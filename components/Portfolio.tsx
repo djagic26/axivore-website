@@ -63,7 +63,7 @@ function PortfolioCard({
         style={{ transformOrigin: "left" }}
       />
 
-      <div className="p-8">
+      <div className="p-5 sm:p-8">
         {/* Header: name + status + metric */}
         <div className="flex items-start justify-between mb-5">
           <div className="flex-1 min-w-0">

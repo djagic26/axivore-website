@@ -80,7 +80,7 @@ function MetricCard({
 
   return (
     <motion.div
-      className="group relative flex flex-col p-8 rounded-2xl overflow-hidden cursor-default"
+      className="group relative flex flex-col p-5 sm:p-8 rounded-2xl overflow-hidden cursor-default"
       style={{
         background: isLight ? "#FFFFFF" : "linear-gradient(155deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.008) 100%)",
         border: isLight ? `1px solid rgba(91,79,217,0.15)` : "1px solid rgba(255,255,255,0.07)",
