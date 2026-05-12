@@ -123,7 +123,7 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3.5 group">
+        <a href="/" className="flex items-center gap-3.5 group">
           <svg width="32" height="32" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
             <circle cx="26" cy="26" r="24" stroke="#4A4866" strokeWidth="1"/>
             <line x1="26" y1="4" x2="26" y2="48" stroke="#A09AFF" strokeWidth="2.5" strokeLinecap="round"/>

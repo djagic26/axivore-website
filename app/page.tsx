@@ -1,18 +1,21 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
-import Results from "@/components/Results";
-import WhyUs from "@/components/WhyUs";
-import Services from "@/components/Services";
-import ForWho from "@/components/ForWho";
-import Portfolio from "@/components/Portfolio";
-import Testimonials from "@/components/Testimonials";
-import Process from "@/components/Process";
-import FAQ from "@/components/FAQ";
-import FinalCTA from "@/components/FinalCTA";
-import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import FloatingCTA from "@/components/FloatingCTA";
+
+// Lazy-load everything below the fold — cuts initial JS bundle in half
+const Marquee     = dynamic(() => import("@/components/Marquee"));
+const Results     = dynamic(() => import("@/components/Results"));
+const WhyUs       = dynamic(() => import("@/components/WhyUs"));
+const Services    = dynamic(() => import("@/components/Services"));
+const ForWho      = dynamic(() => import("@/components/ForWho"));
+const Portfolio   = dynamic(() => import("@/components/Portfolio"));
+const Testimonials = dynamic(() => import("@/components/Testimonials"));
+const Process     = dynamic(() => import("@/components/Process"));
+const FAQ         = dynamic(() => import("@/components/FAQ"));
+const FinalCTA    = dynamic(() => import("@/components/FinalCTA"));
+const Footer      = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
   return (
