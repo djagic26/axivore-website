@@ -38,8 +38,8 @@ export default function Footer() {
             </div>
             <p className="text-white/30 text-sm leading-relaxed max-w-xs mt-1">{t.footer.tagline}</p>
             <div className="mt-6">
-              <a href="mailto:hello@axivore.de" className="text-white/50 text-sm hover:text-white transition-colors">
-                hello@axivore.de
+              <a href="mailto:hello@axivore.io" className="text-white/50 text-sm hover:text-white transition-colors">
+                hello@axivore.io
               </a>
             </div>
           </motion.div>
@@ -78,8 +78,8 @@ export default function Footer() {
             <h4 className="text-white/20 text-xs font-semibold uppercase tracking-widest mb-4">{t.nav.contact}</h4>
             <ul className="space-y-3">
               <li>
-                <a href="mailto:hello@axivore.de" className="text-white/40 text-sm hover:text-white transition-colors">
-                  hello@axivore.de
+                <a href="mailto:hello@axivore.io" className="text-white/40 text-sm hover:text-white transition-colors">
+                  hello@axivore.io
                 </a>
               </li>
               <li>
