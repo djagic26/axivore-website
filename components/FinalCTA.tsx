@@ -68,7 +68,7 @@ export default function FinalCTA() {
           className="mb-8"
         >
           <motion.a
-            href="https://calendly.com/hello-axivore"
+            href="https://calendly.com/hello-axivore/kostenloses-gesprach"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold px-10 py-5 rounded-full text-lg shadow-2xl shadow-violet-500/30"
