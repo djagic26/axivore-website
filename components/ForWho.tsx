@@ -76,7 +76,7 @@ export default function ForWho() {
           {t.forwho.items.map((item, i) => (
             <motion.div
               key={i}
-              className={`group relative rounded-2xl border bg-white/[0.02] p-8 transition-all duration-300 ${borderColors[i]}`}
+              className={`group relative rounded-2xl border bg-white/[0.02] p-6 sm:p-8 transition-all duration-300 ${borderColors[i]}`}
               initial={{ opacity: 0, y: 32 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.1 + i * 0.1 }}

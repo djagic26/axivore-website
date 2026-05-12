@@ -128,7 +128,7 @@ function MetricCard({
       {/* Number */}
       <div className="relative z-10 flex items-baseline gap-1 mb-5">
         <motion.span
-          className={`text-[4.5rem] leading-none font-black tracking-tight ${isLight ? "" : `bg-gradient-to-br ${a.gradient} bg-clip-text text-transparent`}`}
+          className={`text-[3rem] sm:text-[4.5rem] leading-none font-black tracking-tight ${isLight ? "" : `bg-gradient-to-br ${a.gradient} bg-clip-text text-transparent`}`}
           style={isLight ? { color: a.lightColor } : {}}
           initial={{ opacity: 0, scale: 0.7 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}

@@ -101,7 +101,7 @@ export default function FinalCTA() {
         </motion.p>
 
         {/* Decorative grid */}
-        <div className="mt-20 grid grid-cols-8 gap-3 select-none pointer-events-none">
+        <div className="mt-20 grid grid-cols-4 sm:grid-cols-8 gap-3 select-none pointer-events-none">
           {Array.from({ length: 24 }).map((_, i) => (
             <motion.div
               key={i}

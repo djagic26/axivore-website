@@ -138,7 +138,7 @@ export default function Testimonials() {
               <ReviewBadge result={item.result} index={i} inView={inView} />
 
               <motion.div
-                className="group relative flex flex-col h-full p-8 rounded-2xl border border-white/8 bg-white/[0.02] hover:border-white/15 hover:bg-white/[0.035] transition-all duration-300 overflow-hidden"
+                className="group relative flex flex-col h-full p-6 sm:p-8 rounded-2xl border border-white/8 bg-white/[0.02] hover:border-white/15 hover:bg-white/[0.035] transition-all duration-300 overflow-hidden"
                 initial={{ opacity: 0, y: 36 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.65, delay: i * 0.14 }}
