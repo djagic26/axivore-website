@@ -99,8 +99,8 @@ export default function Footer() {
         >
           <p className="text-white/20 text-xs">© {year} Axivore. {t.footer.copyright}</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-white/20 text-xs hover:text-white/50 transition-colors">{t.footer.legal}</a>
-            <a href="#" className="text-white/20 text-xs hover:text-white/50 transition-colors">{t.footer.privacy}</a>
+            <a href="/impressum" className="text-white/20 text-xs hover:text-white/50 transition-colors">{t.footer.legal}</a>
+            <a href="/datenschutz" className="text-white/20 text-xs hover:text-white/50 transition-colors">{t.footer.privacy}</a>
           </div>
         </motion.div>
       </div>
