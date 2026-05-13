@@ -2,8 +2,8 @@ import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 
-const ScrollProgress = dynamic(() => import("@/components/ScrollProgress"), { ssr: false });
-const FloatingCTA    = dynamic(() => import("@/components/FloatingCTA"),    { ssr: false });
+const ScrollProgress = dynamic(() => import("@/components/ScrollProgress"));
+const FloatingCTA    = dynamic(() => import("@/components/FloatingCTA"));
 
 // Lazy-load everything below the fold — cuts initial JS bundle in half
 const Marquee     = dynamic(() => import("@/components/Marquee"));
