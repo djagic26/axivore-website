@@ -18,12 +18,12 @@ const AxivoreIcon = () => (
 );
 
 const WELCOME: Record<string, string> = {
-  de: "Hallo! 👋 Ich bin der Axivore KI-Assistent. Wie kann ich Ihnen helfen?",
-  en: "Hello! 👋 I'm the Axivore AI assistant. How can I help you?",
-  hr: "Zdravo! 👋 Ja sam Axivore AI asistent. Kako vam mogu pomoći?",
-  ro: "Bună! 👋 Sunt asistentul AI Axivore. Cum vă pot ajuta?",
-  tr: "Merhaba! 👋 Ben Axivore AI asistanıyım. Size nasıl yardımcı olabilirim?",
-  it: "Ciao! 👋 Sono l'assistente AI di Axivore. Come posso aiutarti?",
+  de: "Hey! 👋 Ich bin Axi. Was kann ich für dich tun?",
+  en: "Hey! 👋 I'm Axi. What can I help you with?",
+  hr: "Hej! 👋 Ja sam Axi. Kako mogu pomoći?",
+  ro: "Salut! 👋 Sunt Axi. Cu ce te pot ajuta?",
+  tr: "Merhaba! 👋 Ben Axi. Nasıl yardımcı olabilirim?",
+  it: "Ciao! 👋 Sono Axi. Come posso aiutarti?",
 };
 
 const PLACEHOLDER: Record<string, string> = {
@@ -92,7 +92,7 @@ export default function ChatWidget() {
                   <AxivoreIcon />
                 </div>
                 <div>
-                  <p className="text-white text-sm font-medium leading-none">Axivore AI</p>
+                  <p className="text-white text-sm font-medium leading-none">Axi</p>
                   <p className="text-[10px] mt-0.5" style={{ color: "#A09AFF" }}>{ONLINE_TEXT[language] ?? ONLINE_TEXT.de}</p>
                 </div>
               </div>
