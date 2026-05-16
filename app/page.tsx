@@ -6,17 +6,16 @@ const ScrollProgress = dynamic(() => import("@/components/ScrollProgress"));
 const FloatingCTA    = dynamic(() => import("@/components/FloatingCTA"));
 
 // Lazy-load everything below the fold — cuts initial JS bundle in half
-const Marquee     = dynamic(() => import("@/components/Marquee"));
-const Results     = dynamic(() => import("@/components/Results"));
-const WhyUs       = dynamic(() => import("@/components/WhyUs"));
-const Services    = dynamic(() => import("@/components/Services"));
-const ForWho      = dynamic(() => import("@/components/ForWho"));
-const Portfolio   = dynamic(() => import("@/components/Portfolio"));
+const Marquee      = dynamic(() => import("@/components/Marquee"));
+const Results      = dynamic(() => import("@/components/Results"));
+const Services     = dynamic(() => import("@/components/Services"));
+const WhyUs        = dynamic(() => import("@/components/WhyUs"));
+const Portfolio    = dynamic(() => import("@/components/Portfolio"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
-const Process     = dynamic(() => import("@/components/Process"));
-const FAQ         = dynamic(() => import("@/components/FAQ"));
-const FinalCTA    = dynamic(() => import("@/components/FinalCTA"));
-const Footer      = dynamic(() => import("@/components/Footer"));
+const Process      = dynamic(() => import("@/components/Process"));
+const FAQ          = dynamic(() => import("@/components/FAQ"));
+const FinalCTA     = dynamic(() => import("@/components/FinalCTA"));
+const Footer       = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
   return (
@@ -27,9 +26,8 @@ export default function Home() {
       <Hero />
       <Marquee />
       <Results />
-      <WhyUs />
       <Services />
-      <ForWho />
+      <WhyUs />
       <Portfolio />
       <Testimonials />
       <Process />

@@ -4,6 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import { ThemeProvider } from "@/lib/ThemeContext";
 import ChatWidgetWrapper from "@/components/ChatWidgetWrapper";
+import { cookies } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,17 +33,23 @@ export const metadata: Metadata = {
       "Axivore builds custom AI automations, intelligent chatbots, and SaaS products for modern businesses.",
   },
   icons: {
-    icon: "/icon.svg",
+    apple: "/apple-touch-icon.png",
   },
 };
 
-export default function RootLayout({
+const VALID_LANGS = ["de", "en", "hr", "ro", "tr", "it"];
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const langCookie = cookieStore.get("axivore-lang")?.value ?? "de";
+  const lang = VALID_LANGS.includes(langCookie) ? langCookie : "de";
+
   return (
-    <html lang="de" suppressHydrationWarning className={`${geistSans.variable} h-full antialiased`}>
+    <html lang={lang} suppressHydrationWarning className={`${geistSans.variable} h-full antialiased`}>
       <head>
         {/* Prevent flash of wrong theme and wrong language on load */}
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('axivore-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}try{var l=localStorage.getItem('axivore-lang')||'de';document.documentElement.setAttribute('lang',l);}catch(e){}})();` }} />

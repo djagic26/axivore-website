@@ -24,6 +24,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   function setLanguage(lang: Language) {
     setLanguageState(lang);
     localStorage.setItem("axivore-lang", lang);
+    document.cookie = `axivore-lang=${lang}; path=/; max-age=31536000; SameSite=Lax`;
   }
 
   return (

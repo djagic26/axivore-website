@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useTheme } from "@/lib/ThemeContext";
@@ -10,6 +10,31 @@ export default function FinalCTA() {
   const { theme } = useTheme();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("success");
+      setName(""); setEmail(""); setMessage("");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  const inputClass =
+    "w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/25 focus:outline-none focus:border-violet-500/50 focus:bg-white/[0.06] transition-all duration-200";
 
   return (
     <section id="contact" className="py-32 px-6 relative overflow-hidden">
@@ -61,11 +86,12 @@ export default function FinalCTA() {
           {t.cta.subheadline}
         </motion.p>
 
+        {/* Calendly CTA */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-8"
+          className="mb-4"
         >
           <motion.a
             href="https://calendly.com/hello-axivore/kostenloses-gesprach"
@@ -92,13 +118,78 @@ export default function FinalCTA() {
         </motion.div>
 
         <motion.p
-          className="text-white/25 text-sm"
+          className="text-white/25 text-sm mb-16"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5 }}
         >
           {t.cta.subtext}
         </motion.p>
+
+        {/* Divider */}
+        <motion.div
+          className="flex items-center gap-4 mb-10 max-w-md mx-auto"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.55 }}
+        >
+          <div className="flex-1 h-px bg-white/10" />
+          <span className="text-white/25 text-sm font-medium">{t.cta.formTitle}</span>
+          <div className="flex-1 h-px bg-white/10" />
+        </motion.div>
+
+        {/* Contact Form */}
+        <motion.form
+          onSubmit={handleSubmit}
+          className="max-w-lg mx-auto flex flex-col gap-3 text-left"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6, duration: 0.5 }}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={e => setName(e.target.value)}
+              placeholder={t.cta.formName}
+              className={inputClass}
+            />
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder={t.cta.formEmail}
+              className={inputClass}
+            />
+          </div>
+          <textarea
+            required
+            rows={4}
+            value={message}
+            onChange={e => setMessage(e.target.value)}
+            placeholder={t.cta.formMessage}
+            className={`${inputClass} resize-none`}
+          />
+
+          {status === "success" && (
+            <p className="text-emerald-400 text-sm text-center py-2">{t.cta.formSuccess}</p>
+          )}
+          {status === "error" && (
+            <p className="text-rose-400 text-sm text-center py-2">{t.cta.formError}</p>
+          )}
+
+          <motion.button
+            type="submit"
+            disabled={status === "loading"}
+            className="w-full py-3.5 rounded-xl bg-white/[0.06] border border-white/10 text-white text-sm font-semibold hover:bg-white/[0.10] hover:border-violet-500/30 transition-all duration-200 disabled:opacity-50"
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {status === "loading" ? "..." : t.cta.formSubmit}
+          </motion.button>
+        </motion.form>
 
         {/* Decorative grid */}
         <div className="mt-20 grid grid-cols-4 sm:grid-cols-8 gap-3 select-none pointer-events-none">
