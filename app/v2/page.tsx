@@ -258,87 +258,104 @@ function useCountUp(target: number, duration = 1800) {
 // ─── Glass Card ───────────────────────────────────────────────────────────
 function GlassCard({ isDark }: { isDark: boolean }) {
   const textMain = isDark ? "#fff" : "#0a0a0f";
-  const textMuted = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.45)";
-  const cardGlass = isDark
-    ? { bg: "rgba(18,14,38,0.6)", border: "rgba(124,92,255,0.22)" }
-    : { bg: "rgba(248,246,255,0.8)", border: "rgba(124,92,255,0.18)" };
+  const textMuted = isDark ? "rgba(255,255,255,0.45)" : "rgba(10,10,15,0.45)";
 
   return (
     <div className="relative w-full h-full flex items-center justify-center select-none">
-      {/* Outer glow blobs */}
-      <div className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(124,92,255,0.28) 0%, transparent 65%)", filter: "blur(60px)", top: "50%", left: "50%", transform: "translate(-50%,-55%)" }} />
-      <div className="absolute w-[320px] h-[320px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(90,138,255,0.18) 0%, transparent 65%)", filter: "blur(50px)", bottom: "5%", right: "0%" }} />
+      {/* Mega glow behind card */}
+      <div className="absolute pointer-events-none"
+        style={{ width: 560, height: 560, top: "50%", left: "50%", transform: "translate(-50%,-52%)",
+          background: "radial-gradient(ellipse, rgba(124,92,255,0.4) 0%, rgba(91,138,255,0.15) 40%, transparent 70%)",
+          filter: "blur(55px)" }} />
+      <div className="absolute pointer-events-none"
+        style={{ width: 300, height: 300, bottom: "0%", right: "-5%",
+          background: "radial-gradient(ellipse, rgba(255,61,197,0.2) 0%, transparent 65%)",
+          filter: "blur(45px)" }} />
 
       {/* Layer 3 — deep back */}
       <motion.div
-        animate={{ y: [0, -12, 0], rotate: [0, 1.2, 0] }}
+        animate={{ y: [0, -14, 0], rotate: [0, 1.5, 0] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute w-[310px] h-[200px] rounded-2xl"
+        className="absolute rounded-[20px]"
         style={{
-          background: isDark ? "rgba(60,30,120,0.18)" : "rgba(200,190,255,0.25)",
-          border: `1px solid ${isDark ? "rgba(160,154,255,0.12)" : "rgba(124,92,255,0.12)"}`,
-          backdropFilter: "blur(4px)",
-          transform: "rotate(-9deg) translateY(62px) translateX(36px)",
-          boxShadow: isDark ? "0 20px 60px rgba(60,30,120,0.25)" : "0 20px 60px rgba(124,92,255,0.1)",
+          width: 320, height: 210,
+          background: isDark ? "rgba(50,20,110,0.25)" : "rgba(200,190,255,0.3)",
+          border: `1px solid ${isDark ? "rgba(160,154,255,0.15)" : "rgba(124,92,255,0.14)"}`,
+          backdropFilter: "blur(6px)",
+          transform: "rotate(-10deg) translateY(70px) translateX(40px)",
+          boxShadow: isDark ? "0 24px 80px rgba(60,20,140,0.4)" : "0 24px 60px rgba(124,92,255,0.12)",
         }} />
 
       {/* Layer 2 — mid */}
       <motion.div
-        animate={{ y: [0, -16, 0], rotate: [0, -0.6, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        className="absolute w-[330px] h-[215px] rounded-2xl"
+        animate={{ y: [0, -18, 0], rotate: [0, -0.8, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+        className="absolute rounded-[20px]"
         style={{
-          background: isDark ? "rgba(40,20,90,0.35)" : "rgba(230,225,255,0.5)",
-          border: `1px solid ${isDark ? "rgba(160,154,255,0.18)" : "rgba(124,92,255,0.2)"}`,
-          backdropFilter: "blur(10px)",
-          transform: "rotate(-4deg) translateY(24px)",
-          boxShadow: isDark ? "0 24px 60px rgba(60,30,120,0.3)" : "0 24px 60px rgba(124,92,255,0.12)",
+          width: 345, height: 225,
+          background: isDark ? "rgba(35,15,85,0.45)" : "rgba(228,222,255,0.6)",
+          border: `1px solid ${isDark ? "rgba(160,154,255,0.22)" : "rgba(124,92,255,0.22)"}`,
+          backdropFilter: "blur(12px)",
+          transform: "rotate(-5deg) translateY(28px)",
+          boxShadow: isDark ? "0 30px 80px rgba(60,20,140,0.45)" : "0 30px 60px rgba(124,92,255,0.14)",
         }} />
 
-      {/* Layer 1 — front main card */}
+      {/* Layer 1 — main card */}
       <motion.div
-        animate={{ y: [0, -10, 0] }}
+        animate={{ y: [0, -12, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="relative w-[350px] h-[235px] rounded-2xl overflow-hidden"
+        className="relative rounded-[22px] overflow-hidden"
         style={{
-          background: cardGlass.bg,
-          border: `1px solid ${cardGlass.border}`,
-          backdropFilter: "blur(24px)",
+          width: 370, height: 250,
+          background: isDark ? "rgba(12,7,28,0.82)" : "rgba(250,248,255,0.92)",
+          border: "1px solid rgba(140,100,255,0.35)",
+          backdropFilter: "blur(40px) saturate(200%)",
           boxShadow: isDark
-            ? "0 32px 80px rgba(60,30,120,0.5), 0 0 0 1px rgba(160,154,255,0.08) inset"
-            : "0 32px 80px rgba(124,92,255,0.15), 0 0 0 1px rgba(124,92,255,0.1) inset",
+            ? "0 50px 120px rgba(40,10,110,0.8), 0 0 0 1px rgba(180,154,255,0.12) inset, 0 1px 0 rgba(255,255,255,0.08) inset"
+            : "0 50px 120px rgba(124,92,255,0.22), 0 0 0 1px rgba(124,92,255,0.14) inset",
         }}>
-        {/* Top shimmer */}
+        {/* Top shimmer line */}
         <div className="absolute top-0 left-0 right-0 h-px"
-          style={{ background: "linear-gradient(90deg, transparent 5%, rgba(160,154,255,0.5) 50%, transparent 95%)" }} />
-        {/* Inner glow top-right */}
-        <div className="absolute top-0 right-0 w-40 h-40 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(ellipse, rgba(124,92,255,0.25) 0%, transparent 70%)", filter: "blur(20px)", transform: "translate(30%, -30%)" }} />
-        {/* Bottom glow */}
-        <div className="absolute bottom-0 left-0 w-32 h-24 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(ellipse, rgba(90,138,255,0.15) 0%, transparent 70%)", filter: "blur(15px)", transform: "translate(-20%, 30%)" }} />
+          style={{ background: "linear-gradient(90deg, transparent 5%, rgba(180,154,255,0.7) 40%, rgba(255,61,197,0.5) 60%, transparent 95%)" }} />
+        {/* Corner glow */}
+        <div className="absolute top-0 right-0 pointer-events-none"
+          style={{ width: 180, height: 180,
+            background: "radial-gradient(ellipse, rgba(124,92,255,0.35) 0%, transparent 70%)",
+            filter: "blur(24px)", transform: "translate(30%,-30%)" }} />
+        <div className="absolute bottom-0 left-0 pointer-events-none"
+          style={{ width: 140, height: 120,
+            background: "radial-gradient(ellipse, rgba(255,61,197,0.18) 0%, transparent 70%)",
+            filter: "blur(20px)", transform: "translate(-20%,30%)" }} />
 
-        <div className="relative p-6 h-full flex flex-col justify-between">
-          <div className="flex items-center gap-2">
-            <motion.div className="w-2 h-2 rounded-full"
-              animate={{ opacity: [1, 0.4, 1] }} transition={{ duration: 2, repeat: Infinity }}
-              style={{ background: "#A09AFF", boxShadow: "0 0 8px rgba(160,154,255,0.8)" }} />
-            <span className="text-[10px] tracking-[0.18em] uppercase" style={{ color: textMuted }}>AI System Active</span>
+        <div className="relative p-7 h-full flex flex-col justify-between">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <motion.div className="w-2 h-2 rounded-full"
+                animate={{ opacity: [1, 0.3, 1], scale: [1, 1.3, 1] }}
+                transition={{ duration: 2.5, repeat: Infinity }}
+                style={{ background: "#A09AFF", boxShadow: "0 0 10px rgba(160,154,255,1)" }} />
+              <span className="text-[9.5px] tracking-[0.2em] uppercase font-medium" style={{ color: textMuted }}>AI System Active</span>
+            </div>
+            <div className="px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide"
+              style={{ background: "rgba(34,197,94,0.12)", color: "#4ade80", border: "1px solid rgba(34,197,94,0.2)" }}>
+              ONLINE
+            </div>
           </div>
           <div>
-            <div className="text-[52px] font-bold tracking-tight leading-none"
-              style={{ color: textMain, textShadow: isDark ? "0 0 40px rgba(160,154,255,0.4)" : "none" }}>98%</div>
-            <div className="text-[12px] mt-1" style={{ color: textMuted }}>Client Retention Rate</div>
+            <div className="font-bold tracking-tight leading-none mb-1"
+              style={{ fontSize: 56, background: "linear-gradient(135deg, #ffffff 0%, #A09AFF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              98%
+            </div>
+            <div className="text-[11.5px] font-medium" style={{ color: textMuted }}>Client Retention Rate</div>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-end justify-between pt-4"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
             <div>
-              <div className="text-[26px] font-bold" style={{ color: textMain }}>$24M+</div>
+              <div className="text-[28px] font-bold" style={{ color: textMain }}>$24M+</div>
               <div className="text-[10px]" style={{ color: textMuted }}>Revenue Influenced</div>
             </div>
             <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ background: "rgba(124,92,255,0.2)", border: "1px solid rgba(124,92,255,0.35)", boxShadow: "0 4px 20px rgba(124,92,255,0.25)" }}>
+              style={{ background: "linear-gradient(135deg, rgba(124,92,255,0.3), rgba(255,61,197,0.15))", border: "1px solid rgba(160,100,255,0.4)", boxShadow: "0 4px 20px rgba(124,92,255,0.3)" }}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M2 12L6 7L10 9L14 3" stroke="#A09AFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M11 3H14V6" stroke="#A09AFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -350,46 +367,49 @@ function GlassCard({ isDark }: { isDark: boolean }) {
 
       {/* Floating chip — top right */}
       <motion.div
-        animate={{ y: [0, -8, 0], x: [0, 4, 0] }}
+        animate={{ y: [0, -10, 0], x: [0, 4, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute top-4 right-2 px-4 py-2.5 rounded-xl"
+        className="absolute top-2 right-0 px-4 py-3 rounded-2xl"
         style={{
-          background: isDark ? "rgba(18,14,38,0.75)" : "rgba(248,246,255,0.9)",
-          border: `1px solid ${isDark ? "rgba(160,154,255,0.2)" : "rgba(124,92,255,0.2)"}`,
-          backdropFilter: "blur(16px)",
-          boxShadow: "0 8px 32px rgba(60,30,120,0.25)",
+          background: isDark ? "rgba(10,5,25,0.85)" : "rgba(248,246,255,0.92)",
+          border: "1px solid rgba(160,154,255,0.28)",
+          backdropFilter: "blur(20px)",
+          boxShadow: "0 12px 40px rgba(60,30,120,0.35)",
         }}>
-        <div className="text-[9.5px] tracking-widest uppercase" style={{ color: textMuted }}>Systems Built</div>
-        <div className="text-[22px] font-bold leading-tight" style={{ color: textMain }}>47+</div>
+        <div className="text-[9px] tracking-widest uppercase font-medium mb-0.5" style={{ color: "rgba(160,154,255,0.7)" }}>Systems Built</div>
+        <div className="text-[24px] font-bold leading-tight" style={{ color: textMain }}>47+</div>
       </motion.div>
 
       {/* Floating chip — bottom left */}
       <motion.div
-        animate={{ y: [0, -10, 0], x: [0, -3, 0] }}
+        animate={{ y: [0, -12, 0], x: [0, -4, 0] }}
         transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-        className="absolute bottom-8 left-0 px-4 py-2.5 rounded-xl"
+        className="absolute bottom-6 left-[-8px] px-4 py-3 rounded-2xl"
         style={{
-          background: isDark ? "rgba(40,20,100,0.6)" : "rgba(240,236,255,0.9)",
-          border: "1px solid rgba(124,92,255,0.3)",
-          backdropFilter: "blur(16px)",
-          boxShadow: "0 8px 32px rgba(124,92,255,0.2)",
+          background: isDark ? "rgba(10,5,25,0.85)" : "rgba(248,246,255,0.92)",
+          border: "1px solid rgba(255,61,197,0.3)",
+          backdropFilter: "blur(20px)",
+          boxShadow: "0 12px 40px rgba(255,61,197,0.2)",
         }}>
-        <div className="text-[9.5px] tracking-widest uppercase" style={{ color: "rgba(160,154,255,0.8)" }}>Avg. ROI</div>
-        <div className="text-[22px] font-bold leading-tight" style={{ color: textMain }}>2–6x</div>
+        <div className="text-[9px] tracking-widest uppercase font-medium mb-0.5" style={{ color: "rgba(255,120,210,0.8)" }}>Avg. ROI</div>
+        <div className="text-[24px] font-bold leading-tight" style={{ color: textMain }}>2–6x</div>
       </motion.div>
 
-      {/* Floating pill — activity */}
+      {/* Floating pill — live */}
       <motion.div
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-        className="absolute top-[42%] right-[-12px] flex items-center gap-2 px-3 py-1.5 rounded-full"
+        animate={{ y: [0, -7, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        className="absolute top-[44%] right-[-16px] flex items-center gap-2 px-3 py-1.5 rounded-full"
         style={{
-          background: isDark ? "rgba(20,15,50,0.8)" : "rgba(245,242,255,0.95)",
-          border: "1px solid rgba(124,92,255,0.25)",
-          backdropFilter: "blur(12px)",
+          background: isDark ? "rgba(10,5,25,0.9)" : "rgba(248,246,255,0.95)",
+          border: "1px solid rgba(34,197,94,0.3)",
+          backdropFilter: "blur(16px)",
+          boxShadow: "0 6px 24px rgba(34,197,94,0.15)",
         }}>
-        <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#22c55e", boxShadow: "0 0 6px #22c55e" }} />
-        <span className="text-[10px] font-medium whitespace-nowrap" style={{ color: textMuted }}>Live system</span>
+        <motion.div className="w-1.5 h-1.5 rounded-full"
+          animate={{ opacity: [1, 0.4, 1] }} transition={{ duration: 1.5, repeat: Infinity }}
+          style={{ background: "#22c55e", boxShadow: "0 0 8px #22c55e" }} />
+        <span className="text-[10px] font-semibold whitespace-nowrap" style={{ color: textMuted }}>Live system</span>
       </motion.div>
     </div>
   );
@@ -409,7 +429,7 @@ function Hero() {
   ];
 
   const heroBg = isDark
-    ? "#06040f"
+    ? "#030208"
     : "linear-gradient(145deg, #ece8ff 0%, #e8e2ff 20%, #f0ecff 50%, #f8f5ff 80%, #faf8ff 100%)";
 
   return (
@@ -417,48 +437,60 @@ function Hero() {
       style={{ background: heroBg }}>
 
       {/* ── Background atmosphere ── */}
-      {/* Primary mega-glow — top center */}
+      {/* Primary mega-glow — cinematic top purple */}
       <div className="absolute pointer-events-none"
-        style={{ width: 1100, height: 800, top: -200, left: "50%", transform: "translateX(-50%)",
+        style={{ width: 1400, height: 1000, top: -350, left: "50%", transform: "translateX(-50%)",
           background: isDark
-            ? "radial-gradient(ellipse, rgba(110,65,240,0.55) 0%, rgba(80,40,200,0.28) 35%, transparent 65%)"
+            ? "radial-gradient(ellipse, rgba(130,75,255,0.75) 0%, rgba(95,48,215,0.38) 28%, rgba(55,22,150,0.14) 52%, transparent 68%)"
             : "radial-gradient(ellipse, rgba(150,110,255,0.35) 0%, rgba(120,80,240,0.18) 40%, transparent 70%)",
           filter: "blur(50px)" }} />
-      {/* Right glow */}
+      {/* Right magenta glow */}
       <motion.div className="absolute pointer-events-none"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.75, 1, 0.75] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        style={{ width: 700, height: 700, top: "5%", right: "-10%",
+        animate={{ scale: [1, 1.18, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        style={{ width: 650, height: 650, top: "8%", right: "-8%",
           background: isDark
-            ? "radial-gradient(ellipse, rgba(100,65,230,0.35) 0%, rgba(70,40,180,0.15) 45%, transparent 70%)"
+            ? "radial-gradient(ellipse, rgba(255,61,197,0.22) 0%, rgba(130,60,230,0.18) 35%, transparent 65%)"
             : "radial-gradient(ellipse, rgba(130,90,255,0.22) 0%, transparent 65%)",
           filter: "blur(70px)" }} />
-      {/* Left glow */}
+      {/* Left blue glow */}
       <motion.div className="absolute pointer-events-none"
-        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-        style={{ width: 600, height: 500, top: "30%", left: "-8%",
+        animate={{ scale: [1, 1.12, 1], opacity: [0.45, 0.8, 0.45] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        style={{ width: 600, height: 500, top: "25%", left: "-10%",
           background: isDark
-            ? "radial-gradient(ellipse, rgba(70,40,190,0.3) 0%, transparent 65%)"
+            ? "radial-gradient(ellipse, rgba(60,120,255,0.25) 0%, rgba(70,40,190,0.12) 50%, transparent 70%)"
             : "radial-gradient(ellipse, rgba(110,70,230,0.15) 0%, transparent 65%)",
-          filter: "blur(60px)" }} />
-      {/* Bottom accent */}
-      <div className="absolute pointer-events-none"
-        style={{ width: 800, height: 300, bottom: 60, left: "50%", transform: "translateX(-50%)",
+          filter: "blur(65px)" }} />
+      {/* Bottom magenta accent */}
+      <motion.div className="absolute pointer-events-none"
+        animate={{ opacity: [0.5, 0.85, 0.5] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        style={{ width: 700, height: 400, bottom: 40, left: "50%", transform: "translateX(-50%)",
           background: isDark
-            ? "radial-gradient(ellipse, rgba(80,45,200,0.22) 0%, transparent 70%)"
+            ? "radial-gradient(ellipse, rgba(255,61,197,0.12) 0%, rgba(80,45,200,0.1) 40%, transparent 70%)"
             : "radial-gradient(ellipse, rgba(120,80,240,0.12) 0%, transparent 70%)",
-          filter: "blur(40px)" }} />
+          filter: "blur(45px)" }} />
 
       {/* Grid */}
       <div className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(${isDark ? "rgba(160,154,255,0.06)" : "rgba(90,60,200,0.07)"} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? "rgba(160,154,255,0.06)" : "rgba(90,60,200,0.07)"} 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(${isDark ? "rgba(160,154,255,0.04)" : "rgba(90,60,200,0.06)"} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? "rgba(160,154,255,0.04)" : "rgba(90,60,200,0.06)"} 1px, transparent 1px)`,
           backgroundSize: "80px 80px",
         }} />
+      {/* Noise texture overlay */}
+      {isDark && (
+        <div className="absolute inset-0 pointer-events-none opacity-[0.018]"
+          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")", backgroundRepeat: "repeat", backgroundSize: "128px 128px" }} />
+      )}
+      {/* Horizontal accent line */}
+      {isDark && (
+        <div className="absolute left-0 right-0 pointer-events-none"
+          style={{ top: "62%", height: "1px", background: "linear-gradient(90deg, transparent 5%, rgba(124,92,255,0.12) 30%, rgba(160,154,255,0.18) 50%, rgba(124,92,255,0.12) 70%, transparent 95%)" }} />
+      )}
       {/* Vignette bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-[35%] pointer-events-none"
-        style={{ background: `linear-gradient(to bottom, transparent, ${isDark ? "#06040f" : "#eeeaff"}ee)` }} />
+      <div className="absolute bottom-0 left-0 right-0 h-[40%] pointer-events-none"
+        style={{ background: `linear-gradient(to bottom, transparent, ${isDark ? "#030208" : "#eeeaff"}f0)` }} />
 
       {/* ── Content ── */}
       <div className="relative flex-1 max-w-[1320px] mx-auto px-6 w-full">
@@ -483,11 +515,20 @@ function Hero() {
               {heroLines.map((line, i) => (
                 <div key={i} className="overflow-hidden">
                   <motion.div initial={{ y: "105%" }} animate={{ y: 0 }}
-                    transition={{ duration: 0.75, delay: 0.25 + i * 0.13, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-bold leading-[0.93] tracking-[-0.04em]"
-                    style={{ fontSize: "clamp(50px,6vw,88px)", color: textColor }}>
+                    transition={{ duration: 0.78, delay: 0.25 + i * 0.14, ease: [0.16, 1, 0.3, 1] }}
+                    className="font-bold leading-[0.92] tracking-[-0.045em]"
+                    style={{
+                      fontSize: "clamp(52px,6.2vw,92px)",
+                      ...(isDark ? {
+                        background: i === 0
+                          ? "linear-gradient(135deg, #ffffff 0%, #d4ccff 100%)"
+                          : "linear-gradient(135deg, #e8e0ff 0%, #A09AFF 60%, #c472ff 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      } : { color: textColor }),
+                    }}>
                     {i === heroLines.length - 1 ? (
-                      <>{line}<span style={{ color: "#7C5CFF" }}>.</span></>
+                      <>{line}<span style={{ ...(isDark ? { background: "none", WebkitTextFillColor: "#7C5CFF" } : { color: "#7C5CFF" }) }}>.</span></>
                     ) : line}
                   </motion.div>
                 </div>
@@ -505,10 +546,10 @@ function Hero() {
               transition={{ duration: 0.5, delay: 0.78 }}
               className="flex items-center gap-5 flex-wrap mb-16">
               <motion.a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
-                whileHover={{ scale: 1.03, boxShadow: "0 8px 36px rgba(124,92,255,0.55)" }}
+                whileHover={{ scale: 1.04, boxShadow: "0 10px 50px rgba(160,60,255,0.65)" }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-6 py-3.5 rounded-full text-white text-[14px] font-semibold cursor-pointer"
-                style={{ background: "linear-gradient(135deg, #7C5CFF 0%, #5b8aff 100%)", boxShadow: "0 4px 28px rgba(124,92,255,0.4)", transition: "box-shadow 0.2s" }}>
+                className="flex items-center gap-2 px-7 py-4 rounded-full text-white text-[14px] font-semibold cursor-pointer relative overflow-hidden"
+                style={{ background: "linear-gradient(135deg, #8B5CF6 0%, #7C5CFF 40%, #5b8aff 100%)", boxShadow: "0 6px 36px rgba(124,92,255,0.5)", transition: "box-shadow 0.25s" }}>
                 {t.hero.ctaPrimary}
                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                   <path d="M2 11L11 2M11 2H4M11 2V9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
@@ -565,7 +606,7 @@ function Hero() {
           style={{ width: "max-content" }}>
           {[0, 1].map(k => (
             <div key={k} className="flex items-center">
-              {["AXIVORE", "AI AUTOMATION", "MÜNCHEN & STUTTGART", "KI AGENTUR", "AXIVORE"].map((word, j) => (
+              {["AXIVORE", "INTELLIGENT SYSTEMS", "AI AUTOMATION", "RESULTS FIRST", "PRECISION"].map((word, j) => (
                 <span key={j} className="font-bold uppercase tracking-[-0.02em] mx-8"
                   style={{
                     fontSize: "clamp(56px, 8vw, 110px)",
@@ -621,21 +662,32 @@ function MetricCard({ m, i, isDark }: {
   const { count, ref } = useCountUp(numVal, 1800);
   const inView = useInView(ref, { once: true });
   const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.42)";
-  const cardBg = isDark ? "rgba(255,255,255,0.022)" : "rgba(0,0,0,0.025)";
-  const cardBorder = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+  const mutedColor = isDark ? "rgba(255,255,255,0.35)" : "rgba(10,10,15,0.42)";
+  const cardBg = isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.025)";
+  const cardBorder = isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)";
 
   return (
     <motion.div ref={ref}
       initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.5, delay: i * 0.08 }}
-      className="rounded-2xl p-6 flex flex-col gap-1"
+      whileHover={{ y: -2, borderColor: "rgba(124,92,255,0.2)" }}
+      className="rounded-2xl p-7 flex flex-col gap-1 relative overflow-hidden transition-all duration-300"
       style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
-      <div className="font-bold tracking-tight leading-none mb-2" style={{ fontSize: "clamp(36px,4vw,54px)", color: textColor }}>
-        {numVal > 0 && inView ? count : m.value}{m.suffix}
-      </div>
-      <div className="text-[13px] font-medium" style={{ color: textColor }}>{m.label}</div>
-      <div className="text-[11.5px]" style={{ color: mutedColor }}>{m.context}</div>
+      {(() => {
+        const accents = ["rgba(160,154,255,0.45)", "rgba(255,61,197,0.35)", "rgba(91,138,255,0.35)", "rgba(52,211,153,0.35)"];
+        const numColors = ["#A09AFF", "#FF3DC5", "#5b8aff", "#34d399"];
+        return (
+          <>
+            <div className="absolute top-0 left-0 right-0 h-px"
+              style={{ background: isDark ? `linear-gradient(90deg, transparent, ${accents[i % 4]}, transparent)` : "transparent" }} />
+            <div className="font-bold tracking-tight leading-none mb-3" style={{ fontSize: "clamp(40px,4vw,58px)", color: isDark ? numColors[i % 4] : textColor }}>
+              {numVal > 0 && inView ? count : m.value}{m.suffix}
+            </div>
+            <div className="text-[13px] font-semibold" style={{ color: textColor }}>{m.label}</div>
+            <div className="text-[11.5px] mt-0.5" style={{ color: mutedColor }}>{m.context}</div>
+          </>
+        );
+      })()}
     </motion.div>
   );
 }
@@ -684,8 +736,8 @@ function Services() {
   const borderColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
   const cardBg = isDark ? "rgba(255,255,255,0.022)" : "rgba(0,0,0,0.025)";
   const cardBorder = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const accentCardBg = isDark ? "rgba(124,92,255,0.06)" : "rgba(124,92,255,0.04)";
-  const accentCardBorder = "rgba(124,92,255,0.18)";
+  const accentCardBg = isDark ? "rgba(124,92,255,0.08)" : "rgba(124,92,255,0.05)";
+  const accentCardBorder = "rgba(124,92,255,0.28)";
 
   return (
     <section id="services" className="py-[100px]" style={{ background: bg, borderTop: `1px solid ${borderColor}` }}>
@@ -706,9 +758,9 @@ function Services() {
             <motion.div key={i}
               initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, delay: i * 0.09 }}
-              whileHover={{ y: -3 }}
-              className="rounded-2xl p-7 flex flex-col justify-between cursor-pointer transition-all duration-300"
-              style={{ background: i === 0 ? accentCardBg : cardBg, border: `1px solid ${i === 0 ? accentCardBorder : cardBorder}`, minHeight: "220px" }}>
+              whileHover={{ y: -4, boxShadow: isDark ? "0 20px 60px rgba(80,40,200,0.18)" : "0 20px 60px rgba(124,92,255,0.1)" }}
+              className="rounded-2xl p-8 flex flex-col justify-between cursor-pointer transition-all duration-300 relative overflow-hidden"
+              style={{ background: i === 0 ? accentCardBg : cardBg, border: `1px solid ${i === 0 ? accentCardBorder : cardBorder}`, minHeight: "240px" }}>
               <div>
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium mb-5"
                   style={{ background: "rgba(124,92,255,0.1)", color: "#A09AFF", border: "1px solid rgba(124,92,255,0.2)" }}>
@@ -1044,30 +1096,56 @@ function FinalCTA() {
   const borderColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
 
   return (
-    <section className="py-[140px]" style={{ background: bg, borderTop: `1px solid ${borderColor}` }}>
-      <div className="max-w-[1320px] mx-auto px-6 text-center">
+    <section className="relative py-[160px] overflow-hidden" style={{ borderTop: `1px solid ${borderColor}` }}>
+      {/* Background */}
+      <div className="absolute inset-0"
+        style={{ background: isDark
+          ? "radial-gradient(ellipse 100% 100% at 50% 100%, rgba(80,40,200,0.22) 0%, rgba(40,15,90,0.12) 40%, #030208 70%)"
+          : "linear-gradient(to bottom, #ffffff, #f5f2ff)" }} />
+      {/* Top glow */}
+      {isDark && (
+        <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
+          style={{ top: "20%", width: 900, height: 600,
+            background: "radial-gradient(ellipse, rgba(100,55,240,0.2) 0%, transparent 65%)",
+            filter: "blur(60px)" }} />
+      )}
+      {/* Grid */}
+      {isDark && (
+        <div className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: "linear-gradient(rgba(160,154,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(160,154,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }} />
+      )}
+
+      <div className="relative max-w-[1320px] mx-auto px-6 text-center">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
-          <p className="text-[10.5px] tracking-[0.22em] uppercase mb-10" style={{ color: "#A09AFF" }}>
-            {t.labels.cta}
-          </p>
-          <h2 className="font-bold tracking-[-0.035em] leading-[0.95] mb-8"
-            style={{ fontSize: "clamp(44px,6.5vw,90px)", color: textColor }}>
+          viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-10"
+            style={{ background: "rgba(124,92,255,0.1)", border: "1px solid rgba(124,92,255,0.22)" }}>
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#A09AFF" }} />
+            <span className="text-[10.5px] tracking-[0.18em] uppercase font-medium" style={{ color: "#A09AFF" }}>
+              {t.labels.cta}
+            </span>
+          </div>
+          <h2 className="font-bold tracking-[-0.04em] leading-[0.92] mb-8"
+            style={{ fontSize: "clamp(48px,7vw,100px)", color: textColor }}>
             {t.cta.headline.replace(/[?!.]$/, "")}<span style={{ color: "#7C5CFF" }}>?</span>
           </h2>
-          <p className="text-[15px] mb-12 max-w-[420px] mx-auto leading-[1.72]" style={{ color: mutedColor }}>
+          <p className="text-[16px] mb-12 max-w-[400px] mx-auto leading-[1.7]" style={{ color: mutedColor }}>
             {t.cta.subheadline}
           </p>
           <motion.a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
-            whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-white text-[14px] font-semibold cursor-pointer"
-            style={{ background: "linear-gradient(135deg, #7C5CFF, #5b8aff)", boxShadow: "0 4px 28px rgba(124,92,255,0.4)" }}>
+            whileHover={{ scale: 1.04, boxShadow: "0 12px 48px rgba(124,92,255,0.6)" }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-white text-[14px] font-semibold cursor-pointer"
+            style={{ background: "linear-gradient(135deg, #7C5CFF 0%, #6B8FFF 100%)", boxShadow: "0 6px 32px rgba(124,92,255,0.45)", transition: "box-shadow 0.2s" }}>
             {t.cta.button}
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path d="M2 11L11 2M11 2H4M11 2V9" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 12L12 2M12 2H4M12 2V10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
           </motion.a>
-          <p className="text-[11px] mt-5" style={{ color: isDark ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.25)" }}>
+          <p className="text-[11.5px] mt-6 tracking-wide" style={{ color: isDark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.25)" }}>
             {t.cta.subtext}
           </p>
         </motion.div>
