@@ -570,10 +570,10 @@ function Hero() {
                   style={{
                     fontSize: "clamp(56px, 8vw, 110px)",
                     color: j % 2 === 0
-                      ? isDark ? "rgba(255,255,255,0.04)" : "rgba(90,60,200,0.06)"
+                      ? isDark ? "rgba(255,255,255,0.09)" : "rgba(90,60,200,0.1)"
                       : "transparent",
                     WebkitTextStroke: j % 2 !== 0
-                      ? isDark ? "1.5px rgba(160,154,255,0.18)" : "1.5px rgba(90,60,200,0.14)"
+                      ? isDark ? "1.5px rgba(160,154,255,0.45)" : "1.5px rgba(90,60,200,0.22)"
                       : "none",
                   }}>
                   {word}
@@ -933,10 +933,10 @@ function Process() {
 
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
-  const x = useTransform(scrollYProgress, [0, 1], ["0px", "-1100px"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0px", "-420px"]);
 
   return (
-    <section id="process" ref={targetRef} className="relative h-[350vh]" style={{ borderTop: `1px solid ${borderColor}` }}>
+    <section id="process" ref={targetRef} className="relative h-[220vh]" style={{ borderTop: `1px solid ${borderColor}` }}>
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden" style={{ background: bg }}>
         <div className="max-w-[1320px] mx-auto px-6 w-full mb-10">
           <div className="flex items-end justify-between">
@@ -1053,7 +1053,7 @@ function FinalCTA() {
           </p>
           <h2 className="font-bold tracking-[-0.035em] leading-[0.95] mb-8"
             style={{ fontSize: "clamp(44px,6.5vw,90px)", color: textColor }}>
-            {t.cta.headline}<span style={{ color: "#7C5CFF" }}>?</span>
+            {t.cta.headline.replace(/[?!.]$/, "")}<span style={{ color: "#7C5CFF" }}>?</span>
           </h2>
           <p className="text-[15px] mb-12 max-w-[420px] mx-auto leading-[1.72]" style={{ color: mutedColor }}>
             {t.cta.subheadline}
