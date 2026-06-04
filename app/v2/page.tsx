@@ -436,61 +436,60 @@ function Hero() {
     <section className="relative min-h-screen flex flex-col pt-16 overflow-hidden"
       style={{ background: heroBg }}>
 
-      {/* ── Background atmosphere ── */}
-      {/* Primary mega-glow — cinematic top purple */}
-      <div className="absolute pointer-events-none"
-        style={{ width: 1400, height: 1000, top: -350, left: "50%", transform: "translateX(-50%)",
-          background: isDark
-            ? "radial-gradient(ellipse, rgba(130,75,255,0.75) 0%, rgba(95,48,215,0.38) 28%, rgba(55,22,150,0.14) 52%, transparent 68%)"
-            : "radial-gradient(ellipse, rgba(150,110,255,0.35) 0%, rgba(120,80,240,0.18) 40%, transparent 70%)",
-          filter: "blur(50px)" }} />
-      {/* Right magenta glow */}
-      <motion.div className="absolute pointer-events-none"
-        animate={{ scale: [1, 1.18, 1], opacity: [0.6, 1, 0.6] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        style={{ width: 650, height: 650, top: "8%", right: "-8%",
-          background: isDark
-            ? "radial-gradient(ellipse, rgba(255,61,197,0.22) 0%, rgba(130,60,230,0.18) 35%, transparent 65%)"
-            : "radial-gradient(ellipse, rgba(130,90,255,0.22) 0%, transparent 65%)",
-          filter: "blur(70px)" }} />
-      {/* Left blue glow */}
-      <motion.div className="absolute pointer-events-none"
-        animate={{ scale: [1, 1.12, 1], opacity: [0.45, 0.8, 0.45] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-        style={{ width: 600, height: 500, top: "25%", left: "-10%",
-          background: isDark
-            ? "radial-gradient(ellipse, rgba(60,120,255,0.25) 0%, rgba(70,40,190,0.12) 50%, transparent 70%)"
-            : "radial-gradient(ellipse, rgba(110,70,230,0.15) 0%, transparent 65%)",
-          filter: "blur(65px)" }} />
-      {/* Bottom magenta accent */}
-      <motion.div className="absolute pointer-events-none"
-        animate={{ opacity: [0.5, 0.85, 0.5] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        style={{ width: 700, height: 400, bottom: 40, left: "50%", transform: "translateX(-50%)",
-          background: isDark
-            ? "radial-gradient(ellipse, rgba(255,61,197,0.12) 0%, rgba(80,45,200,0.1) 40%, transparent 70%)"
-            : "radial-gradient(ellipse, rgba(120,80,240,0.12) 0%, transparent 70%)",
-          filter: "blur(45px)" }} />
+      {/* ── SPOTLIGHT BEAM — the WOW moment ── */}
+      {isDark && (
+        <>
+          {/* Sharp concentrated beam from top */}
+          <div className="absolute pointer-events-none inset-x-0 top-0"
+            style={{ height: "85%",
+              background: "radial-gradient(ellipse 38% 60% at 50% -8%, rgba(155,90,255,0.95) 0%, rgba(120,65,240,0.55) 18%, rgba(80,35,200,0.22) 38%, rgba(50,15,140,0.06) 58%, transparent 72%)" }} />
+          {/* Beam core — ultra bright center */}
+          <div className="absolute pointer-events-none inset-x-0 top-0"
+            style={{ height: "50%",
+              background: "radial-gradient(ellipse 18% 35% at 50% -2%, rgba(200,160,255,0.9) 0%, rgba(170,120,255,0.5) 20%, transparent 55%)" }} />
+          {/* Right accent orb — magenta */}
+          <motion.div className="absolute pointer-events-none"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.85, 0.5] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            style={{ width: 550, height: 550, top: "10%", right: "-6%",
+              background: "radial-gradient(ellipse, rgba(255,61,197,0.28) 0%, rgba(180,60,255,0.1) 40%, transparent 65%)",
+              filter: "blur(60px)" }} />
+          {/* Left blue orb */}
+          <motion.div className="absolute pointer-events-none"
+            animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.75, 0.4] }}
+            transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+            style={{ width: 500, height: 450, top: "20%", left: "-8%",
+              background: "radial-gradient(ellipse, rgba(70,130,255,0.3) 0%, rgba(60,80,220,0.12) 45%, transparent 68%)",
+              filter: "blur(60px)" }} />
+          {/* Subtle floor reflection */}
+          <motion.div className="absolute pointer-events-none"
+            animate={{ opacity: [0.4, 0.7, 0.4] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            style={{ width: 800, height: 300, bottom: 60, left: "50%", transform: "translateX(-50%)",
+              background: "radial-gradient(ellipse, rgba(120,60,255,0.18) 0%, rgba(255,61,197,0.07) 40%, transparent 65%)",
+              filter: "blur(40px)" }} />
+        </>
+      )}
+      {!isDark && (
+        <div className="absolute pointer-events-none inset-x-0 top-0" style={{ height: "100%",
+          background: "radial-gradient(ellipse 60% 70% at 50% -5%, rgba(150,110,255,0.35) 0%, rgba(120,80,240,0.18) 40%, transparent 65%)" }} />
+      )}
 
-      {/* Grid */}
+      {/* Fine dot grid — premium texture */}
       <div className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(${isDark ? "rgba(160,154,255,0.04)" : "rgba(90,60,200,0.06)"} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? "rgba(160,154,255,0.04)" : "rgba(90,60,200,0.06)"} 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
+          backgroundImage: `radial-gradient(circle, ${isDark ? "rgba(160,154,255,0.18)" : "rgba(90,60,200,0.14)"} 1px, transparent 1px)`,
+          backgroundSize: "40px 40px",
+          maskImage: "radial-gradient(ellipse 80% 80% at 50% 30%, black 20%, transparent 80%)",
         }} />
-      {/* Noise texture overlay */}
-      {isDark && (
-        <div className="absolute inset-0 pointer-events-none opacity-[0.018]"
-          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")", backgroundRepeat: "repeat", backgroundSize: "128px 128px" }} />
-      )}
-      {/* Horizontal accent line */}
-      {isDark && (
-        <div className="absolute left-0 right-0 pointer-events-none"
-          style={{ top: "62%", height: "1px", background: "linear-gradient(90deg, transparent 5%, rgba(124,92,255,0.12) 30%, rgba(160,154,255,0.18) 50%, rgba(124,92,255,0.12) 70%, transparent 95%)" }} />
-      )}
-      {/* Vignette bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-[40%] pointer-events-none"
-        style={{ background: `linear-gradient(to bottom, transparent, ${isDark ? "#030208" : "#eeeaff"}f0)` }} />
+      {/* Vignette */}
+      <div className="absolute bottom-0 left-0 right-0 h-[45%] pointer-events-none"
+        style={{ background: `linear-gradient(to bottom, transparent, ${isDark ? "#030208" : "#eeeaff"}f5)` }} />
+      {/* Side vignettes */}
+      <div className="absolute inset-y-0 left-0 w-[15%] pointer-events-none"
+        style={{ background: `linear-gradient(to right, ${isDark ? "#030208" : "#eeeaff"}, transparent)` }} />
+      <div className="absolute inset-y-0 right-0 w-[15%] pointer-events-none"
+        style={{ background: `linear-gradient(to left, ${isDark ? "#030208" : "#eeeaff"}, transparent)` }} />
 
       {/* ── Content ── */}
       <div className="relative flex-1 max-w-[1320px] mx-auto px-6 w-full">
@@ -516,15 +515,16 @@ function Hero() {
                 <div key={i} className="overflow-hidden">
                   <motion.div initial={{ y: "105%" }} animate={{ y: 0 }}
                     transition={{ duration: 0.78, delay: 0.25 + i * 0.14, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-bold leading-[0.92] tracking-[-0.045em]"
+                    className="font-black leading-[0.88] tracking-[-0.05em]"
                     style={{
-                      fontSize: "clamp(52px,6.2vw,92px)",
+                      fontSize: "clamp(58px,7.5vw,110px)",
                       ...(isDark ? {
                         background: i === 0
-                          ? "linear-gradient(135deg, #ffffff 0%, #d4ccff 100%)"
-                          : "linear-gradient(135deg, #e8e0ff 0%, #A09AFF 60%, #c472ff 100%)",
+                          ? "linear-gradient(160deg, #ffffff 0%, #e0d8ff 60%, #c4b8ff 100%)"
+                          : "linear-gradient(160deg, #f0ebff 0%, #B8AEFF 50%, #d47fff 100%)",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
+                        filter: "drop-shadow(0 0 40px rgba(160,154,255,0.35))",
                       } : { color: textColor }),
                     }}>
                     {i === heroLines.length - 1 ? (
@@ -1090,10 +1090,31 @@ function FinalCTA() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const bg = isDark ? "#050505" : "#ffffff";
   const textColor = isDark ? "#ffffff" : "#0a0a0f";
   const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.42)";
   const borderColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("success");
+      setName(""); setEmail(""); setMessage("");
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
     <section className="relative py-[160px] overflow-hidden" style={{ borderTop: `1px solid ${borderColor}` }}>
@@ -1148,6 +1169,67 @@ function FinalCTA() {
           <p className="text-[11.5px] mt-6 tracking-wide" style={{ color: isDark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.25)" }}>
             {t.cta.subtext}
           </p>
+
+          {/* Divider */}
+          <div className="flex items-center gap-4 mt-16 mb-10 max-w-md mx-auto">
+            <div className="flex-1 h-px" style={{ background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }} />
+            <span className="text-[12px] font-medium" style={{ color: isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.3)" }}>
+              {t.cta.formTitle}
+            </span>
+            <div className="flex-1 h-px" style={{ background: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }} />
+          </div>
+
+          {/* Contact form */}
+          <motion.form onSubmit={handleSubmit}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+            className="max-w-[480px] mx-auto flex flex-col gap-3 text-left">
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { value: name, set: setName, ph: t.cta.formName, type: "text" },
+                { value: email, set: setEmail, ph: t.cta.formEmail, type: "email" },
+              ].map(({ value, set, ph, type }) => (
+                <input key={ph} type={type} required value={value}
+                  onChange={e => set(e.target.value)} placeholder={ph}
+                  className="w-full px-4 py-3 rounded-xl text-[13px] outline-none transition-all duration-200"
+                  style={{
+                    background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
+                    border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+                    color: textColor,
+                  }}
+                  onFocus={e => { e.target.style.borderColor = "rgba(124,92,255,0.5)"; e.target.style.background = isDark ? "rgba(124,92,255,0.06)" : "rgba(124,92,255,0.04)"; }}
+                  onBlur={e => { e.target.style.borderColor = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"; e.target.style.background = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)"; }}
+                />
+              ))}
+            </div>
+            <textarea required rows={4} value={message}
+              onChange={e => setMessage(e.target.value)} placeholder={t.cta.formMessage}
+              className="w-full px-4 py-3 rounded-xl text-[13px] outline-none transition-all duration-200 resize-none"
+              style={{
+                background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
+                border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+                color: textColor,
+              }}
+              onFocus={e => { e.target.style.borderColor = "rgba(124,92,255,0.5)"; e.target.style.background = isDark ? "rgba(124,92,255,0.06)" : "rgba(124,92,255,0.04)"; }}
+              onBlur={e => { e.target.style.borderColor = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"; e.target.style.background = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)"; }}
+            />
+            {status === "success" && (
+              <p className="text-[13px] text-center py-1" style={{ color: "#4ade80" }}>{t.cta.formSuccess}</p>
+            )}
+            {status === "error" && (
+              <p className="text-[13px] text-center py-1" style={{ color: "#f87171" }}>{t.cta.formError}</p>
+            )}
+            <motion.button type="submit" disabled={status === "loading"}
+              whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
+              className="w-full py-3.5 rounded-xl text-[13px] font-semibold transition-all duration-200 disabled:opacity-50"
+              style={{
+                background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+                border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+                color: textColor,
+              }}>
+              {status === "loading" ? "..." : t.cta.formSubmit}
+            </motion.button>
+          </motion.form>
         </motion.div>
       </div>
     </section>
