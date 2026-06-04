@@ -7,6 +7,23 @@ import { useLanguage } from "@/lib/LanguageContext";
 import { useTheme } from "@/lib/ThemeContext";
 import { Language } from "@/lib/i18n";
 
+// ─── Color system ─────────────────────────────────────────────────────────
+function useColors(isDark: boolean) {
+  return {
+    text:    isDark ? "#ffffff"                    : "#0d0b1a",
+    muted:   isDark ? "rgba(255,255,255,0.48)"     : "rgba(13,11,26,0.52)",
+    card:    isDark ? "rgba(255,255,255,0.028)"    : "rgba(255,255,255,0.75)",
+    cardBorder: isDark ? "rgba(255,255,255,0.07)"  : "rgba(124,92,255,0.14)",
+    divider: isDark ? "rgba(255,255,255,0.07)"     : "rgba(124,92,255,0.1)",
+    // Section backgrounds — each section slightly different for rhythm
+    bgHero:       isDark ? "#030208" : "linear-gradient(155deg,#ede8ff 0%,#e6deff 35%,#f3efff 70%,#faf8ff 100%)",
+    bgA:          isDark ? "#040110" : "linear-gradient(180deg,#eee9ff 0%,#f5f1ff 100%)",
+    bgB:          isDark ? "#030208" : "linear-gradient(180deg,#f5f1ff 0%,#f0ebff 100%)",
+    bgC:          isDark ? "#06030f" : "linear-gradient(180deg,#f0ebff 0%,#ece6ff 100%)",
+    bgD:          isDark ? "#040110" : "linear-gradient(180deg,#ece6ff 0%,#f5f1ff 100%)",
+  };
+}
+
 // ─── Logo ─────────────────────────────────────────────────────────────────
 function AxivoreLogo() {
   return (
@@ -668,30 +685,31 @@ function MetricCard({ m, i, isDark }: {
   const { count, ref } = useCountUp(numVal, 2000);
   const inView = useInView(ref, { once: true });
   const acc = ACCENTS[i % 4];
-  const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(10,10,15,0.42)";
+  const C = useColors(isDark);
 
   return (
     <motion.div ref={ref}
       initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.6, delay: i * 0.1 }}
-      whileHover={{ y: -6, boxShadow: `0 24px 60px ${acc.glow}` }}
-      className="rounded-[20px] p-8 flex flex-col relative overflow-hidden cursor-default transition-all duration-400"
-      style={{ background: isDark ? `linear-gradient(145deg, rgba(10,6,24,0.9), rgba(6,3,14,0.95))` : "rgba(0,0,0,0.03)", border: `1px solid ${isDark ? acc.border : "rgba(0,0,0,0.06)"}` }}>
-      {/* Top accent bar */}
+      whileHover={{ y: -6, boxShadow: isDark ? `0 24px 60px ${acc.glow}` : `0 16px 48px rgba(124,92,255,0.15)` }}
+      className="rounded-[20px] p-8 flex flex-col relative overflow-hidden cursor-default transition-all duration-300"
+      style={{ background: isDark
+        ? `linear-gradient(145deg, rgba(12,7,28,0.9), rgba(6,3,14,0.96))`
+        : "rgba(255,255,255,0.85)",
+        border: `1px solid ${isDark ? acc.border : "rgba(124,92,255,0.16)"}`,
+        backdropFilter: isDark ? "none" : "blur(20px)",
+        boxShadow: isDark ? "none" : "0 4px 24px rgba(100,60,220,0.08)" }}>
       <div className="absolute top-0 left-0 right-0 h-[2px]"
         style={{ background: `linear-gradient(90deg, transparent 5%, ${acc.color} 50%, transparent 95%)` }} />
-      {/* Corner glow */}
       <div className="absolute top-0 right-0 w-32 h-32 pointer-events-none"
         style={{ background: `radial-gradient(ellipse, ${acc.bg} 0%, transparent 70%)`, filter: "blur(20px)", transform: "translate(20%,-20%)" }} />
-      {/* Number */}
       <div className="font-black tracking-tight leading-none mb-4"
-        style={{ fontSize: "clamp(52px,5vw,76px)", color: acc.color, textShadow: isDark ? `0 0 40px ${acc.glow}` : "none" }}>
+        style={{ fontSize: "clamp(52px,5vw,76px)", color: acc.color,
+          textShadow: isDark ? `0 0 40px ${acc.glow}` : `0 2px 20px ${acc.glow}` }}>
         {numVal > 0 && inView ? count : m.value}{m.suffix}
       </div>
-      {/* Label */}
-      <div className="text-[15px] font-semibold mb-1.5" style={{ color: textColor }}>{m.label}</div>
-      <div className="text-[12px] leading-[1.6]" style={{ color: mutedColor }}>{m.context}</div>
+      <div className="text-[15px] font-semibold mb-1.5" style={{ color: C.text }}>{m.label}</div>
+      <div className="text-[12px] leading-[1.6]" style={{ color: C.muted }}>{m.context}</div>
     </motion.div>
   );
 }
@@ -700,42 +718,37 @@ function Results() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(10,10,15,0.42)";
+  const C = useColors(isDark);
 
   return (
-    <section id="results" className="relative py-[120px] overflow-hidden"
-      style={{ background: isDark ? "#040110" : "#ffffff" }}>
-      {/* Atmospheric bg */}
+    <section id="results" className="relative py-[120px] overflow-hidden" style={{ background: C.bgA }}>
+      <div className="absolute inset-x-0 top-0 h-px"
+        style={{ background: isDark
+          ? "linear-gradient(90deg,transparent 10%,rgba(124,92,255,0.3) 50%,transparent 90%)"
+          : "linear-gradient(90deg,transparent 5%,rgba(124,92,255,0.2) 50%,transparent 95%)" }} />
       {isDark && (
-        <>
-          <div className="absolute inset-x-0 top-0 h-px"
-            style={{ background: "linear-gradient(90deg, transparent 10%, rgba(124,92,255,0.3) 50%, transparent 90%)" }} />
-          <div className="absolute pointer-events-none"
-            style={{ width: 900, height: 600, top: "50%", left: "50%", transform: "translate(-50%,-50%)",
-              background: "radial-gradient(ellipse, rgba(80,40,180,0.12) 0%, transparent 65%)", filter: "blur(60px)" }} />
-        </>
+        <div className="absolute pointer-events-none" style={{ width: 900, height: 600, top: "50%", left: "50%",
+          transform: "translate(-50%,-50%)",
+          background: "radial-gradient(ellipse,rgba(80,40,180,0.14) 0%,transparent 65%)", filter: "blur(60px)" }} />
       )}
       <div className="relative max-w-[1320px] mx-auto px-6">
         <div className="text-center mb-20">
           <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#A09AFF" }}>
+            className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#7C5CFF" }}>
             {t.labels.results}
           </motion.p>
           <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: textColor }}>
+            className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: C.text }}>
             {t.results.headline}
           </motion.h2>
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-            transition={{ delay: 0.2 }} className="text-[15px] mt-5 max-w-sm mx-auto leading-[1.7]" style={{ color: mutedColor }}>
+            transition={{ delay: 0.2 }} className="text-[15px] mt-5 max-w-sm mx-auto leading-[1.7]" style={{ color: C.muted }}>
             {t.results.subheadline}
           </motion.p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {t.results.metrics.map((m, i) => (
-            <MetricCard key={i} m={m} i={i} isDark={isDark} />
-          ))}
+          {t.results.metrics.map((m, i) => <MetricCard key={i} m={m} i={i} isDark={isDark} />)}
         </div>
       </div>
     </section>
@@ -754,33 +767,33 @@ function Services() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.42)" : "rgba(10,10,15,0.45)";
-  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+  const C = useColors(isDark);
+  const borderColor = C.cardBorder;
 
   return (
-    <section id="services" className="relative py-[120px] overflow-hidden"
-      style={{ background: isDark ? "#030208" : "#ffffff" }}>
+    <section id="services" className="relative py-[120px] overflow-hidden" style={{ background: C.bgB }}>
       <div className="absolute inset-x-0 top-0 h-px"
-        style={{ background: isDark ? "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.07) 50%, transparent 90%)" : "rgba(0,0,0,0.05)" }} />
+        style={{ background: isDark
+          ? "linear-gradient(90deg,transparent 10%,rgba(255,255,255,0.07) 50%,transparent 90%)"
+          : "linear-gradient(90deg,transparent 5%,rgba(124,92,255,0.15) 50%,transparent 95%)" }} />
 
       <div className="max-w-[1320px] mx-auto px-6">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div>
             <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#A09AFF" }}>
+              className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#7C5CFF" }}>
               {t.labels.services}
             </motion.p>
             <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: textColor }}>
+              className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: C.text }}>
               {t.services.headline}<span style={{ color: "#7C5CFF" }}>.</span>
             </motion.h2>
           </div>
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-[14px] leading-[1.75] max-w-xs" style={{ color: mutedColor }}>
+            className="text-[14px] leading-[1.75] max-w-xs" style={{ color: C.muted }}>
             {t.services.subheadline}
           </motion.p>
         </div>
@@ -791,14 +804,16 @@ function Services() {
             <motion.div key={i}
               initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.55, delay: i * 0.1 }}
-              whileHover={{ y: -6, boxShadow: "0 28px 70px rgba(100,50,220,0.2)" }}
-              className="group rounded-[22px] p-9 flex flex-col justify-between relative overflow-hidden transition-all duration-350 cursor-pointer"
+              whileHover={{ y: -6, boxShadow: isDark ? "0 28px 70px rgba(100,50,220,0.25)" : "0 20px 50px rgba(100,60,220,0.15)" }}
+              className="group rounded-[22px] p-9 flex flex-col justify-between relative overflow-hidden transition-all duration-300 cursor-pointer"
               style={{
                 background: isDark
-                  ? i === 0 ? "linear-gradient(145deg, rgba(100,60,220,0.12), rgba(6,3,14,0.95))"
-                           : "linear-gradient(145deg, rgba(12,7,28,0.9), rgba(6,3,14,0.95))"
-                  : "rgba(0,0,0,0.025)",
-                border: `1px solid ${i === 0 ? "rgba(124,92,255,0.32)" : borderColor}`,
+                  ? i === 0 ? "linear-gradient(145deg,rgba(100,60,220,0.14),rgba(6,3,14,0.96))"
+                           : "linear-gradient(145deg,rgba(12,7,28,0.92),rgba(6,3,14,0.96))"
+                  : "rgba(255,255,255,0.82)",
+                border: `1px solid ${i === 0 ? "rgba(124,92,255,0.38)" : borderColor}`,
+                backdropFilter: isDark ? "none" : "blur(20px)",
+                boxShadow: isDark ? "none" : "0 4px 24px rgba(100,60,220,0.08)",
                 minHeight: "280px",
               }}>
               {/* Top shimmer on hover */}
@@ -817,24 +832,30 @@ function Services() {
                 {/* Icon */}
                 <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-7"
                   style={{
-                    background: i === 0 ? "rgba(124,92,255,0.18)" : "rgba(255,255,255,0.05)",
-                    border: `1px solid ${i === 0 ? "rgba(124,92,255,0.35)" : "rgba(255,255,255,0.08)"}`,
-                    color: i === 0 ? "#A09AFF" : "rgba(255,255,255,0.45)",
+                    background: i === 0
+                      ? "rgba(124,92,255,0.18)"
+                      : isDark ? "rgba(255,255,255,0.06)" : "rgba(124,92,255,0.1)",
+                    border: `1px solid ${i === 0
+                      ? "rgba(124,92,255,0.4)"
+                      : isDark ? "rgba(255,255,255,0.1)" : "rgba(124,92,255,0.2)"}`,
+                    color: isDark
+                      ? i === 0 ? "#A09AFF" : "rgba(255,255,255,0.5)"
+                      : "#7C5CFF",
                   }}>
                   {SVC_ICONS[i]}
                 </div>
                 {/* Tag */}
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9.5px] font-semibold tracking-wide mb-4"
-                  style={{ background: "rgba(124,92,255,0.1)", color: "#A09AFF", border: "1px solid rgba(124,92,255,0.18)" }}>
+                  style={{ background: "rgba(124,92,255,0.1)", color: "#7C5CFF", border: "1px solid rgba(124,92,255,0.2)" }}>
                   {svc.tag}
                 </div>
-                <h3 className="text-[21px] font-bold mb-3 tracking-tight" style={{ color: textColor }}>{svc.title}</h3>
-                <p className="text-[13.5px] leading-[1.7]" style={{ color: mutedColor }}>{svc.description}</p>
+                <h3 className="text-[21px] font-bold mb-3 tracking-tight" style={{ color: C.text }}>{svc.title}</h3>
+                <p className="text-[13.5px] leading-[1.7]" style={{ color: C.muted }}>{svc.description}</p>
               </div>
 
               <div className="flex items-center justify-between mt-8 pt-6"
-                style={{ borderTop: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"}` }}>
-                <span className="text-[12px] font-semibold" style={{ color: "#A09AFF" }}>{svc.outcome}</span>
+                style={{ borderTop: `1px solid ${C.divider}` }}>
+                <span className="text-[12px] font-semibold" style={{ color: "#7C5CFF" }}>{svc.outcome}</span>
                 <motion.div whileHover={{ x: 3, y: -3 }}
                   className="w-8 h-8 rounded-xl flex items-center justify-center"
                   style={{ background: "rgba(124,92,255,0.1)", border: "1px solid rgba(124,92,255,0.2)" }}>
@@ -868,48 +889,50 @@ function PortfolioCard({ product, i, isDark }: {
   i: number; isDark: boolean;
 }) {
   const { t } = useLanguage();
-  const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.42)";
-  const cardBg = isDark ? "rgba(255,255,255,0.022)" : "rgba(0,0,0,0.025)";
-  const cardBorder = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const sc = statusColors[product.status] ?? { bg: "rgba(255,255,255,0.05)", color: mutedColor, border: cardBorder };
+  const C = useColors(isDark);
+  const sc = statusColors[product.status] ?? { bg: "rgba(124,92,255,0.08)", color: "#A09AFF", border: "rgba(124,92,255,0.2)" };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.5, delay: i * 0.1 }}
-      whileHover={{ y: -3 }}
-      className="rounded-2xl overflow-hidden flex flex-col"
-      style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
+      whileHover={{ y: -5, boxShadow: isDark ? "0 24px 60px rgba(80,40,180,0.18)" : "0 16px 48px rgba(100,60,220,0.14)" }}
+      className="rounded-[22px] overflow-hidden flex flex-col transition-all duration-300"
+      style={{ background: isDark
+        ? "linear-gradient(145deg,rgba(12,7,28,0.92),rgba(6,3,14,0.96))"
+        : "rgba(255,255,255,0.85)",
+        border: `1px solid ${C.cardBorder}`,
+        backdropFilter: isDark ? "none" : "blur(20px)",
+        boxShadow: isDark ? "none" : "0 4px 24px rgba(100,60,220,0.08)" }}>
       <div className="h-[3px]" style={{ background: `linear-gradient(90deg, ${product.gradient.includes("violet") ? "#7C5CFF" : "#5b8aff"}, ${product.gradient.includes("indigo") ? "#5b8aff" : "#A09AFF"})` }} />
       <div className="p-7 flex flex-col flex-1 gap-5">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h3 className="text-[18px] font-bold tracking-tight" style={{ color: textColor }}>{product.name}</h3>
+              <h3 className="text-[18px] font-bold tracking-tight" style={{ color: C.text }}>{product.name}</h3>
               <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full border"
                 style={{ background: sc.bg, color: sc.color, borderColor: sc.border }}>{product.status}</span>
             </div>
-            <p className="text-[12.5px]" style={{ color: mutedColor }}>{product.tagline}</p>
+            <p className="text-[12.5px]" style={{ color: C.muted }}>{product.tagline}</p>
           </div>
           <div className="text-right shrink-0">
-            <div className="text-[22px] font-bold" style={{ color: "#A09AFF" }}>{product.metric.value}</div>
-            <div className="text-[10px] max-w-[80px] leading-tight" style={{ color: mutedColor }}>{product.metric.label}</div>
+            <div className="text-[22px] font-bold" style={{ color: "#7C5CFF" }}>{product.metric.value}</div>
+            <div className="text-[10px] max-w-[80px] leading-tight" style={{ color: C.muted }}>{product.metric.label}</div>
           </div>
         </div>
-        <div className="h-px" style={{ background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)" }} />
+        <div className="h-px" style={{ background: C.divider }} />
         <div>
           <div className="flex items-center gap-2 mb-2">
             <div className="w-3.5 h-3.5 rounded-full flex items-center justify-center" style={{ background: "rgba(251,191,36,0.15)" }}>
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#fbbf24" }} />
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#f59e0b" }} />
             </div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "#fbbf24" }}>{t.labels.problem}</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "#f59e0b" }}>{t.labels.problem}</span>
           </div>
-          <p className="text-[12.5px] leading-[1.65] pl-5" style={{ color: mutedColor }}>{product.problem}</p>
+          <p className="text-[12.5px] leading-[1.65] pl-5" style={{ color: C.muted }}>{product.problem}</p>
         </div>
         <div className="pl-2">
           <svg width="10" height="14" viewBox="0 0 10 14" fill="none">
-            <path d="M5 0v12M1 9l4 4 4-4" stroke={isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)"} strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M5 0v12M1 9l4 4 4-4" stroke={C.divider} strokeWidth="1.5" strokeLinecap="round"/>
           </svg>
         </div>
         <div>
@@ -919,12 +942,12 @@ function PortfolioCard({ product, i, isDark }: {
             </div>
             <span className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "#22c55e" }}>{t.labels.outcome}</span>
           </div>
-          <p className="text-[12.5px] leading-[1.65] pl-5" style={{ color: textColor }}>{product.outcome}</p>
+          <p className="text-[12.5px] leading-[1.65] pl-5" style={{ color: C.text }}>{product.outcome}</p>
         </div>
         <div className="flex flex-wrap gap-2 mt-auto pt-2">
           {product.tags.map((tag, j) => (
             <span key={j} className="text-[11px] px-2.5 py-0.5 rounded-full"
-              style={{ color: mutedColor, background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)", border: `1px solid ${cardBorder}` }}>
+              style={{ color: C.muted, background: isDark ? "rgba(255,255,255,0.04)" : "rgba(124,92,255,0.07)", border: `1px solid ${C.cardBorder}` }}>
               {tag}
             </span>
           ))}
@@ -938,22 +961,23 @@ function Portfolio() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const bg = isDark ? "#050505" : "#ffffff";
-  const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.42)";
-  const borderColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
+  const C = useColors(isDark);
 
   return (
-    <section id="portfolio" className="py-[100px]" style={{ background: bg, borderTop: `1px solid ${borderColor}` }}>
+    <section id="portfolio" className="py-[110px] relative" style={{ background: C.bgC }}>
+      <div className="absolute inset-x-0 top-0 h-px"
+        style={{ background: isDark
+          ? "linear-gradient(90deg,transparent 10%,rgba(255,255,255,0.07) 50%,transparent 90%)"
+          : "linear-gradient(90deg,transparent 5%,rgba(124,92,255,0.15) 50%,transparent 95%)" }} />
       <div className="max-w-[1320px] mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="text-[10.5px] tracking-[0.22em] uppercase mb-4" style={{ color: "#A09AFF" }}>
+        <div className="relative text-center mb-16">
+          <p className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#7C5CFF" }}>
             {t.labels.portfolio}
           </p>
-          <h2 className="font-bold tracking-[-0.03em] leading-[1.05]" style={{ fontSize: "clamp(32px,4vw,52px)", color: textColor }}>
+          <h2 className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: C.text }}>
             {t.portfolio.headline}<span style={{ color: "#7C5CFF" }}>.</span>
           </h2>
-          <p className="text-[15px] mt-4 max-w-md mx-auto" style={{ color: mutedColor }}>
+          <p className="text-[15px] mt-5 max-w-md mx-auto leading-[1.7]" style={{ color: C.muted }}>
             {t.portfolio.subheadline}
           </p>
         </div>
@@ -972,14 +996,11 @@ function FAQ() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.45)" : "rgba(10,10,15,0.5)";
-  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+  const C = useColors(isDark);
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative py-[120px] overflow-hidden"
-      style={{ background: isDark ? "#030208" : "#ffffff" }}>
+    <section id="faq" className="relative py-[120px] overflow-hidden" style={{ background: C.bgA }}>
       <div className="absolute inset-x-0 top-0 h-px"
         style={{ background: isDark ? "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.07) 50%, transparent 90%)" : "rgba(0,0,0,0.05)" }} />
 
@@ -994,11 +1015,11 @@ function FAQ() {
             <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="font-black tracking-[-0.04em] leading-[1.0] mb-6"
-              style={{ fontSize: "clamp(36px,4vw,56px)", color: textColor }}>
+              style={{ fontSize: "clamp(36px,4vw,56px)", color: C.text }}>
               {t.faq.headline}<span style={{ color: "#7C5CFF" }}>?</span>
             </motion.h2>
             <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              transition={{ delay: 0.2 }} className="text-[14px] leading-[1.75]" style={{ color: mutedColor }}>
+              transition={{ delay: 0.2 }} className="text-[14px] leading-[1.75]" style={{ color: C.muted }}>
               Alles Wichtige — klar und direkt.
             </motion.p>
           </div>
@@ -1012,9 +1033,11 @@ function FAQ() {
                 className="rounded-[18px] overflow-hidden transition-all duration-250 relative"
                 style={{
                   background: openIdx === i
-                    ? isDark ? "rgba(124,92,255,0.07)" : "rgba(124,92,255,0.04)"
-                    : isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.025)",
-                  border: `1px solid ${openIdx === i ? "rgba(124,92,255,0.25)" : borderColor}`,
+                    ? isDark ? "rgba(124,92,255,0.08)" : "rgba(255,255,255,0.9)"
+                    : isDark ? "rgba(255,255,255,0.025)" : "rgba(255,255,255,0.7)",
+                  border: `1px solid ${openIdx === i ? "rgba(124,92,255,0.3)" : C.cardBorder}`,
+                  backdropFilter: isDark ? "none" : "blur(20px)",
+                  boxShadow: isDark ? "none" : "0 2px 12px rgba(100,60,220,0.06)",
                 }}>
                 {/* Left accent bar when open */}
                 {openIdx === i && (
@@ -1024,14 +1047,14 @@ function FAQ() {
                 <button className="w-full flex items-center justify-between px-6 py-5 text-left gap-4"
                   onClick={() => setOpenIdx(openIdx === i ? null : i)}>
                   <span className="text-[14px] font-semibold leading-[1.5]"
-                    style={{ color: openIdx === i ? textColor : mutedColor }}>
+                    style={{ color: openIdx === i ? C.text : C.muted }}>
                     {item.question}
                   </span>
                   <motion.div animate={{ rotate: openIdx === i ? 45 : 0 }} transition={{ duration: 0.22 }}
                     className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200"
                     style={{
                       background: openIdx === i ? "rgba(124,92,255,0.18)" : "transparent",
-                      border: `1px solid ${openIdx === i ? "rgba(124,92,255,0.4)" : borderColor}`,
+                      border: `1px solid ${openIdx === i ? "rgba(124,92,255,0.4)" : C.cardBorder}`,
                     }}>
                     <svg width="12" height="12" fill="none" viewBox="0 0 24 24"
                       stroke={openIdx === i ? "#A09AFF" : isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.3)"} strokeWidth={2.5}>
@@ -1044,7 +1067,7 @@ function FAQ() {
                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}>
                       <div className="px-6 pb-6">
-                        <p className="text-[13.5px] leading-[1.78]" style={{ color: mutedColor }}>{item.answer}</p>
+                        <p className="text-[13.5px] leading-[1.78]" style={{ color: C.muted }}>{item.answer}</p>
                       </div>
                     </motion.div>
                   )}
@@ -1063,9 +1086,7 @@ function Process() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.4)";
-  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+  const C = useColors(isDark);
 
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
@@ -1074,7 +1095,7 @@ function Process() {
   return (
     <section id="process" ref={targetRef} className="relative h-[220vh]">
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden"
-        style={{ background: isDark ? "#030208" : "#ffffff" }}>
+        style={{ background: C.bgB }}>
         <div className="absolute inset-x-0 top-0 h-px"
           style={{ background: isDark ? "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.07) 50%, transparent 90%)" : "rgba(0,0,0,0.05)" }} />
 
@@ -1085,13 +1106,13 @@ function Process() {
                 {t.labels.process}
               </p>
               <h2 className="font-black tracking-[-0.04em] leading-[1.0]"
-                style={{ fontSize: "clamp(36px,4.5vw,60px)", color: textColor }}>
+                style={{ fontSize: "clamp(36px,4.5vw,60px)", color: C.text }}>
                 {t.process.headline}<span style={{ color: "#7C5CFF" }}>.</span>
               </h2>
             </div>
             <div className="text-right hidden md:block">
-              <p className="text-[12px] mb-1" style={{ color: mutedColor }}>{t.process.subheadline}</p>
-              <span className="text-[11px] font-mono tracking-widest" style={{ color: isDark ? "rgba(160,154,255,0.4)" : "rgba(124,92,255,0.4)" }}>
+              <p className="text-[12px] mb-1" style={{ color: C.muted }}>{t.process.subheadline}</p>
+              <span className="text-[11px] font-mono tracking-widest" style={{ color: "#7C5CFF" }}>
                 01 → 0{t.process.steps.length}
               </span>
             </div>
@@ -1103,8 +1124,12 @@ function Process() {
             {t.process.steps.map((step, i) => (
               <div key={i} className="flex-shrink-0 w-[310px] rounded-[22px] p-8 flex flex-col justify-between relative overflow-hidden"
                 style={{
-                  background: isDark ? "linear-gradient(145deg, rgba(14,8,32,0.95), rgba(6,3,14,0.98))" : "rgba(0,0,0,0.025)",
-                  border: `1px solid ${borderColor}`,
+                  background: isDark
+                    ? "linear-gradient(145deg,rgba(14,8,32,0.95),rgba(6,3,14,0.98))"
+                    : "rgba(255,255,255,0.85)",
+                  border: `1px solid ${C.cardBorder}`,
+                  backdropFilter: isDark ? "none" : "blur(20px)",
+                  boxShadow: isDark ? "none" : "0 4px 24px rgba(100,60,220,0.08)",
                   height: "280px",
                 }}>
                 {/* Top accent */}
@@ -1120,8 +1145,8 @@ function Process() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-[21px] font-bold mb-3 tracking-tight" style={{ color: textColor }}>{step.title}</h3>
-                  <p className="text-[12.5px] leading-[1.68]" style={{ color: mutedColor }}>{step.description}</p>
+                  <h3 className="text-[21px] font-bold mb-3 tracking-tight" style={{ color: C.text }}>{step.title}</h3>
+                  <p className="text-[12.5px] leading-[1.68]" style={{ color: C.muted }}>{step.description}</p>
                 </div>
               </div>
             ))}
@@ -1143,12 +1168,10 @@ function Testimonials() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.5)" : "rgba(10,10,15,0.5)";
+  const C = useColors(isDark);
 
   return (
-    <section id="testimonials" className="relative py-[120px] overflow-hidden"
-      style={{ background: isDark ? "#06030f" : "#ffffff" }}>
+    <section id="testimonials" className="relative py-[120px] overflow-hidden" style={{ background: C.bgD }}>
       {/* Atmospheric glow */}
       {isDark && (
         <div className="absolute pointer-events-none inset-0"
@@ -1160,12 +1183,12 @@ function Testimonials() {
       <div className="relative max-w-[1320px] mx-auto px-6">
         <div className="text-center mb-20">
           <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#A09AFF" }}>
+            className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#7C5CFF" }}>
             {t.labels.testimonials}
           </motion.p>
           <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: textColor }}>
+            className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: C.text }}>
             {t.testimonials.headline}
           </motion.h2>
         </div>
@@ -1178,10 +1201,14 @@ function Testimonials() {
                 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.55, delay: i * 0.12 }}
                 whileHover={{ y: -6, boxShadow: `0 28px 70px rgba(80,40,180,0.18)` }}
-                className="rounded-[22px] p-8 flex flex-col relative overflow-hidden transition-all duration-350"
+                className="rounded-[22px] p-8 flex flex-col relative overflow-hidden transition-all duration-300"
                 style={{
-                  background: isDark ? "linear-gradient(145deg, rgba(12,7,28,0.95), rgba(6,3,14,0.98))" : "rgba(0,0,0,0.025)",
-                  border: `1px solid ${isDark ? acc.border : "rgba(0,0,0,0.06)"}`,
+                  background: isDark
+                    ? "linear-gradient(145deg,rgba(12,7,28,0.95),rgba(6,3,14,0.98))"
+                    : "rgba(255,255,255,0.82)",
+                  border: `1px solid ${isDark ? acc.border : "rgba(124,92,255,0.15)"}`,
+                  backdropFilter: isDark ? "none" : "blur(20px)",
+                  boxShadow: isDark ? "none" : "0 4px 24px rgba(100,60,220,0.08)",
                 }}>
                 {/* Top shimmer */}
                 <div className="absolute top-0 left-0 right-0 h-[2px]"
@@ -1196,21 +1223,21 @@ function Testimonials() {
                 </div>
 
                 {/* Quote text */}
-                <p className="text-[14px] leading-[1.8] flex-1 mb-8 font-medium" style={{ color: mutedColor }}>
+                <p className="text-[14px] leading-[1.8] flex-1 mb-8 font-medium" style={{ color: C.muted }}>
                   {item.quote}
                 </p>
 
                 {/* Author + result */}
                 <div className="flex items-center justify-between pt-5"
-                  style={{ borderTop: `1px solid ${isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}` }}>
+                  style={{ borderTop: `1px solid ${C.divider}` }}>
                   <div className="flex items-center gap-3.5">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center text-[11px] font-black text-white shrink-0"
                       style={{ background: acc.avatar }}>
                       {item.initials}
                     </div>
                     <div>
-                      <div className="text-[13px] font-semibold" style={{ color: textColor }}>{item.name}</div>
-                      <div className="text-[11px] mt-0.5" style={{ color: "rgba(160,154,255,0.55)" }}>{item.role}</div>
+                      <div className="text-[13px] font-semibold" style={{ color: C.text }}>{item.name}</div>
+                      <div className="text-[11px] mt-0.5" style={{ color: isDark ? "rgba(160,154,255,0.55)" : "#7C5CFF" }}>{item.role}</div>
                     </div>
                   </div>
                   <div className="px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wide"
