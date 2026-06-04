@@ -653,41 +653,45 @@ function Marquee() {
 }
 
 // ─── Results / Stats ──────────────────────────────────────────────────────
+const ACCENTS = [
+  { color: "#A09AFF", glow: "rgba(160,154,255,0.5)", bg: "rgba(160,154,255,0.07)", border: "rgba(160,154,255,0.18)" },
+  { color: "#FF3DC5", glow: "rgba(255,61,197,0.4)",  bg: "rgba(255,61,197,0.07)",  border: "rgba(255,61,197,0.18)" },
+  { color: "#5B8AFF", glow: "rgba(91,138,255,0.4)",  bg: "rgba(91,138,255,0.07)",  border: "rgba(91,138,255,0.18)" },
+  { color: "#22d3ee", glow: "rgba(34,211,238,0.35)", bg: "rgba(34,211,238,0.06)",  border: "rgba(34,211,238,0.15)" },
+];
+
 function MetricCard({ m, i, isDark }: {
   m: { value: string; suffix: string; label: string; context: string };
-  i: number;
-  isDark: boolean;
+  i: number; isDark: boolean;
 }) {
   const numVal = parseInt(m.value) || 0;
-  const { count, ref } = useCountUp(numVal, 1800);
+  const { count, ref } = useCountUp(numVal, 2000);
   const inView = useInView(ref, { once: true });
+  const acc = ACCENTS[i % 4];
   const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.35)" : "rgba(10,10,15,0.42)";
-  const cardBg = isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.025)";
-  const cardBorder = isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)";
+  const mutedColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(10,10,15,0.42)";
 
   return (
     <motion.div ref={ref}
-      initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.5, delay: i * 0.08 }}
-      whileHover={{ y: -2, borderColor: "rgba(124,92,255,0.2)" }}
-      className="rounded-2xl p-7 flex flex-col gap-1 relative overflow-hidden transition-all duration-300"
-      style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
-      {(() => {
-        const accents = ["rgba(160,154,255,0.45)", "rgba(255,61,197,0.35)", "rgba(91,138,255,0.35)", "rgba(52,211,153,0.35)"];
-        const numColors = ["#A09AFF", "#FF3DC5", "#5b8aff", "#34d399"];
-        return (
-          <>
-            <div className="absolute top-0 left-0 right-0 h-px"
-              style={{ background: isDark ? `linear-gradient(90deg, transparent, ${accents[i % 4]}, transparent)` : "transparent" }} />
-            <div className="font-bold tracking-tight leading-none mb-3" style={{ fontSize: "clamp(40px,4vw,58px)", color: isDark ? numColors[i % 4] : textColor }}>
-              {numVal > 0 && inView ? count : m.value}{m.suffix}
-            </div>
-            <div className="text-[13px] font-semibold" style={{ color: textColor }}>{m.label}</div>
-            <div className="text-[11.5px] mt-0.5" style={{ color: mutedColor }}>{m.context}</div>
-          </>
-        );
-      })()}
+      initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.6, delay: i * 0.1 }}
+      whileHover={{ y: -6, boxShadow: `0 24px 60px ${acc.glow}` }}
+      className="rounded-[20px] p-8 flex flex-col relative overflow-hidden cursor-default transition-all duration-400"
+      style={{ background: isDark ? `linear-gradient(145deg, rgba(10,6,24,0.9), rgba(6,3,14,0.95))` : "rgba(0,0,0,0.03)", border: `1px solid ${isDark ? acc.border : "rgba(0,0,0,0.06)"}` }}>
+      {/* Top accent bar */}
+      <div className="absolute top-0 left-0 right-0 h-[2px]"
+        style={{ background: `linear-gradient(90deg, transparent 5%, ${acc.color} 50%, transparent 95%)` }} />
+      {/* Corner glow */}
+      <div className="absolute top-0 right-0 w-32 h-32 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse, ${acc.bg} 0%, transparent 70%)`, filter: "blur(20px)", transform: "translate(20%,-20%)" }} />
+      {/* Number */}
+      <div className="font-black tracking-tight leading-none mb-4"
+        style={{ fontSize: "clamp(52px,5vw,76px)", color: acc.color, textShadow: isDark ? `0 0 40px ${acc.glow}` : "none" }}>
+        {numVal > 0 && inView ? count : m.value}{m.suffix}
+      </div>
+      {/* Label */}
+      <div className="text-[15px] font-semibold mb-1.5" style={{ color: textColor }}>{m.label}</div>
+      <div className="text-[12px] leading-[1.6]" style={{ color: mutedColor }}>{m.context}</div>
     </motion.div>
   );
 }
@@ -696,24 +700,37 @@ function Results() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const bg = isDark ? "#050505" : "#ffffff";
   const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.42)";
-  const borderColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
+  const mutedColor = isDark ? "rgba(255,255,255,0.4)" : "rgba(10,10,15,0.42)";
 
   return (
-    <section id="results" className="py-[100px]" style={{ background: bg, borderTop: `1px solid ${borderColor}` }}>
-      <div className="max-w-[1320px] mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="text-[10.5px] tracking-[0.22em] uppercase mb-4" style={{ color: "#A09AFF" }}>
+    <section id="results" className="relative py-[120px] overflow-hidden"
+      style={{ background: isDark ? "#040110" : "#ffffff" }}>
+      {/* Atmospheric bg */}
+      {isDark && (
+        <>
+          <div className="absolute inset-x-0 top-0 h-px"
+            style={{ background: "linear-gradient(90deg, transparent 10%, rgba(124,92,255,0.3) 50%, transparent 90%)" }} />
+          <div className="absolute pointer-events-none"
+            style={{ width: 900, height: 600, top: "50%", left: "50%", transform: "translate(-50%,-50%)",
+              background: "radial-gradient(ellipse, rgba(80,40,180,0.12) 0%, transparent 65%)", filter: "blur(60px)" }} />
+        </>
+      )}
+      <div className="relative max-w-[1320px] mx-auto px-6">
+        <div className="text-center mb-20">
+          <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#A09AFF" }}>
             {t.labels.results}
-          </p>
-          <h2 className="font-bold tracking-[-0.03em] leading-[1.05]" style={{ fontSize: "clamp(32px,4vw,52px)", color: textColor }}>
+          </motion.p>
+          <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: textColor }}>
             {t.results.headline}
-          </h2>
-          <p className="text-[15px] mt-4 max-w-md mx-auto" style={{ color: mutedColor }}>
+          </motion.h2>
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            transition={{ delay: 0.2 }} className="text-[15px] mt-5 max-w-sm mx-auto leading-[1.7]" style={{ color: mutedColor }}>
             {t.results.subheadline}
-          </p>
+          </motion.p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {t.results.metrics.map((m, i) => (
@@ -726,58 +743,105 @@ function Results() {
 }
 
 // ─── Services ─────────────────────────────────────────────────────────────
+const SVC_ICONS = [
+  <svg key="0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/><path d="M9 9l2 2 4-4"/></svg>,
+  <svg key="1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>,
+  <svg key="2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round"><path d="M4 4v5h5M20 20v-5h-5"/><path d="M4 9a8 8 0 0114.93-2M20 15a8 8 0 01-14.93 2"/></svg>,
+  <svg key="3" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h8M8 14h5"/></svg>,
+];
+
 function Services() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const bg = isDark ? "#050505" : "#ffffff";
   const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.42)";
-  const borderColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
-  const cardBg = isDark ? "rgba(255,255,255,0.022)" : "rgba(0,0,0,0.025)";
-  const cardBorder = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const accentCardBg = isDark ? "rgba(124,92,255,0.08)" : "rgba(124,92,255,0.05)";
-  const accentCardBorder = "rgba(124,92,255,0.28)";
+  const mutedColor = isDark ? "rgba(255,255,255,0.42)" : "rgba(10,10,15,0.45)";
+  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
 
   return (
-    <section id="services" className="py-[100px]" style={{ background: bg, borderTop: `1px solid ${borderColor}` }}>
+    <section id="services" className="relative py-[120px] overflow-hidden"
+      style={{ background: isDark ? "#030208" : "#ffffff" }}>
+      <div className="absolute inset-x-0 top-0 h-px"
+        style={{ background: isDark ? "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.07) 50%, transparent 90%)" : "rgba(0,0,0,0.05)" }} />
+
       <div className="max-w-[1320px] mx-auto px-6">
-        <div className="flex items-end justify-between mb-14">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div>
-            <p className="text-[10.5px] tracking-[0.22em] uppercase mb-3" style={{ color: "#A09AFF" }}>
+            <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#A09AFF" }}>
               {t.labels.services}
-            </p>
-            <h2 className="font-bold tracking-[-0.03em] leading-[1.05]" style={{ fontSize: "clamp(32px,4vw,52px)", color: textColor }}>
+            </motion.p>
+            <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: textColor }}>
               {t.services.headline}<span style={{ color: "#7C5CFF" }}>.</span>
-            </h2>
-            <p className="text-[14px] mt-2 max-w-sm" style={{ color: mutedColor }}>{t.services.subheadline}</p>
+            </motion.h2>
           </div>
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-[14px] leading-[1.75] max-w-xs" style={{ color: mutedColor }}>
+            {t.services.subheadline}
+          </motion.p>
         </div>
+
+        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {t.services.items.map((svc, i) => (
             <motion.div key={i}
-              initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5, delay: i * 0.09 }}
-              whileHover={{ y: -4, boxShadow: isDark ? "0 20px 60px rgba(80,40,200,0.18)" : "0 20px 60px rgba(124,92,255,0.1)" }}
-              className="rounded-2xl p-8 flex flex-col justify-between cursor-pointer transition-all duration-300 relative overflow-hidden"
-              style={{ background: i === 0 ? accentCardBg : cardBg, border: `1px solid ${i === 0 ? accentCardBorder : cardBorder}`, minHeight: "240px" }}>
+              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.55, delay: i * 0.1 }}
+              whileHover={{ y: -6, boxShadow: "0 28px 70px rgba(100,50,220,0.2)" }}
+              className="group rounded-[22px] p-9 flex flex-col justify-between relative overflow-hidden transition-all duration-350 cursor-pointer"
+              style={{
+                background: isDark
+                  ? i === 0 ? "linear-gradient(145deg, rgba(100,60,220,0.12), rgba(6,3,14,0.95))"
+                           : "linear-gradient(145deg, rgba(12,7,28,0.9), rgba(6,3,14,0.95))"
+                  : "rgba(0,0,0,0.025)",
+                border: `1px solid ${i === 0 ? "rgba(124,92,255,0.32)" : borderColor}`,
+                minHeight: "280px",
+              }}>
+              {/* Top shimmer on hover */}
+              <div className="absolute top-0 left-0 right-0 h-px transition-opacity duration-300"
+                style={{ background: i === 0
+                  ? "linear-gradient(90deg, transparent, rgba(160,154,255,0.6), transparent)"
+                  : "linear-gradient(90deg, transparent, rgba(160,154,255,0.2), transparent)", opacity: i === 0 ? 1 : 0 }}
+                data-hover-show />
+              {/* Corner glow */}
+              {isDark && i === 0 && (
+                <div className="absolute top-0 right-0 w-48 h-48 pointer-events-none"
+                  style={{ background: "radial-gradient(ellipse, rgba(124,92,255,0.18) 0%, transparent 65%)", filter: "blur(24px)", transform: "translate(20%,-20%)" }} />
+              )}
+
               <div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium mb-5"
-                  style={{ background: "rgba(124,92,255,0.1)", color: "#A09AFF", border: "1px solid rgba(124,92,255,0.2)" }}>
+                {/* Icon */}
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-7"
+                  style={{
+                    background: i === 0 ? "rgba(124,92,255,0.18)" : "rgba(255,255,255,0.05)",
+                    border: `1px solid ${i === 0 ? "rgba(124,92,255,0.35)" : "rgba(255,255,255,0.08)"}`,
+                    color: i === 0 ? "#A09AFF" : "rgba(255,255,255,0.45)",
+                  }}>
+                  {SVC_ICONS[i]}
+                </div>
+                {/* Tag */}
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9.5px] font-semibold tracking-wide mb-4"
+                  style={{ background: "rgba(124,92,255,0.1)", color: "#A09AFF", border: "1px solid rgba(124,92,255,0.18)" }}>
                   {svc.tag}
                 </div>
-                <h3 className="text-[19px] font-bold mb-2.5 tracking-tight" style={{ color: textColor }}>{svc.title}</h3>
-                <p className="text-[13px] leading-[1.65]" style={{ color: mutedColor }}>{svc.description}</p>
+                <h3 className="text-[21px] font-bold mb-3 tracking-tight" style={{ color: textColor }}>{svc.title}</h3>
+                <p className="text-[13.5px] leading-[1.7]" style={{ color: mutedColor }}>{svc.description}</p>
               </div>
-              <div className="flex items-center justify-between mt-6 pt-5"
-                style={{ borderTop: `1px solid ${isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}` }}>
-                <span className="text-[12px] font-medium" style={{ color: "#A09AFF" }}>{svc.outcome}</span>
-                <div className="w-7 h-7 rounded-lg flex items-center justify-center"
-                  style={{ background: "rgba(124,92,255,0.08)", border: "1px solid rgba(124,92,255,0.15)" }}>
-                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-                    <path d="M1.5 9.5L9.5 1.5M9.5 1.5H3.5M9.5 1.5V7.5" stroke="#A09AFF" strokeWidth="1.3" strokeLinecap="round"/>
+
+              <div className="flex items-center justify-between mt-8 pt-6"
+                style={{ borderTop: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"}` }}>
+                <span className="text-[12px] font-semibold" style={{ color: "#A09AFF" }}>{svc.outcome}</span>
+                <motion.div whileHover={{ x: 3, y: -3 }}
+                  className="w-8 h-8 rounded-xl flex items-center justify-center"
+                  style={{ background: "rgba(124,92,255,0.1)", border: "1px solid rgba(124,92,255,0.2)" }}>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M1 11L11 1M11 1H3M11 1V9" stroke="#A09AFF" strokeWidth="1.4" strokeLinecap="round"/>
                   </svg>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           ))}
@@ -908,63 +972,86 @@ function FAQ() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const bg = isDark ? "#050505" : "#ffffff";
   const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.42)";
-  const borderColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
+  const mutedColor = isDark ? "rgba(255,255,255,0.45)" : "rgba(10,10,15,0.5)";
+  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-[100px]" style={{ background: bg, borderTop: `1px solid ${borderColor}` }}>
+    <section id="faq" className="relative py-[120px] overflow-hidden"
+      style={{ background: isDark ? "#030208" : "#ffffff" }}>
+      <div className="absolute inset-x-0 top-0 h-px"
+        style={{ background: isDark ? "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.07) 50%, transparent 90%)" : "rgba(0,0,0,0.05)" }} />
+
       <div className="max-w-[1320px] mx-auto px-6">
-        <div className="text-center mb-14">
-          <p className="text-[10.5px] tracking-[0.22em] uppercase mb-4" style={{ color: "#A09AFF" }}>
-            {t.labels.faq}
-          </p>
-          <h2 className="font-bold tracking-[-0.03em] leading-[1.05]" style={{ fontSize: "clamp(32px,4vw,52px)", color: textColor }}>
-            {t.faq.headline}<span style={{ color: "#7C5CFF" }}>?</span>
-          </h2>
-        </div>
-        <div className="max-w-[780px] mx-auto space-y-2">
-          {t.faq.items.map((item, i) => (
-            <motion.div key={i}
-              initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.45, delay: i * 0.07 }}
-              className="rounded-2xl overflow-hidden transition-colors duration-200"
-              style={{
-                background: openIdx === i
-                  ? isDark ? "rgba(124,92,255,0.06)" : "rgba(124,92,255,0.04)"
-                  : isDark ? "rgba(255,255,255,0.022)" : "rgba(0,0,0,0.025)",
-                border: `1px solid ${openIdx === i ? "rgba(124,92,255,0.2)" : borderColor}`,
-              }}>
-              <button className="w-full flex items-center justify-between px-6 py-5 text-left gap-4"
-                onClick={() => setOpenIdx(openIdx === i ? null : i)}>
-                <span className="text-[14px] font-medium" style={{ color: openIdx === i ? textColor : mutedColor }}>
-                  {item.question}
-                </span>
-                <motion.div animate={{ rotate: openIdx === i ? 45 : 0 }} transition={{ duration: 0.22 }}
-                  className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
-                  style={{
-                    background: openIdx === i ? "rgba(124,92,255,0.15)" : "transparent",
-                    border: `1px solid ${openIdx === i ? "rgba(124,92,255,0.3)" : borderColor}`,
-                  }}>
-                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke={openIdx === i ? "#A09AFF" : mutedColor} strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                  </svg>
-                </motion.div>
-              </button>
-              <AnimatePresence initial={false}>
+        <div className="flex flex-col md:flex-row gap-16">
+          {/* Left — sticky title */}
+          <div className="md:w-[380px] shrink-0">
+            <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#A09AFF" }}>
+              {t.labels.faq}
+            </motion.p>
+            <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="font-black tracking-[-0.04em] leading-[1.0] mb-6"
+              style={{ fontSize: "clamp(36px,4vw,56px)", color: textColor }}>
+              {t.faq.headline}<span style={{ color: "#7C5CFF" }}>?</span>
+            </motion.h2>
+            <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+              transition={{ delay: 0.2 }} className="text-[14px] leading-[1.75]" style={{ color: mutedColor }}>
+              Alles Wichtige — klar und direkt.
+            </motion.p>
+          </div>
+
+          {/* Right — accordion */}
+          <div className="flex-1 space-y-2">
+            {t.faq.items.map((item, i) => (
+              <motion.div key={i}
+                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }} transition={{ duration: 0.45, delay: i * 0.06 }}
+                className="rounded-[18px] overflow-hidden transition-all duration-250 relative"
+                style={{
+                  background: openIdx === i
+                    ? isDark ? "rgba(124,92,255,0.07)" : "rgba(124,92,255,0.04)"
+                    : isDark ? "rgba(255,255,255,0.025)" : "rgba(0,0,0,0.025)",
+                  border: `1px solid ${openIdx === i ? "rgba(124,92,255,0.25)" : borderColor}`,
+                }}>
+                {/* Left accent bar when open */}
                 {openIdx === i && (
-                  <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}>
-                    <div className="px-6 pb-5">
-                      <p className="text-[13px] leading-[1.72]" style={{ color: mutedColor }}>{item.answer}</p>
-                    </div>
-                  </motion.div>
+                  <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-full"
+                    style={{ background: "linear-gradient(to bottom, #7C5CFF, #FF3DC5)" }} />
                 )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                <button className="w-full flex items-center justify-between px-6 py-5 text-left gap-4"
+                  onClick={() => setOpenIdx(openIdx === i ? null : i)}>
+                  <span className="text-[14px] font-semibold leading-[1.5]"
+                    style={{ color: openIdx === i ? textColor : mutedColor }}>
+                    {item.question}
+                  </span>
+                  <motion.div animate={{ rotate: openIdx === i ? 45 : 0 }} transition={{ duration: 0.22 }}
+                    className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200"
+                    style={{
+                      background: openIdx === i ? "rgba(124,92,255,0.18)" : "transparent",
+                      border: `1px solid ${openIdx === i ? "rgba(124,92,255,0.4)" : borderColor}`,
+                    }}>
+                    <svg width="12" height="12" fill="none" viewBox="0 0 24 24"
+                      stroke={openIdx === i ? "#A09AFF" : isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.3)"} strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                  </motion.div>
+                </button>
+                <AnimatePresence initial={false}>
+                  {openIdx === i && (
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}>
+                      <div className="px-6 pb-6">
+                        <p className="text-[13.5px] leading-[1.78]" style={{ color: mutedColor }}>{item.answer}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -976,49 +1063,65 @@ function Process() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const bg = isDark ? "#050505" : "#ffffff";
   const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.35)" : "rgba(10,10,15,0.4)";
-  const borderColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
-  const cardBg = isDark ? "rgba(255,255,255,0.022)" : "rgba(0,0,0,0.025)";
-  const cardBorder = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+  const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.4)";
+  const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
 
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
   const x = useTransform(scrollYProgress, [0, 1], ["0px", "-420px"]);
 
   return (
-    <section id="process" ref={targetRef} className="relative h-[220vh]" style={{ borderTop: `1px solid ${borderColor}` }}>
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden" style={{ background: bg }}>
-        <div className="max-w-[1320px] mx-auto px-6 w-full mb-10">
+    <section id="process" ref={targetRef} className="relative h-[220vh]">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden"
+        style={{ background: isDark ? "#030208" : "#ffffff" }}>
+        <div className="absolute inset-x-0 top-0 h-px"
+          style={{ background: isDark ? "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.07) 50%, transparent 90%)" : "rgba(0,0,0,0.05)" }} />
+
+        <div className="max-w-[1320px] mx-auto px-6 w-full mb-12">
           <div className="flex items-end justify-between">
             <div>
-              <p className="text-[10.5px] tracking-[0.22em] uppercase mb-3" style={{ color: "#A09AFF" }}>
+              <p className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#A09AFF" }}>
                 {t.labels.process}
               </p>
-              <h2 className="font-bold tracking-[-0.03em] leading-[1.05]"
-                style={{ fontSize: "clamp(32px,4vw,52px)", color: textColor }}>
+              <h2 className="font-black tracking-[-0.04em] leading-[1.0]"
+                style={{ fontSize: "clamp(36px,4.5vw,60px)", color: textColor }}>
                 {t.process.headline}<span style={{ color: "#7C5CFF" }}>.</span>
               </h2>
             </div>
-            <p className="text-[12px] mb-1.5" style={{ color: mutedColor }}>{t.process.subheadline}</p>
+            <div className="text-right hidden md:block">
+              <p className="text-[12px] mb-1" style={{ color: mutedColor }}>{t.process.subheadline}</p>
+              <span className="text-[11px] font-mono tracking-widest" style={{ color: isDark ? "rgba(160,154,255,0.4)" : "rgba(124,92,255,0.4)" }}>
+                01 → 0{t.process.steps.length}
+              </span>
+            </div>
           </div>
         </div>
+
         <div className="overflow-hidden">
-          <motion.div style={{ x }} className="flex gap-5 pl-[max(24px,calc((100vw-1320px)/2+24px))] pr-24">
+          <motion.div style={{ x }} className="flex gap-4 pl-[max(24px,calc((100vw-1320px)/2+24px))] pr-32">
             {t.process.steps.map((step, i) => (
-              <div key={i} className="flex-shrink-0 w-[300px] rounded-2xl p-7 flex flex-col justify-between"
-                style={{ background: cardBg, border: `1px solid ${cardBorder}`, height: "260px" }}>
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] tracking-[0.14em]" style={{ color: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)" }}>{step.number}</span>
-                  <div className="w-7 h-7 rounded-lg flex items-center justify-center"
-                    style={{ background: "rgba(124,92,255,0.08)", border: "1px solid rgba(124,92,255,0.12)" }}>
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#A09AFF" }} />
+              <div key={i} className="flex-shrink-0 w-[310px] rounded-[22px] p-8 flex flex-col justify-between relative overflow-hidden"
+                style={{
+                  background: isDark ? "linear-gradient(145deg, rgba(14,8,32,0.95), rgba(6,3,14,0.98))" : "rgba(0,0,0,0.025)",
+                  border: `1px solid ${borderColor}`,
+                  height: "280px",
+                }}>
+                {/* Top accent */}
+                <div className="absolute top-0 left-0 right-0 h-[2px]"
+                  style={{ background: `linear-gradient(90deg, transparent, rgba(${i === 0 ? "160,154,255" : i === 1 ? "255,61,197" : i === 2 ? "91,138,255" : i === 3 ? "34,211,238" : "160,154,255"},0.6), transparent)` }} />
+                {/* Step number — large gradient */}
+                <div>
+                  <div className="font-black leading-none mb-6"
+                    style={{ fontSize: 56,
+                      background: "linear-gradient(135deg, rgba(160,154,255,0.9) 0%, rgba(124,92,255,0.4) 100%)",
+                      WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                    {step.number}
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-[20px] font-bold mb-2.5 tracking-tight" style={{ color: textColor }}>{step.title}</h3>
-                  <p className="text-[12.5px] leading-[1.65]" style={{ color: mutedColor }}>{step.description}</p>
+                  <h3 className="text-[21px] font-bold mb-3 tracking-tight" style={{ color: textColor }}>{step.title}</h3>
+                  <p className="text-[12.5px] leading-[1.68]" style={{ color: mutedColor }}>{step.description}</p>
                 </div>
               </div>
             ))}
@@ -1030,55 +1133,94 @@ function Process() {
 }
 
 // ─── Testimonials ─────────────────────────────────────────────────────────
+const TESTI_ACCENTS = [
+  { avatar: "linear-gradient(135deg, #7C5CFF, #A09AFF)", border: "rgba(124,92,255,0.25)", result: "rgba(124,92,255,0.1)", resultColor: "#A09AFF", resultBorder: "rgba(124,92,255,0.2)" },
+  { avatar: "linear-gradient(135deg, #FF3DC5, #ff8de8)", border: "rgba(255,61,197,0.2)",  result: "rgba(255,61,197,0.08)", resultColor: "#FF3DC5", resultBorder: "rgba(255,61,197,0.18)" },
+  { avatar: "linear-gradient(135deg, #5B8AFF, #93baff)", border: "rgba(91,138,255,0.2)",  result: "rgba(91,138,255,0.08)", resultColor: "#5B8AFF", resultBorder: "rgba(91,138,255,0.18)" },
+];
+
 function Testimonials() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const bg = isDark ? "#050505" : "#ffffff";
   const textColor = isDark ? "#ffffff" : "#0a0a0f";
-  const mutedColor = isDark ? "rgba(255,255,255,0.38)" : "rgba(10,10,15,0.42)";
-  const borderColor = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)";
-  const cardBg = isDark ? "rgba(255,255,255,0.022)" : "rgba(0,0,0,0.025)";
-  const cardBorder = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+  const mutedColor = isDark ? "rgba(255,255,255,0.5)" : "rgba(10,10,15,0.5)";
 
   return (
-    <section id="testimonials" className="py-[100px]" style={{ background: bg, borderTop: `1px solid ${borderColor}` }}>
-      <div className="max-w-[1320px] mx-auto px-6">
-        <p className="text-[10.5px] tracking-[0.22em] uppercase text-center mb-3" style={{ color: "#A09AFF" }}>
-          {t.labels.testimonials}
-        </p>
-        <h2 className="text-center font-bold tracking-[-0.03em] mb-14" style={{ fontSize: "clamp(28px,3.5vw,44px)", color: textColor }}>
-          {t.testimonials.headline}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {t.testimonials.items.map((item, i) => (
-            <motion.div key={i}
-              initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.48, delay: i * 0.09 }}
-              className="rounded-2xl p-6 flex flex-col"
-              style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
-              <div className="text-[32px] font-serif leading-none mb-3" style={{ color: "#A09AFF" }}>"</div>
-              <p className="text-[13.5px] leading-[1.7] flex-1 mb-6" style={{ color: mutedColor }}>
-                {item.quote}
-              </p>
-              <div className="flex items-center justify-between pt-4" style={{ borderTop: `1px solid ${cardBorder}` }}>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold"
-                    style={{ background: "rgba(124,92,255,0.12)", color: "#A09AFF" }}>
-                    {item.initials}
+    <section id="testimonials" className="relative py-[120px] overflow-hidden"
+      style={{ background: isDark ? "#06030f" : "#ffffff" }}>
+      {/* Atmospheric glow */}
+      {isDark && (
+        <div className="absolute pointer-events-none inset-0"
+          style={{ background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(80,40,180,0.1) 0%, transparent 65%)" }} />
+      )}
+      <div className="absolute inset-x-0 top-0 h-px"
+        style={{ background: isDark ? "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.07) 50%, transparent 90%)" : "rgba(0,0,0,0.05)" }} />
+
+      <div className="relative max-w-[1320px] mx-auto px-6">
+        <div className="text-center mb-20">
+          <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#A09AFF" }}>
+            {t.labels.testimonials}
+          </motion.p>
+          <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: textColor }}>
+            {t.testimonials.headline}
+          </motion.h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {t.testimonials.items.map((item, i) => {
+            const acc = TESTI_ACCENTS[i % 3];
+            return (
+              <motion.div key={i}
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.55, delay: i * 0.12 }}
+                whileHover={{ y: -6, boxShadow: `0 28px 70px rgba(80,40,180,0.18)` }}
+                className="rounded-[22px] p-8 flex flex-col relative overflow-hidden transition-all duration-350"
+                style={{
+                  background: isDark ? "linear-gradient(145deg, rgba(12,7,28,0.95), rgba(6,3,14,0.98))" : "rgba(0,0,0,0.025)",
+                  border: `1px solid ${isDark ? acc.border : "rgba(0,0,0,0.06)"}`,
+                }}>
+                {/* Top shimmer */}
+                <div className="absolute top-0 left-0 right-0 h-[2px]"
+                  style={{ background: `linear-gradient(90deg, transparent 5%, ${acc.resultColor}88 50%, transparent 95%)` }} />
+
+                {/* Big quote mark */}
+                <div className="font-black leading-none mb-6 select-none"
+                  style={{ fontSize: 72, lineHeight: 1,
+                    background: `linear-gradient(135deg, ${acc.resultColor} 0%, rgba(255,255,255,0.15) 100%)`,
+                    WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                  "
+                </div>
+
+                {/* Quote text */}
+                <p className="text-[14px] leading-[1.8] flex-1 mb-8 font-medium" style={{ color: mutedColor }}>
+                  {item.quote}
+                </p>
+
+                {/* Author + result */}
+                <div className="flex items-center justify-between pt-5"
+                  style={{ borderTop: `1px solid ${isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}` }}>
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-[11px] font-black text-white shrink-0"
+                      style={{ background: acc.avatar }}>
+                      {item.initials}
+                    </div>
+                    <div>
+                      <div className="text-[13px] font-semibold" style={{ color: textColor }}>{item.name}</div>
+                      <div className="text-[11px] mt-0.5" style={{ color: "rgba(160,154,255,0.55)" }}>{item.role}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-[13px] font-medium" style={{ color: textColor }}>{item.name}</div>
-                    <div className="text-[10.5px]" style={{ color: mutedColor }}>{item.role}</div>
+                  <div className="px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wide"
+                    style={{ background: acc.result, color: acc.resultColor, border: `1px solid ${acc.resultBorder}` }}>
+                    {item.result}
                   </div>
                 </div>
-                <div className="px-2.5 py-1 rounded-full text-[10px] font-medium"
-                  style={{ background: "rgba(124,92,255,0.08)", color: "#A09AFF", border: "1px solid rgba(124,92,255,0.15)" }}>
-                  {item.result}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
