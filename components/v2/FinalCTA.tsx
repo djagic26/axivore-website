@@ -80,7 +80,7 @@ export function FinalCTA() {
           </div>
           <h2 className="font-bold tracking-[-0.04em] leading-[0.92] mb-8"
             style={{ fontSize: "clamp(48px,7vw,100px)", color: textColor }}>
-            {t.cta.headline.replace(/[?!.]$/, "")}<span style={{ color: "#7C5CFF" }}>?</span>
+            {t.cta.headline.replace(/[?!.]$/, "")}<span style={{ color: "#7C5CFF" }}>.</span>
           </h2>
           <p className="text-[16px] mb-12 max-w-[400px] mx-auto leading-[1.7]" style={{ color: mutedColor }}>
             {t.cta.subheadline}
