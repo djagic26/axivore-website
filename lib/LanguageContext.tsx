@@ -26,7 +26,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (stored && VALID_LANGS.includes(stored)) {
       setLanguageState(stored);
     } else {
-      setLanguageState(detectBrowserLanguage());
+      const detected = detectBrowserLanguage();
+      setLanguageState(detected);
+      localStorage.setItem("axivore-lang", detected);
+      document.cookie = `axivore-lang=${detected}; path=/; max-age=31536000; SameSite=Lax`;
     }
   }, []);
 
