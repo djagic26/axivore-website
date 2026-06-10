@@ -12,27 +12,32 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Axivore — Precision · Disruption · Direction",
+  title: "Axivore — KI-Automatisierung für deutsche Unternehmen",
   description:
-    "Axivore builds custom AI automations, intelligent chatbots, and SaaS products for modern businesses.",
+    "Axivore entwickelt KI-Automatisierungen, intelligente Chatbots und maßgeschneiderte Software für Unternehmen in Deutschland. Mehr schaffen, weniger Aufwand.",
   metadataBase: new URL("https://axivore.io"),
+  alternates: {
+    canonical: "https://axivore.io",
+  },
   openGraph: {
-    title: "Axivore — Precision · Disruption · Direction",
+    title: "Axivore — KI-Automatisierung für deutsche Unternehmen",
     description:
-      "Axivore builds custom AI automations, intelligent chatbots, and SaaS products for modern businesses.",
+      "Axivore entwickelt KI-Automatisierungen, intelligente Chatbots und maßgeschneiderte Software für Unternehmen in Deutschland.",
     url: "https://axivore.io",
     siteName: "Axivore",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
-    locale: "en_US",
+    locale: "de_DE",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Axivore — Precision · Disruption · Direction",
+    title: "Axivore — KI-Automatisierung für deutsche Unternehmen",
     description:
-      "Axivore builds custom AI automations, intelligent chatbots, and SaaS products for modern businesses.",
+      "Axivore entwickelt KI-Automatisierungen, intelligente Chatbots und maßgeschneiderte Software für Unternehmen in Deutschland.",
   },
   icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: "/icon.svg",
     apple: "/apple-touch-icon.png",
   },
 };

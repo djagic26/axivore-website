@@ -10,6 +10,7 @@ export const translations = {
       faq: "FAQ",
       contact: "Kontakt",
       cta: "Kostenloses Gespräch",
+      about: "Über uns",
     },
     hero: {
       badge: "KI-Agentur & Software-Studio",
@@ -30,6 +31,11 @@ export const translations = {
         { value: "100", suffix: "%", label: "Kundenzufriedenheit", context: "Kein Projekt ohne Ergebnis" },
         { value: "30", suffix: "+", label: "Automatisierungen", context: "Bereits im Einsatz" },
       ],
+    },
+    proofBento: {
+      quoteStart: "Unsere manuelle Bearbeitung dauerte 4 Stunden — Axivore hat das auf ",
+      quoteHighlight: "unter 2 Minuten",
+      quoteEnd: " reduziert. Das Team denkt wirklich mit und liefert konsequent.",
     },
     whyus: {
       headline: "Warum Axivore — und nicht eine der anderen 1.000 Agenturen?",
@@ -223,6 +229,7 @@ export const translations = {
     },
     faq: {
       headline: "Häufige Fragen",
+      subtitle: "Alles Wichtige — klar und direkt.",
       items: [
         {
           question: "Was macht ihr eigentlich genau?",
@@ -282,9 +289,27 @@ export const translations = {
       popular: "Beliebt",
       navigation: "Navigation",
       forwho: "Für wen?",
+      about: "Über uns",
+    },
+    about: {
+      label: "Über uns",
+      headline: "Was hinter Axivore steckt",
+      paragraphs: [
+        "Axivore ist ein Digital- und KI-Studio aus Stuttgart, das moderne Softwarelösungen für Unternehmen entwickelt.",
+        "Wir erstellen Landing Pages, Unternehmenswebsites, Webshops, SaaS-Plattformen, Kundenportale und individuelle Webanwendungen. Darüber hinaus entwickeln wir KI-Chatbots, intelligente Automatisierungen und KI-Agenten, die wiederkehrende Aufgaben übernehmen und Prozesse effizienter gestalten.",
+        "Unser Ziel ist nicht, möglichst viele Tools einzusetzen. Unser Ziel ist es, Systeme zu entwickeln, die Unternehmen Zeit sparen, Abläufe vereinfachen und nachhaltiges Wachstum ermöglichen.",
+        "Kein aufgeblähtes Agentur-Setup. Keine Standardlösungen von der Stange. Stattdessen direkte Kommunikation, transparente Zusammenarbeit und maßgeschneiderte digitale Lösungen.",
+      ],
+      badges: ["Direkt.", "Transparent.", "Maßgeschneidert."],
+      values: [
+        { label: "Direkt", desc: "Kein Zwischenhändler, keine langen Freigabeschleifen. Du arbeitest immer mit der Person, die auch umsetzt." },
+        { label: "Fokussiert", desc: "Wir nehmen nicht jeden Auftrag an — nur Projekte, bei denen wir echten Mehrwert liefern können." },
+        { label: "Messbar", desc: "Erfolg wird vor dem Start definiert, nicht im Nachhinein behauptet." },
+      ],
     },
     footer: {
       tagline: "Axivore baut Apps, Webseiten und automatisierte Abläufe für Unternehmen die wachsen wollen.",
+      description: "Premium KI-Agentur aus Stuttgart. Wir automatisieren, was dich aufhält — messbar, schnell, direkt.",
       links: { services: "Leistungen", portfolio: "Portfolio", process: "Prozess", pricing: "Preise", contact: "Kontakt" },
       legal: "Impressum",
       privacy: "Datenschutz",
@@ -301,6 +326,7 @@ export const translations = {
       faq: "FAQ",
       contact: "Contact",
       cta: "Free Strategy Call",
+      about: "About",
     },
     hero: {
       badge: "AI Agency & Software Studio",
@@ -321,6 +347,11 @@ export const translations = {
         { value: "100", suffix: "%", label: "client satisfaction", context: "Every project delivered" },
         { value: "30", suffix: "+", label: "automations", context: "Already in use" },
       ],
+    },
+    proofBento: {
+      quoteStart: "Our manual processing took 4 hours — Axivore reduced that to ",
+      quoteHighlight: "under 2 minutes",
+      quoteEnd: ". The team genuinely thinks things through and delivers consistently.",
     },
     whyus: {
       headline: "Why Axivore — and not one of the other 1,000 agencies?",
@@ -514,6 +545,7 @@ export const translations = {
     },
     faq: {
       headline: "Frequently Asked Questions",
+      subtitle: "Everything important — clear and direct.",
       items: [
         {
           question: "What exactly do you do?",
@@ -573,9 +605,27 @@ export const translations = {
       popular: "Popular",
       navigation: "Navigation",
       forwho: "Who it's for",
+      about: "About",
+    },
+    about: {
+      label: "About",
+      headline: "The story behind Axivore",
+      paragraphs: [
+        "Axivore is a digital and AI studio from Stuttgart, building modern software solutions for businesses.",
+        "We create landing pages, company websites, web shops, SaaS platforms, customer portals and custom web applications. We also build AI chatbots, intelligent automations and AI agents that take over repetitive tasks and make processes more efficient.",
+        "Our goal isn't to use as many tools as possible. Our goal is to build systems that save businesses time, simplify operations and enable sustainable growth.",
+        "No bloated agency setup. No off-the-shelf solutions. Instead: direct communication, transparent collaboration and tailored digital solutions.",
+      ],
+      badges: ["Direct.", "Transparent.", "Tailored."],
+      values: [
+        { label: "Direct", desc: "No middlemen, no long approval loops. You always work with the person who actually builds it." },
+        { label: "Focused", desc: "We don't take every job — only projects where we can deliver real value." },
+        { label: "Measurable", desc: "Success is defined before we start, not claimed after the fact." },
+      ],
     },
     footer: {
       tagline: "Axivore builds apps, websites and automated systems for businesses that want to grow.",
+      description: "Premium AI agency from Stuttgart. We automate what slows you down — measurably, fast, direct.",
       links: { services: "Services", portfolio: "Portfolio", process: "Process", pricing: "Pricing", contact: "Contact" },
       legal: "Legal Notice",
       privacy: "Privacy Policy",
@@ -592,6 +642,7 @@ export const translations = {
       faq: "FAQ",
       contact: "Kontakt",
       cta: "Besplatan razgovor",
+      about: "O nama",
     },
     hero: {
       badge: "AI Agencija & Software Studio",
@@ -612,6 +663,11 @@ export const translations = {
         { value: "100", suffix: "%", label: "zadovoljstvo klijenata", context: "Svaki projekt isporučen" },
         { value: "30", suffix: "+", label: "automatizacija", context: "Već u upotrebi" },
       ],
+    },
+    proofBento: {
+      quoteStart: "Naše ručno procesiranje trajalo je 4 sata — Axivore je to svelo na ",
+      quoteHighlight: "manje od 2 minute",
+      quoteEnd: ". Tim zaista razmišlja s nama i isporučuje dosljedno.",
     },
     whyus: {
       headline: "Zašto Axivore — a ne jedna od ostalih 1.000 agencija?",
@@ -732,6 +788,7 @@ export const translations = {
     },
     faq: {
       headline: "Često postavljana pitanja",
+      subtitle: "Sve važno — jasno i direktno.",
       items: [
         { question: "Što točno radite?", answer: "Jednostavno rečeno: štedimo ti vrijeme i novac putem tehnologije. Gradimo aplikacije, web stranice i postavljamo sustave koji automatski obavljaju zadatke — da se možeš fokusirati na ono što je važno." },
         { question: "Što je AI — i trebam li to zaista?", answer: "AI (umjetna inteligencija) je softver koji samostalno obavlja zadatke — odgovara na pitanja, analizira podatke, piše e-mailove. Trebaš li ga? Ako imaš ponavljajuće zadatke koji troše vrijeme — da. U razgovoru ćemo ti objasniti točno što ima smisla za tebe." },
@@ -770,9 +827,27 @@ export const translations = {
       popular: "Popularno",
       navigation: "Navigacija",
       forwho: "Za koga?",
+      about: "O nama",
+    },
+    about: {
+      label: "O nama",
+      headline: "Što stoji iza Axivorea",
+      paragraphs: [
+        "Axivore je digitalni i KI studio iz Stuttgarta koji razvija moderne softverske rješenja za tvrtke.",
+        "Izrađujemo landing stranice, poslovne web stranice, webshopove, SaaS platforme, portale za klijente i prilagođene web aplikacije. Uz to razvijamo KI chatbotove, inteligentne automatizacije i KI agente koji preuzimaju ponavljajuće zadatke i čine procese učinkovitijima.",
+        "Naš cilj nije koristiti što više alata. Naš cilj je izgraditi sustave koji tvrtkama štede vrijeme, pojednostavljuju poslovanje i omogućuju održiv rast.",
+        "Bez napuhanog agencijskog postava. Bez standardnih rješenja. Umjesto toga: direktna komunikacija, transparentna suradnja i prilagođena digitalna rješenja.",
+      ],
+      badges: ["Direktno.", "Transparentno.", "Prilagođeno."],
+      values: [
+        { label: "Direktno", desc: "Nema posrednika ni dugih odobrenja. Uvijek radiš s osobom koja i implementira." },
+        { label: "Fokusirano", desc: "Ne prihvaćamo svaki posao — samo projekte gdje možemo isporučiti pravu vrijednost." },
+        { label: "Mjerljivo", desc: "Uspjeh se definira prije početka, ne tvrdi nakon završetka." },
+      ],
     },
     footer: {
       tagline: "Axivore gradi aplikacije, web stranice i automatizirane procese za tvrtke koje žele rasti.",
+      description: "Premium KI agencija iz Stuttgarta. Automatiziramo ono što te usporava — mjerljivo, brzo, direktno.",
       links: { services: "Usluge", portfolio: "Portfolio", process: "Proces", pricing: "Cijene", contact: "Kontakt" },
       legal: "Pravne informacije",
       privacy: "Privatnost",
@@ -789,6 +864,7 @@ export const translations = {
       faq: "FAQ",
       contact: "Contact",
       cta: "Consultație Gratuită",
+      about: "Despre noi",
     },
     hero: {
       badge: "Agenție AI & Studio Software",
@@ -809,6 +885,11 @@ export const translations = {
         { value: "100", suffix: "%", label: "satisfacția clienților", context: "Fiecare proiect livrat" },
         { value: "30", suffix: "+", label: "automatizări", context: "Deja în uz" },
       ],
+    },
+    proofBento: {
+      quoteStart: "Procesarea noastră manuală dura 4 ore — Axivore a redus asta la ",
+      quoteHighlight: "sub 2 minute",
+      quoteEnd: ". Echipa gândește cu adevărat împreună cu tine și livrează constant.",
     },
     whyus: {
       headline: "De ce Axivore — și nu una dintre celelalte 1.000 de agenții?",
@@ -929,6 +1010,7 @@ export const translations = {
     },
     faq: {
       headline: "Întrebări Frecvente",
+      subtitle: "Tot ce contează — clar și direct.",
       items: [
         { question: "Ce faceți exact?", answer: "Simplu spus: îți economisim timp și bani prin tehnologie. Construim aplicații, site-uri web și configurăm sisteme care execută automat sarcinile — ca să te poți concentra pe ce contează." },
         { question: "Ce este AI — și am nevoie cu adevărat de asta?", answer: "AI (Inteligență Artificială) este software care realizează singur sarcini — răspunde la întrebări, analizează date, scrie emailuri. Ai nevoie de el? Dacă ai sarcini repetitive care consumă timp — da. Îți vom explica exact ce are sens pentru tine într-un apel." },
@@ -967,9 +1049,27 @@ export const translations = {
       popular: "Popular",
       navigation: "Navigație",
       forwho: "Pentru cine?",
+      about: "Despre noi",
+    },
+    about: {
+      label: "Despre noi",
+      headline: "Povestea din spatele Axivore",
+      paragraphs: [
+        "Axivore este un studio digital și de IA din Stuttgart care dezvoltă soluții software moderne pentru companii.",
+        "Creăm pagini de destinație, site-uri de companie, magazine online, platforme SaaS, portale pentru clienți și aplicații web personalizate. De asemenea, dezvoltăm chatbots IA, automatizări inteligente și agenți IA care preiau sarcinile repetitive.",
+        "Scopul nostru nu este să folosim cât mai multe instrumente. Scopul nostru este să construim sisteme care economisesc timp, simplifică operațiunile și permit creșterea durabilă.",
+        "Fără agenție umflată. Fără soluții standard. În schimb: comunicare directă, colaborare transparentă și soluții digitale personalizate.",
+      ],
+      badges: ["Direct.", "Transparent.", "Personalizat."],
+      values: [
+        { label: "Direct", desc: "Fără intermediari, fără bucle lungi de aprobare. Lucrezi întotdeauna cu persoana care construiește." },
+        { label: "Focalizat", desc: "Nu acceptăm orice job — doar proiecte unde putem livra valoare reală." },
+        { label: "Măsurabil", desc: "Succesul se definește înainte de start, nu se afirmă după." },
+      ],
     },
     footer: {
       tagline: "Axivore construiește aplicații, site-uri web și sisteme automatizate pentru afaceri care vor să crească.",
+      description: "Agenție premium AI din Stuttgart. Automatizăm ce te frânează — măsurabil, rapid, direct.",
       links: { services: "Servicii", portfolio: "Portofoliu", process: "Proces", pricing: "Prețuri", contact: "Contact" },
       legal: "Mențiuni legale",
       privacy: "Confidențialitate",
@@ -986,6 +1086,7 @@ export const translations = {
       faq: "SSS",
       contact: "İletişim",
       cta: "Ücretsiz Görüşme",
+      about: "Hakkımızda",
     },
     hero: {
       badge: "AI Ajansı & Yazılım Stüdyosu",
@@ -1006,6 +1107,11 @@ export const translations = {
         { value: "100", suffix: "%", label: "müşteri memnuniyeti", context: "Her proje teslim edildi" },
         { value: "30", suffix: "+", label: "otomasyon", context: "Halihazırda kullanımda" },
       ],
+    },
+    proofBento: {
+      quoteStart: "Manuel işlemlerimiz 4 saat sürüyordu — Axivore bunu ",
+      quoteHighlight: "2 dakikanın altına",
+      quoteEnd: " indirdi. Ekip gerçekten birlikte düşünüyor ve tutarlı şekilde teslim ediyor.",
     },
     whyus: {
       headline: "Neden Axivore — diğer 1.000 ajansdan biri değil?",
@@ -1126,6 +1232,7 @@ export const translations = {
     },
     faq: {
       headline: "Sıkça Sorulan Sorular",
+      subtitle: "Her şey önemli — açık ve net.",
       items: [
         { question: "Tam olarak ne yapıyorsunuz?", answer: "Kısaca: teknoloji aracılığıyla zaman ve para tasarrufu sağlıyoruz. Uygulamalar, web siteleri inşa ediyor ve görevleri otomatik olarak yerine getiren sistemler kuruyoruz — önemli olana odaklanabilmen için." },
         { question: "AI nedir — ve gerçekten buna ihtiyacım var mı?", answer: "AI (Yapay Zeka) görevleri kendi başına yerine getiren yazılımdır — soruları yanıtlar, verileri analiz eder, email yazar. Buna ihtiyacın var mı? Zaman alan tekrarlayan görevlerin varsa — evet. Bir görüşmede senin için tam olarak neyin mantıklı olduğunu açıklayacağız." },
@@ -1164,9 +1271,27 @@ export const translations = {
       popular: "Popüler",
       navigation: "Gezinti",
       forwho: "Kim için?",
+      about: "Hakkımızda",
+    },
+    about: {
+      label: "Hakkımızda",
+      headline: "Axivore'un arkasındaki hikaye",
+      paragraphs: [
+        "Axivore, işletmeler için modern yazılım çözümleri geliştiren Stuttgart merkezli bir dijital ve YZ stüdyosudur.",
+        "Açılış sayfaları, kurumsal web siteleri, web mağazaları, SaaS platformları, müşteri portalları ve özel web uygulamaları oluşturuyoruz. Ayrıca tekrarlayan görevleri üstlenen YZ chatbotları, akıllı otomasyonlar ve YZ ajanları geliştiriyoruz.",
+        "Hedefimiz olabildiğince fazla araç kullanmak değil. Hedefimiz şirketlere zaman kazandıran, süreçleri basitleştiren ve sürdürülebilir büyümeyi mümkün kılan sistemler inşa etmektir.",
+        "Şişirilmiş bir ajans kurulumu yok. Hazır çözümler yok. Bunun yerine: doğrudan iletişim, şeffaf işbirliği ve özelleştirilmiş dijital çözümler.",
+      ],
+      badges: ["Doğrudan.", "Şeffaf.", "Özelleştirilmiş."],
+      values: [
+        { label: "Doğrudan", desc: "Aracı yok, uzun onay döngüleri yok. Her zaman işi yapan kişiyle çalışırsın." },
+        { label: "Odaklı", desc: "Her işi kabul etmiyoruz — yalnızca gerçek değer sunabileceğimiz projeleri." },
+        { label: "Ölçülebilir", desc: "Başarı başlamadan önce tanımlanır, sonradan iddia edilmez." },
+      ],
     },
     footer: {
       tagline: "Axivore büyümek isteyen işletmeler için uygulamalar, web siteleri ve otomatik sistemler inşa eder.",
+      description: "Stuttgart'tan premium YZ ajansı. Sizi yavaşlatan şeyleri otomatikleştiriyoruz — ölçülebilir, hızlı, direkt.",
       links: { services: "Hizmetler", portfolio: "Portföy", process: "Süreç", pricing: "Fiyatlar", contact: "İletişim" },
       legal: "Yasal Bildirim",
       privacy: "Gizlilik Politikası",
@@ -1183,6 +1308,7 @@ export const translations = {
       faq: "FAQ",
       contact: "Contatto",
       cta: "Consulenza Gratuita",
+      about: "Chi siamo",
     },
     hero: {
       badge: "Agenzia AI & Studio Software",
@@ -1203,6 +1329,11 @@ export const translations = {
         { value: "100", suffix: "%", label: "soddisfazione clienti", context: "Ogni progetto consegnato" },
         { value: "30", suffix: "+", label: "automazioni", context: "Già in uso" },
       ],
+    },
+    proofBento: {
+      quoteStart: "La nostra elaborazione manuale durava 4 ore — Axivore l'ha ridotta a ",
+      quoteHighlight: "meno di 2 minuti",
+      quoteEnd: ". Il team pensa davvero insieme a te e consegna in modo coerente.",
     },
     whyus: {
       headline: "Perché Axivore — e non una delle altre 1.000 agenzie?",
@@ -1323,6 +1454,7 @@ export const translations = {
     },
     faq: {
       headline: "Domande Frequenti",
+      subtitle: "Tutto l'essenziale — chiaro e diretto.",
       items: [
         { question: "Cosa fate esattamente?", answer: "In parole semplici: ti facciamo risparmiare tempo e denaro attraverso la tecnologia. Costruiamo app, siti web e configuriamo sistemi che svolgono automaticamente le attività — così puoi concentrarti su ciò che conta." },
         { question: "Cos'è l'AI — e ne ho davvero bisogno?", answer: "L'AI (Intelligenza Artificiale) è software che svolge compiti da sola — risponde alle domande, analizza i dati, scrive email. Ne hai bisogno? Se hai attività ricorrenti che ti consumano tempo — sì. In una chiamata ti spiegheremo esattamente cosa ha senso per te." },
@@ -1361,9 +1493,27 @@ export const translations = {
       popular: "Popolare",
       navigation: "Navigazione",
       forwho: "Per chi?",
+      about: "Chi siamo",
+    },
+    about: {
+      label: "Chi siamo",
+      headline: "La storia dietro Axivore",
+      paragraphs: [
+        "Axivore è uno studio digitale e di IA con sede a Stoccarda che sviluppa soluzioni software moderne per le aziende.",
+        "Creiamo landing page, siti web aziendali, negozi online, piattaforme SaaS, portali clienti e applicazioni web personalizzate. Sviluppiamo anche chatbot IA, automazioni intelligenti e agenti IA che si occupano delle attività ripetitive.",
+        "Il nostro obiettivo non è usare quanti più strumenti possibile. Il nostro obiettivo è costruire sistemi che facciano risparmiare tempo alle aziende, semplifichino le operazioni e consentano una crescita sostenibile.",
+        "Niente agenzia gonfiata. Niente soluzioni standard. Al contrario: comunicazione diretta, collaborazione trasparente e soluzioni digitali su misura.",
+      ],
+      badges: ["Diretto.", "Trasparente.", "Su misura."],
+      values: [
+        { label: "Diretto", desc: "Nessun intermediario, nessun lungo ciclo di approvazione. Lavori sempre con la persona che esegue." },
+        { label: "Focalizzato", desc: "Non accettiamo ogni lavoro — solo progetti dove possiamo offrire valore reale." },
+        { label: "Misurabile", desc: "Il successo si definisce prima di iniziare, non si afferma dopo." },
+      ],
     },
     footer: {
       tagline: "Axivore costruisce app, siti web e sistemi automatizzati per le aziende che vogliono crescere.",
+      description: "Agenzia AI premium di Stoccarda. Automatizziamo ciò che ti rallenta — misurabile, veloce, diretto.",
       links: { services: "Servizi", portfolio: "Portfolio", process: "Processo", pricing: "Prezzi", contact: "Contatto" },
       legal: "Note legali",
       privacy: "Privacy",
