@@ -5,6 +5,11 @@ import { Language, translations, TranslationKeys } from "./i18n";
 
 const VALID_LANGS: Language[] = ["de", "en", "hr", "ro", "tr", "it"];
 
+function detectBrowserLanguage(): Language {
+  const browserLang = navigator.language?.split("-")[0];
+  return VALID_LANGS.includes(browserLang as Language) ? (browserLang as Language) : "de";
+}
+
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
@@ -18,7 +23,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem("axivore-lang") as Language;
-    if (stored && VALID_LANGS.includes(stored)) setLanguageState(stored);
+    if (stored && VALID_LANGS.includes(stored)) {
+      setLanguageState(stored);
+    } else {
+      setLanguageState(detectBrowserLanguage());
+    }
   }, []);
 
   function setLanguage(lang: Language) {
