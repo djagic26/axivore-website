@@ -109,6 +109,7 @@ export function Nav() {
     { key: "services", href: "#services", label: t.nav.services },
     { key: "portfolio", href: "#portfolio", label: t.nav.portfolio },
     { key: "process", href: "#process", label: t.nav.process },
+    { key: "pricing", href: "#pricing", label: t.nav.pricing },
     { key: "about", href: "#ueber-uns", label: t.nav.about },
     { key: "faq", href: "#faq", label: t.nav.faq },
   ];

@@ -8,9 +8,11 @@ import { Marquee } from "@/components/v2/Marquee";
 import { ProofBento } from "@/components/v2/ProofBento";
 import { Results } from "@/components/v2/Results";
 import { Services } from "@/components/v2/Services";
+import { ForWho } from "@/components/v2/ForWho";
+import { WhyUs } from "@/components/v2/WhyUs";
 import { Portfolio } from "@/components/v2/Portfolio";
 import { Process } from "@/components/v2/Process";
-import { Testimonials } from "@/components/v2/Testimonials";
+import { Pricing } from "@/components/v2/Pricing";
 import { UeberUns } from "@/components/v2/UeberUns";
 import { FAQ } from "@/components/v2/FAQ";
 import { FinalCTA } from "@/components/v2/FinalCTA";
@@ -28,9 +30,11 @@ export default function V2Page() {
       <ProofBento />
       <Results />
       <Services />
+      <ForWho />
+      <WhyUs />
       <Portfolio />
       <Process />
-      <Testimonials />
+      <Pricing />
       <UeberUns />
       <FAQ />
       <FinalCTA />
