@@ -144,6 +144,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.78 }}
               className="flex items-center gap-5 flex-wrap mb-16">
               <motion.a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
+                target="_blank" rel="noopener noreferrer"
                 whileHover={{ scale: 1.04, boxShadow: "0 10px 50px rgba(160,60,255,0.65)" }}
                 whileTap={{ scale: 0.97 }}
                 className="flex items-center gap-2 px-7 py-4 rounded-full text-white text-[14px] font-semibold cursor-pointer relative overflow-hidden"

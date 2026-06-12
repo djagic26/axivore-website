@@ -61,6 +61,7 @@ export function Footer() {
                 hello@axivore.io
               </a>
               <a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
+                target="_blank" rel="noopener noreferrer"
                 className="text-[13px] transition-colors duration-150 w-fit"
                 style={{ color: "#A09AFF" }}
                 onMouseEnter={e => { e.currentTarget.style.color = "#7C5CFF"; }}
@@ -139,7 +140,7 @@ export function Footer() {
               onMouseEnter={e => hover(e, true)} onMouseLeave={e => hover(e, false)}>
               {t.footer.legal}
             </a>
-            <a href="#" className="text-[11.5px] transition-colors duration-150" style={{ color: textColor }}
+            <a href="/datenschutz" className="text-[11.5px] transition-colors duration-150" style={{ color: textColor }}
               onMouseEnter={e => hover(e, true)} onMouseLeave={e => hover(e, false)}>
               {t.footer.privacy}
             </a>

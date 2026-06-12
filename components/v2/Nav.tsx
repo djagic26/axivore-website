@@ -171,6 +171,7 @@ export function Nav() {
           </button>
 
           <motion.a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
+            target="_blank" rel="noopener noreferrer"
             whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
             className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-[13px] font-semibold shadow-lg relative overflow-hidden"
             style={{ background: "linear-gradient(135deg, #7C5CFF, #5b8aff)", boxShadow: "0 4px 20px rgba(124,92,255,0.3)" }}
@@ -226,6 +227,7 @@ export function Nav() {
               ))}
             </div>
             <a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
+              target="_blank" rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="inline-flex justify-center items-center text-white text-sm font-semibold px-5 py-3 rounded-full mt-1"
               style={{ background: "linear-gradient(135deg, #7C5CFF, #5b8aff)" }}>

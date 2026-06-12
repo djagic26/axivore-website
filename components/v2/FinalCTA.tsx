@@ -86,6 +86,7 @@ export function FinalCTA() {
             {t.cta.subheadline}
           </p>
           <motion.a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
+            target="_blank" rel="noopener noreferrer"
             whileHover={{ scale: 1.04, boxShadow: "0 12px 48px rgba(124,92,255,0.6)" }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-white text-[14px] font-semibold cursor-pointer relative overflow-hidden"

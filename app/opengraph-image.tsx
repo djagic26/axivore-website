@@ -33,54 +33,15 @@ export default function OGImage() {
           }}
         />
 
-        {/* Logo circle */}
-        <div
-          style={{
-            width: 120,
-            height: 120,
-            borderRadius: "50%",
-            background: "#0C0C0F",
-            border: "2px solid #4A4866",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 40,
-            position: "relative",
-          }}
-        >
-          {/* Cross lines */}
-          <div
-            style={{
-              position: "absolute",
-              width: 3,
-              height: 90,
-              background: "#A09AFF",
-              borderRadius: 4,
-              display: "flex",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              width: 90,
-              height: 3,
-              background: "#A09AFF",
-              borderRadius: 4,
-              display: "flex",
-            }}
-          />
-          {/* Center dot */}
-          <div
-            style={{
-              width: 14,
-              height: 14,
-              borderRadius: "50%",
-              background: "#0C0C0F",
-              border: "2px solid #A09AFF",
-              display: "flex",
-            }}
-          />
-        </div>
+        {/* Logo */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://axivore.io/icon.png"
+          width={120}
+          height={120}
+          alt="Axivore"
+          style={{ marginBottom: 40, objectFit: "contain" }}
+        />
 
         {/* Title */}
         <div

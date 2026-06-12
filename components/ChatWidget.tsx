@@ -18,12 +18,30 @@ const AxivoreIcon = () => (
 );
 
 const WELCOME: Record<string, string> = {
-  de: "Hey! 👋 Ich bin Axi. Was kann ich für dich tun?",
-  en: "Hey! 👋 I'm Axi. What can I help you with?",
-  hr: "Hej! 👋 Ja sam Axi. Kako mogu pomoći?",
-  ro: "Salut! 👋 Sunt Axi. Cu ce te pot ajuta?",
-  tr: "Merhaba! 👋 Ben Axi. Nasıl yardımcı olabilirim?",
-  it: "Ciao! 👋 Sono Axi. Come posso aiutarti?",
+  de: "Hey! 👋 Ich bin Axi, der KI-Assistent von Axivore. Schön, dass du hier bist!",
+  en: "Hey! 👋 I'm Axi, Axivore's AI assistant. Great to have you here!",
+  hr: "Hej! 👋 Ja sam Axi, AI asistent Axivorea. Drago mi je što si tu!",
+  ro: "Salut! 👋 Sunt Axi, asistentul AI al Axivore. Mă bucur că ești aici!",
+  tr: "Merhaba! 👋 Ben Axi, Axivore'un AI asistanıyım. Burada olduğun için mutluyum!",
+  it: "Ciao! 👋 Sono Axi, l'assistente AI di Axivore. Felice di averti qui!",
+};
+
+const PROACTIVE: Record<string, string> = {
+  de: "Darf ich kurz fragen — welche Aufgaben rauben dir im Alltag am meisten Zeit? Angebote, Berichte, Kundenanfragen? Ich zeige dir gerne, wie wir das automatisieren. 🚀",
+  en: "Quick question — what tasks eat up most of your time each day? Quotes, reports, customer messages? I'd love to show you how we can automate that. 🚀",
+  hr: "Smijem li pitati — koji zadaci ti oduzimaju najviše vremena? Ponude, izvještaji, upiti kupaca? Rado ću ti pokazati kako to možemo automatizirati. 🚀",
+  ro: "Pot să întreb — ce sarcini îți consumă cel mai mult timp zilnic? Oferte, rapoarte, mesaje clienți? Îți arăt cu plăcere cum le putem automatiza. 🚀",
+  tr: "Sorabilir miyim — günlük en çok zamanını ne alıyor? Teklifler, raporlar, müşteri mesajları? Bunu nasıl otomatikleştirebileceğimizi göstermekten mutluyum. 🚀",
+  it: "Posso chiederti — quali attività ti portano via più tempo ogni giorno? Preventivi, report, messaggi clienti? Ti mostro volentieri come possiamo automatizzarlo. 🚀",
+};
+
+const BUBBLE_TEXT: Record<string, string> = {
+  de: "Wie kann ich dir helfen? 💬",
+  en: "How can I help you? 💬",
+  hr: "Kako mogu pomoći? 💬",
+  ro: "Cum pot să te ajut? 💬",
+  tr: "Size nasıl yardımcı olabilirim? 💬",
+  it: "Come posso aiutarti? 💬",
 };
 
 const PLACEHOLDER: Record<string, string> = {
@@ -48,6 +66,8 @@ export default function ChatWidget() {
   const { language } = useLanguage();
   const [open, setOpen] = useState(false);
   const [hasUnread, setHasUnread] = useState(false);
+  const [showBubble, setShowBubble] = useState(false);
+  const [showProactive, setShowProactive] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
@@ -65,13 +85,56 @@ export default function ChatWidget() {
     },
   });
 
+  const userHasMessaged = messages.some((m) => m.role === "user");
+
+  // Auto-open once per session: bubble at 2s, open at 4s
+  useEffect(() => {
+    if (sessionStorage.getItem("axi-chat-seen")) return;
+    const bubbleTimer = setTimeout(() => setShowBubble(true), 2000);
+    const openTimer = setTimeout(() => {
+      setOpen(true);
+      setShowBubble(false);
+      sessionStorage.setItem("axi-chat-seen", "1");
+    }, 4000);
+    return () => {
+      clearTimeout(bubbleTimer);
+      clearTimeout(openTimer);
+    };
+  }, []);
+
+  // Hide bubble when chat opens manually
+  useEffect(() => {
+    if (open) setShowBubble(false);
+  }, [open]);
+
+  // Proactive follow-up message 2.5s after opening, only if user hasn't written
+  useEffect(() => {
+    if (!open || showProactive || userHasMessaged) return;
+    const t = setTimeout(() => setShowProactive(true), 2500);
+    return () => clearTimeout(t);
+  }, [open, showProactive, userHasMessaged]);
+
+  // Reset proactive when chat closes so it shows again on reopen
+  useEffect(() => {
+    if (!open) setShowProactive(false);
+  }, [open]);
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, showProactive]);
 
   useEffect(() => {
     if (open) setHasUnread(false);
   }, [open]);
+
+  const proactiveMsg = {
+    id: "proactive-1",
+    role: "assistant" as const,
+    content: PROACTIVE[language] ?? PROACTIVE.de,
+  };
+
+  const displayMessages =
+    !userHasMessaged && showProactive ? [...messages, proactiveMsg] : messages;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
@@ -108,7 +171,7 @@ export default function ChatWidget() {
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3" style={{ scrollbarWidth: "none" }}>
-              {messages.map((m) => (
+              {displayMessages.map((m) => (
                 <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
                     className="max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed"
@@ -167,6 +230,29 @@ export default function ChatWidget() {
               </button>
             </form>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Preview bubble - teaser before auto-open */}
+      <AnimatePresence>
+        {showBubble && !open && (
+          <motion.button
+            onClick={() => { setOpen(true); setShowBubble(false); }}
+            initial={{ opacity: 0, y: 8, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.9 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="max-w-[220px] text-left px-4 py-2.5 rounded-2xl text-sm cursor-pointer"
+            style={{
+              background: "#13131A",
+              color: "rgba(255,255,255,0.85)",
+              border: "1px solid rgba(74,72,102,0.6)",
+              borderBottomRightRadius: "4px",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+            }}
+          >
+            {BUBBLE_TEXT[language] ?? BUBBLE_TEXT.de}
+          </motion.button>
         )}
       </AnimatePresence>
 
