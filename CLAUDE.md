@@ -41,7 +41,7 @@ Automatski se linkuje na axivore.io.
 
 ## Kontakt / Legal
 - Email: hello@axivore.io
-- Adresa (Impressum): Rotweiss 172, 70437 Stuttgart
+- Adresa (Impressum): Rotweg 172, 70437 Stuttgart
 - Steuernummer: dodati nakon Gewerbe potvrde (maj/juni 2026)
 - Datenschutz: napraviti nakon Gewerbe potvrde
 

@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Fraunces } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import { ThemeProvider } from "@/lib/ThemeContext";
 import ChatWidgetWrapper from "@/components/ChatWidgetWrapper";
+import { StructuredData } from "@/components/StructuredData";
 import { cookies } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -57,9 +66,10 @@ export default async function RootLayout({
   const lang = VALID_LANGS.includes(langCookie) ? langCookie : "de";
 
   return (
-    <html lang={lang} suppressHydrationWarning className={`${geistSans.variable} h-full antialiased`}>
+    <html lang={lang} suppressHydrationWarning className={`${geistSans.variable} ${fraunces.variable} h-full antialiased`}>
       <head>
         <meta property="fb:app_id" content="1371180501519020" />
+        <StructuredData />
         {/* Prevent flash of wrong theme and wrong language on load */}
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('axivore-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}try{var l=localStorage.getItem('axivore-lang')||'de';document.documentElement.setAttribute('lang',l);}catch(e){}})();` }} />
       </head>

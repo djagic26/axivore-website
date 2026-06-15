@@ -20,6 +20,8 @@ export function Footer() {
     { label: t.nav.portfolio, href: "#portfolio" },
     { label: t.nav.process, href: "#process" },
     { label: t.nav.faq, href: "#faq" },
+    { label: "KI-Automatisierung", href: "/leistungen/ki-automatisierung" },
+    { label: "KI-Chatbots", href: "/leistungen/ki-chatbots" },
   ];
 
   return (

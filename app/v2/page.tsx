@@ -4,6 +4,7 @@ import { useTheme } from "@/lib/ThemeContext";
 import { ScrollProgress } from "@/components/v2/ScrollProgress";
 import { Nav } from "@/components/v2/Nav";
 import { Hero } from "@/components/v2/Hero";
+import { TrustStrip } from "@/components/v2/TrustStrip";
 import { Marquee } from "@/components/v2/Marquee";
 import { ProofBento } from "@/components/v2/ProofBento";
 import { Results } from "@/components/v2/Results";
@@ -26,6 +27,7 @@ export default function V2Page() {
       <ScrollProgress />
       <Nav />
       <Hero />
+      <TrustStrip />
       <Marquee />
       <ProofBento />
       <Results />

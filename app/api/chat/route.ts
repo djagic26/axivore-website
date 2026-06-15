@@ -3,8 +3,6 @@ import { streamText, tool } from "ai";
 import { Resend } from "resend";
 import { z } from "zod";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const LANG_NAMES: Record<string, string> = {
   de: "German",
   en: "English",
@@ -97,6 +95,12 @@ export async function POST(req: Request) {
         }),
         execute: async ({ name, email, interest }) => {
           try {
+            const apiKey = process.env.RESEND_API_KEY;
+            if (!apiKey) {
+              console.error("RESEND_API_KEY not configured — lead email skipped");
+              return { success: false };
+            }
+            const resend = new Resend(apiKey);
             const transcript = buildTranscriptHtml(messages);
             await resend.emails.send({
               from: "Axivore Chatbot <hello@axivore.io>",

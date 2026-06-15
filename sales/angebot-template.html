@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --purple: #7C5CFF;
+    --blue:   #5B8AFF;
+    --magenta:#FF3DC5;
+    --cyan:   #22d3ee;
+    --ink:    #ECE9FF;
+    --muted:  #9D97C4;
+  }
+
+  html, body {
+    width: 210mm;
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: #050310;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 18mm 16mm 14mm;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(900px 520px at 88% -8%, rgba(124,92,255,0.30), transparent 60%),
+      radial-gradient(760px 520px at -10% 18%, rgba(255,61,197,0.16), transparent 55%),
+      radial-gradient(700px 600px at 50% 118%, rgba(91,138,255,0.20), transparent 60%),
+      #050310;
+  }
+  .page::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 34px 34px;
+    pointer-events: none;
+  }
+  .content { position: relative; z-index: 2; }
+
+  /* ---------- Header ---------- */
+  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13mm; }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .brand img { height: 34px; width: auto; }
+  .brand .wordmark { font-size: 23px; font-weight: 800; letter-spacing: -0.02em; }
+  .tagpill {
+    font-size: 11px; font-weight: 600; color: var(--ink);
+    padding: 6px 13px; border-radius: 999px;
+    border: 1px solid rgba(124,92,255,0.45);
+    background: rgba(124,92,255,0.12);
+    white-space: nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { margin-bottom: 11mm; }
+  .hero h1 { font-size: 33px; line-height: 1.12; font-weight: 800; letter-spacing: -0.03em; max-width: 158mm; }
+  .hero h1 .grad {
+    background: linear-gradient(92deg, var(--purple), var(--magenta) 65%, var(--blue));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero p { margin-top: 11px; font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 150mm; }
+
+  /* ---------- Cards ---------- */
+  .cards { display: flex; flex-direction: column; gap: 7mm; }
+  .card {
+    position: relative; border-radius: 16px; padding: 18px 20px 19px;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(var(--rgb),0.16) 0%, rgba(8,4,18,0.97) 62%);
+    border: 1px solid rgba(var(--rgb),0.42);
+    box-shadow: 0 6px 40px rgba(var(--rgb),0.16);
+  }
+  .card .bar { position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--acc), transparent); }
+  .card .glow { position: absolute; top: -40px; right: -40px; width: 150px; height: 150px;
+    background: radial-gradient(circle, rgba(var(--rgb),0.40), transparent 70%); filter: blur(26px); }
+
+  .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 9px; }
+  .card-title { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; }
+  .card-eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc); margin-bottom: 5px; }
+  .price { text-align: right; white-space: nowrap; }
+  .price .big { font-size: 21px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+  .price .sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+  .problem { font-size: 12.5px; color: #C9C3EE; font-style: italic; margin-bottom: 7px; }
+  .solution { font-size: 13px; line-height: 1.5; color: var(--ink); }
+  .meta { margin-top: 10px; display: flex; gap: 7px; flex-wrap: wrap; }
+  .chip { font-size: 10.5px; font-weight: 600; color: var(--ink);
+    padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(var(--rgb),0.40); background: rgba(var(--rgb),0.10); }
+
+  /* ---------- Footer ---------- */
+  .footer { margin-top: 11mm; padding-top: 7mm; border-top: 1px solid rgba(255,255,255,0.10);
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+  .cta { }
+  .cta .punch { font-size: 17px; font-weight: 800; letter-spacing: -0.01em;
+    background: linear-gradient(92deg, var(--purple), var(--cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .cta .line { font-size: 12.5px; color: var(--muted); margin-top: 5px; max-width: 105mm; line-height: 1.45; }
+  .contact { text-align: right; font-size: 11.5px; color: var(--muted); line-height: 1.7; white-space: nowrap; }
+  .contact .em { color: var(--ink); font-weight: 600; }
+  .contact a { color: var(--purple); text-decoration: none; font-weight: 600; }
+  .legal { position: absolute; bottom: 7mm; left: 16mm; right: 16mm; text-align: center;
+    font-size: 9px; color: rgba(157,151,196,0.6); z-index: 2; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="content">
+      <header>
+        <div class="brand">
+          <img src="{{LOGO}}" alt="Axivore">
+          <span class="wordmark">Axivore</span>
+        </div>
+        <span class="tagpill">Boutique KI-Studio · Stuttgart</span>
+      </header>
+
+      <section class="hero">
+        <h1>Wir nehmen euch die <span class="grad">wiederkehrende Arbeit</span> ab — und ihr gewinnt eure Zeit zurück.</h1>
+        <p>Drei klar umrissene Pakete für kleine Betriebe in der Region Stuttgart. Feste Preise, fester Liefertermin, messbares Ergebnis. Kein Beratungs-Pingpong, kein Konzern-Overhead — wir bauen, ihr spart.</p>
+      </section>
+
+      <section class="cards">
+
+        <div class="card" style="--rgb:124,92,255; --acc:#7C5CFF;">
+          <div class="bar"></div><div class="glow"></div>
+          <div class="card-head">
+            <div>
+              <div class="card-eyebrow">Paket 01</div>
+              <div class="card-title">Angebots-Automat</div>
+            </div>
+            <div class="price"><div class="big">1.490 €</div><div class="sub">einmalig · + 99 €/Monat</div></div>
+          </div>
+          <div class="problem">„Ein sauberes Angebot zu schreiben kostet 2–3 Stunden. Pro Stück.“</div>
+          <div class="solution">Ihr gebt die Eckdaten ein, das System erstellt in 5 Minuten ein fertiges Angebot in eurem Layout — versandfertig, einheitlich, ohne Copy-&-Paste. Bei 10 Angeboten im Monat sind das über 20 Stunden zurück.</div>
+          <div class="meta"><span class="chip">In 2–3 Wochen live</span><span class="chip">Eigenes Layout</span><span class="chip">Spart 20+ Std./Monat</span></div>
+        </div>
+
+        <div class="card" style="--rgb:91,138,255; --acc:#5B8AFF;">
+          <div class="bar"></div><div class="glow"></div>
+          <div class="card-head">
+            <div>
+              <div class="card-eyebrow">Paket 02</div>
+              <div class="card-title">Anfragen-Bot &amp; KI-Telefonassistent</div>
+            </div>
+            <div class="price"><div class="big">990 €</div><div class="sub">einmalig · + 149 €/Monat</div></div>
+          </div>
+          <div class="problem">„Jede verpasste Anfrage ist ein verlorener Auftrag — abends, am Wochenende, auf der Baustelle.“</div>
+          <div class="solution">Ein KI-Assistent beantwortet Anfragen auf Website und Telefon rund um die Uhr, qualifiziert sie und legt den Termin direkt in euren Kalender. Kein Anrufbeantworter, keine kalte Lead-Liste — gebuchte Termine.</div>
+          <div class="meta"><span class="chip">24/7 erreichbar</span><span class="chip">Termin direkt im Kalender</span><span class="chip">Web + Telefon</span></div>
+        </div>
+
+        <div class="card" style="--rgb:255,61,197; --acc:#FF3DC5;">
+          <div class="bar"></div><div class="glow"></div>
+          <div class="card-head">
+            <div>
+              <div class="card-eyebrow">Paket 03</div>
+              <div class="card-title">Büro-Autopilot</div>
+            </div>
+            <div class="price"><div class="big">ab 2.500 €</div><div class="sub">individuell · projektbasiert</div></div>
+          </div>
+          <div class="problem">„Rechnungen, Reports, Nachfass-Mails — die Arbeit nach der Arbeit.“</div>
+          <div class="solution">Wir automatisieren eure wiederkehrenden Büroabläufe end-to-end und binden sie an die Tools, die ihr schon nutzt. Maßgeschneidert nach einem kurzen Prozess-Check — ihr seht vorab genau, was wegfällt.</div>
+          <div class="meta"><span class="chip">An eure Tools angebunden</span><span class="chip">End-to-end</span><span class="chip">Nach Prozess-Check</span></div>
+        </div>
+
+      </section>
+
+      <div class="footer">
+        <div class="cta">
+          <div class="punch">Direkt. Schnell. Messbar.</div>
+          <div class="line">Unverbindliches Erstgespräch, 15 Minuten. Wir schauen uns euren größten Zeitfresser an und sagen ehrlich, ob sich Automatisierung lohnt.</div>
+        </div>
+        <div class="contact">
+          <div class="em">Dino Jagić</div>
+          <div><a href="mailto:hello@axivore.io">hello@axivore.io</a></div>
+          <div><a href="https://axivore.io">axivore.io</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="legal">Axivore · Rotweg 172, 70437 Stuttgart · hello@axivore.io · axivore.io — Alle Preise zzgl. gesetzl. MwSt.</div>
+  </div>
+</body>
+</html>

@@ -113,9 +113,12 @@ export function Hero() {
                 <div key={i} className="overflow-hidden">
                   <motion.div initial={{ y: "105%" }} animate={{ y: 0 }}
                     transition={{ duration: 0.78, delay: 0.25 + i * 0.14, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-black leading-[0.88] tracking-[-0.05em]"
+                    className="leading-[0.94] tracking-[-0.015em]"
                     style={{
-                      fontSize: "clamp(58px,7.5vw,110px)",
+                      fontFamily: "var(--font-fraunces), Georgia, serif",
+                      fontWeight: 600,
+                      fontStyle: i === heroLines.length - 1 ? "italic" : "normal",
+                      fontSize: "clamp(56px,7.2vw,104px)",
                       ...(isDark ? {
                         background: i === 0
                           ? "linear-gradient(160deg, #ffffff 0%, #e0d8ff 60%, #c4b8ff 100%)"
@@ -142,7 +145,7 @@ export function Hero() {
 
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.78 }}
-              className="flex items-center gap-5 flex-wrap mb-16">
+              className="flex items-center gap-5 flex-wrap mb-6">
               <motion.a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
                 target="_blank" rel="noopener noreferrer"
                 whileHover={{ scale: 1.04, boxShadow: "0 10px 50px rgba(160,60,255,0.65)" }}
@@ -166,6 +169,28 @@ export function Hero() {
                 {t.hero.ctaSecondary}
                 <span className="text-[16px]">→</span>
               </motion.a>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+              className="flex items-center gap-x-5 gap-y-2.5 flex-wrap mb-14">
+              <a href="mailto:hello@axivore.io"
+                className="flex items-center gap-2 text-[13.5px] font-medium transition-opacity hover:opacity-70"
+                style={{ color: isDark ? "rgba(255,255,255,0.74)" : "rgba(10,10,15,0.72)" }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A09AFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-10 5L2 7" />
+                </svg>
+                hello@axivore.io
+              </a>
+              <span className="hidden sm:block w-px h-3.5" style={{ background: isDark ? "rgba(255,255,255,0.18)" : "rgba(10,10,15,0.16)" }} />
+              <span className="inline-flex items-center gap-2 text-[12.5px] font-medium" style={{ color: mutedColor }}>
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full rounded-full opacity-60 animate-ping" style={{ background: "#4ade80" }} />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: "#22c55e" }} />
+                </span>
+                {t.hero.ctaNote}
+              </span>
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }}>
