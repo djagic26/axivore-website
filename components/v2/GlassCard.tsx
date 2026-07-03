@@ -84,15 +84,15 @@ export function GlassCard({ isDark }: { isDark: boolean }) {
           <div>
             <div className="font-bold tracking-tight leading-none mb-1"
               style={{ fontSize: 56, background: isDark ? "linear-gradient(135deg, #ffffff 0%, #A09AFF 100%)" : "linear-gradient(135deg, #1a0060 0%, #7C5CFF 55%, #A09AFF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              98%
+              24/7
             </div>
-            <div className="text-[11.5px] font-medium" style={{ color: textMuted }}>Client Retention Rate</div>
+            <div className="text-[11.5px] font-medium" style={{ color: textMuted }}>Systems Running</div>
           </div>
           <div className="flex items-end justify-between pt-4"
             style={{ borderTop: `1px solid ${isDark ? "rgba(255,255,255,0.07)" : "rgba(124,92,255,0.18)"}` }}>
             <div>
-              <div className="text-[28px] font-bold" style={{ color: textMain }}>$24M+</div>
-              <div className="text-[10px]" style={{ color: textMuted }}>Revenue Influenced</div>
+              <div className="text-[28px] font-bold" style={{ color: textMain }}>100+</div>
+              <div className="text-[10px]" style={{ color: textMuted }}>Auto-Published Posts</div>
             </div>
             <div className="w-10 h-10 rounded-xl flex items-center justify-center"
               style={{ background: "linear-gradient(135deg, rgba(124,92,255,0.3), rgba(255,61,197,0.15))", border: "1px solid rgba(160,100,255,0.4)", boxShadow: "0 4px 20px rgba(124,92,255,0.3)" }}>
@@ -116,7 +116,7 @@ export function GlassCard({ isDark }: { isDark: boolean }) {
           boxShadow: "0 12px 40px rgba(60,30,120,0.35)",
         }}>
         <div className="text-[9px] tracking-widest uppercase font-medium mb-0.5" style={{ color: "rgba(160,154,255,0.7)" }}>Systems Built</div>
-        <div className="text-[24px] font-bold leading-tight" style={{ color: textMain }}>47+</div>
+        <div className="text-[24px] font-bold leading-tight" style={{ color: textMain }}>10+</div>
       </motion.div>
 
       <motion.div
@@ -129,8 +129,8 @@ export function GlassCard({ isDark }: { isDark: boolean }) {
           backdropFilter: "blur(20px)",
           boxShadow: "0 12px 40px rgba(255,61,197,0.2)",
         }}>
-        <div className="text-[9px] tracking-widest uppercase font-medium mb-0.5" style={{ color: "rgba(255,120,210,0.8)" }}>Avg. ROI</div>
-        <div className="text-[24px] font-bold leading-tight" style={{ color: textMain }}>2–6x</div>
+        <div className="text-[9px] tracking-widest uppercase font-medium mb-0.5" style={{ color: "rgba(255,120,210,0.8)" }}>Fixed Quote</div>
+        <div className="text-[24px] font-bold leading-tight" style={{ color: textMain }}>48 h</div>
       </motion.div>
 
       <motion.div

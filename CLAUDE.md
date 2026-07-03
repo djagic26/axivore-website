@@ -20,7 +20,7 @@ app/
 components/
   Header.tsx, Footer.tsx, Hero.tsx, Services.tsx, ...
 lib/
-  i18n.ts             ← prijevodi (de, en, hr, fr, es, ar)
+  i18n.ts             ← prijevodi (de, en, hr, ro, tr, it)
   LanguageContext.tsx
   ThemeContext.tsx
 public/
@@ -36,7 +36,7 @@ Automatski se linkuje na axivore.io.
 ## Branding
 - **Boje:** Background #050507, Dark #0C0C0F, Accent #A09AFF, Secondary #7B72E8, Border #4A4866
 - **Font:** Geist Sans
-- **Logo:** Dark circle + purple crosshair (SVG inline)
+- **Logo:** Ljubičasti "A" sa zvijezdom na crnoj podlozi (`public/icon.png`, komponenta `AxivoreLogo`)
 - **Tagline:** Precision · Disruption · Direction
 
 ## Kontakt / Legal
@@ -48,7 +48,8 @@ Automatski se linkuje na axivore.io.
 ## Višejezičnost
 Stranica ima 6 jezika. Prijevodi su u `lib/i18n.ts`.
 Uvijek dodaj prijevode za SVE jezike kad dodaješ novi tekst.
-Jezici: de (default), en, hr, fr, es, ar.
+Jezici: de (default), en, hr, ro, tr, it.
+Detekcija jezika: `navigator.language` (lib/LanguageContext.tsx) — auto-prebacivanje po jeziku browsera.
 
 ## Poznati TODO
 - [ ] Datenschutz stranica (čeka Gewerbe)

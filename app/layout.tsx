@@ -5,7 +5,6 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 import { ThemeProvider } from "@/lib/ThemeContext";
 import ChatWidgetWrapper from "@/components/ChatWidgetWrapper";
 import { StructuredData } from "@/components/StructuredData";
-import { cookies } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,19 +53,16 @@ export const metadata: Metadata = {
   },
 };
 
-const VALID_LANGS = ["de", "en", "hr", "ro", "tr", "it"];
-
-export default async function RootLayout({
+// lang defaults to "de" in the static HTML; the inline script below swaps it
+// client-side from localStorage. No cookies() here — reading cookies in the
+// root layout would force dynamic rendering on every route (slow TTFB, no CDN).
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const langCookie = cookieStore.get("axivore-lang")?.value ?? "de";
-  const lang = VALID_LANGS.includes(langCookie) ? langCookie : "de";
-
   return (
-    <html lang={lang} suppressHydrationWarning className={`${geistSans.variable} ${fraunces.variable} h-full antialiased`}>
+    <html lang="de" suppressHydrationWarning className={`${geistSans.variable} ${fraunces.variable} h-full antialiased`}>
       <head>
         <meta property="fb:app_id" content="1371180501519020" />
         <StructuredData />

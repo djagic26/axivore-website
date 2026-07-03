@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useTheme } from "@/lib/ThemeContext";
 import { Language } from "@/lib/i18n";
@@ -93,6 +94,7 @@ export function Nav() {
   const isDark = theme === "dark";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname() ?? "/";
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
@@ -106,13 +108,15 @@ export function Nav() {
   const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
 
   const navLinks = [
-    { key: "services", href: "#services", label: t.nav.services },
-    { key: "portfolio", href: "#portfolio", label: t.nav.portfolio },
-    { key: "process", href: "#process", label: t.nav.process },
-    { key: "pricing", href: "#pricing", label: t.nav.pricing },
-    { key: "about", href: "#ueber-uns", label: t.nav.about },
-    { key: "faq", href: "#faq", label: t.nav.faq },
+    { key: "services", href: "/leistungen", label: t.nav.services },
+    { key: "branchen", href: "/branchen", label: t.nav.branchen },
+    { key: "portfolio", href: "/projekte", label: t.nav.portfolio },
+    { key: "pricing", href: "/preise", label: t.nav.pricing },
+    { key: "about", href: "/ueber-uns", label: t.nav.about },
+    { key: "contact", href: "/kontakt", label: t.nav.contact },
   ];
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <motion.header
@@ -139,16 +143,19 @@ export function Nav() {
 
         <nav className="hidden md:flex items-center gap-7">
           {navLinks.map(({ key, href, label }, i) => (
-            <motion.a key={key} href={href}
+            <motion.div key={key}
               initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.08 + i * 0.05 }}
-              className="text-[13px] font-medium transition-colors duration-200"
-              style={{ color: mutedColor }}
-              onMouseEnter={e => (e.currentTarget.style.color = textColor)}
-              onMouseLeave={e => (e.currentTarget.style.color = mutedColor)}
             >
-              {label}
-            </motion.a>
+              <Link href={href}
+                className="text-[13px] font-medium transition-colors duration-200"
+                style={{ color: isActive(href) ? textColor : mutedColor }}
+                onMouseEnter={e => (e.currentTarget.style.color = textColor)}
+                onMouseLeave={e => (e.currentTarget.style.color = isActive(href) ? textColor : mutedColor)}
+              >
+                {label}
+              </Link>
+            </motion.div>
           ))}
         </nav>
 
@@ -205,10 +212,11 @@ export function Nav() {
             className="md:hidden px-6 py-5 flex flex-col gap-4 border-t overflow-hidden"
             style={{ background: isDark ? "rgba(5,5,5,0.97)" : "rgba(255,255,255,0.97)", borderColor, backdropFilter: "blur(20px)" }}>
             {navLinks.map(({ href, label }) => (
-              <a key={href} href={href} onClick={() => setMobileOpen(false)}
-                className="text-base font-medium transition-colors" style={{ color: textColor }}>
+              <Link key={href} href={href} onClick={() => setMobileOpen(false)}
+                className="text-base font-medium transition-colors"
+                style={{ color: isActive(href) ? "#A09AFF" : textColor }}>
                 {label}
-              </a>
+              </Link>
             ))}
             <div className="flex flex-wrap gap-2 pt-1">
               {langs.map((lang) => (

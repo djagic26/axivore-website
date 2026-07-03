@@ -3,18 +3,11 @@
 import { useChat } from "@ai-sdk/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const AxivoreIcon = () => (
-  <svg width="22" height="22" viewBox="0 0 52 52" fill="none">
-    <circle cx="26" cy="26" r="24" stroke="#4A4866" strokeWidth="1.5" />
-    <line x1="26" y1="6" x2="26" y2="46" stroke="#A09AFF" strokeWidth="3" strokeLinecap="round" />
-    <line x1="6" y1="26" x2="46" y2="26" stroke="#A09AFF" strokeWidth="3" strokeLinecap="round" />
-    <line x1="10" y1="10" x2="42" y2="42" stroke="#7B72E8" strokeWidth="2" strokeLinecap="round" />
-    <line x1="42" y1="10" x2="10" y2="42" stroke="#7B72E8" strokeWidth="2" strokeLinecap="round" />
-    <circle cx="26" cy="26" r="4" fill="#0C0C0F" stroke="#A09AFF" strokeWidth="2" />
-    <circle cx="26" cy="26" r="1.5" fill="#A09AFF" />
-  </svg>
+  <Image src="/icon.png" alt="Axivore" width={24} height={24} style={{ objectFit: "contain" }} />
 );
 
 const WELCOME: Record<string, string> = {

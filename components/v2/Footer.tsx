@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useTheme } from "@/lib/ThemeContext";
 import { AxivoreLogo } from "./AxivoreLogo";
@@ -15,19 +16,25 @@ export function Footer() {
     e.currentTarget.style.color = enter ? (isDark ? "#ffffff" : "#0a0a0f") : textColor;
   };
 
-  const navLinks = [
-    { label: t.nav.services, href: "#services" },
-    { label: t.nav.portfolio, href: "#portfolio" },
-    { label: t.nav.process, href: "#process" },
-    { label: t.nav.faq, href: "#faq" },
+  const serviceLinks = [
+    { label: t.nav.services, href: "/leistungen" },
     { label: "KI-Automatisierung", href: "/leistungen/ki-automatisierung" },
     { label: "KI-Chatbots", href: "/leistungen/ki-chatbots" },
+    { label: "KI-Agentur Stuttgart", href: "/ki-agentur-stuttgart" },
+  ];
+
+  const companyLinks = [
+    { label: t.nav.branchen, href: "/branchen" },
+    { label: t.nav.portfolio, href: "/projekte" },
+    { label: t.nav.pricing, href: "/preise" },
+    { label: t.nav.about, href: "/ueber-uns" },
+    { label: t.nav.contact, href: "/kontakt" },
   ];
 
   return (
     <footer style={{ background: bg, borderTop: `1px solid ${borderColor}` }}>
       <div className="max-w-[1320px] mx-auto px-6">
-        <div className="py-12 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
+        <div className="py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <AxivoreLogo />
@@ -42,14 +49,27 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-[9px] uppercase tracking-[0.24em] font-semibold mb-4" style={{ color: "#A09AFF" }}>Navigation</p>
+            <p className="text-[9px] uppercase tracking-[0.24em] font-semibold mb-4" style={{ color: "#A09AFF" }}>{t.nav.services}</p>
             <div className="flex flex-col gap-2.5">
-              {navLinks.map(({ label, href }) => (
-                <a key={href} href={href} className="text-[13px] transition-colors duration-150 w-fit"
+              {serviceLinks.map(({ label, href }) => (
+                <Link key={href} href={href} className="text-[13px] transition-colors duration-150 w-fit"
                   style={{ color: textColor }}
                   onMouseEnter={e => hover(e, true)} onMouseLeave={e => hover(e, false)}>
                   {label}
-                </a>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-[9px] uppercase tracking-[0.24em] font-semibold mb-4" style={{ color: "#A09AFF" }}>{t.labels.navigation}</p>
+            <div className="flex flex-col gap-2.5">
+              {companyLinks.map(({ label, href }) => (
+                <Link key={href} href={href} className="text-[13px] transition-colors duration-150 w-fit"
+                  style={{ color: textColor }}
+                  onMouseEnter={e => hover(e, true)} onMouseLeave={e => hover(e, false)}>
+                  {label}
+                </Link>
               ))}
             </div>
           </div>

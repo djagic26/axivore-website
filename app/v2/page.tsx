@@ -11,10 +11,7 @@ import { Results } from "@/components/v2/Results";
 import { Services } from "@/components/v2/Services";
 import { ForWho } from "@/components/v2/ForWho";
 import { WhyUs } from "@/components/v2/WhyUs";
-import { Portfolio } from "@/components/v2/Portfolio";
 import { Process } from "@/components/v2/Process";
-import { Pricing } from "@/components/v2/Pricing";
-import { UeberUns } from "@/components/v2/UeberUns";
 import { FAQ } from "@/components/v2/FAQ";
 import { FinalCTA } from "@/components/v2/FinalCTA";
 import { Footer } from "@/components/v2/Footer";
@@ -34,10 +31,7 @@ export default function V2Page() {
       <Services />
       <ForWho />
       <WhyUs />
-      <Portfolio />
       <Process />
-      <Pricing />
-      <UeberUns />
       <FAQ />
       <FinalCTA />
       <Footer />
