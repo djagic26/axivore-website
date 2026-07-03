@@ -88,7 +88,7 @@ function LangDropdown({ language, setLanguage, isDark }: {
   );
 }
 
-export function Nav() {
+export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: boolean } = {}) {
   const { t, language, setLanguage } = useLanguage();
   const { theme, toggle } = useTheme();
   const isDark = theme === "dark";
@@ -160,7 +160,7 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <LangDropdown language={language} setLanguage={setLanguage} isDark={isDark} />
+          {!hideLanguageSwitcher && <LangDropdown language={language} setLanguage={setLanguage} isDark={isDark} />}
 
           <button onClick={toggle}
             className="p-2 rounded-lg transition-all duration-200"
@@ -218,23 +218,25 @@ export function Nav() {
                 {label}
               </Link>
             ))}
-            <div className="flex flex-wrap gap-2 pt-1">
-              {langs.map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => { setLanguage(lang); setMobileOpen(false); }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all"
-                  style={{
-                    color: language === lang ? "#fff" : mutedColor,
-                    background: language === lang ? "rgba(124,92,255,0.25)" : isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
-                    border: language === lang ? "1px solid rgba(124,92,255,0.4)" : isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
-                  }}
-                >
-                  <span>{langMeta[lang].flag}</span>
-                  <span>{langMeta[lang].name}</span>
-                </button>
-              ))}
-            </div>
+            {!hideLanguageSwitcher && (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {langs.map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => { setLanguage(lang); setMobileOpen(false); }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all"
+                    style={{
+                      color: language === lang ? "#fff" : mutedColor,
+                      background: language === lang ? "rgba(124,92,255,0.25)" : isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+                      border: language === lang ? "1px solid rgba(124,92,255,0.4)" : isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
+                    }}
+                  >
+                    <span>{langMeta[lang].flag}</span>
+                    <span>{langMeta[lang].name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
             <a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
               target="_blank" rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}

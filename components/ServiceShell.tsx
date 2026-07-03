@@ -17,7 +17,7 @@ type ServiceShellProps = {
 export function ServiceShell({ children }: ServiceShellProps) {
   return (
     <div className="min-h-screen bg-[#050507] text-white">
-      <Nav />
+      <Nav hideLanguageSwitcher />
       <main className="pt-16">{children}</main>
       <Footer />
     </div>
