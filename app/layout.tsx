@@ -5,6 +5,7 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 import { ThemeProvider } from "@/lib/ThemeContext";
 import ChatWidgetWrapper from "@/components/ChatWidgetWrapper";
 import { StructuredData } from "@/components/StructuredData";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,6 +77,7 @@ export default function RootLayout({
             <ChatWidgetWrapper />
           </LanguageProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

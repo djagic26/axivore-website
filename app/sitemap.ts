@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { branchen } from "@/lib/branchen";
+import { ratgeberArticles } from "@/lib/ratgeber";
 
 const SITE_URL = "https://axivore.io";
 
@@ -78,5 +79,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    {
+      url: `${SITE_URL}/ratgeber`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    ...ratgeberArticles.map((a) => ({
+      url: `${SITE_URL}/ratgeber/${a.slug}`,
+      lastModified: new Date(a.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
   ];
 }

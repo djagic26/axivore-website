@@ -28,6 +28,7 @@ export function Footer() {
     { label: t.nav.portfolio, href: "/projekte" },
     { label: t.nav.pricing, href: "/preise" },
     { label: t.nav.about, href: "/ueber-uns" },
+    { label: "Ratgeber", href: "/ratgeber" },
     { label: t.nav.contact, href: "/kontakt" },
   ];
 
