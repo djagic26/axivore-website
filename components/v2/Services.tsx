@@ -60,7 +60,9 @@ export function Services() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {t.services.items.map((svc, i) => {
+          {[1, 0, 2, 3].map((idx, i) => {
+            const svc = t.services.items[idx];
+            if (!svc) return null;
             const acc = SVC_ACCENTS[i % 4];
             return (
               <motion.div key={i}

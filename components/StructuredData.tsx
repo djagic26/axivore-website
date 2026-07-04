@@ -19,7 +19,7 @@ export function StructuredData() {
       logo: `${SITE_URL}/icon.png`,
       image: `${SITE_URL}/opengraph-image`,
       description:
-        "Axivore entwickelt KI-Automatisierungen, intelligente Chatbots und maßgeschneiderte Software für kleine und mittlere Unternehmen in Stuttgart und ganz Deutschland.",
+        "Axivore entwickelt moderne Websites, maßgeschneiderte Web-Apps und SaaS-Produkte sowie KI-Automatisierungen und Chatbots für kleine und mittlere Unternehmen in Stuttgart und ganz Deutschland.",
       email: "hello@axivore.io",
       priceRange: "€€",
       founder: {

@@ -5,14 +5,14 @@ import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 const SITE_URL = "https://axivore.io";
 
 export const metadata: Metadata = {
-  title: "Leistungen — KI-Automatisierung & Chatbots für KMU | Axivore",
+  title: "Leistungen — Websites, Software & KI für kleine Unternehmen | Axivore",
   description:
-    "Was Axivore für kleine und mittlere Unternehmen in Deutschland baut: KI-Automatisierungen, intelligente Chatbots und maßgeschneiderte Software. Live in Wochen.",
+    "Was Axivore für kleine und mittlere Unternehmen in Deutschland baut: moderne Websites, maßgeschneiderte Web-Apps & SaaS und KI-Automatisierung. Alles aus einer Hand, live in Wochen.",
   alternates: { canonical: `${SITE_URL}/leistungen` },
   openGraph: {
-    title: "Leistungen — KI-Automatisierung & Chatbots für KMU | Axivore",
+    title: "Leistungen — Websites, Software & KI für kleine Unternehmen | Axivore",
     description:
-      "KI-Automatisierungen, intelligente Chatbots und maßgeschneiderte Software für kleine Unternehmen in Deutschland.",
+      "Moderne Websites, maßgeschneiderte Web-Apps & SaaS und KI-Automatisierung für kleine Unternehmen in Deutschland — alles aus einer Hand.",
     url: `${SITE_URL}/leistungen`,
     siteName: "Axivore",
     locale: "de_DE",
@@ -21,6 +21,18 @@ export const metadata: Metadata = {
 };
 
 const services = [
+  {
+    href: "/leistungen/webseiten",
+    eyebrow: "Websites",
+    title: "Websites & Landingpages",
+    text: "Moderne, schnelle Websites, die aus Besuchern Kunden machen — auf Wunsch mit KI-Assistent, der Termine bucht und Fragen beantwortet.",
+  },
+  {
+    href: "/leistungen/web-apps",
+    eyebrow: "Web-Apps & SaaS",
+    title: "Web-Apps & SaaS",
+    text: "Maßgeschneiderte Web-Anwendungen und SaaS-Produkte — von der Idee bis live. Genau auf deinen Betrieb zugeschnitten, nicht von der Stange.",
+  },
   {
     href: "/leistungen/ki-automatisierung",
     eyebrow: "Automatisierung",
@@ -58,14 +70,14 @@ export default function LeistungenPage() {
           className="font-black tracking-[-0.03em] leading-[1.02] mb-6"
           style={{ fontSize: "clamp(38px,6vw,68px)" }}
         >
-          KI-Automatisierung &amp; Software
+          Websites, Software &amp; KI
           <br />
           für kleine Unternehmen.
         </h1>
         <p className="text-[16px] leading-relaxed text-white/55 max-w-2xl">
-          Wir bauen Systeme, die deine Routinearbeit übernehmen — von der ersten Idee bis
-          live in Wochen, nicht Monaten. Speziell für Geschäftsführer mit 5–30 Mitarbeitern
-          in Deutschland, die selbst mit anpacken.
+          Von der modernen Website über maßgeschneiderte Web-Apps bis zur KI-Automatisierung —
+          wir bauen deine digitale Basis. Alles aus einer Hand, live in Wochen, nicht Monaten.
+          Speziell für Geschäftsführer mit 5–30 Mitarbeitern in Deutschland, die selbst mit anpacken.
         </p>
       </section>
 
