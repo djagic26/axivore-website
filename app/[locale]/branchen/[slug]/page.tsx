@@ -2,9 +2,33 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
-import { branchen, getBranche } from "@/lib/branchen";
+import { branchen, getBranchenList, getBranche } from "@/lib/branchen";
+import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const SITE_URL = "https://axivore.io";
+// Branchen content exists in German and (as of this pass) Croatian; other
+// locales fall back to the German page until they get their own pass.
+const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+
+const UI: Record<"de" | "hr", { faq: string; ctaHeading: string; ctaText: string; ctaButton: string; more: string; start: string; branchenLabel: string }> = {
+  de: {
+    faq: "Häufige Fragen",
+    ctaHeading: "Welche Aufgabe kostet dich am meisten Zeit?",
+    ctaText: "Sag es uns im kostenlosen Gespräch — wir zeigen dir, wie sich genau diese Aufgabe in deinem Betrieb automatisieren lässt.",
+    ctaButton: "Kostenloses Gespräch buchen",
+    more: "Weitere Branchen",
+    start: "Start",
+    branchenLabel: "Branchen",
+  },
+  hr: {
+    faq: "Česta pitanja",
+    ctaHeading: "Koji zadatak ti oduzima najviše vremena?",
+    ctaText: "Reci nam na besplatnom razgovoru — pokazat ćemo ti kako se točno taj zadatak može automatizirati u tvojoj tvrtki.",
+    ctaButton: "Zakaži besplatan razgovor",
+    more: "Ostale branše",
+    start: "Početna",
+    branchenLabel: "Branše",
+  },
+};
 
 // Only the known branches exist — unknown slugs return 404.
 export const dynamicParams = false;
@@ -14,36 +38,36 @@ export function generateStaticParams() {
 }
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const branche = getBranche(slug);
+  const { slug, locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  const branche = getBranche(slug, contentLocale);
   if (!branche) return {};
 
-  const pageUrl = `${SITE_URL}/branchen/${branche.slug}`;
-  return {
-    title: branche.metaTitle,
-    description: branche.metaDescription,
-    alternates: { canonical: pageUrl },
-    openGraph: {
-      title: branche.metaTitle,
-      description: branche.ogDescription,
-      url: pageUrl,
-      siteName: "Axivore",
-      locale: "de_DE",
-      type: "website",
+  return partialPageMetadata(
+    contentLocale,
+    `/branchen/${branche.slug}`,
+    {
+      de: { title: branche.metaTitle, description: branche.metaDescription },
+      hr: { title: branche.metaTitle, description: branche.metaDescription },
     },
-  };
+    AVAILABLE
+  );
 }
 
 export default async function BranchePage({ params }: Props) {
-  const { slug } = await params;
-  const branche = getBranche(slug);
+  const { slug, locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  const branche = getBranche(slug, contentLocale);
   if (!branche) notFound();
 
-  const pageUrl = `${SITE_URL}/branchen/${branche.slug}`;
+  const ui = UI[contentLocale as "de" | "hr"];
+  const pageUrl = `https://axivore.io${localePathname(contentLocale, `/branchen/${branche.slug}`)}`;
+  const branchenUrl = `https://axivore.io${localePathname(contentLocale, "/branchen")}`;
+  const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -54,15 +78,15 @@ export default async function BranchePage({ params }: Props) {
         name: branche.metaTitle.split(" — ")[0],
         serviceType: branche.serviceType,
         description: branche.metaDescription,
-        provider: { "@id": `${SITE_URL}/#organization` },
+        provider: { "@id": "https://axivore.io/#organization" },
         areaServed: { "@type": "Country", name: "Germany" },
         url: pageUrl,
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Start", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "Branchen", item: `${SITE_URL}/branchen` },
+          { "@type": "ListItem", position: 1, name: ui.start, item: siteUrl },
+          { "@type": "ListItem", position: 2, name: ui.branchenLabel, item: branchenUrl },
           { "@type": "ListItem", position: 3, name: branche.name, item: pageUrl },
         ],
       },
@@ -102,7 +126,7 @@ export default async function BranchePage({ params }: Props) {
       </section>
 
       <section className="max-w-3xl mx-auto px-6 py-10">
-        <h2 className="text-[24px] font-bold mb-7">Häufige Fragen</h2>
+        <h2 className="text-[24px] font-bold mb-7">{ui.faq}</h2>
         <div className="space-y-6">
           {branche.faq.map((f) => (
             <div key={f.question}>
@@ -115,23 +139,21 @@ export default async function BranchePage({ params }: Props) {
 
       <section className="max-w-3xl mx-auto px-6 py-12">
         <div className="rounded-2xl px-8 py-11 text-center" style={{ background: "linear-gradient(135deg,rgba(124,92,255,0.12),rgba(160,154,255,0.05))", border: "1px solid rgba(124,92,255,0.2)" }}>
-          <h2 className="text-[24px] font-bold mb-3">Welche Aufgabe kostet dich am meisten Zeit?</h2>
-          <p className="text-white/55 mb-8 max-w-lg mx-auto">
-            Sag es uns im kostenlosen Gespräch — wir zeigen dir, wie sich genau diese Aufgabe in deinem Betrieb automatisieren lässt.
-          </p>
+          <h2 className="text-[24px] font-bold mb-3">{ui.ctaHeading}</h2>
+          <p className="text-white/55 mb-8 max-w-lg mx-auto">{ui.ctaText}</p>
           <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="inline-block font-semibold px-7 py-3.5 rounded-full transition-transform hover:scale-[1.03]" style={{ background: "linear-gradient(135deg,#7C5CFF,#A09AFF)", color: "#0C0C0F" }}>
-            Kostenloses Gespräch buchen
+            {ui.ctaButton}
           </a>
         </div>
       </section>
 
       <section className="max-w-3xl mx-auto px-6 pb-16">
-        <p className="text-[12px] tracking-[0.15em] uppercase text-white/35 mb-4">Weitere Branchen</p>
+        <p className="text-[12px] tracking-[0.15em] uppercase text-white/35 mb-4">{ui.more}</p>
         <div className="flex flex-wrap gap-2.5">
-          {branchen
+          {getBranchenList(contentLocale)
             .filter((b) => b.slug !== branche.slug)
             .map((b) => (
-              <Link key={b.slug} href={`/branchen/${b.slug}`} className="text-[13px] px-3.5 py-1.5 rounded-full transition-colors" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.6)" }}>
+              <Link key={b.slug} href={localePathname(contentLocale, `/branchen/${b.slug}`)} className="text-[13px] px-3.5 py-1.5 rounded-full transition-colors" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.6)" }}>
                 {b.name}
               </Link>
             ))}

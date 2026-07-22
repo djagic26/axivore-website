@@ -2,27 +2,147 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleLayout } from "@/components/ratgeber/ArticleLayout";
 import { getRatgeberArticle } from "@/lib/ratgeber";
+import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const article = getRatgeberArticle("angebote-automatisieren-handwerk")!;
-const PAGE_URL = `https://axivore.io/ratgeber/${article.slug}`;
+const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const SLUG = "angebote-automatisieren-handwerk";
+const PATH = `/ratgeber/${SLUG}`;
 
-export const metadata: Metadata = {
-  title: article.metaTitle,
-  description: article.description,
-  alternates: { canonical: PAGE_URL },
-  openGraph: {
-    title: article.metaTitle,
-    description: article.description,
-    url: PAGE_URL,
-    siteName: "Axivore",
-    locale: "de_DE",
-    type: "article",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  const de = getRatgeberArticle(SLUG, "de")!;
+  const hr = getRatgeberArticle(SLUG, "hr")!;
+  return partialPageMetadata(
+    contentLocale,
+    PATH,
+    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description } },
+    AVAILABLE
+  );
+}
 
-export default function Page() {
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  const article = getRatgeberArticle(SLUG, contentLocale)!;
+
+  if (contentLocale === "hr") {
+    return (
+      <ArticleLayout article={article} locale={contentLocale}>
+        <p>
+          21 sat je. Gradilište je gotovo prije nekoliko sati, ali ti i dalje sjediš za kuhinjskim
+          stolom i tipkaš ponudu. Tražiš stavke, provjeravaš cijene, sve slažeš u ispravan format —
+          a sutra te čeka sljedeća. Ako ti ovo zvuči poznato, ovaj je članak za tebe. Objašnjavamo
+          što &bdquo;automatizacija ponuda&ldquo; konkretno znači, što stvarno donosi — i jednako
+          iskreno: što ne može.
+        </p>
+
+        <h2>Što &bdquo;automatizacija ponuda&ldquo; konkretno znači</h2>
+        <p>
+          Ideja je jednostavna: unosiš samo osnovne podatke — što treba napraviti, koje površine ili
+          količine, koje posebnosti. Ostalo preuzima sustav koji poznaje tvoju logiku cijena i tvoje
+          standardne stavke. Rezultat je gotova, uredno formatirana ponuda kao PDF — s tvojim logom,
+          tvojim tekstovima, tvojim cijenama. Umjesto 45 do 60 minuta po ponudi, trebaš samo par
+          minuta za unos i kratku provjeru.
+        </p>
+
+        <h2>Kako to tehnički funkcionira — bez stručnog žargona</h2>
+        <p>Automatizirani sustav za ponude sastoji se od četiri gradivna elementa:</p>
+        <ul>
+          <li>
+            <strong>Tvoj katalog usluga:</strong> tvoje tipične stavke (npr. &bdquo;gletanje i
+            bojanje zida, po m²&ldquo;) jednom se uredno unesu.
+          </li>
+          <li>
+            <strong>Tvoja logika cijena:</strong> materijal, radno vrijeme, doplate, dolazak —
+            pravila po kojima danas računaš u glavi ili u Excelu ugrađena su u sustav.
+          </li>
+          <li>
+            <strong>AI za tekst:</strong> iz tvojih natuknica AI formulira opise — profesionalno,
+            ali tvojim tonom. Nema fraza koje zvuče kao serijsko pismo.
+          </li>
+          <li>
+            <strong>Tvoja predložak:</strong> gotova ponuda izgleda kao tvoja, jer i jest tvoja —
+            logo, struktura, uvjeti plaćanja, sve kao i inače.
+          </li>
+        </ul>
+        <p>
+          Kontrola ostaje kod tebe: sustav izrađuje nacrt, ti provjeravaš i šalješ. Ništa ne ide van
+          bez tvog odobrenja.
+        </p>
+
+        <h2>Što to stvarno donosi</h2>
+        <h3>1. Vrijeme — iskren obračun</h3>
+        <p>
+          Ako pišeš pet ponuda tjedno po 45 do 60 minuta, to je <strong>4 do 5 sati svaki
+          tjedan</strong> — najčešće navečer ili vikendom. Uz automatizaciju to se smanjuje na unos
+          i provjeru, dakle otprilike sat vremena. To su tri do četiri vraćena sata tjedno, tjedan
+          za tjednom.
+        </p>
+        <h3>2. Brzina donosi poslove</h3>
+        <p>
+          Tko postavi upit, rijetko pita samo jednu tvrtku. Posao često dobije onaj tko prvi pošalje
+          urednu ponudu — ne nužno najjeftiniji. Ako tvoja ponuda stigne klijentu istog dana umjesto
+          za tjedan dana, to je stvarna konkurentska prednost.
+        </p>
+        <h3>3. Dosljednost</h3>
+        <p>
+          Više nema zaboravljenih stavki, pomaknutih cijena, &bdquo;prošli put sam to drugačije
+          izračunao&ldquo;. Svaka ponuda prati istu logiku — to štiti tvoju maržu.
+        </p>
+
+        <h2>Iskreno: Što automatizacija ne može</h2>
+        <ul>
+          <li>
+            <strong>Mjerenje na licu mjesta</strong> ne preuzima nijedan sustav. Osnovne podatke i
+            dalje moraš sam prikupiti — samo tipkanje nakon toga otpada.
+          </li>
+          <li>
+            <strong>Stvarne posebne slučajeve</strong> (neuobičajene konstrukcije, zaštita
+            spomenika, specijalni materijal) i dalje trebaju tvoju glavu. Sustav pomaže kod 80&nbsp;%
+            standardnih slučajeva.
+          </li>
+          <li>
+            <strong>Postavljanje treba tebe:</strong> da bi sustav računao tvoje cijene, moraš
+            jednom otkriti svoju kalkulaciju i proći je s nama. To je jedno popodne posla — jednom,
+            ne svaki tjedan.
+          </li>
+        </ul>
+
+        <h2>Koliko to košta — i od kada se isplati?</h2>
+        <p>
+          Kod nas jedna automatizacija kreće <strong>od 499&nbsp;€ po fiksnoj cijeni</strong> —
+          unaprijed dobivaš pisanu ponudu s fiksnom cijenom, poslije se ništa više ne mijenja. Račun
+          je jednostavan: ako uštediš 3 do 4 sata tjedno i konzervativno računaš svoj sat s
+          50&nbsp;€, sustav se isplatio za nekoliko tjedana. Više o našem modelu cijena pronađi na{" "}
+          <Link href={localePathname(contentLocale, "/preise")}>stranici s cijenama</Link>.
+        </p>
+
+        <h2>Kako krenuti</h2>
+        <ol>
+          <li>
+            <strong>Pogledamo proces:</strong> kako danas nastaju tvoje ponude? Gdje najviše
+            zapinje? To razjasnimo na besplatnom razgovoru.
+          </li>
+          <li>
+            <strong>Bilježimo kalkulaciju:</strong> tvoju logiku cijena prevodimo u pravila koja
+            sustav razumije — zajedno, razumljivo, bez da moraš učiti išta tehničko.
+          </li>
+          <li>
+            <strong>Testiranje i lansiranje:</strong> uspoređuješ automatske ponude sa svojim
+            vlastitim, mi dorađujemo — onda sustav radi. Obično unutar 1 do 2 tjedna.
+          </li>
+        </ol>
+        <p>
+          Više o tome što gradimo posebno za obrtničke tvrtke pronađi na našoj stranici{" "}
+          <Link href={localePathname(contentLocale, "/branchen/handwerk")}>AI za obrtnike</Link>.
+        </p>
+      </ArticleLayout>
+    );
+  }
+
   return (
-    <ArticleLayout article={article}>
+    <ArticleLayout article={article} locale={contentLocale}>
       <p>
         Es ist 21 Uhr. Die Baustelle ist seit Stunden vorbei, aber du sitzt noch am Küchentisch und
         tippst ein Angebot. Positionen raussuchen, Preise nachschlagen, alles ins richtige Format
@@ -113,7 +233,7 @@ export default function Page() {
         du bekommst vorab ein schriftliches Angebot mit fixem Preis, danach ändert sich nichts mehr.
         Die Rechnung dazu ist simpel: Sparst du 3 bis 4 Stunden pro Woche und rechnest deine Stunde
         konservativ mit 50&nbsp;€, hat sich das System nach wenigen Wochen bezahlt gemacht. Alles
-        Weitere zu unserem Preismodell findest du auf der <Link href="/preise">Preisseite</Link>.
+        Weitere zu unserem Preismodell findest du auf der <Link href={localePathname(contentLocale, "/preise")}>Preisseite</Link>.
       </p>
 
       <h2>So startest du</h2>
@@ -133,7 +253,7 @@ export default function Page() {
       </ol>
       <p>
         Mehr dazu, was wir speziell für Handwerksbetriebe bauen, findest du auf unserer Seite{" "}
-        <Link href="/branchen/handwerk">KI für Handwerksbetriebe</Link>.
+        <Link href={localePathname(contentLocale, "/branchen/handwerk")}>KI für Handwerksbetriebe</Link>.
       </p>
     </ArticleLayout>
   );

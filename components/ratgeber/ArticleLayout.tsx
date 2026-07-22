@@ -1,16 +1,39 @@
 import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import type { RatgeberArticle } from "@/lib/ratgeber";
-
-const SITE_URL = "https://axivore.io";
+import { localePathname, type AppLocale } from "@/lib/seo";
 
 type ArticleLayoutProps = {
   article: RatgeberArticle;
+  locale: AppLocale;
   children: React.ReactNode;
 };
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("de-DE", {
+const UI: Record<"de" | "hr", {
+  ratgeberLabel: string; readingTimeSuffix: string; ctaHeading: string; ctaText: string; ctaButton: string; ctaContactLink: string; dateLocale: string;
+}> = {
+  de: {
+    ratgeberLabel: "Ratgeber",
+    readingTimeSuffix: "Lesezeit",
+    ctaHeading: "Willst du wissen, was das für deinen Betrieb konkret heißt?",
+    ctaText: "In einem kostenlosen 30-Minuten-Gespräch schauen wir uns deine Abläufe an und sagen dir ehrlich, ob und wo sich Automatisierung für dich lohnt — ohne Fachchinesisch, ohne Verkaufsdruck.",
+    ctaButton: "Kostenloses Gespräch buchen",
+    ctaContactLink: "oder schreib uns →",
+    dateLocale: "de-DE",
+  },
+  hr: {
+    ratgeberLabel: "Vodič",
+    readingTimeSuffix: "čitanja",
+    ctaHeading: "Želiš znati što to konkretno znači za tvoj posao?",
+    ctaText: "Na besplatnom 30-minutnom razgovoru pogledamo tvoje procese i iskreno ti kažemo isplati li se i gdje se automatizacija isplati za tebe — bez stručnog žargona, bez pritiska na prodaju.",
+    ctaButton: "Zakaži besplatan razgovor",
+    ctaContactLink: "ili nam piši →",
+    dateLocale: "hr-HR",
+  },
+};
+
+function formatDate(iso: string, dateLocale: string): string {
+  return new Date(iso).toLocaleDateString(dateLocale, {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -22,8 +45,10 @@ function formatDate(iso: string): string {
  * prose styling for plain h2/h3/p/ul children, closing CTA and
  * Article + BreadcrumbList JSON-LD.
  */
-export function ArticleLayout({ article, children }: ArticleLayoutProps) {
-  const pageUrl = `${SITE_URL}/ratgeber/${article.slug}`;
+export function ArticleLayout({ article, locale, children }: ArticleLayoutProps) {
+  const ui = UI[locale as "de" | "hr"] ?? UI.de;
+  const pageUrl = `https://axivore.io${localePathname(locale, `/ratgeber/${article.slug}`)}`;
+  const ratgeberUrl = `https://axivore.io${localePathname(locale, "/ratgeber")}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -35,16 +60,16 @@ export function ArticleLayout({ article, children }: ArticleLayoutProps) {
         description: article.description,
         datePublished: article.date,
         dateModified: article.date,
-        inLanguage: "de-DE",
+        inLanguage: `${locale}-${locale === "de" ? "DE" : "HR"}`,
         mainEntityOfPage: pageUrl,
-        author: { "@id": `${SITE_URL}/#organization` },
-        publisher: { "@id": `${SITE_URL}/#organization` },
+        author: { "@id": "https://axivore.io/#organization" },
+        publisher: { "@id": "https://axivore.io/#organization" },
       },
       {
         "@type": "BreadcrumbList",
         "@id": `${pageUrl}/#breadcrumb`,
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Ratgeber", item: `${SITE_URL}/ratgeber` },
+          { "@type": "ListItem", position: 1, name: ui.ratgeberLabel, item: ratgeberUrl },
           { "@type": "ListItem", position: 2, name: article.title, item: pageUrl },
         ],
       },
@@ -59,8 +84,8 @@ export function ArticleLayout({ article, children }: ArticleLayoutProps) {
       />
       <article className="max-w-3xl mx-auto px-6 pt-16 pb-8">
         <nav aria-label="Breadcrumb" className="mb-8 text-[13px] text-white/40">
-          <Link href="/ratgeber" className="hover:text-white/70 transition-colors">
-            Ratgeber
+          <Link href={localePathname(locale, "/ratgeber")} className="hover:text-white/70 transition-colors">
+            {ui.ratgeberLabel}
           </Link>
           <span className="mx-2">/</span>
           <span className="text-white/60">{article.category}</span>
@@ -72,9 +97,9 @@ export function ArticleLayout({ article, children }: ArticleLayoutProps) {
           </h1>
           <p className="text-[16px] leading-[1.7] text-white/60 mb-5">{article.description}</p>
           <p className="text-[13px] text-white/40">
-            <time dateTime={article.date}>{formatDate(article.date)}</time>
+            <time dateTime={article.date}>{formatDate(article.date, ui.dateLocale)}</time>
             <span className="mx-2">·</span>
-            {article.readingTime} Lesezeit
+            {article.readingTime} {ui.readingTimeSuffix}
             <span className="mx-2">·</span>
             Axivore, Stuttgart
           </p>
@@ -100,14 +125,8 @@ export function ArticleLayout({ article, children }: ArticleLayoutProps) {
             border: "1px solid rgba(124,92,255,0.28)",
           }}
         >
-          <p className="text-[18px] font-semibold mb-2">
-            Willst du wissen, was das für deinen Betrieb konkret heißt?
-          </p>
-          <p className="text-[14px] leading-[1.7] text-white/60 mb-5">
-            In einem kostenlosen 30-Minuten-Gespräch schauen wir uns deine Abläufe an und sagen dir
-            ehrlich, ob und wo sich Automatisierung für dich lohnt — ohne Fachchinesisch, ohne
-            Verkaufsdruck.
-          </p>
+          <p className="text-[18px] font-semibold mb-2">{ui.ctaHeading}</p>
+          <p className="text-[14px] leading-[1.7] text-white/60 mb-5">{ui.ctaText}</p>
           <div className="flex flex-wrap items-center gap-4">
             <a
               href={CALENDLY_URL}
@@ -116,10 +135,10 @@ export function ArticleLayout({ article, children }: ArticleLayoutProps) {
               className="inline-flex items-center px-6 py-3 rounded-full text-[14px] font-semibold transition-transform hover:scale-[1.03]"
               style={{ background: "linear-gradient(135deg,#7C5CFF,#A09AFF)", color: "#0C0C0F" }}
             >
-              Kostenloses Gespräch buchen
+              {ui.ctaButton}
             </a>
-            <Link href="/kontakt" className="text-[14px] text-white/60 hover:text-white transition-colors">
-              oder schreib uns →
+            <Link href={localePathname(locale, "/kontakt")} className="text-[14px] text-white/60 hover:text-white transition-colors">
+              {ui.ctaContactLink}
             </Link>
           </div>
         </aside>

@@ -1,48 +1,71 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ServiceShell } from "@/components/ServiceShell";
-import { ratgeberArticles } from "@/lib/ratgeber";
+import { getRatgeberArticlesList } from "@/lib/ratgeber";
+import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const SITE_URL = "https://axivore.io";
-const PAGE_URL = `${SITE_URL}/ratgeber`;
+const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const PATH = "/ratgeber";
 
-export const metadata: Metadata = {
-  title: "Ratgeber — KI & Automatisierung für kleine Unternehmen | Axivore",
-  description:
-    "Praxisnahe Anleitungen ohne Fachchinesisch: Wie kleine Unternehmen in Deutschland mit KI und Automatisierung Zeit sparen — ehrlich, konkret, ohne Hype.",
-  alternates: { canonical: PAGE_URL },
-  openGraph: {
-    title: "Ratgeber — KI & Automatisierung für kleine Unternehmen | Axivore",
-    description:
-      "Praxisnahe Anleitungen ohne Fachchinesisch: Wie kleine Unternehmen mit KI und Automatisierung Zeit sparen.",
-    url: PAGE_URL,
-    siteName: "Axivore",
-    locale: "de_DE",
-    type: "website",
+const COPY: Record<"de" | "hr", { metaTitle: string; metaDescription: string; ogDescription: string; eyebrow: string; h1: string; intro: string; dateLocale: string }> = {
+  de: {
+    metaTitle: "Ratgeber — KI & Automatisierung für kleine Unternehmen | Axivore",
+    metaDescription: "Praxisnahe Anleitungen ohne Fachchinesisch: Wie kleine Unternehmen in Deutschland mit KI und Automatisierung Zeit sparen — ehrlich, konkret, ohne Hype.",
+    ogDescription: "Praxisnahe Anleitungen ohne Fachchinesisch: Wie kleine Unternehmen mit KI und Automatisierung Zeit sparen.",
+    eyebrow: "Ratgeber",
+    h1: "KI & Automatisierung — erklärt für kleine Unternehmen.",
+    intro: "Keine Buzzwords, keine Hochglanz-Versprechen. Hier schreiben wir auf, was in der Praxis funktioniert, was es kostet und wann sich was lohnt — aus unserer täglichen Arbeit mit Betrieben in Stuttgart und ganz Deutschland.",
+    dateLocale: "de-DE",
+  },
+  hr: {
+    metaTitle: "Vodič — AI i automatizacija za male tvrtke | Axivore",
+    metaDescription: "Praktični vodiči bez stručnog žargona: kako male tvrtke u Njemačkoj štede vrijeme uz AI i automatizaciju — iskreno, konkretno, bez hypea.",
+    ogDescription: "Praktični vodiči bez stručnog žargona: kako male tvrtke štede vrijeme uz AI i automatizaciju.",
+    eyebrow: "Vodič",
+    h1: "AI i automatizacija — objašnjeno za male tvrtke.",
+    intro: "Bez buzzworda, bez sjajnih obećanja. Ovdje pišemo o onome što stvarno funkcionira u praksi, koliko to košta i kad se što isplati — iz našeg svakodnevnog rada s tvrtkama u Stuttgartu i cijeloj Njemačkoj.",
+    dateLocale: "hr-HR",
   },
 };
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" });
+function formatDate(iso: string, dateLocale: string): string {
+  return new Date(iso).toLocaleDateString(dateLocale, { day: "numeric", month: "long", year: "numeric" });
 }
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "@id": `${PAGE_URL}/#collection`,
-  url: PAGE_URL,
-  name: "Axivore Ratgeber",
-  inLanguage: "de-DE",
-  about: { "@id": `${SITE_URL}/#organization` },
-  hasPart: ratgeberArticles.map((a) => ({
-    "@type": "Article",
-    headline: a.title,
-    url: `${PAGE_URL}/${a.slug}`,
-    datePublished: a.date,
-  })),
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  return partialPageMetadata(
+    contentLocale,
+    PATH,
+    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription } },
+    AVAILABLE
+  );
+}
 
-export default function RatgeberPage() {
+export default async function RatgeberPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  const c = COPY[contentLocale as "de" | "hr"];
+  const articles = getRatgeberArticlesList(contentLocale);
+  const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${pageUrl}/#collection`,
+    url: pageUrl,
+    name: `Axivore ${c.eyebrow}`,
+    inLanguage: `${contentLocale}-${contentLocale === "de" ? "DE" : "HR"}`,
+    about: { "@id": "https://axivore.io/#organization" },
+    hasPart: articles.map((a) => ({
+      "@type": "Article",
+      headline: a.title,
+      url: `${pageUrl}/${a.slug}`,
+      datePublished: a.date,
+    })),
+  };
+
   return (
     <ServiceShell>
       <script
@@ -52,23 +75,19 @@ export default function RatgeberPage() {
       <div className="max-w-5xl mx-auto px-6 pt-16 pb-8">
         <header className="mb-14 max-w-2xl">
           <p className="text-[11px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#7C5CFF" }}>
-            Ratgeber
+            {c.eyebrow}
           </p>
           <h1 className="text-[34px] md:text-[46px] leading-[1.12] font-semibold tracking-tight mb-5">
-            KI & Automatisierung — erklärt für kleine Unternehmen.
+            {c.h1}
           </h1>
-          <p className="text-[16px] leading-[1.7] text-white/60">
-            Keine Buzzwords, keine Hochglanz-Versprechen. Hier schreiben wir auf, was in der Praxis
-            funktioniert, was es kostet und wann sich was lohnt — aus unserer täglichen Arbeit mit
-            Betrieben in Stuttgart und ganz Deutschland.
-          </p>
+          <p className="text-[16px] leading-[1.7] text-white/60">{c.intro}</p>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {ratgeberArticles.map((a) => (
+          {articles.map((a) => (
             <Link
               key={a.slug}
-              href={`/ratgeber/${a.slug}`}
+              href={localePathname(contentLocale, `/ratgeber/${a.slug}`)}
               className="group rounded-2xl p-7 transition-all duration-200 hover:-translate-y-0.5"
               style={{
                 background: "rgba(255,255,255,0.03)",
@@ -83,7 +102,7 @@ export default function RatgeberPage() {
               </h2>
               <p className="text-[13.5px] leading-[1.65] text-white/55 mb-5">{a.description}</p>
               <p className="text-[12px] text-white/35">
-                <time dateTime={a.date}>{formatDate(a.date)}</time>
+                <time dateTime={a.date}>{formatDate(a.date, c.dateLocale)}</time>
                 <span className="mx-2">·</span>
                 {a.readingTime}
               </p>

@@ -160,6 +160,146 @@ export const branchen: Branche[] = [
   },
 ];
 
-export function getBranche(slug: string): Branche | undefined {
-  return branchen.find((b) => b.slug === slug);
+// Croatian translations — same slugs/order as `branchen`. Other locales
+// (en/ro/tr/it) still fall back to the German content until they get their
+// own pass; see lib/seo.ts's resolveContentLocale.
+export const branchenHr: Branche[] = [
+  {
+    slug: "handwerk",
+    name: "Obrt",
+    metaTitle: "AI za obrtnike — automatiziraj ponude i pozive | Axivore",
+    metaDescription:
+      "AI automatizacija za obrtničke tvrtke: ponude u minutama umjesto navečer, nijedan propušteni poziv s gradilišta, računi automatski. Axivore gradi sustave za obrt — live za 1–2 tjedna.",
+    ogDescription:
+      "Automatiziraj ponude, pozive i račune — da ostaneš na gradilištu umjesto navečer u uredu. Za obrtničke tvrtke u Njemačkoj.",
+    eyebrow: "Branša · Obrt",
+    h1: "AI automatizacija za obrtničke tvrtke.",
+    intro:
+      "Kao obrtnik danju radiš na gradilištu, a navečer pišeš ponude. Pozivi se gube jer nitko ne stigne javiti se na telefon. Axivore gradi sustave koji preuzimaju upravo te zadatke — da poslije posla više ne sjediš u uredu.",
+    serviceType: "AI automatizacija za obrtničke tvrtke",
+    useCasesHeading: "Što se u obrtu može automatizirati",
+    useCases: [
+      { title: "Ponude u minutama", text: "Iz nekoliko natuknica nastaje gotova, obračunata ponuda — formatirana i spremna za slanje. Više nema pisanja ponuda poslije posla." },
+      { title: "Nijedan propušteni poziv", text: "Digitalni asistent prima pozive dok si na ljestvama — bilježi upit, kontakt i želju za povratnim pozivom, tako da ne izgubiš nijedan posao." },
+      { title: "Termini i raspored", text: "Termini s klijentima se automatski koordiniraju i potvrđuju — uključujući podsjetnik, da nitko ne zaboravi i da ne odeš uzalud." },
+      { title: "Računi i podsjećanje", text: "Nakon posla račun nastaje automatski, a nepodmirene stavke se ljubazno podsjećaju — bez da ti to moraš pamtiti." },
+    ],
+    faq: [
+      { question: "Nisam tehnički potkovan — funkcionira li ovo ipak?", answer: "Da. Ti opišeš zadatak običnim jezikom, mi gradimo ostalo. Korištenje je nakon toga jednostavno kao WhatsApp poruka." },
+      { question: "Jesam li kao mala tvrtka premali za ovo?", answer: "Naprotiv. Baš jednočlane i male tvrtke imaju najviše koristi, jer svaki ušteđeni sat znači više vremena na gradilištu ili kod kuće." },
+      { question: "Koliko brzo takav sustav proradi?", answer: "Prva automatizacija — na primjer za ponude — obično je spremna za korištenje za 1–2 tjedna." },
+    ],
+  },
+  {
+    slug: "gastronomie",
+    name: "Ugostiteljstvo",
+    metaTitle: "AI za ugostiteljstvo — automatiziraj rezervacije i upite | Axivore",
+    metaDescription:
+      "AI automatizacija za restorane, kafiće i ugostiteljstvo: rezervacije 0-24, pozivi automatski odgovoreni, recenzije uređene. Axivore gradi sustave za ugostiteljstvo — live za 1–2 tjedna.",
+    ogDescription:
+      "Automatiziraj rezervacije, pozive i upite — i tijekom servisa i poslije radnog vremena. Za restorane i kafiće u Njemačkoj.",
+    eyebrow: "Branša · Ugostiteljstvo",
+    h1: "AI automatizacija za ugostiteljstvo.",
+    intro:
+      "Tijekom servisa telefon zvoni, ali nitko nema slobodnu ruku. Upiti za rezervacije stižu noću, kad je odavno zatvoreno. Axivore gradi sustave koji odgovaraju na upite 0-24 i automatski prihvaćaju rezervacije — da se ti možeš posvetiti gostima ispred sebe.",
+    serviceType: "AI automatizacija za ugostiteljske objekte",
+    useCasesHeading: "Što se u ugostiteljstvu može automatizirati",
+    useCases: [
+      { title: "Rezervacije 0-24", text: "Gosti rezerviraju putem chata ili glasovnog asistenta — čak i u 23 sata, kad je lokal zatvoren. Potvrda i podsjetnik idu automatski." },
+      { title: "Pozivi tijekom servisa", text: "Asistent prima pozive dok je tim za stolovima — odgovara na standardna pitanja o radnom vremenu, jelovniku i dostupnosti." },
+      { title: "Recenzije i upiti", text: "Pristigle recenzije i upiti putem maila automatski se sortiraju i dobivaju prijedloge odgovora, tako da ništa ne ostane zaboravljeno." },
+      { title: "Manje no-showova", text: "Automatski podsjetnici prije termina osjetno smanjuju broj gostiju koji se ne pojave — bez da itko ručno zove i podsjeća." },
+    ],
+    faq: [
+      { question: "Zamjenjuje li ovo moj sustav za rezervacije?", answer: "Ne, nadopunjuje ga. Automatizaciju povezujemo s tvojim postojećim alatima ili gradimo jednostavno rješenje ako ga još nemaš." },
+      { question: "Funkcionira li ovo i za mali kafić?", answer: "Da. Već jedna jedina automatizacija — na primjer prihvaćanje rezervacija poslije radnog vremena — štedi nekoliko sati telefoniranja tjedno." },
+      { question: "Koliko dugo traje postavljanje?", answer: "Prva automatizacija je u pravilu live za 1–2 tjedna i testirana na tvojim stvarnim procesima." },
+    ],
+  },
+  {
+    slug: "praxen",
+    name: "Ordinacije",
+    metaTitle: "AI za liječničke i zubarske ordinacije — rasteretite telefon i termine | Axivore",
+    metaDescription:
+      "AI automatizacija za ordinacije: rasteretite telefon koji stalno zvoni, termine dodijelite automatski, standardne upite odgovorite 0-24. Axivore gradi sustave za liječničke i zubarske ordinacije — live za 1–2 tjedna.",
+    ogDescription:
+      "Rasteretite telefon, dodijelite termine automatski, odgovorite na upite 0-24. Za liječničke, zubarske i terapeutske ordinacije u Njemačkoj.",
+    eyebrow: "Branša · Ordinacije",
+    h1: "AI automatizacija za liječničke i zubarske ordinacije.",
+    intro:
+      "Telefon u ordinaciji ne prestaje zvoniti, recepcija jedva stiže raditi, a pacijenti vas ipak ne mogu dobiti. Axivore gradi sustave koji recepciji skidaju organizacijski teret — zakazivanje termina, ponavljajući upiti i dostupnost, bez da se automatiziraju medicinske odluke.",
+    serviceType: "AI automatizacija za liječničke i zubarske ordinacije",
+    useCasesHeading: "Što se u ordinaciji može automatizirati",
+    useCases: [
+      { title: "Rasterećenje telefona", text: "Digitalni asistent odgovara na ponavljajuća pitanja o radnom vremenu, dostupnosti i procesima — recepcija se može posvetiti pacijentima na licu mjesta." },
+      { title: "Termini 0-24", text: "Pacijenti dogovaraju i pomiču termine online — i izvan ordinacijskog vremena. Potvrda i podsjetnik idu automatski." },
+      { title: "Manje otkazivanja", text: "Automatski podsjetnici za termine smanjuju broj nedolazaka i drže raspored pun, bez dodatnog truda za tim." },
+      { title: "Prethodno sortiranje upita", text: "Pristigli upiti se strukturirano bilježe i prosljeđuju po prioritetu — tim odmah vidi što je hitno, a što može pričekati." },
+    ],
+    faq: [
+      { question: "Donosi li AI medicinske odluke?", answer: "Ne. Automatiziramo isključivo organizacijske procese — termine, dostupnost, ponavljajuće upite. Medicinska procjena u potpunosti ostaje na timu ordinacije." },
+      { question: "Kako stoji stvar sa zaštitom podataka?", answer: "Zaštita podataka je u središtu. Procese postavljamo u skladu s GDPR-om i unaprijed točno dogovaramo koji se podaci i kako obrađuju." },
+      { question: "Može li se ovo povezati s našim softverom?", answer: "U većini slučajeva da. Na prvom razgovoru razjasnimo koje sustave koristite i kako se automatizacija uredno uklapa." },
+    ],
+  },
+  {
+    slug: "agenturen",
+    name: "Agencije",
+    metaTitle: "AI za agencije — automatiziraj izvještaje, ponude i workflowove | Axivore",
+    metaDescription:
+      "AI automatizacija za male agencije: izvještaji na klik, ponude u minutama, content i lead workflowovi automatizirani. Axivore gradi sustave za agencije — live za 1–2 tjedna.",
+    ogDescription:
+      "Automatiziraj izvještaje, ponude i workflowove — više vremena za rad s klijentima umjesto za admin. Za male agencije u Njemačkoj.",
+    eyebrow: "Branša · Agencije",
+    h1: "AI automatizacija za agencije.",
+    intro:
+      "Izvještaji svaki mjesec pojedu dane, ponude se sastavljaju ručno, a tim kopira podatke između alata. Axivore gradi sustave koji preuzimaju upravo taj ponavljajući posao — da tvoj tim sjedi na radu s klijentima, a ne na adminu.",
+    serviceType: "AI automatizacija za agencije",
+    useCasesHeading: "Što se u agenciji može automatizirati",
+    useCases: [
+      { title: "Izvještaji na klik", text: "Podaci s različitih platformi automatski se objedinjuju i izdaju kao gotov, brendiran izvještaj — mjesečno ili na klik." },
+      { title: "Ponude i pitchevi", text: "Iz kratkog brifa nastaje strukturirana ponuda ili pitch dokument — dosljedan stilu agencije, u minutama umjesto sati." },
+      { title: "Content workflowovi", text: "Ponavljajući koraci u produkciji sadržaja — od istraživanja do prve verzije — automatiziraju se, tim samo dorađuje." },
+      { title: "Kvalifikacija leadova", text: "Pristigli upiti se automatski ocjenjuju, obogaćuju podacima i dobivaju poruke za podsjećanje, tako da nijedan lead ne ohladi." },
+    ],
+    faq: [
+      { question: "Koristimo puno različitih alata — je li to izvedivo?", answer: "Upravo za to je i napravljeno. Povezujemo tvoje postojeće alate tako da podaci teku automatski, umjesto da se ručno kopiraju." },
+      { question: "Zamjenjuje li ovo zaposlenike?", answer: "Ne — skida s tima repetitivan posao, da se mogu posvetiti kreativi i odnosima s klijentima. Više outputa bez novih zaposlenja." },
+      { question: "Koliko brzo vidimo rezultate?", answer: "Prva automatizacija — na primjer mjesečni izvještaj — obično je spremna za korištenje za 1–2 tjedna." },
+    ],
+  },
+  {
+    slug: "dienstleister",
+    name: "Pružatelji usluga",
+    metaTitle: "AI za pružatelje usluga — automatiziraj upite, ponude i termine | Axivore",
+    metaDescription:
+      "AI automatizacija za pružatelje usluga: odgovaraj na upite 0-24, automatski izradi ponude, zakazuj termine i podsjećaj. Axivore gradi sustave za uslužne djelatnosti — live za 1–2 tjedna.",
+    ogDescription:
+      "Automatiziraj upite, ponude i termine — nijedan izgubljeni lead, nijedno zaboravljeno podsjećanje. Za pružatelje usluga u Njemačkoj.",
+    eyebrow: "Branša · Pružatelji usluga",
+    h1: "AI automatizacija za pružatelje usluga.",
+    intro:
+      "Upiti stižu kroz pet kanala, ponude pišeš usput, a podsjećanje zaboraviš u svakodnevnom poslu. Axivore gradi sustave koji odmah odgovaraju na upite, pripremaju ponude i koordiniraju termine — da ti više nijedan posao ne promakne.",
+    serviceType: "AI automatizacija za uslužne djelatnosti",
+    useCasesHeading: "Što se kod pružatelja usluga može automatizirati",
+    useCases: [
+      { title: "Upiti 0-24", text: "Digitalni asistent odmah odgovara na upite — i navečer i vikendom — te prikuplja sve podatke koji su ti potrebni za ponudu." },
+      { title: "Ponude automatski", text: "Iz prikupljenih podataka nastaje gotova ponuda — formatirana i spremna za slanje, bez da moraš sjesti navečer." },
+      { title: "Termini i rezervacije", text: "Klijenti sami rezerviraju odgovarajući termin, potvrda i podsjetnik idu automatski — više nema prepiske telefonom." },
+      { title: "Podsjećanje bez zaborava", text: "Otvorene ponude i upiti se automatski i ljubazno podsjećaju, da od interesa nastane i posao." },
+    ],
+    faq: [
+      { question: "Funkcionira li ovo za moju branšu?", answer: "Procesi su kod većine pružatelja usluga slični — upit, ponuda, termin, podsjećanje. Na prvom razgovoru konkretno pogledamo tvoju tvrtku." },
+      { question: "Moram li mijenjati svoje alate?", answer: "Ne. Automatizaciju povezujemo s tvojim postojećim alatima ili gradimo jednostavno rješenje ako ih još ne koristiš." },
+      { question: "Koliko to košta?", answer: "Ovisi o opsegu. Na besplatnom prvom razgovoru iskreno ti kažemo koliko košta i isplati li se to za tebe." },
+    ],
+  },
+];
+
+export function getBranchenList(locale: string): Branche[] {
+  return locale === "hr" ? branchenHr : branchen;
+}
+
+export function getBranche(slug: string, locale: string): Branche | undefined {
+  return getBranchenList(locale).find((b) => b.slug === slug);
 }

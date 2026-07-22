@@ -36,6 +36,35 @@ export const ratgeberArticles: RatgeberArticle[] = [
   },
 ];
 
-export function getRatgeberArticle(slug: string): RatgeberArticle | undefined {
-  return ratgeberArticles.find((a) => a.slug === slug);
+// Croatian translations — same slugs/order/dates as `ratgeberArticles`.
+// Other locales (en/ro/tr/it) fall back to German until they get their pass.
+export const ratgeberArticlesHr: RatgeberArticle[] = [
+  {
+    slug: "angebote-automatisieren-handwerk",
+    title: "Automatizacija ponuda u obrtu: Što to stvarno donosi",
+    metaTitle: "Automatizacija ponuda u obrtu — što to stvarno donosi | Axivore",
+    description:
+      "Kako obrtničke tvrtke izrađuju ponude u minutama umjesto sati: što automatizacija stvarno može, koliko iskreno košta i od kada se isplati.",
+    category: "Obrt",
+    date: "2026-07-03",
+    readingTime: "6 min.",
+  },
+  {
+    slug: "ki-chatbot-oder-anrufbeantworter",
+    title: "AI chatbot ili telefonska sekretarica: Što se isplati za male tvrtke?",
+    metaTitle: "AI chatbot ili telefonska sekretarica? Iskrena usporedba | Axivore",
+    description:
+      "Propušteni pozivi koštaju poslova. Iskrena usporedba: telefonska sekretarica, ured/služba i AI asistent — troškovi, korist i kad se što stvarno isplati.",
+    category: "Dostupnost",
+    date: "2026-07-03",
+    readingTime: "7 min.",
+  },
+];
+
+export function getRatgeberArticlesList(locale: string): RatgeberArticle[] {
+  return locale === "hr" ? ratgeberArticlesHr : ratgeberArticles;
+}
+
+export function getRatgeberArticle(slug: string, locale: string = "de"): RatgeberArticle | undefined {
+  return getRatgeberArticlesList(locale).find((a) => a.slug === slug);
 }

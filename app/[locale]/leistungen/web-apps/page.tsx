@@ -1,101 +1,173 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
+import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const SITE_URL = "https://axivore.io";
-const PAGE_URL = `${SITE_URL}/leistungen/web-apps`;
+const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const PATH = "/leistungen/web-apps";
 
-export const metadata: Metadata = {
-  title: "Web-App & SaaS entwickeln lassen — maßgeschneiderte Software | Axivore",
-  description:
-    "Axivore entwickelt maßgeschneiderte Web-Apps und SaaS-Produkte für kleine und mittlere Unternehmen — von der Idee bis live. Genau auf deinen Betrieb zugeschnitten, zum Festpreis.",
-  alternates: { canonical: PAGE_URL },
-  openGraph: {
-    title: "Web-App & SaaS entwickeln lassen — maßgeschneiderte Software | Axivore",
-    description:
-      "Maßgeschneiderte Web-Apps und SaaS-Produkte von der Idee bis live — genau auf deinen Betrieb zugeschnitten, zum Festpreis.",
-    url: PAGE_URL,
-    siteName: "Axivore",
-    locale: "de_DE",
-    type: "website",
+type Item = { title: string; text: string };
+type Step = { n: string; title: string; text: string };
+type Faq = { question: string; answer: string };
+
+const CONTENT: Record<"de" | "hr", {
+  metaTitle: string; metaDescription: string; ogDescription: string;
+  breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
+  useCasesHeading: string; useCases: Item[];
+  stepsHeading: string; steps: Step[];
+  faqHeading: string; faq: Faq[];
+  projekteText: string; projekteLinkLabel: string;
+  ctaHeading: string; ctaText: string; ctaButton: string;
+  start: string; leistungenLabel: string;
+}> = {
+  de: {
+    metaTitle: "Web-App & SaaS entwickeln lassen — maßgeschneiderte Software | Axivore",
+    metaDescription: "Axivore entwickelt maßgeschneiderte Web-Apps und SaaS-Produkte für kleine und mittlere Unternehmen — von der Idee bis live. Genau auf deinen Betrieb zugeschnitten, zum Festpreis.",
+    ogDescription: "Maßgeschneiderte Web-Apps und SaaS-Produkte von der Idee bis live — genau auf deinen Betrieb zugeschnitten, zum Festpreis.",
+    breadcrumb: "Web-Apps & SaaS",
+    serviceName: "Web-Apps & SaaS-Entwicklung",
+    eyebrow: "Leistungen / Web-Apps & SaaS",
+    h1: "Software, die zu deinem Betrieb passt.",
+    subheadline: "Standardsoftware zwingt dich, deinen Ablauf an das Programm anzupassen. Wir machen es umgekehrt: Wir bauen eine Web-App oder ein SaaS-Produkt, das genau deinen Prozess abbildet — von der ersten Idee bis live, zum Festpreis.",
+    useCasesHeading: "Was wir bauen",
+    useCases: [
+      { title: "Interne Tools", text: "Software, die genau deinen Ablauf abbildet — statt teurer Standardlösungen, die nie richtig passen und die du nie ganz nutzt." },
+      { title: "Kundenportale", text: "Ein geschützter Bereich, in dem deine Kunden Dokumente, Termine oder Status einsehen — ohne ständige Rückfragen bei dir." },
+      { title: "SaaS-Produkte", text: "Du hast eine Produktidee? Wir bauen dein SaaS von der Idee über MVP bis zum Start — inklusive Nutzerverwaltung und Abrechnung." },
+      { title: "Dashboards & Auswertungen", text: "Zahlen aus verschiedenen Quellen an einem Ort — übersichtlich, aktuell, damit du Entscheidungen auf Basis echter Daten triffst." },
+      { title: "Buchungs- & Bestellsysteme", text: "Maßgeschneiderte Systeme für Termine, Reservierungen oder Bestellungen — genau so, wie dein Betrieb sie braucht." },
+      { title: "Integrationen", text: "Wir verbinden deine bestehenden Tools, damit Daten automatisch fließen — kein Copy-Paste zwischen Programmen mehr." },
+    ],
+    stepsHeading: "So läuft es ab",
+    steps: [
+      { n: "01", title: "Idee & Scope", text: "Wir klären, was die Anwendung können muss und für wen. Danach bekommst du ein Festpreis-Angebot mit klarem Umfang." },
+      { n: "02", title: "Bauen & Testen", text: "Wir entwickeln in Etappen, du siehst früh erste Versionen und gibst Feedback — so gibt es am Ende keine Überraschungen." },
+      { n: "03", title: "Live & Weiterentwicklung", text: "Die Anwendung geht live. Auf Wunsch entwickeln wir sie weiter, wenn dein Betrieb wächst und neue Anforderungen kommen." },
+    ],
+    faqHeading: "Häufige Fragen",
+    faq: [
+      { question: "Was kostet die Entwicklung einer Web-App?", answer: "Das hängt stark vom Umfang ab. Wir teilen größere Projekte in Etappen, damit du nicht alles auf einmal bezahlst. Vorab bekommst du immer ein schriftliches Festpreis-Angebot mit klarem Umfang — keine offene Rechnung." },
+      { question: "Wie lange dauert die Entwicklung?", answer: "Ein erster nutzbarer Stand (MVP) ist oft in wenigen Wochen möglich. Umfangreichere Produkte wachsen in Etappen. Wir sagen dir vorab einen realistischen Zeitplan." },
+      { question: "Gehört mir der Code am Ende?", answer: "Ja. Was wir für dich bauen, gehört dir — inklusive Code. Du bist nicht an uns gebunden und kannst die Anwendung jederzeit weitergeben." },
+      { question: "Könnt ihr auf einer bestehenden Lösung aufbauen?", answer: "Oft ja. Wir schauen uns an, was du bereits hast, und erweitern oder verbinden es — statt alles neu zu bauen, wenn es sich nicht lohnt." },
+    ],
+    projekteText: "Live-Beispiele unserer eigenen Produkte findest du unter {LINK} — echte SaaS-Systeme, die wir selbst gebaut haben und täglich betreiben.",
+    projekteLinkLabel: "Projekte",
+    ctaHeading: "Hast du eine Idee im Kopf?",
+    ctaText: "Erzähl sie uns in einem kostenlosen 30-Minuten-Gespräch. Wir sagen dir ehrlich, ob und wie sie sich umsetzen lässt — und was es kostet. Kein Pitch.",
+    ctaButton: "Kostenloses Gespräch buchen",
+    start: "Start",
+    leistungenLabel: "Leistungen",
+  },
+  hr: {
+    metaTitle: "Izrada web-aplikacije i SaaS-a — softver po mjeri | Axivore",
+    metaDescription: "Axivore razvija softver po mjeri — web-aplikacije i SaaS proizvode za male i srednje tvrtke — od ideje do live. Skrojeno točno za tvoj posao, po fiksnoj cijeni.",
+    ogDescription: "Softver po mjeri, od ideje do live — skrojeno točno za tvoj posao, po fiksnoj cijeni.",
+    breadcrumb: "Web-aplikacije i SaaS",
+    serviceName: "Razvoj web-aplikacija i SaaS-a",
+    eyebrow: "Usluge / Web-aplikacije i SaaS",
+    h1: "Softver koji pristaje tvom poslu.",
+    subheadline: "Standardni softver tjera te da svoj proces prilagodiš programu. Mi radimo obrnuto: gradimo web-aplikaciju ili SaaS proizvod koji prati točno tvoj proces — od prve ideje do live, po fiksnoj cijeni.",
+    useCasesHeading: "Što gradimo",
+    useCases: [
+      { title: "Interni alati", text: "Softver koji prati točno tvoj proces — umjesto skupih standardnih rješenja koja nikad ne pristaju kako treba i koja nikad u potpunosti ne koristiš." },
+      { title: "Portali za klijente", text: "Zaštićeno područje u kojem tvoji klijenti vide dokumente, termine ili status — bez stalnih dodatnih upita tebi." },
+      { title: "SaaS proizvodi", text: "Imaš ideju za proizvod? Gradimo tvoj SaaS od ideje preko MVP-a do lansiranja — uključujući upravljanje korisnicima i naplatu." },
+      { title: "Dashboardi i analize", text: "Brojevi s različitih izvora na jednom mjestu — pregledno, ažurno, da odluke donosiš na temelju stvarnih podataka." },
+      { title: "Sustavi za rezervacije i narudžbe", text: "Sustavi po mjeri za termine, rezervacije ili narudžbe — točno onako kako tvoj posao treba." },
+      { title: "Integracije", text: "Povezujemo tvoje postojeće alate da podaci teku automatski — više nema copy-pastea između programa." },
+    ],
+    stepsHeading: "Kako to izgleda",
+    steps: [
+      { n: "01", title: "Ideja i opseg", text: "Razjasnimo što aplikacija mora moći i za koga. Nakon toga dobivaš ponudu s fiksnom cijenom i jasnim opsegom." },
+      { n: "02", title: "Izrada i testiranje", text: "Razvijamo u etapama, ti rano vidiš prve verzije i daješ feedback — tako na kraju nema iznenađenja." },
+      { n: "03", title: "Live i daljnji razvoj", text: "Aplikacija ide live. Po želji je dalje razvijamo kako tvoj posao raste i dolaze novi zahtjevi." },
+    ],
+    faqHeading: "Česta pitanja",
+    faq: [
+      { question: "Koliko košta razvoj web-aplikacije?", answer: "Ovisi uvelike o opsegu. Veće projekte dijelimo na etape, da ne plaćaš sve odjednom. Unaprijed uvijek dobivaš pisanu ponudu s fiksnom cijenom i jasnim opsegom — bez otvorenog računa." },
+      { question: "Koliko traje razvoj?", answer: "Prva upotrebljiva verzija (MVP) često je moguća za nekoliko tjedana. Opsežniji proizvodi rastu u etapama. Unaprijed ti kažemo realan rok." },
+      { question: "Je li kod na kraju moj?", answer: "Da. Ono što gradimo za tebe, tvoje je — uključujući kod. Nisi vezan uz nas i aplikaciju možeš prenijeti bilo kad." },
+      { question: "Možete li nadograditi postojeće rješenje?", answer: "Često da. Pogledamo što već imaš i proširimo ili povežemo to — umjesto da sve gradimo iznova ako se to ne isplati." },
+    ],
+    projekteText: "Live primjere naših vlastitih proizvoda pronađi na {LINK} — pravi SaaS sustavi koje smo sami izgradili i svakodnevno pokrećemo.",
+    projekteLinkLabel: "Projekti",
+    ctaHeading: "Imaš ideju u glavi?",
+    ctaText: "Ispričaj nam je na besplatnom 30-minutnom razgovoru. Iskreno ćemo ti reći može li se i kako ostvariti — i koliko košta. Bez pitcha.",
+    ctaButton: "Zakaži besplatan razgovor",
+    start: "Početna",
+    leistungenLabel: "Usluge",
   },
 };
 
-const useCases = [
-  { title: "Interne Tools", text: "Software, die genau deinen Ablauf abbildet — statt teurer Standardlösungen, die nie richtig passen und die du nie ganz nutzt." },
-  { title: "Kundenportale", text: "Ein geschützter Bereich, in dem deine Kunden Dokumente, Termine oder Status einsehen — ohne ständige Rückfragen bei dir." },
-  { title: "SaaS-Produkte", text: "Du hast eine Produktidee? Wir bauen dein SaaS von der Idee über MVP bis zum Start — inklusive Nutzerverwaltung und Abrechnung." },
-  { title: "Dashboards & Auswertungen", text: "Zahlen aus verschiedenen Quellen an einem Ort — übersichtlich, aktuell, damit du Entscheidungen auf Basis echter Daten triffst." },
-  { title: "Buchungs- & Bestellsysteme", text: "Maßgeschneiderte Systeme für Termine, Reservierungen oder Bestellungen — genau so, wie dein Betrieb sie braucht." },
-  { title: "Integrationen", text: "Wir verbinden deine bestehenden Tools, damit Daten automatisch fließen — kein Copy-Paste zwischen Programmen mehr." },
-];
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  return partialPageMetadata(
+    contentLocale,
+    PATH,
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription } },
+    AVAILABLE
+  );
+}
 
-const steps = [
-  { n: "01", title: "Idee & Scope", text: "Wir klären, was die Anwendung können muss und für wen. Danach bekommst du ein Festpreis-Angebot mit klarem Umfang." },
-  { n: "02", title: "Bauen & Testen", text: "Wir entwickeln in Etappen, du siehst früh erste Versionen und gibst Feedback — so gibt es am Ende keine Überraschungen." },
-  { n: "03", title: "Live & Weiterentwicklung", text: "Die Anwendung geht live. Auf Wunsch entwickeln wir sie weiter, wenn dein Betrieb wächst und neue Anforderungen kommen." },
-];
+export default async function WebAppsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  const c = CONTENT[contentLocale as "de" | "hr"];
+  const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
+  const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
+  const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
+  const [projekteBefore, projekteAfter] = c.projekteText.split("{LINK}");
 
-const faqItems = [
-  { question: "Was kostet die Entwicklung einer Web-App?", answer: "Das hängt stark vom Umfang ab. Wir teilen größere Projekte in Etappen, damit du nicht alles auf einmal bezahlst. Vorab bekommst du immer ein schriftliches Festpreis-Angebot mit klarem Umfang — keine offene Rechnung." },
-  { question: "Wie lange dauert die Entwicklung?", answer: "Ein erster nutzbarer Stand (MVP) ist oft in wenigen Wochen möglich. Umfangreichere Produkte wachsen in Etappen. Wir sagen dir vorab einen realistischen Zeitplan." },
-  { question: "Gehört mir der Code am Ende?", answer: "Ja. Was wir für dich bauen, gehört dir — inklusive Code. Du bist nicht an uns gebunden und kannst die Anwendung jederzeit weitergeben." },
-  { question: "Könnt ihr auf einer bestehenden Lösung aufbauen?", answer: "Oft ja. Wir schauen uns an, was du bereits hast, und erweitern oder verbinden es — statt alles neu zu bauen, wenn es sich nicht lohnt." },
-];
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${pageUrl}/#service`,
+        name: c.serviceName,
+        serviceType: "Softwareentwicklung",
+        description: "Maßgeschneiderte Web-Anwendungen und SaaS-Produkte für kleine und mittlere Unternehmen — von der Idee bis live.",
+        provider: { "@id": "https://axivore.io/#organization" },
+        areaServed: { "@type": "Country", name: "Germany" },
+        url: pageUrl,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: c.start, item: siteUrl },
+          { "@type": "ListItem", position: 2, name: c.leistungenLabel, item: leistungenUrl },
+          { "@type": "ListItem", position: 3, name: c.breadcrumb, item: pageUrl },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: c.faq.map((i) => ({
+          "@type": "Question",
+          name: i.question,
+          acceptedAnswer: { "@type": "Answer", text: i.answer },
+        })),
+      },
+    ],
+  };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Service",
-      "@id": `${PAGE_URL}/#service`,
-      name: "Web-Apps & SaaS-Entwicklung",
-      serviceType: "Softwareentwicklung",
-      description: "Maßgeschneiderte Web-Anwendungen und SaaS-Produkte für kleine und mittlere Unternehmen — von der Idee bis live.",
-      provider: { "@id": `${SITE_URL}/#organization` },
-      areaServed: { "@type": "Country", name: "Germany" },
-      url: PAGE_URL,
-    },
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Start", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "Leistungen", item: `${SITE_URL}/leistungen` },
-        { "@type": "ListItem", position: 3, name: "Web-Apps & SaaS", item: PAGE_URL },
-      ],
-    },
-    {
-      "@type": "FAQPage",
-      mainEntity: faqItems.map((i) => ({
-        "@type": "Question",
-        name: i.question,
-        acceptedAnswer: { "@type": "Answer", text: i.answer },
-      })),
-    },
-  ],
-};
-
-export default function WebAppsPage() {
   return (
     <ServiceShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="max-w-3xl mx-auto px-6 pt-20 pb-10">
-        <p className="text-[11px] tracking-[0.2em] uppercase text-[#A09AFF] mb-5">Leistungen / Web-Apps & SaaS</p>
+        <p className="text-[11px] tracking-[0.2em] uppercase text-[#A09AFF] mb-5">{c.eyebrow}</p>
         <h1 className="font-black tracking-[-0.03em] leading-[1.04] mb-6" style={{ fontSize: "clamp(36px,5.5vw,60px)" }}>
-          Software, die zu deinem Betrieb passt.
+          {c.h1}
         </h1>
-        <p className="text-[17px] leading-relaxed text-white/60">
-          Standardsoftware zwingt dich, deinen Ablauf an das Programm anzupassen. Wir machen es
-          umgekehrt: Wir bauen eine Web-App oder ein SaaS-Produkt, das genau deinen Prozess
-          abbildet — von der ersten Idee bis live, zum Festpreis.
-        </p>
+        <p className="text-[17px] leading-relaxed text-white/60">{c.subheadline}</p>
       </section>
 
       <section className="max-w-5xl mx-auto px-6 py-8">
-        <h2 className="text-[24px] md:text-[28px] font-bold tracking-tight mb-8">Was wir bauen</h2>
+        <h2 className="text-[24px] md:text-[28px] font-bold tracking-tight mb-8">{c.useCasesHeading}</h2>
         <div className="grid sm:grid-cols-2 gap-x-10 gap-y-6">
-          {useCases.map((u) => (
+          {c.useCases.map((u) => (
             <div key={u.title} className="flex gap-3.5">
               <span className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: "#A09AFF" }} />
               <div>
@@ -108,9 +180,9 @@ export default function WebAppsPage() {
       </section>
 
       <section className="max-w-5xl mx-auto px-6 py-8">
-        <h2 className="text-[24px] md:text-[28px] font-bold tracking-tight mb-8">So läuft es ab</h2>
+        <h2 className="text-[24px] md:text-[28px] font-bold tracking-tight mb-8">{c.stepsHeading}</h2>
         <div className="grid sm:grid-cols-3 gap-8">
-          {steps.map((s) => (
+          {c.steps.map((s) => (
             <div key={s.n}>
               <div className="text-[13px] font-bold text-[#A09AFF] mb-3">{s.n}</div>
               <h3 className="text-[16px] font-semibold mb-2">{s.title}</h3>
@@ -121,9 +193,9 @@ export default function WebAppsPage() {
       </section>
 
       <section className="max-w-3xl mx-auto px-6 py-8">
-        <h2 className="text-[24px] md:text-[28px] font-bold tracking-tight mb-8">Häufige Fragen</h2>
+        <h2 className="text-[24px] md:text-[28px] font-bold tracking-tight mb-8">{c.faqHeading}</h2>
         <div className="space-y-6">
-          {faqItems.map((f) => (
+          {c.faq.map((f) => (
             <div key={f.question}>
               <h3 className="text-[15.5px] font-semibold mb-2">{f.question}</h3>
               <p className="text-[14px] leading-relaxed text-white/55">{f.answer}</p>
@@ -131,21 +203,18 @@ export default function WebAppsPage() {
           ))}
         </div>
         <p className="text-[14px] leading-relaxed text-white/50 mt-10">
-          Live-Beispiele unserer eigenen Produkte findest du unter{" "}
-          <Link href="/projekte" className="text-[#A09AFF] underline underline-offset-2 hover:text-[#C4B8FF]">Projekte</Link>{" "}
-          — echte SaaS-Systeme, die wir selbst gebaut haben und täglich betreiben.
+          {projekteBefore}
+          <Link href={localePathname(contentLocale, "/projekte")} className="text-[#A09AFF] underline underline-offset-2 hover:text-[#C4B8FF]">{c.projekteLinkLabel}</Link>
+          {projekteAfter}
         </p>
       </section>
 
       <section className="max-w-5xl mx-auto px-6 py-16">
         <div className="rounded-2xl px-8 py-12 text-center" style={{ background: "linear-gradient(135deg,rgba(124,92,255,0.12),rgba(160,154,255,0.05))", border: "1px solid rgba(124,92,255,0.2)" }}>
-          <h2 className="text-[26px] font-bold mb-3">Hast du eine Idee im Kopf?</h2>
-          <p className="text-white/55 mb-8 max-w-xl mx-auto">
-            Erzähl sie uns in einem kostenlosen 30-Minuten-Gespräch. Wir sagen dir ehrlich, ob und
-            wie sie sich umsetzen lässt — und was es kostet. Kein Pitch.
-          </p>
+          <h2 className="text-[26px] font-bold mb-3">{c.ctaHeading}</h2>
+          <p className="text-white/55 mb-8 max-w-xl mx-auto">{c.ctaText}</p>
           <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="inline-block font-semibold px-7 py-3.5 rounded-full transition-transform hover:scale-[1.03]" style={{ background: "linear-gradient(135deg,#7C5CFF,#A09AFF)", color: "#0C0C0F" }}>
-            Kostenloses Gespräch buchen
+            {c.ctaButton}
           </a>
         </div>
       </section>

@@ -1,76 +1,109 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
-import { branchen } from "@/lib/branchen";
+import { getBranchenList } from "@/lib/branchen";
+import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const SITE_URL = "https://axivore.io";
-const PAGE_URL = `${SITE_URL}/branchen`;
+const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
 
-export const metadata: Metadata = {
-  title: "KI-Automatisierung nach Branche — für dein Geschäft | Axivore",
-  description:
-    "KI-Automatisierung passend zu deiner Branche: Handwerk, Gastronomie, Praxen, Agenturen und Dienstleister. Axivore baut Systeme, die genau die Aufgaben deiner Branche übernehmen — live in 1–2 Wochen.",
-  alternates: { canonical: PAGE_URL },
-  openGraph: {
-    title: "KI-Automatisierung nach Branche — für dein Geschäft | Axivore",
-    description:
-      "KI-Automatisierung für Handwerk, Gastronomie, Praxen, Agenturen und Dienstleister in Deutschland.",
-    url: PAGE_URL,
-    siteName: "Axivore",
-    locale: "de_DE",
-    type: "website",
+const COPY: Record<"de" | "hr", {
+  metaTitle: string; metaDescription: string; ogDescription: string;
+  eyebrow: string; h1: string; intro: string; more: string; noMatchHeading: string; noMatchText: string; ctaButton: string;
+  start: string;
+}> = {
+  de: {
+    metaTitle: "KI-Automatisierung nach Branche — für dein Geschäft | Axivore",
+    metaDescription:
+      "KI-Automatisierung passend zu deiner Branche: Handwerk, Gastronomie, Praxen, Agenturen und Dienstleister. Axivore baut Systeme, die genau die Aufgaben deiner Branche übernehmen — live in 1–2 Wochen.",
+    ogDescription: "KI-Automatisierung für Handwerk, Gastronomie, Praxen, Agenturen und Dienstleister in Deutschland.",
+    eyebrow: "Branchen",
+    h1: "KI-Automatisierung für deine Branche.",
+    intro: "Jede Branche verliert Zeit an anderen Aufgaben. Wir bauen Systeme, die genau die wiederkehrende Arbeit deines Geschäfts übernehmen — damit du dich auf das konzentrierst, was zählt. Wähle deine Branche:",
+    more: "Mehr erfahren →",
+    noMatchHeading: "Deine Branche ist nicht dabei?",
+    noMatchText: "Kein Problem — die meisten Abläufe ähneln sich. Sag uns im kostenlosen Gespräch, welche Aufgabe dich am meisten Zeit kostet.",
+    ctaButton: "Kostenloses Gespräch buchen",
+    start: "Start",
+  },
+  hr: {
+    metaTitle: "AI automatizacija po branši — za tvoj posao | Axivore",
+    metaDescription:
+      "AI automatizacija prilagođena tvojoj branši: obrt, ugostiteljstvo, ordinacije, agencije i pružatelji usluga. Axivore gradi sustave koji preuzimaju upravo zadatke tvoje branše — live za 1–2 tjedna.",
+    ogDescription: "AI automatizacija za obrt, ugostiteljstvo, ordinacije, agencije i pružatelje usluga u Njemačkoj.",
+    eyebrow: "Branše",
+    h1: "AI automatizacija za tvoju branšu.",
+    intro: "Svaka branša gubi vrijeme na drugačijim zadacima. Gradimo sustave koji preuzimaju upravo ponavljajući posao tvog poslovanja — da se ti možeš usredotočiti na ono što je važno. Odaberi svoju branšu:",
+    more: "Saznaj više →",
+    noMatchHeading: "Tvoje branše nema na popisu?",
+    noMatchText: "Nema problema — većina procesa je slična. Reci nam na besplatnom razgovoru koji ti zadatak oduzima najviše vremena.",
+    ctaButton: "Zakaži besplatan razgovor",
+    start: "Početna",
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "CollectionPage",
-      "@id": `${PAGE_URL}/#collection`,
-      url: PAGE_URL,
-      name: "KI-Automatisierung nach Branche",
-      isPartOf: { "@id": `${SITE_URL}/#website` },
-    },
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Start", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "Branchen", item: PAGE_URL },
-      ],
-    },
-  ],
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  const c = COPY[contentLocale as "de" | "hr"];
+  return partialPageMetadata(
+    contentLocale,
+    "/branchen",
+    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription } },
+    AVAILABLE
+  );
+}
 
-export default function BranchenPage() {
+export default async function BranchenPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: rawLocale } = await params;
+  const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
+  const c = COPY[contentLocale as "de" | "hr"];
+  const pageUrl = `https://axivore.io${localePathname(contentLocale, "/branchen")}`;
+  const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${pageUrl}/#collection`,
+        url: pageUrl,
+        name: c.metaTitle.split(" — ")[0],
+        isPartOf: { "@id": "https://axivore.io/#website" },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: c.start, item: siteUrl },
+          { "@type": "ListItem", position: 2, name: c.eyebrow, item: pageUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <ServiceShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="max-w-3xl mx-auto px-6 pt-20 pb-10">
-        <p className="text-[11px] tracking-[0.2em] uppercase text-[#A09AFF] mb-5">Branchen</p>
+        <p className="text-[11px] tracking-[0.2em] uppercase text-[#A09AFF] mb-5">{c.eyebrow}</p>
         <h1 className="font-black tracking-[-0.03em] leading-[1.04] mb-6" style={{ fontSize: "clamp(36px,5.5vw,60px)" }}>
-          KI-Automatisierung für deine Branche.
+          {c.h1}
         </h1>
-        <p className="text-[17px] leading-relaxed text-white/60">
-          Jede Branche verliert Zeit an anderen Aufgaben. Wir bauen Systeme, die genau
-          die wiederkehrende Arbeit deines Geschäfts übernehmen — damit du dich auf das
-          konzentrierst, was zählt. Wähle deine Branche:
-        </p>
+        <p className="text-[17px] leading-relaxed text-white/60">{c.intro}</p>
       </section>
 
       <section className="max-w-3xl mx-auto px-6 py-10">
         <div className="grid sm:grid-cols-2 gap-4">
-          {branchen.map((b) => (
+          {getBranchenList(contentLocale).map((b) => (
             <Link
               key={b.slug}
-              href={`/branchen/${b.slug}`}
+              href={localePathname(contentLocale, `/branchen/${b.slug}`)}
               className="rounded-xl p-6 transition-transform hover:scale-[1.02]"
               style={{ background: "rgba(255,255,255,0.028)", border: "1px solid rgba(255,255,255,0.07)" }}
             >
               <h2 className="text-[18px] font-semibold mb-2">{b.name}</h2>
               <p className="text-[13.5px] leading-relaxed text-white/50">{b.intro.split(".")[0]}.</p>
-              <span className="inline-block mt-4 text-[13px] font-medium text-[#A09AFF]">Mehr erfahren →</span>
+              <span className="inline-block mt-4 text-[13px] font-medium text-[#A09AFF]">{c.more}</span>
             </Link>
           ))}
         </div>
@@ -78,13 +111,10 @@ export default function BranchenPage() {
 
       <section className="max-w-3xl mx-auto px-6 py-12">
         <div className="rounded-2xl px-8 py-11 text-center" style={{ background: "linear-gradient(135deg,rgba(124,92,255,0.12),rgba(160,154,255,0.05))", border: "1px solid rgba(124,92,255,0.2)" }}>
-          <h2 className="text-[24px] font-bold mb-3">Deine Branche ist nicht dabei?</h2>
-          <p className="text-white/55 mb-8 max-w-lg mx-auto">
-            Kein Problem — die meisten Abläufe ähneln sich. Sag uns im kostenlosen Gespräch,
-            welche Aufgabe dich am meisten Zeit kostet.
-          </p>
+          <h2 className="text-[24px] font-bold mb-3">{c.noMatchHeading}</h2>
+          <p className="text-white/55 mb-8 max-w-lg mx-auto">{c.noMatchText}</p>
           <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="inline-block font-semibold px-7 py-3.5 rounded-full transition-transform hover:scale-[1.03]" style={{ background: "linear-gradient(135deg,#7C5CFF,#A09AFF)", color: "#0C0C0F" }}>
-            Kostenloses Gespräch buchen
+            {c.ctaButton}
           </a>
         </div>
       </section>
