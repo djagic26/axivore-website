@@ -19,6 +19,14 @@ const langMeta: Record<Language, { name: string; flag: string }> = {
 };
 const langs: Language[] = ["de", "en", "hr", "ro", "tr", "it"];
 
+// German has no URL prefix; every other language keeps its /xx prefix on
+// internal links so switching pages doesn't silently drop the visitor back
+// into German chrome.
+function localePath(locale: Language, path: string): string {
+  if (locale === "de") return path;
+  return path === "/" ? `/${locale}` : `/${locale}${path}`;
+}
+
 function LangDropdown({ language, setLanguage, isDark }: {
   language: Language; setLanguage: (l: Language) => void; isDark: boolean;
 }) {
@@ -107,13 +115,16 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
   const mutedColor = isDark ? "rgba(255,255,255,0.45)" : "rgba(10,10,15,0.45)";
   const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
 
+  // Leistungen/Branchen aren't translated yet (German-only SEO content) —
+  // keep those two unprefixed so visitors land on a consistently German
+  // page instead of a Croatian/Romanian/etc. shell around German copy.
   const navLinks = [
     { key: "services", href: "/leistungen", label: t.nav.services },
     { key: "branchen", href: "/branchen", label: t.nav.branchen },
-    { key: "portfolio", href: "/projekte", label: t.nav.portfolio },
-    { key: "pricing", href: "/preise", label: t.nav.pricing },
-    { key: "about", href: "/ueber-uns", label: t.nav.about },
-    { key: "contact", href: "/kontakt", label: t.nav.contact },
+    { key: "portfolio", href: localePath(language, "/projekte"), label: t.nav.portfolio },
+    { key: "pricing", href: localePath(language, "/preise"), label: t.nav.pricing },
+    { key: "about", href: localePath(language, "/ueber-uns"), label: t.nav.about },
+    { key: "contact", href: localePath(language, "/kontakt"), label: t.nav.contact },
   ];
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
@@ -131,7 +142,7 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
       }}
     >
       <div className="max-w-[1320px] mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href={localePath(language, "/")} className="flex items-center gap-3 group">
           <AxivoreLogo />
           <div className="flex flex-col leading-tight">
             <span className="font-medium text-[17px] tracking-[-0.04em]" style={{ color: textColor }}>Axivore</span>

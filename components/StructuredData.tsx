@@ -1,4 +1,4 @@
-import { translations } from "@/lib/i18n";
+import { translations, type Language } from "@/lib/i18n";
 
 const SITE_URL = "https://axivore.io";
 
@@ -7,8 +7,8 @@ const SITE_URL = "https://axivore.io";
  * Lives in the static HTML so Google + AI search engines can read it
  * (client-injected schema is invisible to most crawlers).
  */
-export function StructuredData() {
-  const faqItems = translations.de.faq.items;
+export function StructuredData({ locale }: { locale: Language }) {
+  const faqItems = translations[locale].faq.items;
 
   const graph = [
     {

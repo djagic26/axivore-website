@@ -5,8 +5,17 @@ import { useLanguage } from "@/lib/LanguageContext";
 import { useTheme } from "@/lib/ThemeContext";
 import { AxivoreLogo } from "./AxivoreLogo";
 
+// German has no URL prefix; only pages that are actually translated get one —
+// Leistungen/Branchen/Ratgeber/KI-Agentur-Stuttgart stay German-only for now,
+// so linking to them keeps the whole page consistently German instead of a
+// translated shell wrapped around German copy.
+function localePath(locale: string, path: string): string {
+  if (locale === "de") return path;
+  return path === "/" ? `/${locale}` : `/${locale}${path}`;
+}
+
 export function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const bg = isDark ? "#050505" : "#ffffff";
@@ -25,11 +34,11 @@ export function Footer() {
 
   const companyLinks = [
     { label: t.nav.branchen, href: "/branchen" },
-    { label: t.nav.portfolio, href: "/projekte" },
-    { label: t.nav.pricing, href: "/preise" },
-    { label: t.nav.about, href: "/ueber-uns" },
+    { label: t.nav.portfolio, href: localePath(language, "/projekte") },
+    { label: t.nav.pricing, href: localePath(language, "/preise") },
+    { label: t.nav.about, href: localePath(language, "/ueber-uns") },
     { label: "Ratgeber", href: "/ratgeber" },
-    { label: t.nav.contact, href: "/kontakt" },
+    { label: t.nav.contact, href: localePath(language, "/kontakt") },
   ];
 
   return (

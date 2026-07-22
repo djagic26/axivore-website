@@ -1,8 +1,21 @@
 import { MetadataRoute } from "next";
 import { branchen } from "@/lib/branchen";
 import { ratgeberArticles } from "@/lib/ratgeber";
+import { routing } from "@/i18n/routing";
+import { localeHref } from "@/lib/seo";
 
 const SITE_URL = "https://axivore.io";
+
+// Pages that exist in all 6 languages (see lib/i18n.ts) — every other page
+// (branchen, leistungen, ratgeber, ki-agentur-stuttgart) is still German-only
+// content, so it stays a single German URL in the sitemap for now.
+const TRANSLATED_PATHS = ["", "/preise", "/ueber-uns", "/projekte", "/kontakt"];
+
+function languageAlternates(path: string) {
+  return {
+    languages: Object.fromEntries(routing.locales.map((l) => [l, localeHref(l, path)])),
+  };
+}
 
 // Only indexable pages belong in the sitemap.
 // Impressum & Datenschutz are intentionally noindex (legal pages)
@@ -17,13 +30,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [
-    {
-      url: SITE_URL,
+  const translatedEntries: MetadataRoute.Sitemap = TRANSLATED_PATHS.flatMap((path) =>
+    routing.locales.map((locale) => ({
+      url: localeHref(locale, path),
       lastModified,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
+      changeFrequency: "weekly" as const,
+      priority: path === "" ? 1 : 0.7,
+      alternates: languageAlternates(path),
+    }))
+  );
+
+  return [
+    ...translatedEntries,
     {
       url: `${SITE_URL}/ki-agentur-stuttgart`,
       lastModified,
@@ -66,30 +84,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/projekte`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/preise`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/ueber-uns`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${SITE_URL}/kontakt`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.6,
     },
     {
       url: `${SITE_URL}/ratgeber`,
