@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function GlassCard({ isDark }: { isDark: boolean }) {
+  const { t } = useLanguage();
+  const w = t.hero.widget;
   const textMain = isDark ? "#fff" : "#0a0a0f";
   const textMuted = isDark ? "rgba(255,255,255,0.45)" : "rgba(10,10,15,0.45)";
 
@@ -74,11 +77,11 @@ export function GlassCard({ isDark }: { isDark: boolean }) {
                 animate={{ opacity: [1, 0.3, 1], scale: [1, 1.3, 1] }}
                 transition={{ duration: 2.5, repeat: Infinity }}
                 style={{ background: "#A09AFF", boxShadow: "0 0 10px rgba(160,154,255,1)" }} />
-              <span className="text-[9.5px] tracking-[0.2em] uppercase font-medium" style={{ color: textMuted }}>AI System Active</span>
+              <span className="text-[9.5px] tracking-[0.2em] uppercase font-medium" style={{ color: textMuted }}>{w.statusActive}</span>
             </div>
             <div className="px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide"
               style={{ background: "rgba(34,197,94,0.12)", color: "#4ade80", border: "1px solid rgba(34,197,94,0.2)" }}>
-              ONLINE
+              {w.online}
             </div>
           </div>
           <div>
@@ -86,13 +89,13 @@ export function GlassCard({ isDark }: { isDark: boolean }) {
               style={{ fontSize: 56, background: isDark ? "linear-gradient(135deg, #ffffff 0%, #A09AFF 100%)" : "linear-gradient(135deg, #1a0060 0%, #7C5CFF 55%, #A09AFF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               24/7
             </div>
-            <div className="text-[11.5px] font-medium" style={{ color: textMuted }}>Systems Running</div>
+            <div className="text-[11.5px] font-medium" style={{ color: textMuted }}>{w.systemsRunning}</div>
           </div>
           <div className="flex items-end justify-between pt-4"
             style={{ borderTop: `1px solid ${isDark ? "rgba(255,255,255,0.07)" : "rgba(124,92,255,0.18)"}` }}>
             <div>
               <div className="text-[28px] font-bold" style={{ color: textMain }}>100+</div>
-              <div className="text-[10px]" style={{ color: textMuted }}>Auto-Published Posts</div>
+              <div className="text-[10px]" style={{ color: textMuted }}>{w.autoPublished}</div>
             </div>
             <div className="w-10 h-10 rounded-xl flex items-center justify-center"
               style={{ background: "linear-gradient(135deg, rgba(124,92,255,0.3), rgba(255,61,197,0.15))", border: "1px solid rgba(160,100,255,0.4)", boxShadow: "0 4px 20px rgba(124,92,255,0.3)" }}>
@@ -115,7 +118,7 @@ export function GlassCard({ isDark }: { isDark: boolean }) {
           backdropFilter: "blur(20px)",
           boxShadow: "0 12px 40px rgba(60,30,120,0.35)",
         }}>
-        <div className="text-[9px] tracking-widest uppercase font-medium mb-0.5" style={{ color: "rgba(160,154,255,0.7)" }}>Systems Built</div>
+        <div className="text-[9px] tracking-widest uppercase font-medium mb-0.5" style={{ color: "rgba(160,154,255,0.7)" }}>{w.systemsBuilt}</div>
         <div className="text-[24px] font-bold leading-tight" style={{ color: textMain }}>10+</div>
       </motion.div>
 
@@ -129,7 +132,7 @@ export function GlassCard({ isDark }: { isDark: boolean }) {
           backdropFilter: "blur(20px)",
           boxShadow: "0 12px 40px rgba(255,61,197,0.2)",
         }}>
-        <div className="text-[9px] tracking-widest uppercase font-medium mb-0.5" style={{ color: "rgba(255,120,210,0.8)" }}>Fixed Quote</div>
+        <div className="text-[9px] tracking-widest uppercase font-medium mb-0.5" style={{ color: "rgba(255,120,210,0.8)" }}>{w.fixedQuote}</div>
         <div className="text-[24px] font-bold leading-tight" style={{ color: textMain }}>48 h</div>
       </motion.div>
 
@@ -146,7 +149,7 @@ export function GlassCard({ isDark }: { isDark: boolean }) {
         <motion.div className="w-1.5 h-1.5 rounded-full"
           animate={{ opacity: [1, 0.4, 1] }} transition={{ duration: 1.5, repeat: Infinity }}
           style={{ background: "#22c55e", boxShadow: "0 0 8px #22c55e" }} />
-        <span className="text-[10px] font-semibold whitespace-nowrap" style={{ color: textMuted }}>Live system</span>
+        <span className="text-[10px] font-semibold whitespace-nowrap" style={{ color: textMuted }}>{w.liveSystem}</span>
       </motion.div>
     </div>
   );

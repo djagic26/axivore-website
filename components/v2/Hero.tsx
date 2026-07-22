@@ -216,7 +216,7 @@ export function Hero() {
             <div className="absolute right-[-8px] bottom-14 text-right pr-2">
               <p className="text-[10.5px] leading-[1.9]"
                 style={{ color: isDark ? "rgba(255,255,255,0.48)" : "rgba(60,30,150,0.55)" }}>
-                Intelligent systems.<br />Real results.<br />No fluff.
+                {t.hero.widget.caption[0]}<br />{t.hero.widget.caption[1]}<br />{t.hero.widget.caption[2]}
               </p>
               <div className="w-1 h-1 rounded-full ml-auto mt-2"
                 style={{ background: "#A09AFF", boxShadow: "0 0 8px rgba(160,154,255,0.8)" }} />
@@ -233,7 +233,7 @@ export function Hero() {
           style={{ width: "max-content" }}>
           {[0, 1].map(k => (
             <div key={k} className="flex items-center">
-              {["AXIVORE", "INTELLIGENT SYSTEMS", "AI AUTOMATION", "RESULTS FIRST", "PRECISION"].map((word, j) => (
+              {["AXIVORE", ...t.hero.marqueeWords].map((word, j) => (
                 <span key={j} className="font-bold uppercase tracking-[-0.02em] mx-8"
                   style={{
                     fontSize: "clamp(48px,7vw,90px)",

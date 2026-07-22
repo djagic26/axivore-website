@@ -1,9 +1,15 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useLayoutEffect, ReactNode } from "react";
 import { Language, translations, TranslationKeys } from "./i18n";
 
 const VALID_LANGS: Language[] = ["de", "en", "hr", "ro", "tr", "it"];
+
+// useLayoutEffect fires before the browser paints, so the language swap below
+// happens before the user sees a frame — useEffect would let a German frame
+// paint first for every non-German visitor. Falls back to useEffect on the
+// server where useLayoutEffect is a no-op (and would otherwise warn).
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 function detectBrowserLanguage(): Language {
   const browserLang = navigator.language?.split("-")[0];
@@ -21,7 +27,7 @@ const LanguageContext = createContext<LanguageContextType | null>(null);
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("de");
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const stored = localStorage.getItem("axivore-lang") as Language;
     if (stored && VALID_LANGS.includes(stored)) {
       setLanguageState(stored);

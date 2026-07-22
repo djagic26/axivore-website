@@ -36,6 +36,7 @@ export const metadata: Metadata = {
     siteName: "Axivore",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     locale: "de_DE",
+    alternateLocale: ["en_US", "hr_HR", "ro_RO", "tr_TR", "it_IT"],
     type: "website",
   },
   twitter: {
