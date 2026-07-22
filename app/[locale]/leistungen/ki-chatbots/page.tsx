@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 const PATH = "/leistungen/ki-chatbots";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr", {
+const CONTENT: Record<"de" | "hr" | "en", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   useCasesHeading: string; useCases: Item[];
@@ -86,6 +86,40 @@ const CONTENT: Record<"de" | "hr", {
     start: "Početna",
     leistungenLabel: "Usluge",
   },
+  en: {
+    metaTitle: "AI Chatbots for Businesses in Germany | Axivore",
+    metaDescription: "Intelligent AI chatbots that answer customer inquiries, book appointments and qualify leads around the clock. Axivore builds chatbots for SMEs — 70–90% of inquiries answered automatically.",
+    ogDescription: "A digital assistant that answers customer inquiries and books appointments around the clock — even at night.",
+    breadcrumb: "AI Chatbots",
+    serviceName: "AI Chatbots",
+    eyebrow: "Services / AI Chatbots",
+    h1: "AI chatbots that never sleep.",
+    subheadline: "A digital assistant that answers customer inquiries around the clock, books appointments and qualifies leads — nights and weekends too. So you never lose an inquiry just because no one was by the phone.",
+    useCasesHeading: "What an AI chatbot takes off your hands",
+    useCases: [
+      { title: "24/7 customer service", text: "Answers recurring questions instantly — about hours, prices, services — even outside your working hours." },
+      { title: "Book appointments", text: "Visitors book an appointment directly in the chat, with no email back-and-forth and no phone tag." },
+      { title: "Qualify leads", text: "The bot asks the right questions, recognizes serious prospects and hands them to you with all the info." },
+      { title: "On your website or WhatsApp", text: "We deploy the bot where your customers are — embedded on your website or via messenger." },
+    ],
+    stepsHeading: "How it works",
+    steps: [
+      { n: "01", title: "Gather knowledge", text: "We feed the bot your content — services, prices, common questions — so it sounds like your business." },
+      { n: "02", title: "Built in 2–4 weeks", text: "We build, train and test the chatbot with real questions before it goes live." },
+      { n: "03", title: "Live & keeps learning", text: "The bot goes live and keeps improving with real conversations. We keep supporting it." },
+    ],
+    faqHeading: "Frequently asked questions",
+    faq: [
+      { question: "How many inquiries can a chatbot handle?", answer: "In practice, well-built chatbots answer 70–90% of recurring inquiries fully automatically. Your team then only deals with the truly complex cases." },
+      { question: "Does the bot sound like a robot?", answer: "No. We train it on your content and tone, so it answers naturally and helpfully — like a well-onboarded employee." },
+      { question: "What happens if the bot doesn't know something?", answer: "It honestly admits that and forwards the inquiry to you or your team — including the conversation so far." },
+    ],
+    ctaHeading: "Test how your chatbot would sound.",
+    ctaText: "In a free call, we'll show you with a concrete example how a chatbot would answer inquiries for your business.",
+    ctaButton: "Book a free call",
+    start: "Home",
+    leistungenLabel: "Services",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -94,7 +128,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
     AVAILABLE
   );
 }
@@ -102,7 +136,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function KiChatbotsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

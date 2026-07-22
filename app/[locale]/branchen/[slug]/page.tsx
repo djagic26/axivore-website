@@ -5,11 +5,11 @@ import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { branchen, getBranchenList, getBranche } from "@/lib/branchen";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-// Branchen content exists in German and (as of this pass) Croatian; other
-// locales fall back to the German page until they get their own pass.
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+// Branchen content exists in German, Croatian and (as of this pass) English;
+// other locales fall back to the German page until they get their own pass.
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 
-const UI: Record<"de" | "hr", { faq: string; ctaHeading: string; ctaText: string; ctaButton: string; more: string; start: string; branchenLabel: string }> = {
+const UI: Record<"de" | "hr" | "en", { faq: string; ctaHeading: string; ctaText: string; ctaButton: string; more: string; start: string; branchenLabel: string }> = {
   de: {
     faq: "Häufige Fragen",
     ctaHeading: "Welche Aufgabe kostet dich am meisten Zeit?",
@@ -27,6 +27,15 @@ const UI: Record<"de" | "hr", { faq: string; ctaHeading: string; ctaText: string
     more: "Ostale branše",
     start: "Početna",
     branchenLabel: "Branše",
+  },
+  en: {
+    faq: "Frequently asked questions",
+    ctaHeading: "Which task costs you the most time?",
+    ctaText: "Tell us in a free call — we'll show you exactly how that task can be automated in your business.",
+    ctaButton: "Book a free call",
+    more: "Other industries",
+    start: "Home",
+    branchenLabel: "Industries",
   },
 };
 
@@ -53,6 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     {
       de: { title: branche.metaTitle, description: branche.metaDescription },
       hr: { title: branche.metaTitle, description: branche.metaDescription },
+      en: { title: branche.metaTitle, description: branche.metaDescription },
     },
     AVAILABLE
   );
@@ -64,7 +74,7 @@ export default async function BranchePage({ params }: Props) {
   const branche = getBranche(slug, contentLocale);
   if (!branche) notFound();
 
-  const ui = UI[contentLocale as "de" | "hr"];
+  const ui = UI[contentLocale as "de" | "hr" | "en"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, `/branchen/${branche.slug}`)}`;
   const branchenUrl = `https://axivore.io${localePathname(contentLocale, "/branchen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

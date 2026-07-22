@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 const PATH = "/leistungen/webseiten";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr", {
+const CONTENT: Record<"de" | "hr" | "en", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   featuresHeading: string; features: Item[];
@@ -100,6 +100,46 @@ const CONTENT: Record<"de" | "hr", {
     start: "Početna",
     leistungenLabel: "Usluge",
   },
+  en: {
+    metaTitle: "Website Design & Development — Modern Websites for Small Businesses | Axivore",
+    metaDescription: "Axivore builds modern, fast websites that turn visitors into customers — with an optional AI assistant for booking and customer inquiries. Fixed price, live in 1–3 weeks.",
+    ogDescription: "Modern, fast websites that turn visitors into customers — with an optional AI assistant. Fixed price, live in 1–3 weeks.",
+    breadcrumb: "Websites",
+    serviceName: "Websites & Landing Pages",
+    eyebrow: "Services / Websites",
+    h1: "Websites that don't just look good.",
+    subheadline: "A modern website is more than a digital business card. We build sites that turn visitors into customers — fast, mobile, found on Google — and on request with an AI assistant that books appointments and answers questions, even after hours.",
+    featuresHeading: "What you get",
+    features: [
+      { title: "Professional appearance", text: "A design that builds trust and fits your business — not off the shelf, but tailored to you." },
+      { title: "Fast & mobile", text: "Your site loads in seconds and looks just as good on a phone as on a computer — where most customers find you." },
+      { title: "Found locally", text: "Built cleanly for Google, so customers in your region find you when they search for your service." },
+      { title: "AI assistant (optional)", text: "On request we build in an assistant that answers questions and books appointments — your website then works at night too." },
+      { title: "Appointments & inquiries", text: "Contact form, appointment booking or WhatsApp — visitors become inquiries directly, with no detours." },
+      { title: "Easy to maintain", text: "You can change content yourself or we take care of maintenance — whichever you prefer." },
+    ],
+    stepsHeading: "How it works",
+    steps: [
+      { n: "01", title: "Conversation & concept", text: "We clarify what your website needs to achieve and who your customers are. Then you get a fixed-price quote." },
+      { n: "02", title: "Design & build", text: "We design and build the site — with your content, your logo, your voice. You see interim versions and give feedback." },
+      { n: "03", title: "Live & support", text: "The site goes live, we take care of tech and hosting. On request with ongoing maintenance." },
+    ],
+    faqHeading: "Frequently asked questions",
+    faq: [
+      { question: "What does a website from Axivore cost?", answer: "It depends on scope. You get a written fixed-price quote upfront — the price doesn't change after that. A classic business site starts in the low four figures, smaller landing pages below that." },
+      { question: "How long until my website is live?", answer: "Usually 1 to 3 weeks, depending on scope and how quickly we get your content (text, images). We give you a realistic date upfront." },
+      { question: "Can I change the content myself later?", answer: "Yes. We build the site so you can maintain text and images yourself — or we take care of maintenance for you. Whichever you prefer." },
+      { question: "Do you also do search engine optimization (SEO)?", answer: "We build every website technically clean for Google. On request we also handle local SEO, so customers in your region find you better." },
+    ],
+    crossLinkText: "Does a website with an AI assistant fit your business? Also check out our {CHATBOTS} or take a look at our {RATGEBER}.",
+    chatbotsLabel: "AI Chatbots",
+    ratgeberLabel: "Guide",
+    ctaHeading: "Ready for a website that works?",
+    ctaText: "In a free 30-minute call, we'll look at what your website needs to achieve — and afterwards you'll get a fixed-price quote. No pitch.",
+    ctaButton: "Book a free call",
+    start: "Home",
+    leistungenLabel: "Services",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -108,7 +148,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
     AVAILABLE
   );
 }
@@ -116,7 +156,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function WebseitenPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

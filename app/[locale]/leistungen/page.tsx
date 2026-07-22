@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 const PATH = "/leistungen";
 
 type ServiceCard = { href: string; eyebrow: string; title: string; text: string };
 type Pair = [string, string];
 type Step = [string, string, string];
 
-const CONTENT: Record<"de" | "hr", {
+const CONTENT: Record<"de" | "hr" | "en", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   eyebrow: string; h1a: string; h1b: string; subheadline: string;
   services: ServiceCard[]; more: string;
@@ -98,6 +98,45 @@ const CONTENT: Record<"de" | "hr", {
     ctaButton: "Zakaži besplatan razgovor",
     start: "Početna",
   },
+  en: {
+    metaTitle: "Services — Websites, Software & AI for Small Businesses | Axivore",
+    metaDescription: "What Axivore builds for small and medium businesses in Germany: modern websites, custom web apps & SaaS, and AI automation. Everything from one source, live within weeks.",
+    ogDescription: "Modern websites, custom web apps & SaaS, and AI automation for small businesses in Germany — everything from one source.",
+    eyebrow: "Services",
+    h1a: "Websites, Software & AI",
+    h1b: "for small businesses.",
+    subheadline: "From modern websites through custom web apps to AI automation — we build your digital foundation. Everything from one source, live within weeks, not months. Especially for owners of businesses with 5–30 employees in Germany who roll up their sleeves themselves.",
+    services: [
+      { href: "/leistungen/webseiten", eyebrow: "Websites", title: "Websites & Landing Pages", text: "Modern, fast websites that turn visitors into customers — on request with an AI assistant that books appointments and answers questions." },
+      { href: "/leistungen/web-apps", eyebrow: "Web Apps & SaaS", title: "Web Apps & SaaS", text: "Custom web applications and SaaS products — from idea to live. Tailored exactly to your business, not off the shelf." },
+      { href: "/leistungen/ki-automatisierung", eyebrow: "Automation", title: "AI Automation", text: "Quotes, invoices, reports, data entry — recurring tasks run automatically. You save 5–15 hours a week." },
+      { href: "/leistungen/ki-chatbots", eyebrow: "Chatbots", title: "AI Chatbots", text: "A digital assistant that answers customer inquiries, books appointments and qualifies leads around the clock — even at night." },
+    ],
+    more: "Learn more",
+    autoHeading: "What can be automated in your business",
+    autoIntro: "Most small businesses lose hours every week to the same recurring tasks. That's exactly where we come in — here are the most common examples from practice:",
+    autoItems: [
+      ["Quotes & estimates", "A few bullet points turn into a finished, calculated quote — formatted and ready to send in minutes instead of hours."],
+      ["Invoices & follow-ups", "Invoices are created automatically after the job, open items get a friendly follow-up — without you having to remember."],
+      ["Appointment scheduling", "Customers book a free slot themselves, confirmation and reminders go out automatically — no more phone tag."],
+      ["Answering customer inquiries", "Recurring questions about prices, hours and services are answered around the clock — even after hours."],
+      ["Reports & reporting", "Numbers from different sources are automatically merged — the finished report is in your inbox on Monday morning."],
+      ["Data entry & transfer", "Data moves automatically from A to B — between form, spreadsheet and your system, with no copy-paste at all."],
+    ],
+    stepsHeading: "How a project works",
+    steps: [
+      ["01", "Free call", "We look at your workflows and find the task that pays off fastest. Honestly — even when the answer is sometimes: not yet."],
+      ["02", "Fixed-price quote", "You get a written quote with a fixed price and a clear scope. The price doesn't change after that."],
+      ["03", "Live within weeks", "We build, test together with you and go live — usually within 1 to 2 weeks, not months."],
+    ],
+    branchenLinkText: "Not sure if your business is ready for this? See how we work for {BRANCHEN}, or take a look at our {RATGEBER}.",
+    branchenLabel: "different industries",
+    ratgeberLabel: "guide",
+    ctaHeading: "Tell us your problem.",
+    ctaText: "In a free 30-minute call, we'll look together at which task can be automated fastest for you. No pitch.",
+    ctaButton: "Book a free call",
+    start: "Home",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -106,7 +145,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
     AVAILABLE
   );
 }
@@ -114,7 +153,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function LeistungenPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
   const [beforeBranchen, rest] = c.branchenLinkText.split("{BRANCHEN}");

@@ -9,7 +9,7 @@ type ArticleLayoutProps = {
   children: React.ReactNode;
 };
 
-const UI: Record<"de" | "hr", {
+const UI: Record<"de" | "hr" | "en", {
   ratgeberLabel: string; readingTimeSuffix: string; ctaHeading: string; ctaText: string; ctaButton: string; ctaContactLink: string; dateLocale: string;
 }> = {
   de: {
@@ -30,6 +30,15 @@ const UI: Record<"de" | "hr", {
     ctaContactLink: "ili nam piši →",
     dateLocale: "hr-HR",
   },
+  en: {
+    ratgeberLabel: "Guide",
+    readingTimeSuffix: "read",
+    ctaHeading: "Want to know what this means for your business specifically?",
+    ctaText: "In a free 30-minute call, we'll look at your workflows and tell you honestly whether and where automation is worth it for you — no jargon, no sales pressure.",
+    ctaButton: "Book a free call",
+    ctaContactLink: "or write to us →",
+    dateLocale: "en-US",
+  },
 };
 
 function formatDate(iso: string, dateLocale: string): string {
@@ -46,7 +55,7 @@ function formatDate(iso: string, dateLocale: string): string {
  * Article + BreadcrumbList JSON-LD.
  */
 export function ArticleLayout({ article, locale, children }: ArticleLayoutProps) {
-  const ui = UI[locale as "de" | "hr"] ?? UI.de;
+  const ui = UI[locale as "de" | "hr" | "en"] ?? UI.de;
   const pageUrl = `https://axivore.io${localePathname(locale, `/ratgeber/${article.slug}`)}`;
   const ratgeberUrl = `https://axivore.io${localePathname(locale, "/ratgeber")}`;
 
@@ -60,7 +69,7 @@ export function ArticleLayout({ article, locale, children }: ArticleLayoutProps)
         description: article.description,
         datePublished: article.date,
         dateModified: article.date,
-        inLanguage: `${locale}-${locale === "de" ? "DE" : "HR"}`,
+        inLanguage: ui.dateLocale,
         mainEntityOfPage: pageUrl,
         author: { "@id": "https://axivore.io/#organization" },
         publisher: { "@id": "https://axivore.io/#organization" },

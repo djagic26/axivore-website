@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 const PATH = "/ki-agentur-stuttgart";
 
 const region = ["Stuttgart", "Esslingen", "Ludwigsburg", "Böblingen", "Sindelfingen", "Waiblingen", "Fellbach", "Leonberg"];
@@ -10,7 +10,7 @@ const region = ["Stuttgart", "Esslingen", "Ludwigsburg", "Böblingen", "Sindelfi
 type Item = { title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr", {
+const CONTENT: Record<"de" | "hr" | "en", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   eyebrow: string; h1: string; subheadline: string;
   servicesHeading: string; services: Item[];
@@ -88,6 +88,40 @@ const CONTENT: Record<"de" | "hr", {
     start: "Početna",
     localBusinessDescription: "AI agencija iz Stuttgarta za AI automatizacije, chatbotove i softver po mjeri za male i srednje tvrtke u Stuttgartu i okolici.",
   },
+  en: {
+    metaTitle: "AI Agency Stuttgart — AI Automation for SMEs | Axivore",
+    metaDescription: "Axivore is your AI agency from Stuttgart: AI automations, chatbots and custom software for small and medium businesses in Stuttgart and the region. Live in 1–2 weeks.",
+    ogDescription: "AI automations, chatbots and software for small businesses in Stuttgart and the surrounding area. Personal, local, honest.",
+    eyebrow: "AI Agency · Stuttgart",
+    h1: "AI agency from Stuttgart for small businesses.",
+    subheadline: "Axivore builds AI automations, intelligent chatbots and custom software for small and medium businesses in Stuttgart and the region. We take the tasks off your hands that cost hours every week — personal, local, with no need to understand the technology.",
+    servicesHeading: "What we build for Stuttgart businesses",
+    services: [
+      { title: "AI automation", text: "Quotes, invoices, reports and data entry run automatically — 5–15 hours a week reclaimed, with no new hires." },
+      { title: "AI chatbots", text: "A digital assistant answers customer inquiries around the clock, books appointments and qualifies leads — even after hours." },
+      { title: "Custom software", text: "Small tools that fit your business exactly — instead of expensive off-the-shelf solutions you never fully use." },
+    ],
+    whyHeading: "Why an AI agency from the region",
+    why: [
+      { title: "From Stuttgart, for Stuttgart", text: "We know the businesses here — trades, services, hospitality, practices. Not an anonymous call center, but a contact person from the region." },
+      { title: "Personally reachable", text: "In-person meeting in Stuttgart and the surrounding area or via video — whichever suits you. You always talk directly to the person building your system." },
+      { title: "Live fast", text: "The first automation usually runs within 1–2 weeks. Not a months-long project, but a result you feel immediately." },
+    ],
+    regionHeading: "In Stuttgart and the surrounding area",
+    regionText: "We support businesses across Stuttgart and the region — including in:",
+    faqHeading: "Frequently asked questions",
+    faq: [
+      { question: "Does Axivore only work in Stuttgart?", answer: "We're based in Stuttgart and support businesses in Stuttgart and the entire region — from Esslingen to Ludwigsburg to Böblingen. In-person meetings are easily possible across the region, everything else runs comfortably online." },
+      { question: "Which businesses is this worth it for?", answer: "For small and medium businesses with 5–30 employees that lose time on recurring tasks — trades, services, agencies, hospitality, practices. Small businesses in particular benefit the most, because every hour saved counts directly." },
+      { question: "What does AI automation cost?", answer: "It depends on the scope. In the free initial call, we'll look at your time-consuming task and tell you honestly what it costs and whether it's worth the effort — with no obligation." },
+      { question: "Do I need to be technical?", answer: "No. You describe the task in plain language, we build the rest. Using it afterwards is as simple as sending an email." },
+    ],
+    ctaHeading: "Let's talk about your business.",
+    ctaText: "Free initial call — in person in Stuttgart or via video. We'll show you which task is worth automating first for you.",
+    ctaButton: "Book a free call",
+    start: "Home",
+    localBusinessDescription: "AI agency from Stuttgart for AI automations, chatbots and custom software for small and medium businesses in Stuttgart and the region.",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -96,7 +130,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
     AVAILABLE
   );
 }
@@ -104,7 +138,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function KiAgenturStuttgartPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
 

@@ -61,8 +61,34 @@ export const ratgeberArticlesHr: RatgeberArticle[] = [
   },
 ];
 
+// English translations — same slugs/order/dates as `ratgeberArticles`.
+export const ratgeberArticlesEn: RatgeberArticle[] = [
+  {
+    slug: "angebote-automatisieren-handwerk",
+    title: "Automating Quotes in Trade Businesses: What It Really Delivers",
+    metaTitle: "Automating Quotes in Trade Businesses — What It Really Delivers | Axivore",
+    description:
+      "How trade businesses create quotes in minutes instead of hours: what automation can really do, what it honestly costs, and when it's worth it.",
+    category: "Trades",
+    date: "2026-07-03",
+    readingTime: "6 min.",
+  },
+  {
+    slug: "ki-chatbot-oder-anrufbeantworter",
+    title: "AI Chatbot or Answering Machine: What's Worth It for Small Businesses?",
+    metaTitle: "AI Chatbot or Answering Machine? The Honest Comparison | Axivore",
+    description:
+      "Missed calls cost jobs. The honest comparison: answering machine, office staff and AI assistant — costs, benefits, and when what actually pays off.",
+    category: "Availability",
+    date: "2026-07-03",
+    readingTime: "7 min.",
+  },
+];
+
 export function getRatgeberArticlesList(locale: string): RatgeberArticle[] {
-  return locale === "hr" ? ratgeberArticlesHr : ratgeberArticles;
+  if (locale === "hr") return ratgeberArticlesHr;
+  if (locale === "en") return ratgeberArticlesEn;
+  return ratgeberArticles;
 }
 
 export function getRatgeberArticle(slug: string, locale: string = "de"): RatgeberArticle | undefined {

@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 const PATH = "/leistungen/ki-automatisierung";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr", {
+const CONTENT: Record<"de" | "hr" | "en", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   useCasesHeading: string; useCases: Item[];
@@ -86,6 +86,40 @@ const CONTENT: Record<"de" | "hr", {
     start: "Početna",
     leistungenLabel: "Usluge",
   },
+  en: {
+    metaTitle: "AI Automation for SMEs in Germany | Axivore",
+    metaDescription: "Get quotes, invoices, reports and data entry handled automatically. Axivore builds AI automations for small businesses — 5–15 hours saved per week. Live in 1–2 weeks.",
+    ogDescription: "Get recurring tasks handled automatically — quotes, invoices, reports. For small businesses in Germany.",
+    breadcrumb: "AI Automation",
+    serviceName: "AI Automation",
+    eyebrow: "Services / AI Automation",
+    h1: "AI automation for small businesses.",
+    subheadline: "Quotes, invoices, reports, data entry — the tasks that cost hours every week are taken over by a system. You get back 5–15 hours a week, with no new hires and no need to understand the technology.",
+    useCasesHeading: "What can be automated",
+    useCases: [
+      { title: "Quotes & invoices", text: "A short input turns into a finished quote or invoice — formatted, correct, in seconds instead of 30 minutes." },
+      { title: "Reports & reporting", text: "Data from different sources is automatically merged and delivered as a finished report — daily, weekly or on demand." },
+      { title: "Data entry & transfer", text: "Information moves automatically between email, spreadsheets and your tools — no copy-paste, no typos." },
+      { title: "Sorting customer inquiries", text: "Incoming inquiries are automatically scored, prioritized and given follow-up messages — with no manual effort." },
+    ],
+    stepsHeading: "How it works",
+    steps: [
+      { n: "01", title: "Free call", text: "We look at your time-consuming task and tell you honestly whether and how we can automate it." },
+      { n: "02", title: "Built in 1–2 weeks", text: "We build the system, test it with your real data and hand it over ready to use." },
+      { n: "03", title: "Runs & is supported", text: "The system runs on its own. We don't disappear after launch — you can reach us anytime." },
+    ],
+    faqHeading: "Frequently asked questions",
+    faq: [
+      { question: "How long does an automation take?", answer: "A typical automation is ready in 1–2 weeks — from the first idea to a running system." },
+      { question: "Do I need to be technical to use this?", answer: "No. You describe the task in plain language, we build the rest. Using it afterwards is as simple as sending an email." },
+      { question: "Am I too small as a small business?", answer: "Quite the opposite. Small businesses benefit the most, because every hour saved counts directly. Even a single automation often saves several hours a week." },
+    ],
+    ctaHeading: "Which task costs you the most time?",
+    ctaText: "Tell us in a free call — we'll show you exactly how that task can be automated.",
+    ctaButton: "Book a free call",
+    start: "Home",
+    leistungenLabel: "Services",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -94,7 +128,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
     AVAILABLE
   );
 }
@@ -102,7 +136,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function KiAutomatisierungPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 const PATH = "/leistungen/web-apps";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr", {
+const CONTENT: Record<"de" | "hr" | "en", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   useCasesHeading: string; useCases: Item[];
@@ -98,6 +98,45 @@ const CONTENT: Record<"de" | "hr", {
     start: "Početna",
     leistungenLabel: "Usluge",
   },
+  en: {
+    metaTitle: "Custom Web App & SaaS Development | Axivore",
+    metaDescription: "Axivore builds custom web apps and SaaS products for small and medium businesses — from idea to live. Tailored exactly to your business, at a fixed price.",
+    ogDescription: "Custom web apps and SaaS products from idea to live — tailored exactly to your business, at a fixed price.",
+    breadcrumb: "Web Apps & SaaS",
+    serviceName: "Web App & SaaS Development",
+    eyebrow: "Services / Web Apps & SaaS",
+    h1: "Software that fits your business.",
+    subheadline: "Off-the-shelf software forces you to adapt your workflow to the program. We do it the other way around: we build a web app or SaaS product that mirrors your exact process — from the first idea to live, at a fixed price.",
+    useCasesHeading: "What we build",
+    useCases: [
+      { title: "Internal tools", text: "Software that mirrors your exact workflow — instead of expensive off-the-shelf solutions that never quite fit and that you never fully use." },
+      { title: "Customer portals", text: "A protected area where your customers can view documents, appointments or status — without constant follow-up questions to you." },
+      { title: "SaaS products", text: "Have a product idea? We build your SaaS from idea through MVP to launch — including user management and billing." },
+      { title: "Dashboards & analytics", text: "Numbers from different sources in one place — clear, up to date, so you make decisions based on real data." },
+      { title: "Booking & ordering systems", text: "Custom systems for appointments, reservations or orders — exactly the way your business needs them." },
+      { title: "Integrations", text: "We connect your existing tools so data flows automatically — no more copy-paste between programs." },
+    ],
+    stepsHeading: "How it works",
+    steps: [
+      { n: "01", title: "Idea & scope", text: "We clarify what the application needs to do and for whom. Then you get a fixed-price quote with a clear scope." },
+      { n: "02", title: "Build & test", text: "We develop in stages, you see early versions and give feedback — so there are no surprises at the end." },
+      { n: "03", title: "Live & ongoing development", text: "The application goes live. On request, we keep developing it as your business grows and new requirements come up." },
+    ],
+    faqHeading: "Frequently asked questions",
+    faq: [
+      { question: "What does developing a web app cost?", answer: "It depends heavily on scope. We split larger projects into stages so you don't pay for everything at once. You always get a written fixed-price quote with a clear scope upfront — no open-ended bill." },
+      { question: "How long does development take?", answer: "A first usable version (MVP) is often possible within a few weeks. Larger products grow in stages. We give you a realistic timeline upfront." },
+      { question: "Do I own the code in the end?", answer: "Yes. What we build for you belongs to you — including the code. You're not tied to us and can hand off the application at any time." },
+      { question: "Can you build on an existing solution?", answer: "Often, yes. We look at what you already have and extend or connect it — instead of rebuilding everything from scratch when that's not worth it." },
+    ],
+    projekteText: "You'll find live examples of our own products at {LINK} — real SaaS systems we built ourselves and run every day.",
+    projekteLinkLabel: "Projects",
+    ctaHeading: "Got an idea in mind?",
+    ctaText: "Tell us about it in a free 30-minute call. We'll tell you honestly whether and how it can be built — and what it costs. No pitch.",
+    ctaButton: "Book a free call",
+    start: "Home",
+    leistungenLabel: "Services",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -106,7 +145,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
     AVAILABLE
   );
 }
@@ -114,7 +153,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function WebAppsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

@@ -4,9 +4,9 @@ import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { getBranchenList } from "@/lib/branchen";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 
-const COPY: Record<"de" | "hr", {
+const COPY: Record<"de" | "hr" | "en", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   eyebrow: string; h1: string; intro: string; more: string; noMatchHeading: string; noMatchText: string; ctaButton: string;
   start: string;
@@ -39,16 +39,30 @@ const COPY: Record<"de" | "hr", {
     ctaButton: "Zakaži besplatan razgovor",
     start: "Početna",
   },
+  en: {
+    metaTitle: "AI Automation by Industry — For Your Business | Axivore",
+    metaDescription:
+      "AI automation tailored to your industry: trade businesses, hospitality, medical practices, agencies and service providers. Axivore builds systems that take over exactly your industry's tasks — live in 1–2 weeks.",
+    ogDescription: "AI automation for trade businesses, hospitality, practices, agencies and service providers in Germany.",
+    eyebrow: "Industries",
+    h1: "AI automation for your industry.",
+    intro: "Every industry loses time on different tasks. We build systems that take over exactly the recurring work of your business — so you can focus on what matters. Choose your industry:",
+    more: "Learn more →",
+    noMatchHeading: "Your industry isn't listed?",
+    noMatchText: "No problem — most workflows are similar. Tell us in a free call which task costs you the most time.",
+    ctaButton: "Book a free call",
+    start: "Home",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = COPY[contentLocale as "de" | "hr"];
+  const c = COPY[contentLocale as "de" | "hr" | "en"];
   return partialPageMetadata(
     contentLocale,
     "/branchen",
-    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription } },
+    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription }, en: { title: COPY.en.metaTitle, description: COPY.en.metaDescription } },
     AVAILABLE
   );
 }
@@ -56,7 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function BranchenPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = COPY[contentLocale as "de" | "hr"];
+  const c = COPY[contentLocale as "de" | "hr" | "en"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, "/branchen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
 

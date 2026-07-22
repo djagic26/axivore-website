@@ -4,7 +4,7 @@ import { ArticleLayout } from "@/components/ratgeber/ArticleLayout";
 import { getRatgeberArticle } from "@/lib/ratgeber";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 const SLUG = "angebote-automatisieren-handwerk";
 const PATH = `/ratgeber/${SLUG}`;
 
@@ -13,10 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
   const de = getRatgeberArticle(SLUG, "de")!;
   const hr = getRatgeberArticle(SLUG, "hr")!;
+  const en = getRatgeberArticle(SLUG, "en")!;
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description } },
+    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description }, en: { title: en.metaTitle, description: en.description } },
     AVAILABLE
   );
 }
@@ -136,6 +137,124 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <p>
           Više o tome što gradimo posebno za obrtničke tvrtke pronađi na našoj stranici{" "}
           <Link href={localePathname(contentLocale, "/branchen/handwerk")}>AI za obrtnike</Link>.
+        </p>
+      </ArticleLayout>
+    );
+  }
+
+  if (contentLocale === "en") {
+    return (
+      <ArticleLayout article={article} locale={contentLocale}>
+        <p>
+          It's 9pm. The job site has been quiet for hours, but you're still at the kitchen table
+          typing up a quote. Looking up line items, checking prices, getting everything into the
+          right format — and tomorrow the next one is waiting. If this sounds familiar, this
+          article is for you. We explain what &ldquo;automating quotes&rdquo; actually means, what
+          it really delivers — and just as honestly: what it can't do.
+        </p>
+
+        <h2>What &ldquo;automating quotes&rdquo; actually means</h2>
+        <p>
+          The idea is simple: you only enter the key details — what needs to be done, which areas
+          or quantities, which special requirements. A system that knows your pricing logic and
+          your standard line items takes care of the rest. What comes out is a finished, cleanly
+          formatted quote as a PDF — with your logo, your wording, your prices. Instead of 45 to 60
+          minutes per quote, you need a few minutes for input and a quick review.
+        </p>
+
+        <h2>How it works technically — without the jargon</h2>
+        <p>An automated quoting system consists of four building blocks:</p>
+        <ul>
+          <li>
+            <strong>Your service catalog:</strong> your typical line items (e.g. &ldquo;skim and
+            paint wall, per m²&rdquo;) are captured cleanly once.
+          </li>
+          <li>
+            <strong>Your pricing logic:</strong> materials, labor time, surcharges, travel — the
+            rules you currently calculate in your head or in Excel are built into the system.
+          </li>
+          <li>
+            <strong>AI for the text:</strong> from your bullet points, the AI writes the
+            descriptions — professional, but in your voice. No boilerplate that reads like a form
+            letter.
+          </li>
+          <li>
+            <strong>Your template:</strong> the finished quote looks like yours, because it is
+            yours — logo, layout, payment terms, all as usual.
+          </li>
+        </ul>
+        <p>
+          You stay in control: the system creates the draft, you review and send it. Nothing goes
+          out without your okay.
+        </p>
+
+        <h2>What it really delivers</h2>
+        <h3>1. Time — the honest math</h3>
+        <p>
+          If you write five quotes a week at 45 to 60 minutes each, that's <strong>4 to 5 hours
+          every week</strong> — usually in the evening or on weekends. With automation that shrinks
+          to input plus review, roughly one hour. That's three to four reclaimed hours per week,
+          week after week.
+        </p>
+        <h3>2. Speed wins jobs</h3>
+        <p>
+          Whoever makes an inquiry rarely asks only one business. The job often goes to whoever
+          sends a clean quote first — not necessarily the cheapest. If your quote reaches the
+          customer the same day instead of a week later, that's a real competitive advantage.
+        </p>
+        <h3>3. Consistency</h3>
+        <p>
+          No more forgotten line items, no more shifted prices, no more &ldquo;last time I
+          calculated it differently.&rdquo; Every quote follows the same logic — that protects your
+          margin.
+        </p>
+
+        <h2>Honestly: what automation can't do</h2>
+        <ul>
+          <li>
+            <strong>On-site measuring</strong> isn't taken over by any system. You still have to
+            gather the key details yourself — only the typing afterward goes away.
+          </li>
+          <li>
+            <strong>Genuine edge cases</strong> (unusual constructions, heritage protection,
+            special materials) still need your judgment. The system helps with the 80% standard
+            cases.
+          </li>
+          <li>
+            <strong>Setup needs you:</strong> for the system to calculate your prices, you need to
+            lay out your pricing once and go through it with us. That's an afternoon of work — once,
+            not every week.
+          </li>
+        </ul>
+
+        <h2>What does it cost — and when is it worth it?</h2>
+        <p>
+          With us, a single automation starts <strong>from €499 at a fixed price</strong> — you get
+          a written quote with a fixed price upfront, nothing changes after that. The math is
+          simple: if you save 3 to 4 hours a week and conservatively value your hour at €50, the
+          system pays for itself within a few weeks. More on our pricing model on the{" "}
+          <Link href={localePathname(contentLocale, "/preise")}>pricing page</Link>.
+        </p>
+
+        <h2>How to get started</h2>
+        <ol>
+          <li>
+            <strong>Look at the process:</strong> how do your quotes come together today? Where
+            does it get stuck the most? We clarify this in a free call.
+          </li>
+          <li>
+            <strong>Capture your pricing:</strong> we translate your pricing logic into rules the
+            system understands — together, in plain language, with no need for you to learn
+            anything technical.
+          </li>
+          <li>
+            <strong>Test and go live:</strong> you compare the automatic quotes with your own, we
+            fine-tune — then it runs. Usually within 1 to 2 weeks.
+          </li>
+        </ol>
+        <p>
+          More on what we build specifically for trade businesses can be found on our{" "}
+          <Link href={localePathname(contentLocale, "/branchen/handwerk")}>AI for trade businesses</Link> page.
         </p>
       </ArticleLayout>
     );

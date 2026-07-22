@@ -296,8 +296,144 @@ export const branchenHr: Branche[] = [
   },
 ];
 
+// English translations — same slugs/order as `branchen`.
+export const branchenEn: Branche[] = [
+  {
+    slug: "handwerk",
+    name: "Trade Businesses",
+    metaTitle: "AI for Trade Businesses — Automate Quotes & Calls | Axivore",
+    metaDescription:
+      "AI automation for trade businesses: quotes in minutes instead of at night, no missed call from the job site, invoices on autopilot. Axivore builds systems for tradespeople — live in 1–2 weeks.",
+    ogDescription:
+      "Automate quotes, calls and invoices — so you stay on the job site instead of in the office at night. For trade businesses in Germany.",
+    eyebrow: "Industry · Trade Businesses",
+    h1: "AI automation for trade businesses.",
+    intro:
+      "As a tradesperson you work on site all day and write quotes at night. Calls get lost because no one can pick up. Axivore builds systems that take over exactly these tasks — so you're not stuck in the office after work anymore.",
+    serviceType: "AI automation for trade businesses",
+    useCasesHeading: "What can be automated in a trade business",
+    useCases: [
+      { title: "Quotes in minutes", text: "A few bullet points turn into a finished, calculated quote — formatted and ready to send. No more writing quotes after hours." },
+      { title: "No missed calls", text: "A digital assistant takes calls while you're up a ladder — noting the request, contact details and callback wish, so you never lose a job again." },
+      { title: "Appointments & scheduling", text: "Customer appointments are coordinated and confirmed automatically — including reminders, so no one forgets and you don't drive out for nothing." },
+      { title: "Invoices & follow-ups", text: "Invoices are created automatically after the job, open items get a friendly follow-up — without you having to remember." },
+    ],
+    faq: [
+      { question: "I'm not technical — does this still work?", answer: "Yes. You describe the task in plain language, we build the rest. Using it afterwards is as simple as a WhatsApp message." },
+      { question: "Am I too small as a one-person business?", answer: "Quite the opposite. One-person and small businesses benefit the most, because every hour saved directly means more time on site or at home." },
+      { question: "How fast is a system like this up and running?", answer: "A first automation — for quotes, for example — is usually ready to use in 1–2 weeks." },
+    ],
+  },
+  {
+    slug: "gastronomie",
+    name: "Hospitality",
+    metaTitle: "AI for Hospitality — Automate Reservations & Inquiries | Axivore",
+    metaDescription:
+      "AI automation for restaurants, cafés and hospitality businesses: reservations around the clock, calls answered automatically, reviews handled. Axivore builds systems for hospitality — live in 1–2 weeks.",
+    ogDescription:
+      "Automate reservations, calls and inquiries — during service and after hours. For restaurants and cafés in Germany.",
+    eyebrow: "Industry · Hospitality",
+    h1: "AI automation for hospitality.",
+    intro:
+      "During service the phone rings, but no one has a free hand. Reservation requests come in at night, long after closing. Axivore builds systems that answer inquiries around the clock and accept reservations automatically — so you can focus on the guests in front of you.",
+    serviceType: "AI automation for hospitality businesses",
+    useCasesHeading: "What can be automated in hospitality",
+    useCases: [
+      { title: "Reservations around the clock", text: "Guests book via chat or voice assistant — even at 11pm when the venue is closed. Confirmation and reminders go out automatically." },
+      { title: "Calls during service", text: "An assistant takes calls while the team is at the tables — answering standard questions about hours, the menu and availability." },
+      { title: "Reviews & inquiries", text: "Incoming reviews and email inquiries are automatically sorted and given suggested replies, so nothing falls through the cracks." },
+      { title: "Fewer no-shows", text: "Automatic reminders before the reservation noticeably reduce no-shows — without anyone having to call around manually." },
+    ],
+    faq: [
+      { question: "Does this replace my reservation system?", answer: "No, it complements it. We connect the automation to your existing tools, or build a lean solution if you don't have one yet." },
+      { question: "Does this work for a small café too?", answer: "Yes. Even a single automation — like accepting reservations after hours — saves several hours of phone time per week." },
+      { question: "How long does setup take?", answer: "A first automation is usually live within 1–2 weeks and tested against your real workflows." },
+    ],
+  },
+  {
+    slug: "praxen",
+    name: "Medical & Dental Practices",
+    metaTitle: "AI for Medical & Dental Practices — Relieve Phone & Scheduling | Axivore",
+    metaDescription:
+      "AI automation for practices: relieve a constantly ringing phone, schedule appointments automatically, answer standard inquiries around the clock. Axivore builds systems for medical and dental practices — live in 1–2 weeks.",
+    ogDescription:
+      "Relieve the phone, schedule appointments automatically, answer inquiries around the clock. For medical, dental and therapy practices in Germany.",
+    eyebrow: "Industry · Practices",
+    h1: "AI automation for medical and dental practices.",
+    intro:
+      "The practice phone never stops, the front desk barely gets to work, and patients still can't reach you. Axivore builds systems that take the organizational load off the front desk — scheduling, recurring inquiries and availability, without automating any medical decisions.",
+    serviceType: "AI automation for medical and dental practices",
+    useCasesHeading: "What can be automated in a practice",
+    useCases: [
+      { title: "Relieve the phone", text: "A digital assistant answers recurring questions about hours, availability and procedures — so the front desk can focus on the patients in front of them." },
+      { title: "Appointments around the clock", text: "Patients book and reschedule appointments online — even outside consultation hours. Confirmation and reminders go out automatically." },
+      { title: "Fewer no-shows", text: "Automatic appointment reminders reduce no-shows and keep the schedule full, with no extra effort for the team." },
+      { title: "Pre-sorting inquiries", text: "Incoming requests are captured in a structured way and forwarded by priority — the team immediately sees what's urgent and what can wait." },
+    ],
+    faq: [
+      { question: "Does the AI make medical decisions?", answer: "No. We only automate organizational processes — scheduling, availability, recurring inquiries. Medical judgment stays entirely with the practice team." },
+      { question: "What about data protection?", answer: "Data protection is central. We set up processes in line with GDPR and clarify in advance exactly which data is processed and how." },
+      { question: "Can this connect to our software?", answer: "In most cases, yes. In the first conversation we clarify which systems you use and how the automation fits in cleanly." },
+    ],
+  },
+  {
+    slug: "agenturen",
+    name: "Agencies",
+    metaTitle: "AI for Agencies — Automate Reporting, Quotes & Workflows | Axivore",
+    metaDescription:
+      "AI automation for small agencies: reports at the push of a button, quotes in minutes, content and lead workflows automated. Axivore builds systems for agencies — live in 1–2 weeks.",
+    ogDescription:
+      "Automate reporting, quotes and workflows — more time for client work instead of admin. For small agencies in Germany.",
+    eyebrow: "Industry · Agencies",
+    h1: "AI automation for agencies.",
+    intro:
+      "Reporting eats up days every month, quotes are pieced together by hand, and the team copies data between tools. Axivore builds systems that take over exactly this recurring work — so your team sits on client work instead of admin.",
+    serviceType: "AI automation for agencies",
+    useCasesHeading: "What can be automated at an agency",
+    useCases: [
+      { title: "Reporting at the push of a button", text: "Data from different platforms is automatically merged and delivered as a finished, branded report — monthly or on demand." },
+      { title: "Quotes & pitches", text: "A short brief turns into a structured quote or pitch document — consistent with the agency's style, in minutes instead of hours." },
+      { title: "Content workflows", text: "Recurring steps in content production — from research to first draft — are automated, the team only refines from there." },
+      { title: "Qualifying leads", text: "Incoming inquiries are automatically scored, enriched and given follow-up messages, so no lead goes cold." },
+    ],
+    faq: [
+      { question: "We use lots of different tools — does this work?", answer: "That's exactly what it's built for. We connect your existing tools so data flows automatically instead of being copied by hand." },
+      { question: "Does this replace employees?", answer: "No — it takes the repetitive work off the team so they can focus on creative work and client relationships. More output without new hires." },
+      { question: "How quickly do we see results?", answer: "A first automation — such as monthly reporting — is usually ready to use in 1–2 weeks." },
+    ],
+  },
+  {
+    slug: "dienstleister",
+    name: "Service Providers",
+    metaTitle: "AI for Service Providers — Automate Inquiries, Quotes & Appointments | Axivore",
+    metaDescription:
+      "AI automation for service providers: answer inquiries around the clock, generate quotes automatically, book appointments and follow up. Axivore builds systems for service businesses — live in 1–2 weeks.",
+    ogDescription:
+      "Automate inquiries, quotes and appointments — no lost lead, no forgotten follow-up. For service providers in Germany.",
+    eyebrow: "Industry · Service Providers",
+    h1: "AI automation for service providers.",
+    intro:
+      "Inquiries come in through five channels, you write quotes in between other things, and follow-ups get forgotten in the daily grind. Axivore builds systems that answer inquiries instantly, prepare quotes and coordinate appointments — so no job slips through anymore.",
+    serviceType: "AI automation for service businesses",
+    useCasesHeading: "What can be automated for service providers",
+    useCases: [
+      { title: "Inquiries around the clock", text: "A digital assistant answers inquiries immediately — evenings and weekends too — and collects all the info you need for a quote." },
+      { title: "Quotes automatically", text: "The finished quote is generated from the collected details — formatted and ready to send, without you having to sit down at night." },
+      { title: "Appointments & booking", text: "Customers book a suitable appointment themselves, confirmation and reminders go out automatically — no more back-and-forth phone calls." },
+      { title: "Follow-ups without forgetting", text: "Open quotes and inquiries get an automatic, friendly follow-up, so interest actually turns into a booking." },
+    ],
+    faq: [
+      { question: "Does this work for my industry?", answer: "The workflows are similar for most service providers — inquiry, quote, appointment, follow-up. In the first conversation we look specifically at your business." },
+      { question: "Do I have to switch tools?", answer: "No. We connect the automation to your existing tools, or build a lean solution if you're not using any yet." },
+      { question: "What does it cost?", answer: "It depends on the scope. In the free first conversation, we'll tell you honestly what it costs and whether it's worth it for you." },
+    ],
+  },
+];
+
 export function getBranchenList(locale: string): Branche[] {
-  return locale === "hr" ? branchenHr : branchen;
+  if (locale === "hr") return branchenHr;
+  if (locale === "en") return branchenEn;
+  return branchen;
 }
 
 export function getBranche(slug: string, locale: string): Branche | undefined {

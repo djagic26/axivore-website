@@ -4,10 +4,10 @@ import { ServiceShell } from "@/components/ServiceShell";
 import { getRatgeberArticlesList } from "@/lib/ratgeber";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 const PATH = "/ratgeber";
 
-const COPY: Record<"de" | "hr", { metaTitle: string; metaDescription: string; ogDescription: string; eyebrow: string; h1: string; intro: string; dateLocale: string }> = {
+const COPY: Record<"de" | "hr" | "en", { metaTitle: string; metaDescription: string; ogDescription: string; eyebrow: string; h1: string; intro: string; dateLocale: string }> = {
   de: {
     metaTitle: "Ratgeber — KI & Automatisierung für kleine Unternehmen | Axivore",
     metaDescription: "Praxisnahe Anleitungen ohne Fachchinesisch: Wie kleine Unternehmen in Deutschland mit KI und Automatisierung Zeit sparen — ehrlich, konkret, ohne Hype.",
@@ -26,6 +26,15 @@ const COPY: Record<"de" | "hr", { metaTitle: string; metaDescription: string; og
     intro: "Bez buzzworda, bez sjajnih obećanja. Ovdje pišemo o onome što stvarno funkcionira u praksi, koliko to košta i kad se što isplati — iz našeg svakodnevnog rada s tvrtkama u Stuttgartu i cijeloj Njemačkoj.",
     dateLocale: "hr-HR",
   },
+  en: {
+    metaTitle: "Guide — AI & Automation for Small Businesses | Axivore",
+    metaDescription: "Practical guides with no jargon: how small businesses in Germany save time with AI and automation — honest, concrete, no hype.",
+    ogDescription: "Practical guides with no jargon: how small businesses save time with AI and automation.",
+    eyebrow: "Guide",
+    h1: "AI & automation — explained for small businesses.",
+    intro: "No buzzwords, no glossy promises. Here we write down what actually works in practice, what it costs and when it's worth it — from our daily work with businesses in Stuttgart and across Germany.",
+    dateLocale: "en-US",
+  },
 };
 
 function formatDate(iso: string, dateLocale: string): string {
@@ -38,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription } },
+    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription }, en: { title: COPY.en.metaTitle, description: COPY.en.metaDescription } },
     AVAILABLE
   );
 }
@@ -46,7 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function RatgeberPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = COPY[contentLocale as "de" | "hr"];
+  const c = COPY[contentLocale as "de" | "hr" | "en"];
   const articles = getRatgeberArticlesList(contentLocale);
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
 
@@ -56,7 +65,7 @@ export default async function RatgeberPage({ params }: { params: Promise<{ local
     "@id": `${pageUrl}/#collection`,
     url: pageUrl,
     name: `Axivore ${c.eyebrow}`,
-    inLanguage: `${contentLocale}-${contentLocale === "de" ? "DE" : "HR"}`,
+    inLanguage: c.dateLocale,
     about: { "@id": "https://axivore.io/#organization" },
     hasPart: articles.map((a) => ({
       "@type": "Article",

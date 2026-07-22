@@ -4,7 +4,7 @@ import { ArticleLayout } from "@/components/ratgeber/ArticleLayout";
 import { getRatgeberArticle } from "@/lib/ratgeber";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
 const SLUG = "ki-chatbot-oder-anrufbeantworter";
 const PATH = `/ratgeber/${SLUG}`;
 
@@ -13,10 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
   const de = getRatgeberArticle(SLUG, "de")!;
   const hr = getRatgeberArticle(SLUG, "hr")!;
+  const en = getRatgeberArticle(SLUG, "en")!;
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description } },
+    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description }, en: { title: en.metaTitle, description: en.description } },
     AVAILABLE
   );
 }
@@ -37,6 +38,15 @@ const comparisonHr = [
   { label: "Zakazuje termine", ab: "Ne", buero: "Da", ki: "Da, izravno u tvoj kalendar" },
   { label: "Strukturirana predaja", ab: "Sam preslušavaš poruke", buero: "Cedulja / e-mail", ki: "Upit + kontakt uredno zabilježeni" },
   { label: "Osobni kontakt", ab: "Ne", buero: "Da", ki: "Ne — predaje tebi kad postane osobno" },
+];
+
+const comparisonEn = [
+  { label: "Cost", ab: "Very cheap, one-time", buero: "Ongoing, from several hundred €/month", ki: "One-time from €499, low ongoing costs" },
+  { label: "Availability", ab: "24/7 — but only recording", buero: "During office hours", ki: "24/7 — with real answers" },
+  { label: "Answers questions", ab: "No", buero: "Yes, standard questions", ki: "Yes, everything you teach it" },
+  { label: "Books appointments", ab: "No", buero: "Yes", ki: "Yes, directly into your calendar" },
+  { label: "Structured handoff", ab: "You listen to messages", buero: "Note / email", ki: "Request + contact captured cleanly" },
+  { label: "Personal contact", ab: "No", buero: "Yes", ki: "No — hands off to you when it gets personal" },
 ];
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
@@ -157,6 +167,124 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           jednokratnu cijenu. Koje rješenje pristaje tvom poslu ovisi o broju poziva koje primaš, ne
           o tehnološkom hypeu. Ako nisi siguran: u 30 minuta ti iskreno kažemo isplati li se to kod
           tebe — čak i kad je odgovor &bdquo;ne&ldquo;.
+        </p>
+      </ArticleLayout>
+    );
+  }
+
+  if (contentLocale === "en") {
+    return (
+      <ArticleLayout article={article} locale={contentLocale}>
+        <p>
+          You're up a ladder, the phone rings. You're talking to a customer — it rings again. After
+          hours you call back, but the prospect has long since called the next business. Missed
+          calls are one of the most expensive problems for small businesses — precisely because you
+          never see it on an invoice. The question is: what to do? We compare the three usual
+          options — honestly, with all their weaknesses.
+        </p>
+
+        <h2>The real problem: whoever can't get through calls the next one</h2>
+        <p>
+          Anyone looking for a tradesperson, a table, or an appointment today has little patience.
+          If no one answers the phone, people rarely wait — they dial the next number on the list.
+          The job is gone before you even knew it existed. Every solution has to be measured
+          against this: does it catch the prospect in the moment they call or message?
+        </p>
+
+        <h2>Option 1: The answering machine</h2>
+        <p>
+          The classic solution — costs almost nothing and is set up quickly. You know the problem
+          from experience: <strong>many callers don't even leave a message</strong> on an answering
+          machine, they just hang up. And even when there is a message, the callback ping-pong
+          begins: you call back, the customer isn't reachable, they call back, you're up a ladder.
+          The answering machine records — it doesn't solve anything.
+        </p>
+
+        <h2>Option 2: Office staff or an external phone service</h2>
+        <p>
+          A human on the phone is the most pleasant solution for the caller — no question. But it
+          has its price: your own office staff only pays off from a certain business size, and
+          external phone services cost money on an ongoing basis while only knowing your business
+          superficially. On technical questions (&ldquo;Do you also do renovation work on older
+          buildings?&rdquo;) it gets thin, and outside office hours it rings into the void again.
+        </p>
+
+        <h2>Option 3: The AI assistant</h2>
+        <p>
+          An AI assistant — as a chat on your website, via WhatsApp, or on the phone — is the newest
+          option, and the only one that <em>answers</em> around the clock instead of just recording.
+          Specifically, it can:
+        </p>
+        <ul>
+          <li>
+            <strong>Answer standard questions instantly:</strong> hours, services, service area,
+            rough price ranges — anything you've taught it once.
+          </li>
+          <li>
+            <strong>Book appointments directly:</strong> the prospect picks an open slot,
+            confirmation goes out automatically — no callback ping-pong.
+          </li>
+          <li>
+            <strong>Capture requests in a structured way:</strong> instead of a half-understandable
+            voicemail, you get name, contact, request and urgency noted cleanly.
+          </li>
+          <li>
+            <strong>Hand off when it gets serious:</strong> a good assistant recognizes when a human
+            needs to take over — and forwards, instead of sending the customer in circles.
+          </li>
+        </ul>
+
+        <h2>The honest comparison</h2>
+        <div className="mb-6 overflow-x-auto rounded-xl" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
+          <table className="w-full text-[13.5px] leading-[1.5]">
+            <thead>
+              <tr className="text-left" style={{ background: "rgba(255,255,255,0.04)" }}>
+                <th className="p-3.5 font-semibold text-white"> </th>
+                <th className="p-3.5 font-semibold text-white">Answering machine</th>
+                <th className="p-3.5 font-semibold text-white">Office staff / service</th>
+                <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>AI assistant</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonEn.map((row) => (
+                <tr key={row.label} style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+                  <td className="p-3.5 font-medium text-white/85">{row.label}</td>
+                  <td className="p-3.5 text-white/55">{row.ab}</td>
+                  <td className="p-3.5 text-white/55">{row.buero}</td>
+                  <td className="p-3.5 text-white/75">{row.ki}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2>When the answering machine is completely enough</h2>
+        <p>
+          Honest answer: not every business needs AI. If you have almost only repeat customers,
+          hardly any new inquiries come in by phone, and you reliably manage callbacks the same day
+          — then the answering machine will do. Invest the money elsewhere.
+        </p>
+
+        <h2>When the AI assistant is worth it</h2>
+        <ul>
+          <li>You regularly miss calls because you're on the job site, in service, or with a patient.</li>
+          <li>New inquiries matter to you — and you know some of them end up with the competition.</li>
+          <li>The same five questions eat up time every day: hours, prices, availability.</li>
+          <li>Coordinating appointments via back-and-forth phone calls annoys you (and your customers).</li>
+        </ul>
+        <p>
+          If two or more of these apply, the assistant quickly pays for itself: with us, a system
+          like this starts <strong>from €499 at a fixed price</strong> — one-time, with a written
+          quote upfront. Details on the <Link href={localePathname(contentLocale, "/preise")}>pricing page</Link>, more on
+          the technology on our page about <Link href={localePathname(contentLocale, "/leistungen/ki-chatbots")}>AI chatbots for businesses</Link>.
+        </p>
+
+        <h2>Bottom line</h2>
+        <p>
+          The answering machine records, the human costs on an ongoing basis, the AI assistant
+          answers — around the clock, for a one-time price. Which solution fits your business
+          depends on your call volume, not the tech hype. If you're unsure: in 30 minutes we'll
+          tell you honestly whether it's worth it for you — even if the answer is &ldquo;no.&rdquo;
         </p>
       </ArticleLayout>
     );
