@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 const PATH = "/leistungen";
 
 type ServiceCard = { href: string; eyebrow: string; title: string; text: string };
 type Pair = [string, string];
 type Step = [string, string, string];
 
-const CONTENT: Record<"de" | "hr" | "en" | "ro", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   eyebrow: string; h1a: string; h1b: string; subheadline: string;
   services: ServiceCard[]; more: string;
@@ -176,6 +176,84 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro", {
     ctaButton: "Programează o discuție gratuită",
     start: "Acasă",
   },
+  tr: {
+    metaTitle: "Hizmetler — Küçük İşletmeler için Web Siteleri, Yazılım ve AI | Axivore",
+    metaDescription: "Axivore'un Almanya'daki küçük ve orta ölçekli işletmeler için inşa ettikleri: modern web siteleri, özel web uygulamaları ve SaaS, AI otomasyonu. Tek elden, haftalar içinde canlı.",
+    ogDescription: "Almanya'daki küçük işletmeler için modern web siteleri, özel web uygulamaları ve SaaS, AI otomasyonu — tek elden.",
+    eyebrow: "Hizmetler",
+    h1a: "Web Siteleri, Yazılım ve AI",
+    h1b: "küçük işletmeler için.",
+    subheadline: "Modern web sitesinden özel web uygulamalarına, AI otomasyonuna kadar — dijital temelini biz kuruyoruz. Tek elden, aylar değil haftalar içinde canlı. Özellikle Almanya'da 5-30 çalışanı olan ve işin başında bizzat duran işletme sahipleri için.",
+    services: [
+      { href: "/leistungen/webseiten", eyebrow: "Web Siteleri", title: "Web Siteleri ve Açılış Sayfaları", text: "Ziyaretçileri müşteriye dönüştüren modern, hızlı web siteleri — istek üzerine randevu alan ve soruları yanıtlayan bir AI asistanıyla." },
+      { href: "/leistungen/web-apps", eyebrow: "Web Uygulamaları ve SaaS", title: "Web Uygulamaları ve SaaS", text: "Fikirden canlıya kadar özel web uygulamaları ve SaaS ürünleri. Hazır kalıp değil, tam olarak işletmene göre uyarlanmış." },
+      { href: "/leistungen/ki-automatisierung", eyebrow: "Otomasyon", title: "AI Otomasyonu", text: "Teklifler, faturalar, raporlar, veri girişi — tekrarlayan görevler otomatik yürür. Haftada 5-15 saat kazanırsın." },
+      { href: "/leistungen/ki-chatbots", eyebrow: "Chatbotlar", title: "AI Chatbotlar", text: "Müşteri taleplerini 7/24 yanıtlayan, randevu alan ve lead'leri niteleyen bir dijital asistan — geceleri bile." },
+    ],
+    more: "Daha fazla bilgi",
+    autoHeading: "İşletmende neler otomatikleştirilebilir",
+    autoIntro: "Çoğu küçük işletme her hafta aynı tekrarlayan görevlere saatler harcıyor. Tam olarak burada devreye giriyoruz — işte pratikten en yaygın örnekler:",
+    autoItems: [
+      ["Teklifler ve fiyat tahminleri", "Birkaç maddeden hesaplanmış, tamamlanmış bir teklif ortaya çıkar — saatler yerine dakikalar içinde biçimlendirilmiş ve gönderime hazır."],
+      ["Faturalar ve takip", "İş bittikten sonra faturalar otomatik olarak oluşturulur, açık kalemler nazikçe takip edilir — bunu hatırlaman gerekmeden."],
+      ["Randevu planlama", "Müşteriler uygun bir zamanı kendileri ayırır, onay ve hatırlatma otomatik olarak gönderilir — artık telefonla ileri geri yazışma yok."],
+      ["Müşteri taleplerini yanıtlama", "Fiyatlar, çalışma saatleri ve hizmetler hakkındaki tekrarlayan sorular 7/24 yanıtlanır — mesai sonrasında bile."],
+      ["Raporlar ve raporlama", "Farklı kaynaklardan gelen sayılar otomatik olarak birleştirilir — hazır rapor pazartesi sabahı gelen kutunda seni bekler."],
+      ["Veri girişi ve aktarımı", "Veriler form, tablo ve sistemin arasında otomatik olarak A'dan B'ye taşınır — hiç kopyala-yapıştır olmadan."],
+    ],
+    stepsHeading: "Bir proje nasıl ilerler",
+    steps: [
+      ["01", "Ücretsiz görüşme", "Süreçlerine bakar ve en hızlı karşılığını verecek görevi buluruz. Dürüstçe — bazen cevap 'henüz değil' olsa bile."],
+      ["02", "Sabit fiyat teklifi", "Sabit fiyatlı ve net kapsamlı yazılı bir teklif alırsın. Sonrasında fiyat değişmez."],
+      ["03", "Haftalar içinde canlı", "Kurarız, seninle birlikte test ederiz ve canlıya alırız — genellikle aylar değil, 1-2 hafta içinde."],
+    ],
+    branchenLinkText: "İşletmenin buna hazır olup olmadığından emin değil misin? {BRANCHEN} için nasıl çalıştığımıza bak ya da {RATGEBER} sayfamıza göz at.",
+    branchenLabel: "farklı sektörler",
+    ratgeberLabel: "rehberimiz",
+    ctaHeading: "Bize sorununu anlat.",
+    ctaText: "Ücretsiz 30 dakikalık bir görüşmede, senin için en hızlı otomatikleştirilebilecek görevi birlikte bulalım. Satış konuşması yok.",
+    ctaButton: "Ücretsiz görüşme ayarla",
+    start: "Ana Sayfa",
+  },
+  it: {
+    metaTitle: "Servizi — Siti Web, Software e AI per Piccole Imprese | Axivore",
+    metaDescription: "Cosa costruisce Axivore per piccole e medie imprese in Germania: siti web moderni, web-app e SaaS su misura, automazione AI. Tutto da un'unica fonte, attivo in poche settimane.",
+    ogDescription: "Siti web moderni, web-app e SaaS su misura, automazione AI per piccole imprese in Germania — tutto da un'unica fonte.",
+    eyebrow: "Servizi",
+    h1a: "Siti Web, Software e AI",
+    h1b: "per piccole imprese.",
+    subheadline: "Dal sito web moderno alle web-app su misura fino all'automazione AI — costruiamo la tua base digitale. Tutto da un'unica fonte, attivo in settimane, non mesi. Pensato per titolari di aziende con 5–30 dipendenti in Germania che mettono le mani in pasta loro stessi.",
+    services: [
+      { href: "/leistungen/webseiten", eyebrow: "Siti Web", title: "Siti Web e Landing Page", text: "Siti web moderni e veloci che trasformano i visitatori in clienti — su richiesta con assistente AI che prenota appuntamenti e risponde alle domande." },
+      { href: "/leistungen/web-apps", eyebrow: "Web-App e SaaS", title: "Web-App e SaaS", text: "Applicazioni web e prodotti SaaS su misura — dall'idea all'attivazione. Realizzati esattamente per la tua attività, non preconfezionati." },
+      { href: "/leistungen/ki-automatisierung", eyebrow: "Automazione", title: "Automazione AI", text: "Preventivi, fatture, report, inserimento dati — i compiti ricorrenti girano automaticamente. Risparmi 5–15 ore a settimana." },
+      { href: "/leistungen/ki-chatbots", eyebrow: "Chatbot", title: "Chatbot AI", text: "Un assistente digitale che risponde alle richieste dei clienti 24/7, prenota appuntamenti e qualifica i lead — anche di notte." },
+    ],
+    more: "Scopri di più",
+    autoHeading: "Cosa si può automatizzare nella tua attività",
+    autoIntro: "La maggior parte delle piccole imprese perde ore ogni settimana con gli stessi compiti ricorrenti. È esattamente lì che interveniamo — ecco gli esempi più comuni dalla pratica:",
+    autoItems: [
+      ["Preventivi e stime", "Da poche note nasce il preventivo finito e calcolato — formattato e pronto per l'invio in pochi minuti invece che ore."],
+      ["Fatture e solleciti", "Le fatture vengono create automaticamente dopo l'incarico, le voci aperte vengono sollecitate gentilmente — senza che tu debba pensarci."],
+      ["Prenotazione appuntamenti", "I clienti prenotano da soli un orario libero, conferma e promemoria vengono inviati automaticamente — niente più tira e molla telefonico."],
+      ["Rispondere alle richieste dei clienti", "Le domande ricorrenti su prezzi, orari e servizi vengono risposte 24/7 — anche dopo l'orario di lavoro."],
+      ["Report e reportistica", "I numeri da fonti diverse vengono uniti automaticamente — il report finito è nella tua casella di posta il lunedì mattina."],
+      ["Inserimento e trasferimento dati", "I dati passano automaticamente da A a B — tra modulo, tabella e il tuo sistema, senza copia-incolla."],
+    ],
+    stepsHeading: "Come funziona un progetto",
+    steps: [
+      ["01", "Colloquio gratuito", "Guardiamo i tuoi processi e troviamo il compito che ripaga più velocemente. Onestamente — anche quando la risposta a volte è: non ancora."],
+      ["02", "Preventivo a prezzo fisso", "Ricevi un preventivo scritto con prezzo fisso e ambito chiaro. Dopo, il prezzo non cambia più."],
+      ["03", "Attivo in settimane", "Costruiamo, testiamo insieme a te e andiamo online — di solito in 1–2 settimane, non mesi."],
+    ],
+    branchenLinkText: "Non sei sicuro se la tua attività è pronta per questo? Guarda come lavoriamo per {BRANCHEN}, o dai un'occhiata alla nostra {RATGEBER}.",
+    branchenLabel: "diversi settori",
+    ratgeberLabel: "guida",
+    ctaHeading: "Raccontaci il tuo problema.",
+    ctaText: "In un colloquio gratuito di 30 minuti guardiamo insieme quale compito si può automatizzare più velocemente per te. Nessuna presentazione di vendita.",
+    ctaButton: "Prenota un colloquio gratuito",
+    start: "Home",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -184,7 +262,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription }, tr: { title: CONTENT.tr.metaTitle, description: CONTENT.tr.metaDescription }, it: { title: CONTENT.it.metaTitle, description: CONTENT.it.metaDescription } },
     AVAILABLE
   );
 }
@@ -192,7 +270,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function LeistungenPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
   const [beforeBranchen, rest] = c.branchenLinkText.split("{BRANCHEN}");

@@ -4,9 +4,9 @@ import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { getBranchenList } from "@/lib/branchen";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 
-const COPY: Record<"de" | "hr" | "en" | "ro", {
+const COPY: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   eyebrow: string; h1: string; intro: string; more: string; noMatchHeading: string; noMatchText: string; ctaButton: string;
   start: string;
@@ -66,16 +66,44 @@ const COPY: Record<"de" | "hr" | "en" | "ro", {
     ctaButton: "Programează o discuție gratuită",
     start: "Acasă",
   },
+  tr: {
+    metaTitle: "Sektöre Göre AI Otomasyonu — İşletmen İçin | Axivore",
+    metaDescription:
+      "Sektörüne uygun AI otomasyonu: zanaatkârlar, gastronomi, muayenehaneler, ajanslar ve hizmet sağlayıcılar. Axivore, tam olarak sektörünün görevlerini üstlenen sistemler kuruyor — 1-2 hafta içinde canlı.",
+    ogDescription: "Almanya'daki zanaatkârlar, gastronomi, muayenehaneler, ajanslar ve hizmet sağlayıcılar için AI otomasyonu.",
+    eyebrow: "Sektörler",
+    h1: "Sektörün için AI otomasyonu.",
+    intro: "Her sektör zamanı farklı görevlerde kaybeder. İşletmenin tam olarak tekrarlayan işini üstlenen sistemler kuruyoruz — böylece sen önemli olana odaklanabilirsin. Sektörünü seç:",
+    more: "Daha fazla bilgi →",
+    noMatchHeading: "Sektörün listede yok mu?",
+    noMatchText: "Sorun değil — çoğu süreç birbirine benzer. Ücretsiz görüşmede bize hangi görevin en çok zamanını aldığını söyle.",
+    ctaButton: "Ücretsiz görüşme ayarla",
+    start: "Ana Sayfa",
+  },
+  it: {
+    metaTitle: "Automazione AI per Settore — Per la Tua Attività | Axivore",
+    metaDescription:
+      "Automazione AI su misura per il tuo settore: artigiani, ristorazione, studi medici, agenzie e fornitori di servizi. Axivore costruisce sistemi che si occupano esattamente dei compiti del tuo settore — attivo in 1–2 settimane.",
+    ogDescription: "Automazione AI per artigiani, ristorazione, studi medici, agenzie e fornitori di servizi in Germania.",
+    eyebrow: "Settori",
+    h1: "Automazione AI per il tuo settore.",
+    intro: "Ogni settore perde tempo con compiti diversi. Costruiamo sistemi che si occupano esattamente del lavoro ricorrente della tua attività — così puoi concentrarti su ciò che conta. Scegli il tuo settore:",
+    more: "Scopri di più →",
+    noMatchHeading: "Il tuo settore non è nell'elenco?",
+    noMatchText: "Nessun problema — la maggior parte dei processi si somiglia. Dicci nel colloquio gratuito quale compito ti costa più tempo.",
+    ctaButton: "Prenota un colloquio gratuito",
+    start: "Home",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = COPY[contentLocale as "de" | "hr" | "en" | "ro"];
+  const c = COPY[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   return partialPageMetadata(
     contentLocale,
     "/branchen",
-    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription }, en: { title: COPY.en.metaTitle, description: COPY.en.metaDescription }, ro: { title: COPY.ro.metaTitle, description: COPY.ro.metaDescription } },
+    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription }, en: { title: COPY.en.metaTitle, description: COPY.en.metaDescription }, ro: { title: COPY.ro.metaTitle, description: COPY.ro.metaDescription }, tr: { title: COPY.tr.metaTitle, description: COPY.tr.metaDescription }, it: { title: COPY.it.metaTitle, description: COPY.it.metaDescription } },
     AVAILABLE
   );
 }
@@ -83,7 +111,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function BranchenPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = COPY[contentLocale as "de" | "hr" | "en" | "ro"];
+  const c = COPY[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, "/branchen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 const PATH = "/ki-agentur-stuttgart";
 
 const region = ["Stuttgart", "Esslingen", "Ludwigsburg", "Böblingen", "Sindelfingen", "Waiblingen", "Fellbach", "Leonberg"];
@@ -10,7 +10,7 @@ const region = ["Stuttgart", "Esslingen", "Ludwigsburg", "Böblingen", "Sindelfi
 type Item = { title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en" | "ro", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   eyebrow: string; h1: string; subheadline: string;
   servicesHeading: string; services: Item[];
@@ -156,6 +156,74 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro", {
     start: "Acasă",
     localBusinessDescription: "Agenție AI din Stuttgart pentru automatizări AI, chatbot-uri și software personalizat pentru firme mici și mijlocii din Stuttgart și regiune.",
   },
+  tr: {
+    metaTitle: "Stuttgart AI Ajansı — KOBİ'ler için AI Otomasyonu | Axivore",
+    metaDescription: "Axivore, Stuttgart'tan AI ajansındır: Stuttgart ve çevresindeki küçük ve orta ölçekli işletmeler için AI otomasyonları, chatbotlar ve özel yazılım. 1-2 hafta içinde canlı.",
+    ogDescription: "Stuttgart ve çevresindeki küçük işletmeler için AI otomasyonları, chatbotlar ve yazılım. Kişisel, yerel, dürüst.",
+    eyebrow: "AI Ajansı · Stuttgart",
+    h1: "Küçük işletmeler için Stuttgart'tan AI ajansı.",
+    subheadline: "Axivore, Stuttgart ve çevresindeki küçük ve orta ölçekli işletmeler için AI otomasyonları, akıllı chatbotlar ve özel yazılım kurar. Her hafta saatler alan görevleri senden alırız — kişisel, yerel ve teknolojiyi anlaman gerekmeden.",
+    servicesHeading: "Stuttgartlı işletmeler için neler kuruyoruz",
+    services: [
+      { title: "AI Otomasyonu", text: "Teklifler, faturalar, raporlar ve veri girişi otomatik olarak yürür — haftada 5-15 saat geri kazanılır, yeni işe alım olmadan." },
+      { title: "AI Chatbotlar", text: "Bir dijital asistan müşteri taleplerini 7/24 yanıtlar, randevu alır ve lead'leri niteler — mesai sonrasında bile." },
+      { title: "Özel yazılım", text: "Tam olarak asla kullanmadığın pahalı hazır çözümler yerine, işletmene tam olarak uyan küçük araçlar." },
+    ],
+    whyHeading: "Neden bölgeden bir AI ajansı",
+    why: [
+      { title: "Stuttgart'tan, Stuttgart için", text: "Buradaki işletmeleri tanırız — zanaatkârlar, hizmet sağlayıcılar, gastronomi, muayenehaneler. Anonim bir çağrı merkezi değil, bölgeden bir muhatap." },
+      { title: "Kişisel olarak ulaşılabilir", text: "Stuttgart ve çevresinde yüz yüze randevu ya da video üzerinden — sana uyan şekilde. Her zaman sistemini kuran kişiyle doğrudan konuşursun." },
+      { title: "Hızlı canlı", text: "İlk otomasyon genellikle 1-2 hafta içinde çalışır. Aylarca süren bir proje değil, anında hissettiğin bir sonuç." },
+    ],
+    regionHeading: "Stuttgart ve çevresinde",
+    regionText: "Stuttgart ve bölgenin tamamındaki işletmelere hizmet veriyoruz — bunlar arasında:",
+    faqHeading: "Sık sorulan sorular",
+    faq: [
+      { question: "Axivore sadece Stuttgart'ta mı çalışıyor?", answer: "Merkezimiz Stuttgart'ta ve Esslingen'den Ludwigsburg'a, Böblingen'e kadar Stuttgart ve tüm bölgedeki işletmelere hizmet veriyoruz. Bölgede yüz yüze randevular sorunsuzca mümkün, gerisi rahatça dijital olarak yürüyor." },
+      { question: "Bu hangi işletmeler için değer?", answer: "Tekrarlayan görevlere zaman kaybeden 5-30 çalışanlı küçük ve orta ölçekli işletmeler için — zanaatkârlar, hizmetler, ajanslar, gastronomi, muayenehaneler. Özellikle küçük işletmeler en çok fayda sağlar, çünkü tasarruf edilen her saat doğrudan değer katar." },
+      { question: "Bir AI otomasyonu ne kadara mal olur?", answer: "Bu kapsama bağlıdır. Ücretsiz ilk görüşmede zamanını alan göreve bakarız ve sana dürüstçe ne kadara mal olacağını ve çabaya değip değmeyeceğini söyleriz — hiçbir yükümlülük olmadan." },
+      { question: "Teknik bilgim olması gerekir mi?", answer: "Hayır. Görevi sade bir dille anlatırsın, gerisini biz kurarız. Kullanımı sonrasında bir e-posta göndermek kadar basittir." },
+    ],
+    ctaHeading: "İşletmen hakkında konuşalım.",
+    ctaText: "Ücretsiz ilk görüşme — Stuttgart'ta yüz yüze ya da video üzerinden. Sana hangi görevin önce otomatikleştirilmeye değer olduğunu gösteririz.",
+    ctaButton: "Ücretsiz görüşme ayarla",
+    start: "Ana Sayfa",
+    localBusinessDescription: "Stuttgart ve çevresindeki küçük ve orta ölçekli işletmeler için AI otomasyonları, chatbotlar ve özel yazılım sunan Stuttgart'tan bir AI ajansı.",
+  },
+  it: {
+    metaTitle: "Agenzia AI Stoccarda — Automazione AI per PMI | Axivore",
+    metaDescription: "Axivore è la tua agenzia AI di Stoccarda: automazioni AI, chatbot e software su misura per piccole e medie imprese a Stoccarda e nella regione. Attivo in 1–2 settimane.",
+    ogDescription: "Automazioni AI, chatbot e software per piccole imprese a Stoccarda e dintorni. Personale, locale, onesto.",
+    eyebrow: "Agenzia AI · Stoccarda",
+    h1: "Agenzia AI di Stoccarda per piccole imprese.",
+    subheadline: "Axivore costruisce automazioni AI, chatbot intelligenti e software su misura per piccole e medie imprese a Stoccarda e nella regione. Ti togliamo i compiti che costano ore ogni settimana — personale, locale e senza dover capire la tecnologia.",
+    servicesHeading: "Cosa costruiamo per le aziende di Stoccarda",
+    services: [
+      { title: "Automazione AI", text: "Preventivi, fatture, report e inserimento dati funzionano automaticamente — 5–15 ore a settimana recuperate, senza nuove assunzioni." },
+      { title: "Chatbot AI", text: "Un assistente digitale risponde alle richieste dei clienti 24/7, prenota appuntamenti e qualifica i lead — anche dopo l'orario di lavoro." },
+      { title: "Software su misura", text: "Piccoli strumenti che si adattano esattamente alla tua attività — invece di costose soluzioni standard che non usi mai completamente." },
+    ],
+    whyHeading: "Perché un'agenzia AI della regione",
+    why: [
+      { title: "Da Stoccarda, per Stoccarda", text: "Conosciamo le aziende qui — artigiani, fornitori di servizi, ristorazione, studi medici. Non un call center anonimo, ma un referente della regione." },
+      { title: "Raggiungibili personalmente", text: "Appuntamento di persona a Stoccarda e dintorni o via video — come preferisci. Parli sempre direttamente con la persona che costruisce il tuo sistema." },
+      { title: "Attivo velocemente", text: "La prima automazione di solito funziona in 1–2 settimane. Non un progetto di mesi, ma un risultato che senti subito." },
+    ],
+    regionHeading: "A Stoccarda e dintorni",
+    regionText: "Seguiamo aziende in tutta Stoccarda e nella regione — tra le altre in:",
+    faqHeading: "Domande frequenti",
+    faq: [
+      { question: "Axivore lavora solo a Stoccarda?", answer: "La nostra sede è a Stoccarda e seguiamo aziende a Stoccarda e in tutta la regione — da Esslingen a Ludwigsburg fino a Böblingen. Gli appuntamenti di persona nella regione sono possibili senza problemi, il resto funziona comodamente online." },
+      { question: "Per quali aziende conviene?", answer: "Per piccole e medie imprese con 5–30 dipendenti che perdono tempo con compiti ricorrenti — artigiani, fornitori di servizi, agenzie, ristorazione, studi medici. Sono proprio le piccole imprese a trarne il massimo beneficio, perché ogni ora risparmiata conta direttamente." },
+      { question: "Quanto costa un'automazione AI?", answer: "Dipende dall'ambito. Nel primo colloquio gratuito guardiamo il tuo compito che ti fa perdere tempo e ti diciamo onestamente quanto costa e se ne vale la pena — senza impegno." },
+      { question: "Devo essere tecnico?", answer: "No. Descrivi il compito in linguaggio semplice, noi costruiamo il resto. L'uso è poi semplice come inviare un'e-mail." },
+    ],
+    ctaHeading: "Parliamo della tua attività.",
+    ctaText: "Primo colloquio gratuito — di persona a Stoccarda o via video. Ti mostriamo quale compito conviene automatizzare prima per te.",
+    ctaButton: "Prenota un colloquio gratuito",
+    start: "Home",
+    localBusinessDescription: "Agenzia AI di Stoccarda per automazioni AI, chatbot e software su misura per piccole e medie imprese a Stoccarda e nella regione.",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -164,7 +232,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription }, tr: { title: CONTENT.tr.metaTitle, description: CONTENT.tr.metaDescription }, it: { title: CONTENT.it.metaTitle, description: CONTENT.it.metaDescription } },
     AVAILABLE
   );
 }
@@ -172,7 +240,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function KiAgenturStuttgartPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
 

@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 const PATH = "/leistungen/ki-chatbots";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en" | "ro", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   useCasesHeading: string; useCases: Item[];
@@ -154,6 +154,74 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro", {
     start: "Acasă",
     leistungenLabel: "Servicii",
   },
+  tr: {
+    metaTitle: "Almanya'daki İşletmeler için AI Chatbotlar | Axivore",
+    metaDescription: "Müşteri taleplerini 7/24 yanıtlayan, randevu alan ve lead'leri niteleyen akıllı AI chatbotlar. Axivore KOBİ'ler için chatbotlar kuruyor — taleplerin %70-90'ı otomatik yanıtlanır.",
+    ogDescription: "Müşteri taleplerini 7/24 yanıtlayan ve randevu alan bir dijital asistan — geceleri bile.",
+    breadcrumb: "AI Chatbotlar",
+    serviceName: "AI Chatbotlar",
+    eyebrow: "Hizmetler / AI Chatbotlar",
+    h1: "Hiç uyumayan AI chatbotlar.",
+    subheadline: "Müşteri taleplerini 7/24 yanıtlayan, randevu alan ve potansiyel müşterileri niteleyen bir dijital asistan — geceleri ve hafta sonları da. Böylece sadece o anda telefonun başında kimse olmadığı için hiçbir talebi kaybetmezsin.",
+    useCasesHeading: "Bir AI chatbot senin için neyi üstlenir",
+    useCases: [
+      { title: "7/24 müşteri hizmeti", text: "Çalışma saatleri, fiyatlar, hizmetler hakkındaki tekrarlayan soruları anında yanıtlar — mesai saatlerin dışında bile." },
+      { title: "Randevu alma", text: "Ziyaretçiler sohbet içinde doğrudan randevu alır, e-posta ileri geri yazışması ve telefonla uğraşma olmadan." },
+      { title: "Lead niteleme", text: "Bot doğru soruları sorar, gerçekten ilgilenen kişileri tanır ve tüm bilgilerle birlikte sana teslim eder." },
+      { title: "Web sitende veya WhatsApp'ta", text: "Botu müşterilerinin bulunduğu yere yerleştiririz — web sitene gömülü ya da messenger üzerinden." },
+    ],
+    stepsHeading: "Nasıl işliyor",
+    steps: [
+      { n: "01", title: "Bilgi toplama", text: "Botu içeriklerinle besleriz — hizmetler, fiyatlar, sık sorulan sorular — böylece işletmen gibi konuşur." },
+      { n: "02", title: "2-4 hafta içinde kurulum", text: "Chatbotu canlıya almadan önce kurar, eğitir ve gerçek sorularla test ederiz." },
+      { n: "03", title: "Canlı ve öğrenmeye devam ediyor", text: "Bot canlıya alınır ve gerçek konuşmalarla sürekli gelişir. Ona destek vermeye devam ederiz." },
+    ],
+    faqHeading: "Sık sorulan sorular",
+    faq: [
+      { question: "Bir chatbot kaç talebi üstlenebilir?", answer: "Pratikte iyi kurulmuş chatbotlar tekrarlayan taleplerin %70-90'ını tamamen otomatik olarak yanıtlar. Ekibin böylece yalnızca gerçekten karmaşık durumlarla ilgilenir." },
+      { question: "Bot robot gibi mi konuşuyor?", answer: "Hayır. Onu içeriğin ve üslubunla eğitiriz, böylece doğal ve yardımsever yanıtlar verir — iyi yetiştirilmiş bir çalışan gibi." },
+      { question: "Bot bir şeyi bilmiyorsa ne olur?", answer: "O zaman bunu dürüstçe kabul eder ve talebi, o ana kadarki konuşmayla birlikte sana ya da ekibine yönlendirir." },
+    ],
+    ctaHeading: "Chatbotunun nasıl konuşacağını dene.",
+    ctaText: "Ücretsiz görüşmede, işletmen için bir chatbotun talepleri nasıl yanıtlayacağını somut bir örnekle gösteririz.",
+    ctaButton: "Ücretsiz görüşme ayarla",
+    start: "Ana Sayfa",
+    leistungenLabel: "Hizmetler",
+  },
+  it: {
+    metaTitle: "Chatbot AI per Aziende in Germania | Axivore",
+    metaDescription: "Chatbot AI intelligenti che rispondono alle richieste dei clienti 24/7, prenotano appuntamenti e qualificano i lead. Axivore costruisce chatbot per PMI — 70–90% delle richieste risposte automaticamente.",
+    ogDescription: "Un assistente digitale che risponde alle richieste dei clienti e prenota appuntamenti 24/7 — anche di notte.",
+    breadcrumb: "Chatbot AI",
+    serviceName: "Chatbot AI",
+    eyebrow: "Servizi / Chatbot AI",
+    h1: "Chatbot AI che non dormono mai.",
+    subheadline: "Un assistente digitale che risponde alle richieste dei clienti 24/7, prenota appuntamenti e qualifica i potenziali clienti — anche di notte e nei weekend. Così non perdi più nessuna richiesta solo perché in quel momento nessuno era al telefono.",
+    useCasesHeading: "Cosa si occupa di fare un chatbot AI per te",
+    useCases: [
+      { title: "Servizio clienti 24/7", text: "Risponde immediatamente a domande ricorrenti — su orari, prezzi, servizi — anche fuori dal tuo orario di lavoro." },
+      { title: "Prenotare appuntamenti", text: "I visitatori prenotano un appuntamento direttamente in chat, senza avanti e indietro via e-mail e senza tira e molla telefonico." },
+      { title: "Qualificare i lead", text: "Il bot pone le domande giuste, riconosce i potenziali clienti seri e te li consegna con tutte le informazioni." },
+      { title: "Sul tuo sito o su WhatsApp", text: "Installiamo il bot dove sono i tuoi clienti — integrato sul sito web o tramite messenger." },
+    ],
+    stepsHeading: "Come funziona",
+    steps: [
+      { n: "01", title: "Raccolta delle conoscenze", text: "Alimentiamo il bot con i tuoi contenuti — servizi, prezzi, domande frequenti — così suona come la tua azienda." },
+      { n: "02", title: "Realizzazione in 2–4 settimane", text: "Costruiamo, addestriamo e testiamo il chatbot con domande reali prima che vada online." },
+      { n: "03", title: "Online e continua ad apprendere", text: "Il bot va online e migliora continuamente con le conversazioni reali. Continuiamo a seguirlo." },
+    ],
+    faqHeading: "Domande frequenti",
+    faq: [
+      { question: "Quante richieste può gestire un chatbot?", answer: "In pratica, i chatbot ben costruiti rispondono completamente in automatico al 70–90% delle richieste ricorrenti. Il tuo team si occupa poi solo dei casi davvero complessi." },
+      { question: "Il bot suona come un robot?", answer: "No. Lo addestriamo sui tuoi contenuti e sul tuo tono, così risponde in modo naturale e utile — come un dipendente ben formato." },
+      { question: "Cosa succede se il bot non sa qualcosa?", answer: "Allora lo ammette onestamente e inoltra la richiesta a te o al tuo team — inclusa la conversazione fino a quel momento." },
+    ],
+    ctaHeading: "Prova come suonerebbe il tuo chatbot.",
+    ctaText: "Nel colloquio gratuito ti mostriamo con un esempio concreto come un chatbot risponderebbe alle richieste per la tua azienda.",
+    ctaButton: "Prenota un colloquio gratuito",
+    start: "Home",
+    leistungenLabel: "Servizi",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -162,7 +230,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription }, tr: { title: CONTENT.tr.metaTitle, description: CONTENT.tr.metaDescription }, it: { title: CONTENT.it.metaTitle, description: CONTENT.it.metaDescription } },
     AVAILABLE
   );
 }
@@ -170,7 +238,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function KiChatbotsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

@@ -4,10 +4,10 @@ import { ServiceShell } from "@/components/ServiceShell";
 import { getRatgeberArticlesList } from "@/lib/ratgeber";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 const PATH = "/ratgeber";
 
-const COPY: Record<"de" | "hr" | "en" | "ro", { metaTitle: string; metaDescription: string; ogDescription: string; eyebrow: string; h1: string; intro: string; dateLocale: string }> = {
+const COPY: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", { metaTitle: string; metaDescription: string; ogDescription: string; eyebrow: string; h1: string; intro: string; dateLocale: string }> = {
   de: {
     metaTitle: "Ratgeber — KI & Automatisierung für kleine Unternehmen | Axivore",
     metaDescription: "Praxisnahe Anleitungen ohne Fachchinesisch: Wie kleine Unternehmen in Deutschland mit KI und Automatisierung Zeit sparen — ehrlich, konkret, ohne Hype.",
@@ -44,6 +44,24 @@ const COPY: Record<"de" | "hr" | "en" | "ro", { metaTitle: string; metaDescripti
     intro: "Fără cuvinte la modă, fără promisiuni lucioase. Aici scriem ce funcționează cu adevărat în practică, cât costă și când merită — din munca noastră zilnică cu firme din Stuttgart și din toată Germania.",
     dateLocale: "ro-RO",
   },
+  tr: {
+    metaTitle: "Rehber — Küçük İşletmeler için AI ve Otomasyon | Axivore",
+    metaDescription: "Karmaşık terimler olmadan pratik rehberler: Almanya'daki küçük işletmeler AI ve otomasyonla nasıl zaman kazanır — dürüst, somut, abartısız.",
+    ogDescription: "Karmaşık terimler olmadan pratik rehberler: küçük işletmeler AI ve otomasyonla nasıl zaman kazanır.",
+    eyebrow: "Rehber",
+    h1: "AI ve otomasyon — küçük işletmeler için açıklandı.",
+    intro: "Ne moda kelimeler, ne parlak vaatler. Burada pratikte gerçekten neyin işe yaradığını, neye mal olduğunu ve ne zaman değdiğini yazıyoruz — Stuttgart'ta ve tüm Almanya'daki işletmelerle günlük çalışmamızdan.",
+    dateLocale: "tr-TR",
+  },
+  it: {
+    metaTitle: "Guida — AI e Automazione per Piccole Imprese | Axivore",
+    metaDescription: "Guide pratiche senza gergo tecnico: come le piccole imprese in Germania risparmiano tempo con AI e automazione — onesto, concreto, senza hype.",
+    ogDescription: "Guide pratiche senza gergo tecnico: come le piccole imprese risparmiano tempo con AI e automazione.",
+    eyebrow: "Guida",
+    h1: "AI e automazione — spiegate per piccole imprese.",
+    intro: "Niente parole d'ordine, niente promesse patinate. Qui scriviamo cosa funziona davvero nella pratica, quanto costa e quando conviene — dal nostro lavoro quotidiano con aziende a Stoccarda e in tutta la Germania.",
+    dateLocale: "it-IT",
+  },
 };
 
 function formatDate(iso: string, dateLocale: string): string {
@@ -56,7 +74,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription }, en: { title: COPY.en.metaTitle, description: COPY.en.metaDescription }, ro: { title: COPY.ro.metaTitle, description: COPY.ro.metaDescription } },
+    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription }, en: { title: COPY.en.metaTitle, description: COPY.en.metaDescription }, ro: { title: COPY.ro.metaTitle, description: COPY.ro.metaDescription }, tr: { title: COPY.tr.metaTitle, description: COPY.tr.metaDescription }, it: { title: COPY.it.metaTitle, description: COPY.it.metaDescription } },
     AVAILABLE
   );
 }
@@ -64,7 +82,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function RatgeberPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = COPY[contentLocale as "de" | "hr" | "en" | "ro"];
+  const c = COPY[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   const articles = getRatgeberArticlesList(contentLocale);
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
 

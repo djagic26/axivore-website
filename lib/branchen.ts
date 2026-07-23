@@ -160,9 +160,7 @@ export const branchen: Branche[] = [
   },
 ];
 
-// Croatian translations — same slugs/order as `branchen`. Other locales
-// (en/ro/tr/it) still fall back to the German content until they get their
-// own pass; see lib/seo.ts's resolveContentLocale.
+// Croatian translations — same slugs/order as `branchen`.
 export const branchenHr: Branche[] = [
   {
     slug: "handwerk",
@@ -564,10 +562,280 @@ export const branchenRo: Branche[] = [
   },
 ];
 
+// Turkish translations — same slugs/order as `branchen`.
+export const branchenTr: Branche[] = [
+  {
+    slug: "handwerk",
+    name: "Zanaatkârlar",
+    metaTitle: "Zanaatkârlar için AI — Teklif ve Aramaları Otomatikleştirin | Axivore",
+    metaDescription:
+      "Zanaatkâr işletmeleri için AI otomasyonu: akşamları değil dakikalar içinde teklifler, şantiyeden kaçırılan aramalar artık yok, faturalar otomatik. Axivore zanaatkârlar için sistemler kuruyor — 1-2 hafta içinde canlı.",
+    ogDescription:
+      "Teklifleri, aramaları ve faturaları otomatikleştirin — akşamları ofiste değil, şantiyede kalın. Almanya'daki zanaatkâr işletmeleri için.",
+    eyebrow: "Sektör · Zanaatkârlar",
+    h1: "Zanaatkâr işletmeleri için AI otomasyonu.",
+    intro:
+      "Bir zanaatkâr olarak gün boyu şantiyede çalışıyor, akşamları teklif yazıyorsun. Kimse telefona bakamadığı için aramalar kayboluyor. Axivore tam olarak bu görevleri üstlenen sistemler kuruyor — böylece iş sonrası artık ofiste oturmuyorsun.",
+    serviceType: "Zanaatkâr işletmeleri için AI otomasyonu",
+    useCasesHeading: "Zanaatkârlıkta neler otomatikleştirilebilir",
+    useCases: [
+      { title: "Dakikalar içinde teklifler", text: "Birkaç maddeden hesaplanmış, tamamlanmış bir teklif ortaya çıkar — biçimlendirilmiş ve gönderime hazır. Artık iş sonrası teklif yazmak yok." },
+      { title: "Kaçırılan arama yok", text: "Sen merdivendeyken dijital bir asistan aramaları karşılar — talebi, iletişim bilgilerini ve geri arama isteğini not eder, böylece artık hiçbir işi kaçırmazsın." },
+      { title: "Randevular ve planlama", text: "Müşteri randevuları otomatik olarak koordine edilir ve onaylanır — hatırlatma dahil, böylece kimse unutmaz ve boşuna gitmezsin." },
+      { title: "Faturalar ve takip", text: "İş bittikten sonra fatura otomatik olarak oluşturulur, açık kalemler nazikçe takip edilir — bunu hatırlaman gerekmeden." },
+    ],
+    faq: [
+      { question: "Teknik değilim — yine de çalışır mı?", answer: "Evet. Görevi sade bir dille anlatırsın, gerisini biz kurarız. Kullanımı sonrasında bir WhatsApp mesajı kadar basittir." },
+      { question: "Küçük bir işletme olarak bunun için çok mu küçüğüm?", answer: "Tam tersine. Tek kişilik ve küçük işletmeler en çok fayda sağlar, çünkü tasarruf edilen her saat doğrudan şantiyede ya da evde daha fazla zaman demektir." },
+      { question: "Böyle bir sistem ne kadar hızlı çalışmaya başlar?", answer: "İlk otomasyon — örneğin teklifler için — genellikle 1-2 hafta içinde kullanıma hazır olur." },
+    ],
+  },
+  {
+    slug: "gastronomie",
+    name: "Gastronomi",
+    metaTitle: "Gastronomi için AI — Rezervasyon ve Talepleri Otomatikleştirin | Axivore",
+    metaDescription:
+      "Restoranlar, kafeler ve gastronomi işletmeleri için AI otomasyonu: 7/24 rezervasyon, aramalar otomatik yanıtlanır, değerlendirmeler yönetilir. Axivore gastronomi için sistemler kuruyor — 1-2 hafta içinde canlı.",
+    ogDescription:
+      "Rezervasyonları, aramaları ve talepleri otomatikleştirin — servis sırasında ve mesai sonrasında da. Almanya'daki restoranlar ve kafeler için.",
+    eyebrow: "Sektör · Gastronomi",
+    h1: "Gastronomi için AI otomasyonu.",
+    intro:
+      "Servis sırasında telefon çalar ama kimsenin eli boş değildir. Rezervasyon talepleri gece geç saatte, mekan çoktan kapandıktan sonra gelir. Axivore, talepleri 7/24 yanıtlayan ve rezervasyonları otomatik olarak kabul eden sistemler kuruyor — böylece sen önündeki misafirlerle ilgilenebilirsin.",
+    serviceType: "Gastronomi işletmeleri için AI otomasyonu",
+    useCasesHeading: "Gastronomide neler otomatikleştirilebilir",
+    useCases: [
+      { title: "7/24 rezervasyon", text: "Misafirler sohbet veya sesli asistan üzerinden rezervasyon yapar — mekan kapalıyken saat 23:00'te bile. Onay ve hatırlatma otomatik olarak gönderilir." },
+      { title: "Servis sırasında aramalar", text: "Ekip masalardayken bir asistan aramaları karşılar — çalışma saatleri, menü ve müsaitlik hakkındaki standart soruları yanıtlar." },
+      { title: "Değerlendirmeler ve talepler", text: "Gelen değerlendirmeler ve e-posta talepleri otomatik olarak sınıflandırılır ve yanıt önerileriyle birlikte sunulur, böylece hiçbir şey gözden kaçmaz." },
+      { title: "Daha az no-show", text: "Randevu öncesi otomatik hatırlatmalar, kimse elle aramak zorunda kalmadan gelmeyen misafir sayısını belirgin şekilde azaltır." },
+    ],
+    faq: [
+      { question: "Bu benim rezervasyon sistemimin yerini mi alıyor?", answer: "Hayır, onu tamamlar. Otomasyonu mevcut araçlarınla entegre ederiz ya da henüz yoksa sade bir çözüm kurarız." },
+      { question: "Küçük bir kafe için de işe yarar mı?", answer: "Evet. Tek bir otomasyon bile — örneğin mesai sonrası rezervasyon kabulü — haftada birkaç saat telefon süresi kazandırır." },
+      { question: "Kurulum ne kadar sürer?", answer: "İlk otomasyon genellikle 1-2 hafta içinde canlıya alınır ve gerçek süreçlerinle test edilir." },
+    ],
+  },
+  {
+    slug: "praxen",
+    name: "Muayenehaneler",
+    metaTitle: "Doktor ve Diş Hekimi Muayenehaneleri için AI — Telefon ve Randevu Yükünü Azaltın | Axivore",
+    metaDescription:
+      "Muayenehaneler için AI otomasyonu: sürekli çalan telefonu rahatlatın, randevuları otomatik verin, standart talepleri 7/24 yanıtlayın. Axivore doktor ve diş hekimi muayenehaneleri için sistemler kuruyor — 1-2 hafta içinde canlı.",
+    ogDescription:
+      "Telefonu rahatlatın, randevuları otomatik verin, talepleri 7/24 yanıtlayın. Almanya'daki doktor, diş hekimi ve terapi muayenehaneleri için.",
+    eyebrow: "Sektör · Muayenehaneler",
+    h1: "Doktor ve diş hekimi muayenehaneleri için AI otomasyonu.",
+    intro:
+      "Muayenehane telefonu susmuyor, resepsiyon zar zor çalışabiliyor ve hastalar yine de size ulaşamıyor. Axivore, resepsiyondan organizasyonel yükü alan sistemler kuruyor — randevu verme, tekrarlayan talepler ve erişilebilirlik, tıbbi kararları otomatikleştirmeden.",
+    serviceType: "Doktor ve diş hekimi muayenehaneleri için AI otomasyonu",
+    useCasesHeading: "Muayenehanede neler otomatikleştirilebilir",
+    useCases: [
+      { title: "Telefonu rahatlatın", text: "Dijital bir asistan, çalışma saatleri, erişilebilirlik ve süreçler hakkındaki tekrarlayan soruları yanıtlar — resepsiyon yerinde bulunan hastalara odaklanabilir." },
+      { title: "7/24 randevu", text: "Hastalar randevularını çevrimiçi olarak alır ve değiştirir — muayene saatleri dışında bile. Onay ve hatırlatma otomatik olarak gönderilir." },
+      { title: "Daha az iptal", text: "Otomatik randevu hatırlatmaları gelmeme oranını azaltır ve ekip için ek bir çaba olmadan takvimi dolu tutar." },
+      { title: "Talepleri ön sıralama", text: "Gelen talepler yapılandırılmış şekilde kaydedilir ve önceliğe göre yönlendirilir — ekip neyin acil, neyin bekleyebilir olduğunu hemen görür." },
+    ],
+    faq: [
+      { question: "AI tıbbi kararlar alıyor mu?", answer: "Hayır. Yalnızca organizasyonel süreçleri otomatikleştiriyoruz — randevular, erişilebilirlik, tekrarlayan talepler. Tıbbi değerlendirme tamamen muayenehane ekibinde kalır." },
+      { question: "Veri koruması konusunda durum nedir?", answer: "Veri koruması odak noktamızdır. Süreçleri GDPR'a uygun şekilde kurar ve hangi verilerin nasıl işlendiğini önceden tam olarak netleştiririz." },
+      { question: "Bu yazılımımıza bağlanabilir mi?", answer: "Çoğu durumda evet. İlk görüşmede hangi sistemleri kullandığınızı ve otomasyonun nasıl sorunsuz entegre olacağını netleştiririz." },
+    ],
+  },
+  {
+    slug: "agenturen",
+    name: "Ajanslar",
+    metaTitle: "Ajanslar için AI — Raporlama, Teklif ve İş Akışlarını Otomatikleştirin | Axivore",
+    metaDescription:
+      "Küçük ajanslar için AI otomasyonu: bir tuşla raporlar, dakikalar içinde teklifler, otomatikleştirilmiş içerik ve lead iş akışları. Axivore ajanslar için sistemler kuruyor — 1-2 hafta içinde canlı.",
+    ogDescription:
+      "Raporlamayı, teklifleri ve iş akışlarını otomatikleştirin — idari işler yerine müşteri işine daha fazla zaman. Almanya'daki küçük ajanslar için.",
+    eyebrow: "Sektör · Ajanslar",
+    h1: "Ajanslar için AI otomasyonu.",
+    intro:
+      "Raporlama her ay günler alıyor, teklifler elle bir araya getiriliyor ve ekip araçlar arasında veri kopyalıyor. Axivore, tam olarak bu tekrarlayan işi üstlenen sistemler kuruyor — böylece ekibin idari işler yerine müşteri işiyle uğraşır.",
+    serviceType: "Ajanslar için AI otomasyonu",
+    useCasesHeading: "Ajansta neler otomatikleştirilebilir",
+    useCases: [
+      { title: "Bir tuşla raporlama", text: "Farklı platformlardan gelen veriler otomatik olarak birleştirilir ve hazır, markalı bir rapor olarak sunulur — aylık ya da talep üzerine." },
+      { title: "Teklifler ve pitch'ler", text: "Kısa bir brief'ten yapılandırılmış bir teklif ya da pitch dokümanı ortaya çıkar — ajansın stiliyle tutarlı, saatler yerine dakikalar içinde." },
+      { title: "İçerik iş akışları", text: "İçerik üretimindeki tekrarlayan adımlar — araştırmadan ilk taslağa kadar — otomatikleştirilir, ekip yalnızca ince ayar yapar." },
+      { title: "Lead niteleme", text: "Gelen talepler otomatik olarak değerlendirilir, zenginleştirilir ve takip mesajlarıyla desteklenir, böylece hiçbir lead soğumaz." },
+    ],
+    faq: [
+      { question: "Birçok farklı araç kullanıyoruz — bu işe yarar mı?", answer: "Tam olarak bunun için tasarlandı. Mevcut araçlarınızı bağlıyoruz, böylece veriler elle kopyalanmak yerine otomatik olarak akar." },
+      { question: "Bu çalışanların yerini mi alıyor?", answer: "Hayır — ekipten tekrarlayan işi alır, böylece yaratıcı çalışmaya ve müşteri ilişkilerine odaklanabilirler. Yeni işe alım olmadan daha fazla çıktı." },
+      { question: "Sonuçları ne kadar hızlı görürüz?", answer: "İlk otomasyon — örneğin aylık raporlama — genellikle 1-2 hafta içinde kullanıma hazır olur." },
+    ],
+  },
+  {
+    slug: "dienstleister",
+    name: "Hizmet Sağlayıcılar",
+    metaTitle: "Hizmet Sağlayıcılar için AI — Talep, Teklif ve Randevuları Otomatikleştirin | Axivore",
+    metaDescription:
+      "Hizmet sağlayıcılar için AI otomasyonu: talepleri 7/24 yanıtlayın, teklifleri otomatik oluşturun, randevu alın ve takip edin. Axivore hizmet işletmeleri için sistemler kuruyor — 1-2 hafta içinde canlı.",
+    ogDescription:
+      "Talepleri, teklifleri ve randevuları otomatikleştirin — kaybolan lead yok, unutulan takip yok. Almanya'daki hizmet sağlayıcılar için.",
+    eyebrow: "Sektör · Hizmet Sağlayıcılar",
+    h1: "Hizmet sağlayıcılar için AI otomasyonu.",
+    intro:
+      "Talepler beş farklı kanaldan geliyor, teklifleri arada bir yazıyorsun ve takip günlük telaşede unutuluyor. Axivore, talepleri anında yanıtlayan, teklifleri hazırlayan ve randevuları koordine eden sistemler kuruyor — böylece artık hiçbir iş elden kaçmaz.",
+    serviceType: "Hizmet işletmeleri için AI otomasyonu",
+    useCasesHeading: "Hizmet sağlayıcılarda neler otomatikleştirilebilir",
+    useCases: [
+      { title: "7/24 talepler", text: "Dijital bir asistan talepleri anında yanıtlar — akşamları ve hafta sonları da — ve bir teklif için ihtiyacın olan tüm bilgileri toplar." },
+      { title: "Otomatik teklifler", text: "Toplanan bilgilerden hazır bir teklif ortaya çıkar — biçimlendirilmiş ve gönderime hazır, akşam oturup hazırlaman gerekmeden." },
+      { title: "Randevu ve rezervasyon", text: "Müşteriler uygun randevuyu kendileri ayırır, onay ve hatırlatma otomatik olarak gönderilir — artık telefonla ileri geri yazışma yok." },
+      { title: "Unutmadan takip", text: "Açık teklifler ve talepler otomatik ve nazikçe takip edilir, böylece ilgi gerçek bir işe dönüşür." },
+    ],
+    faq: [
+      { question: "Bu benim sektörüm için işe yarar mı?", answer: "Süreçler çoğu hizmet sağlayıcıda benzerdir — talep, teklif, randevu, takip. İlk görüşmede işletmene özel bakarız." },
+      { question: "Araçlarımı değiştirmem gerekiyor mu?", answer: "Hayır. Otomasyonu mevcut araçlarınla entegre ederiz ya da henüz kullanmıyorsan sade bir çözüm kurarız." },
+      { question: "Maliyeti nedir?", answer: "Kapsama bağlıdır. Ücretsiz ilk görüşmede sana dürüstçe ne kadara mal olacağını ve senin için değip değmeyeceğini söyleriz." },
+    ],
+  },
+];
+
+// Italian translations — same slugs/order as `branchen`.
+export const branchenIt: Branche[] = [
+  {
+    slug: "handwerk",
+    name: "Artigiani",
+    metaTitle: "AI per Artigiani — Automatizza Preventivi e Chiamate | Axivore",
+    metaDescription:
+      "Automazione AI per aziende artigiane: preventivi in pochi minuti invece che di sera, nessuna chiamata persa dal cantiere, fatture automatiche. Axivore costruisce sistemi per artigiani — attivo in 1–2 settimane.",
+    ogDescription:
+      "Automatizza preventivi, chiamate e fatture — per restare in cantiere invece che in ufficio la sera. Per aziende artigiane in Germania.",
+    eyebrow: "Settore · Artigiani",
+    h1: "Automazione AI per aziende artigiane.",
+    intro:
+      "Come artigiano lavori tutto il giorno in cantiere e scrivi i preventivi la sera. Le chiamate si perdono perché nessuno può rispondere al telefono. Axivore costruisce sistemi che si occupano esattamente di questi compiti — così dopo il lavoro non sei più seduto in ufficio.",
+    serviceType: "Automazione AI per aziende artigiane",
+    useCasesHeading: "Cosa si può automatizzare nell'artigianato",
+    useCases: [
+      { title: "Preventivi in pochi minuti", text: "Da poche note nasce il preventivo finito e calcolato — formattato e pronto per l'invio. Niente più preventivi dopo il lavoro." },
+      { title: "Nessuna chiamata persa", text: "Un assistente digitale risponde alle chiamate mentre sei sulla scala — annota richiesta, contatto e desiderio di richiamata, così non perdi più nessun lavoro." },
+      { title: "Appuntamenti e pianificazione", text: "Gli appuntamenti con i clienti vengono coordinati e confermati automaticamente — promemoria incluso, così nessuno dimentica e tu non vai lì per niente." },
+      { title: "Fatture e solleciti", text: "Dopo il lavoro la fattura viene creata automaticamente, le voci aperte vengono sollecitate gentilmente — senza che tu debba pensarci." },
+    ],
+    faq: [
+      { question: "Non sono tecnico — funziona comunque?", answer: "Sì. Descrivi il compito in linguaggio semplice, noi costruiamo il resto. L'uso è poi semplice come un messaggio WhatsApp." },
+      { question: "Sono troppo piccolo come azienda per questo?", answer: "Al contrario. Sono proprio le aziende individuali e piccole a trarne il massimo beneficio, perché ogni ora risparmiata significa direttamente più tempo in cantiere o a casa." },
+      { question: "Quanto velocemente funziona un sistema del genere?", answer: "Una prima automazione — ad esempio per i preventivi — è di solito pronta per l'uso in 1–2 settimane." },
+    ],
+  },
+  {
+    slug: "gastronomie",
+    name: "Ristorazione",
+    metaTitle: "AI per la Ristorazione — Automatizza Prenotazioni e Richieste | Axivore",
+    metaDescription:
+      "Automazione AI per ristoranti, bar e locali: prenotazioni 24/7, chiamate risposte automaticamente, recensioni gestite. Axivore costruisce sistemi per la ristorazione — attivo in 1–2 settimane.",
+    ogDescription:
+      "Automatizza prenotazioni, chiamate e richieste — anche durante il servizio e dopo l'orario di lavoro. Per ristoranti e bar in Germania.",
+    eyebrow: "Settore · Ristorazione",
+    h1: "Automazione AI per la ristorazione.",
+    intro:
+      "Durante il servizio squilla il telefono, ma nessuno ha una mano libera. Le richieste di prenotazione arrivano di notte, quando il locale è già chiuso da tempo. Axivore costruisce sistemi che rispondono alle richieste 24/7 e accettano prenotazioni automaticamente — così tu puoi occuparti degli ospiti davanti a te.",
+    serviceType: "Automazione AI per attività di ristorazione",
+    useCasesHeading: "Cosa si può automatizzare nella ristorazione",
+    useCases: [
+      { title: "Prenotazioni 24/7", text: "Gli ospiti prenotano tramite chat o assistente vocale — anche alle 23 quando il locale è chiuso. Conferma e promemoria vengono inviati automaticamente." },
+      { title: "Chiamate durante il servizio", text: "Un assistente risponde alle chiamate mentre il team è ai tavoli — risponde a domande standard su orari, menu e disponibilità." },
+      { title: "Recensioni e richieste", text: "Le recensioni in arrivo e le richieste via e-mail vengono automaticamente ordinate e dotate di proposte di risposta, così nulla resta in sospeso." },
+      { title: "Meno no-show", text: "I promemoria automatici prima della prenotazione riducono sensibilmente le assenze — senza che nessuno debba telefonare manualmente." },
+    ],
+    faq: [
+      { question: "Questo sostituisce il mio sistema di prenotazione?", answer: "No, lo completa. Colleghiamo l'automazione ai tuoi strumenti esistenti o costruiamo una soluzione snella se non ne hai ancora una." },
+      { question: "Funziona anche per un piccolo bar?", answer: "Sì. Anche una sola automazione — ad esempio l'accettazione delle prenotazioni dopo l'orario di lavoro — fa risparmiare diverse ore di telefono a settimana." },
+      { question: "Quanto dura la configurazione?", answer: "Una prima automazione è di solito attiva in 1–2 settimane e testata con i tuoi flussi di lavoro reali." },
+    ],
+  },
+  {
+    slug: "praxen",
+    name: "Studi Medici",
+    metaTitle: "AI per Studi Medici e Dentistici — Alleggerisci Telefono e Appuntamenti | Axivore",
+    metaDescription:
+      "Automazione AI per studi medici: alleggerisci il telefono che squilla continuamente, assegna appuntamenti automaticamente, rispondi a richieste standard 24/7. Axivore costruisce sistemi per studi medici e dentistici — attivo in 1–2 settimane.",
+    ogDescription:
+      "Alleggerisci il telefono, assegna appuntamenti automaticamente, rispondi alle richieste 24/7. Per studi medici, dentistici e di terapia in Germania.",
+    eyebrow: "Settore · Studi Medici",
+    h1: "Automazione AI per studi medici e dentistici.",
+    intro:
+      "Il telefono dello studio non si ferma mai, la reception riesce a malapena a lavorare e i pazienti comunque non riescono a raggiungervi. Axivore costruisce sistemi che tolgono il carico organizzativo dalla reception — assegnazione appuntamenti, richieste ricorrenti e reperibilità, senza automatizzare decisioni mediche.",
+    serviceType: "Automazione AI per studi medici e dentistici",
+    useCasesHeading: "Cosa si può automatizzare nello studio",
+    useCases: [
+      { title: "Alleggerisci il telefono", text: "Un assistente digitale risponde a domande ricorrenti su orari, reperibilità e procedure — la reception può concentrarsi sui pazienti presenti." },
+      { title: "Appuntamenti 24/7", text: "I pazienti prenotano e spostano gli appuntamenti online — anche fuori dagli orari di consulenza. Conferma e promemoria vengono inviati automaticamente." },
+      { title: "Meno assenze", text: "I promemoria automatici degli appuntamenti riducono le assenze e mantengono l'agenda piena, senza sforzo aggiuntivo per il team." },
+      { title: "Pre-ordinamento delle richieste", text: "Le richieste in arrivo vengono registrate in modo strutturato e inoltrate per priorità — il team vede subito cosa è urgente e cosa può aspettare." },
+    ],
+    faq: [
+      { question: "L'AI prende decisioni mediche?", answer: "No. Automatizziamo esclusivamente i processi organizzativi — appuntamenti, reperibilità, richieste ricorrenti. La valutazione medica resta interamente al team dello studio." },
+      { question: "Come funziona con la protezione dei dati?", answer: "La protezione dei dati è centrale. Configuriamo i processi in conformità al GDPR e chiariamo in anticipo esattamente quali dati vengono elaborati e come." },
+      { question: "Si può collegare al nostro software?", answer: "Nella maggior parte dei casi sì. Nel primo colloquio chiariamo quali sistemi utilizzate e come l'automazione si integra perfettamente." },
+    ],
+  },
+  {
+    slug: "agenturen",
+    name: "Agenzie",
+    metaTitle: "AI per Agenzie — Automatizza Reportistica, Preventivi e Flussi di Lavoro | Axivore",
+    metaDescription:
+      "Automazione AI per piccole agenzie: report a portata di clic, preventivi in pochi minuti, flussi di lavoro per contenuti e lead automatizzati. Axivore costruisce sistemi per agenzie — attivo in 1–2 settimane.",
+    ogDescription:
+      "Automatizza reportistica, preventivi e flussi di lavoro — più tempo per il lavoro con i clienti invece che per l'amministrazione. Per piccole agenzie in Germania.",
+    eyebrow: "Settore · Agenzie",
+    h1: "Automazione AI per agenzie.",
+    intro:
+      "La reportistica divora giorni ogni mese, i preventivi vengono assemblati a mano e il team copia dati tra strumenti diversi. Axivore costruisce sistemi che si occupano esattamente di questo lavoro ricorrente — così il tuo team si dedica al lavoro con i clienti invece che all'amministrazione.",
+    serviceType: "Automazione AI per agenzie",
+    useCasesHeading: "Cosa si può automatizzare in agenzia",
+    useCases: [
+      { title: "Report a portata di clic", text: "I dati provenienti da diverse piattaforme vengono uniti automaticamente e forniti come report finito e brandizzato — mensilmente o su richiesta." },
+      { title: "Preventivi e pitch", text: "Da un breve briefing nasce il preventivo strutturato o il documento di pitch — coerente con lo stile dell'agenzia, in pochi minuti invece che ore." },
+      { title: "Flussi di lavoro per i contenuti", text: "I passaggi ricorrenti nella produzione di contenuti — dalla ricerca alla prima bozza — vengono automatizzati, il team si limita a perfezionare." },
+      { title: "Qualificazione dei lead", text: "Le richieste in arrivo vengono valutate automaticamente, arricchite e dotate di messaggi di sollecito, così nessun lead si raffredda." },
+    ],
+    faq: [
+      { question: "Usiamo molti strumenti diversi — funziona?", answer: "È fatto proprio per questo. Colleghiamo i tuoi strumenti esistenti in modo che i dati fluiscano automaticamente, invece di essere copiati a mano." },
+      { question: "Questo sostituisce i dipendenti?", answer: "No — toglie al team il lavoro ripetitivo, così può concentrarsi sulla creatività e sulle relazioni con i clienti. Più output senza nuove assunzioni." },
+      { question: "Quanto velocemente vediamo i risultati?", answer: "Una prima automazione — ad esempio il report mensile — è di solito pronta per l'uso in 1–2 settimane." },
+    ],
+  },
+  {
+    slug: "dienstleister",
+    name: "Fornitori di Servizi",
+    metaTitle: "AI per Fornitori di Servizi — Automatizza Richieste, Preventivi e Appuntamenti | Axivore",
+    metaDescription:
+      "Automazione AI per fornitori di servizi: rispondi alle richieste 24/7, genera preventivi automaticamente, prenota appuntamenti e solleciti. Axivore costruisce sistemi per aziende di servizi — attivo in 1–2 settimane.",
+    ogDescription:
+      "Automatizza richieste, preventivi e appuntamenti — nessun lead perso, nessun sollecito dimenticato. Per fornitori di servizi in Germania.",
+    eyebrow: "Settore · Fornitori di Servizi",
+    h1: "Automazione AI per fornitori di servizi.",
+    intro:
+      "Le richieste arrivano da cinque canali diversi, scrivi i preventivi tra un impegno e l'altro e il sollecito viene dimenticato nella routine quotidiana. Axivore costruisce sistemi che rispondono subito alle richieste, preparano i preventivi e coordinano gli appuntamenti — così nessun incarico ti sfugge più.",
+    serviceType: "Automazione AI per aziende di servizi",
+    useCasesHeading: "Cosa si può automatizzare per i fornitori di servizi",
+    useCases: [
+      { title: "Richieste 24/7", text: "Un assistente digitale risponde subito alle richieste — anche la sera e nei weekend — e raccoglie tutte le informazioni di cui hai bisogno per un preventivo." },
+      { title: "Preventivi automatici", text: "Dalle informazioni raccolte nasce il preventivo finito — formattato e pronto per l'invio, senza che tu debba sederti la sera." },
+      { title: "Appuntamenti e prenotazioni", text: "I clienti prenotano da soli l'appuntamento adatto, conferma e promemoria vengono inviati automaticamente — niente più avanti e indietro al telefono." },
+      { title: "Solleciti senza dimenticare", text: "I preventivi e le richieste aperte vengono sollecitati automaticamente e gentilmente, così l'interesse si trasforma davvero in un incarico." },
+    ],
+    faq: [
+      { question: "Questo funziona per il mio settore?", answer: "I processi sono simili nella maggior parte dei fornitori di servizi — richiesta, preventivo, appuntamento, sollecito. Nel primo colloquio guardiamo concretamente alla tua attività." },
+      { question: "Devo cambiare i miei strumenti?", answer: "No. Colleghiamo l'automazione ai tuoi strumenti esistenti o costruiamo una soluzione snella se non ne usi ancora nessuno." },
+      { question: "Quanto costa?", answer: "Dipende dalla portata. Nel primo colloquio gratuito ti diciamo onestamente quanto costa e se ne vale la pena per te." },
+    ],
+  },
+];
+
 export function getBranchenList(locale: string): Branche[] {
   if (locale === "hr") return branchenHr;
   if (locale === "en") return branchenEn;
   if (locale === "ro") return branchenRo;
+  if (locale === "tr") return branchenTr;
+  if (locale === "it") return branchenIt;
   return branchen;
 }
 

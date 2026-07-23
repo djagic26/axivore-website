@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 const PATH = "/leistungen/ki-automatisierung";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en" | "ro", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   useCasesHeading: string; useCases: Item[];
@@ -154,6 +154,74 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro", {
     start: "Acasă",
     leistungenLabel: "Servicii",
   },
+  tr: {
+    metaTitle: "Almanya'daki KOBİ'ler için AI Otomasyonu | Axivore",
+    metaDescription: "Teklifler, faturalar, raporlar ve veri girişini otomatik olarak halledin. Axivore küçük işletmeler için AI otomasyonları kuruyor — haftada 5-15 saat tasarruf. 1-2 hafta içinde canlı.",
+    ogDescription: "Tekrarlayan görevleri otomatik olarak halledin — teklifler, faturalar, raporlar. Almanya'daki küçük işletmeler için.",
+    breadcrumb: "AI Otomasyonu",
+    serviceName: "AI Otomasyonu",
+    eyebrow: "Hizmetler / AI Otomasyonu",
+    h1: "Küçük işletmeler için AI otomasyonu.",
+    subheadline: "Teklifler, faturalar, raporlar, veri girişi — her hafta saatler alan görevleri bir sistem üstlenir. Yeni işe alım yapmadan ve teknolojiyi anlaman gerekmeden haftada 5-15 saat geri kazanırsın.",
+    useCasesHeading: "Neler otomatikleştirilebilir",
+    useCases: [
+      { title: "Teklifler ve faturalar", text: "Kısa bir girişten hazır teklif veya fatura ortaya çıkar — biçimlendirilmiş, doğru, 30 dakika yerine saniyeler içinde." },
+      { title: "Raporlar ve raporlama", text: "Farklı kaynaklardan gelen veriler otomatik olarak birleştirilir ve hazır bir rapor olarak sunulur — günlük, haftalık ya da talep üzerine." },
+      { title: "Veri girişi ve aktarımı", text: "Bilgiler e-posta, tablolar ve araçların arasında otomatik olarak taşınır — kopyala-yapıştır yok, yazım hatası yok." },
+      { title: "Müşteri taleplerini sıralama", text: "Gelen talepler otomatik olarak değerlendirilir, önceliklendirilir ve takip mesajlarıyla desteklenir — elle uğraşmadan." },
+    ],
+    stepsHeading: "Nasıl işliyor",
+    steps: [
+      { n: "01", title: "Ücretsiz görüşme", text: "Zamanını alan göreve bakarız ve onu otomatikleştirip otomatikleştiremeyeceğimizi, nasıl yapacağımızı dürüstçe söyleriz." },
+      { n: "02", title: "1-2 hafta içinde kurulum", text: "Sistemi kurarız, gerçek verilerinle test ederiz ve kullanıma hazır şekilde teslim ederiz." },
+      { n: "03", title: "Çalışır ve desteklenir", text: "Sistem kendi başına çalışır. Başlangıçtan sonra ortadan kaybolmayız — bize her zaman ulaşabilirsin." },
+    ],
+    faqHeading: "Sık sorulan sorular",
+    faq: [
+      { question: "Bir otomasyon ne kadar sürer?", answer: "Tipik bir otomasyon 1-2 hafta içinde hazır olur — ilk fikirden çalışan sisteme kadar." },
+      { question: "Bunu kullanmak için teknik bilgim olması gerekir mi?", answer: "Hayır. Görevi sade bir dille anlatırsın, gerisini biz kurarız. Kullanımı sonrasında bir e-posta göndermek kadar basittir." },
+      { question: "Küçük bir işletme olarak bunun için çok mu küçüğüm?", answer: "Tam tersine. Küçük işletmeler en çok fayda sağlar, çünkü tasarruf edilen her saat doğrudan değer katar. Tek bir otomasyon bile genellikle haftada birkaç saat tasarruf sağlar." },
+    ],
+    ctaHeading: "Hangi görev senin en çok zamanını alıyor?",
+    ctaText: "Ücretsiz görüşmede bize söyle — o görevin tam olarak nasıl otomatikleştirilebileceğini gösterelim.",
+    ctaButton: "Ücretsiz görüşme ayarla",
+    start: "Ana Sayfa",
+    leistungenLabel: "Hizmetler",
+  },
+  it: {
+    metaTitle: "Automazione AI per PMI in Germania | Axivore",
+    metaDescription: "Fai gestire automaticamente preventivi, fatture, report e inserimento dati. Axivore costruisce automazioni AI per piccole imprese — 5–15 ore risparmiate a settimana. Attivo in 1–2 settimane.",
+    ogDescription: "Fai gestire automaticamente i compiti ricorrenti — preventivi, fatture, report. Per piccole imprese in Germania.",
+    breadcrumb: "Automazione AI",
+    serviceName: "Automazione AI",
+    eyebrow: "Servizi / Automazione AI",
+    h1: "Automazione AI per piccole imprese.",
+    subheadline: "Preventivi, fatture, report, inserimento dati — i compiti che costano ore ogni settimana vengono presi in carico da un sistema. Recuperi 5–15 ore a settimana, senza nuove assunzioni e senza dover capire la tecnologia.",
+    useCasesHeading: "Cosa si può automatizzare",
+    useCases: [
+      { title: "Preventivi e fatture", text: "Da un breve inserimento nasce il preventivo o la fattura finiti — formattati, corretti, in secondi invece che 30 minuti." },
+      { title: "Report e reportistica", text: "I dati provenienti da fonti diverse vengono uniti automaticamente e forniti come report finito — giornalmente, settimanalmente o su richiesta." },
+      { title: "Inserimento e trasferimento dati", text: "Le informazioni passano automaticamente tra e-mail, tabelle e i tuoi strumenti — senza copia-incolla, senza errori di battitura." },
+      { title: "Ordinamento delle richieste dei clienti", text: "Le richieste in arrivo vengono valutate automaticamente, prioritizzate e dotate di messaggi di sollecito — senza sforzo manuale." },
+    ],
+    stepsHeading: "Come funziona",
+    steps: [
+      { n: "01", title: "Colloquio gratuito", text: "Guardiamo il tuo compito che ti fa perdere tempo e ti diciamo onestamente se e come possiamo automatizzarlo." },
+      { n: "02", title: "Realizzazione in 1–2 settimane", text: "Costruiamo il sistema, lo testiamo con i tuoi dati reali e te lo consegniamo pronto all'uso." },
+      { n: "03", title: "Funziona ed è seguito", text: "Il sistema funziona autonomamente. Non spariamo dopo l'attivazione — puoi raggiungerci in qualsiasi momento." },
+    ],
+    faqHeading: "Domande frequenti",
+    faq: [
+      { question: "Quanto dura un'automazione?", answer: "Un'automazione tipica è pronta in 1–2 settimane — dalla prima idea al sistema funzionante." },
+      { question: "Devo essere tecnico per usarlo?", answer: "No. Descrivi il compito in linguaggio semplice, noi costruiamo il resto. L'uso è poi semplice come inviare un'e-mail." },
+      { question: "Sono troppo piccolo come azienda per questo?", answer: "Al contrario. Sono proprio le piccole imprese a trarne il massimo beneficio, perché ogni ora risparmiata conta direttamente. Anche una sola automazione spesso fa risparmiare diverse ore a settimana." },
+    ],
+    ctaHeading: "Quale compito ti costa più tempo?",
+    ctaText: "Dicci nel colloquio gratuito — ti mostriamo esattamente come automatizzare quel compito.",
+    ctaButton: "Prenota un colloquio gratuito",
+    start: "Home",
+    leistungenLabel: "Servizi",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -162,7 +230,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription }, tr: { title: CONTENT.tr.metaTitle, description: CONTENT.tr.metaDescription }, it: { title: CONTENT.it.metaTitle, description: CONTENT.it.metaDescription } },
     AVAILABLE
   );
 }
@@ -170,7 +238,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function KiAutomatisierungPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

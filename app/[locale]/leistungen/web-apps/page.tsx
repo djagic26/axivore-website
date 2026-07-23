@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 const PATH = "/leistungen/web-apps";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en" | "ro", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   useCasesHeading: string; useCases: Item[];
@@ -176,6 +176,84 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro", {
     start: "Acasă",
     leistungenLabel: "Servicii",
   },
+  tr: {
+    metaTitle: "Web Uygulaması ve SaaS Geliştirme — Özel Yazılım | Axivore",
+    metaDescription: "Axivore, küçük ve orta ölçekli işletmeler için fikirden canlıya kadar özel web uygulamaları ve SaaS ürünleri geliştirir. Tam olarak işletmene göre uyarlanmış, sabit fiyatla.",
+    ogDescription: "Fikirden canlıya kadar özel web uygulamaları ve SaaS ürünleri — tam olarak işletmene göre uyarlanmış, sabit fiyatla.",
+    breadcrumb: "Web Uygulamaları ve SaaS",
+    serviceName: "Web Uygulaması ve SaaS Geliştirme",
+    eyebrow: "Hizmetler / Web Uygulamaları ve SaaS",
+    h1: "İşletmene uyan yazılım.",
+    subheadline: "Hazır yazılım, iş akışını programa uydurmanı zorlar. Biz tam tersini yaparız: tam olarak senin sürecini yansıtan bir web uygulaması ya da SaaS ürünü kurarız — ilk fikirden canlıya kadar, sabit fiyatla.",
+    useCasesHeading: "Neler kuruyoruz",
+    useCases: [
+      { title: "Dahili araçlar", text: "Asla tam oturmayan ve tam olarak hiç kullanmadığın pahalı hazır çözümler yerine, tam olarak iş akışını yansıtan yazılım." },
+      { title: "Müşteri portalları", text: "Müşterilerinin dokümanları, randevuları ya da durumu görebildiği korumalı bir alan — sana sürekli soru sormadan." },
+      { title: "SaaS ürünleri", text: "Bir ürün fikrin mi var? SaaS'ını fikirden MVP'ye, oradan lansmana kadar kurarız — kullanıcı yönetimi ve faturalandırma dahil." },
+      { title: "Panolar ve analizler", text: "Farklı kaynaklardan gelen sayılar tek bir yerde — net, güncel, böylece gerçek verilere dayanarak karar verirsin." },
+      { title: "Rezervasyon ve sipariş sistemleri", text: "Randevular, rezervasyonlar ya da siparişler için özel sistemler — tam olarak işletmenin ihtiyacı olduğu şekilde." },
+      { title: "Entegrasyonlar", text: "Verilerin otomatik akması için mevcut araçlarını birbirine bağlarız — programlar arasında artık kopyala-yapıştır yok." },
+    ],
+    stepsHeading: "Nasıl işliyor",
+    steps: [
+      { n: "01", title: "Fikir ve kapsam", text: "Uygulamanın ne yapması gerektiğini ve kimin için olduğunu netleştiririz. Sonrasında net kapsamlı, sabit fiyatlı bir teklif alırsın." },
+      { n: "02", title: "Kurma ve test etme", text: "Aşamalar halinde geliştiririz, ilk versiyonları erkenden görür ve geri bildirim verirsin — böylece sonunda sürpriz olmaz." },
+      { n: "03", title: "Canlı ve devam eden geliştirme", text: "Uygulama canlıya alınır. İstek üzerine, işletmen büyüdükçe ve yeni ihtiyaçlar ortaya çıktıkça onu geliştirmeye devam ederiz." },
+    ],
+    faqHeading: "Sık sorulan sorular",
+    faq: [
+      { question: "Bir web uygulaması geliştirmenin maliyeti nedir?", answer: "Bu büyük ölçüde kapsama bağlıdır. Büyük projeleri aşamalara böleriz, böylece her şeyi bir kerede ödemezsin. Önceden her zaman net kapsamlı, sabit fiyatlı yazılı bir teklif alırsın — açık uçlu fatura yok." },
+      { question: "Geliştirme ne kadar sürer?", answer: "İlk kullanılabilir versiyon (MVP) genellikle birkaç hafta içinde mümkündür. Daha kapsamlı ürünler aşamalar halinde büyür. Önceden sana gerçekçi bir zaman çizelgesi veririz." },
+      { question: "Kod sonunda bana mı ait olur?", answer: "Evet. Senin için kurduğumuz şey sana aittir — kod dahil. Bize bağlı değilsin ve uygulamayı istediğin zaman devredebilirsin." },
+      { question: "Mevcut bir çözümün üzerine inşa edebilir misiniz?", answer: "Çoğu zaman evet. Zaten sahip olduğun şeye bakar ve değmediğinde her şeyi sıfırdan kurmak yerine onu genişletir ya da bağlarız." },
+    ],
+    projekteText: "Kendi ürünlerimizin canlı örneklerini {LINK} sayfasında bulabilirsin — kendimizin kurduğu ve her gün işlettiğimiz gerçek SaaS sistemleri.",
+    projekteLinkLabel: "Projeler",
+    ctaHeading: "Aklında bir fikir mi var?",
+    ctaText: "Ücretsiz 30 dakikalık bir görüşmede bize anlat. Uygulanıp uygulanamayacağını, nasıl yapılabileceğini ve maliyetini dürüstçe söyleriz. Satış konuşması yok.",
+    ctaButton: "Ücretsiz görüşme ayarla",
+    start: "Ana Sayfa",
+    leistungenLabel: "Hizmetler",
+  },
+  it: {
+    metaTitle: "Sviluppo Web-App e SaaS su Misura | Axivore",
+    metaDescription: "Axivore sviluppa web-app e prodotti SaaS su misura per piccole e medie imprese — dall'idea all'attivazione. Realizzati esattamente per la tua attività, a prezzo fisso.",
+    ogDescription: "Web-app e prodotti SaaS su misura dall'idea all'attivazione — realizzati esattamente per la tua attività, a prezzo fisso.",
+    breadcrumb: "Web-App e SaaS",
+    serviceName: "Sviluppo Web-App e SaaS",
+    eyebrow: "Servizi / Web-App e SaaS",
+    h1: "Software che si adatta alla tua attività.",
+    subheadline: "Il software standard ti costringe ad adattare il tuo processo al programma. Noi facciamo il contrario: costruiamo una web-app o un prodotto SaaS che rispecchia esattamente il tuo processo — dalla prima idea all'attivazione, a prezzo fisso.",
+    useCasesHeading: "Cosa costruiamo",
+    useCases: [
+      { title: "Strumenti interni", text: "Software che rispecchia esattamente il tuo flusso di lavoro — invece di costose soluzioni standard che non si adattano mai perfettamente e che non usi mai completamente." },
+      { title: "Portali clienti", text: "Un'area protetta in cui i tuoi clienti visualizzano documenti, appuntamenti o stato — senza continue richieste a te." },
+      { title: "Prodotti SaaS", text: "Hai un'idea di prodotto? Costruiamo il tuo SaaS dall'idea all'MVP fino al lancio — inclusa gestione utenti e fatturazione." },
+      { title: "Dashboard e analisi", text: "Numeri da fonti diverse in un unico posto — chiari, aggiornati, così prendi decisioni basate su dati reali." },
+      { title: "Sistemi di prenotazione e ordini", text: "Sistemi su misura per appuntamenti, prenotazioni o ordini — esattamente come ne ha bisogno la tua attività." },
+      { title: "Integrazioni", text: "Colleghiamo i tuoi strumenti esistenti così i dati fluiscono automaticamente — niente più copia-incolla tra programmi." },
+    ],
+    stepsHeading: "Come funziona",
+    steps: [
+      { n: "01", title: "Idea e ambito", text: "Chiariamo cosa deve fare l'applicazione e per chi. Poi ricevi un preventivo a prezzo fisso con ambito chiaro." },
+      { n: "02", title: "Costruzione e test", text: "Sviluppiamo per fasi, vedi presto le prime versioni e dai feedback — così alla fine non ci sono sorprese." },
+      { n: "03", title: "Online e sviluppo continuo", text: "L'applicazione va online. Su richiesta, continuiamo a svilupparla man mano che la tua attività cresce e emergono nuove esigenze." },
+    ],
+    faqHeading: "Domande frequenti",
+    faq: [
+      { question: "Quanto costa sviluppare una web-app?", answer: "Dipende molto dall'ambito. Dividiamo i progetti più grandi in fasi, così non paghi tutto in una volta. Ricevi sempre in anticipo un preventivo scritto a prezzo fisso con ambito chiaro — nessuna fattura aperta." },
+      { question: "Quanto dura lo sviluppo?", answer: "Una prima versione utilizzabile (MVP) è spesso possibile in poche settimane. I prodotti più ampi crescono per fasi. Ti diciamo in anticipo una tempistica realistica." },
+      { question: "Il codice alla fine è mio?", answer: "Sì. Ciò che costruiamo per te ti appartiene — codice incluso. Non sei legato a noi e puoi trasferire l'applicazione in qualsiasi momento." },
+      { question: "Potete costruire su una soluzione esistente?", answer: "Spesso sì. Guardiamo cosa hai già ed estendiamo o colleghiamo — invece di ricostruire tutto da zero quando non ne vale la pena." },
+    ],
+    projekteText: "Trovi esempi live dei nostri prodotti su {LINK} — sistemi SaaS reali che abbiamo costruito noi stessi e gestiamo ogni giorno.",
+    projekteLinkLabel: "Progetti",
+    ctaHeading: "Hai un'idea in mente?",
+    ctaText: "Raccontacela in un colloquio gratuito di 30 minuti. Ti diciamo onestamente se e come può essere realizzata — e quanto costa. Nessuna presentazione di vendita.",
+    ctaButton: "Prenota un colloquio gratuito",
+    start: "Home",
+    leistungenLabel: "Servizi",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -184,7 +262,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription }, tr: { title: CONTENT.tr.metaTitle, description: CONTENT.tr.metaDescription }, it: { title: CONTENT.it.metaTitle, description: CONTENT.it.metaDescription } },
     AVAILABLE
   );
 }
@@ -192,7 +270,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function WebAppsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

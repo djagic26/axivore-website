@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 const PATH = "/leistungen/webseiten";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en" | "ro", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   featuresHeading: string; features: Item[];
@@ -180,6 +180,86 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro", {
     start: "Acasă",
     leistungenLabel: "Servicii",
   },
+  tr: {
+    metaTitle: "Web Sitesi Yaptırma — Küçük İşletmeler için Modern Web Siteleri | Axivore",
+    metaDescription: "Axivore, ziyaretçileri müşteriye dönüştüren modern, hızlı web siteleri kurar — istek üzerine randevu alma ve müşteri talepleri için AI asistanıyla. Sabit fiyat, 1-3 hafta içinde canlı.",
+    ogDescription: "Ziyaretçileri müşteriye dönüştüren modern, hızlı web siteleri — isteğe bağlı AI asistanıyla. Sabit fiyat, 1-3 hafta içinde canlı.",
+    breadcrumb: "Web Siteleri",
+    serviceName: "Web Siteleri ve Açılış Sayfaları",
+    eyebrow: "Hizmetler / Web Siteleri",
+    h1: "Sadece iyi görünmekle kalmayan web siteleri.",
+    subheadline: "Modern bir web sitesi dijital bir kartvizitten fazlasıdır. Ziyaretçileri müşteriye dönüştüren siteler kurarız — hızlı, mobil uyumlu, Google'da bulunan — ve istek üzerine, mesai sonrasında bile randevu alan ve soruları yanıtlayan bir AI asistanıyla.",
+    featuresHeading: "Neler alırsın",
+    features: [
+      { title: "Profesyonel görünüm", text: "Güven inşa eden ve işletmene uyan bir tasarım — hazır kalıp değil, sana özel uyarlanmış." },
+      { title: "Hızlı ve mobil uyumlu", text: "Siten saniyeler içinde yüklenir ve telefonda da bilgisayarda olduğu kadar iyi görünür — müşterilerin çoğunun seni bulduğu yer." },
+      { title: "Yerel aramada bulunma", text: "Google için düzgünce kurulmuş, böylece bölgendeki müşteriler hizmetini aradığında seni bulur." },
+      { title: "AI asistan (isteğe bağlı)", text: "İstek üzerine, soruları yanıtlayan ve randevu alan bir asistan ekleriz — siten böylece geceleri de çalışır." },
+      { title: "Randevular ve talepler", text: "İletişim formu, randevu alma ya da WhatsApp — ziyaretçiler dolambaçsız şekilde doğrudan talebe dönüşür." },
+      { title: "Bakımı kolay", text: "İçeriği kendin değiştirebilirsin ya da bakımı biz üstleniriz — hangisini tercih edersen." },
+    ],
+    stepsHeading: "Nasıl işliyor",
+    steps: [
+      { n: "01", title: "Görüşme ve konsept", text: "Web sitenin ne başarması gerektiğini ve müşterilerinin kim olduğunu netleştiririz. Sonrasında sabit fiyatlı bir teklif alırsın." },
+      { n: "02", title: "Tasarım ve kurulum", text: "Siteyi senin içeriğinle, logonla, senin diliyle tasarlar ve kurarız. Ara aşamaları görür ve geri bildirim verirsin." },
+      { n: "03", title: "Canlı ve destek", text: "Site canlıya alınır, teknik ve hosting işleriyle biz ilgileniriz. İstek üzerine sürekli bakımla." },
+    ],
+    faqHeading: "Sık sorulan sorular",
+    faq: [
+      { question: "Axivore'da bir web sitesi ne kadara mal olur?", answer: "Bu kapsama bağlıdır. Önceden sabit fiyatlı yazılı bir teklif alırsın — sonrasında fiyat değişmez. Klasik bir kurumsal site düşük dört haneli rakamlarla başlar, daha küçük açılış sayfaları bunun altındadır." },
+      { question: "Web sitem canlıya alınana kadar ne kadar sürer?", answer: "Genellikle kapsama ve içeriğini (metin, görsel) ne kadar hızlı bize ulaştırdığına bağlı olarak 1 ila 3 hafta. Önceden sana gerçekçi bir tarih söyleriz." },
+      { question: "İçeriği daha sonra kendim değiştirebilir miyim?", answer: "Evet. Siteyi metinleri ve görselleri kendin yönetebileceğin şekilde kurarız — ya da bakımı senin yerine biz üstleniriz. Tamamen sen tercih edersin." },
+      { question: "Arama motoru optimizasyonu (SEO) da yapıyor musunuz?", answer: "Her web sitesini teknik olarak Google için temiz şekilde kurarız. İstek üzerine ayrıca yerel SEO ile de ilgileniriz, böylece bölgendeki müşteriler seni daha iyi bulur." },
+    ],
+    crossLinkText: "AI asistanlı bir web sitesi işletmene uyuyor mu? {CHATBOTS} sayfamıza da göz at ya da {RATGEBER} sayfamıza bak.",
+    chatbotsLabel: "AI Chatbotlarımız",
+    ratgeberLabel: "Rehber",
+    ctaHeading: "Çalışan bir web sitesine hazır mısın?",
+    ctaText: "Ücretsiz 30 dakikalık bir görüşmede web sitenin ne başarması gerektiğine bakarız — ve sonrasında sabit fiyatlı bir teklif alırsın. Satış konuşması yok.",
+    ctaButton: "Ücretsiz görüşme ayarla",
+    start: "Ana Sayfa",
+    leistungenLabel: "Hizmetler",
+  },
+  it: {
+    metaTitle: "Creazione Siti Web — Siti Web Moderni per Piccole Imprese | Axivore",
+    metaDescription: "Axivore costruisce siti web moderni e veloci che trasformano i visitatori in clienti — su richiesta con assistente AI per prenotazione appuntamenti e richieste dei clienti. Prezzo fisso, attivo in 1–3 settimane.",
+    ogDescription: "Siti web moderni e veloci che trasformano i visitatori in clienti — con assistente AI opzionale. Prezzo fisso, attivo in 1–3 settimane.",
+    breadcrumb: "Siti Web",
+    serviceName: "Siti Web e Landing Page",
+    eyebrow: "Servizi / Siti Web",
+    h1: "Siti web che non sono solo belli da vedere.",
+    subheadline: "Un sito web moderno è più di un biglietto da visita digitale. Costruiamo siti che trasformano i visitatori in clienti — veloci, mobile, trovati su Google — e su richiesta con un assistente AI che prenota appuntamenti e risponde alle domande, anche dopo l'orario di lavoro.",
+    featuresHeading: "Cosa ottieni",
+    features: [
+      { title: "Presenza professionale", text: "Un design che crea fiducia e si adatta alla tua attività — non preconfezionato, ma su misura per te." },
+      { title: "Veloce e mobile", text: "Il tuo sito si carica in secondi e ha lo stesso bell'aspetto su cellulare come su computer — dove la maggior parte dei clienti ti trova." },
+      { title: "Trovato localmente", text: "Costruito correttamente per Google, così i clienti della tua zona ti trovano quando cercano il tuo servizio." },
+      { title: "Assistente AI (opzionale)", text: "Su richiesta integriamo un assistente che risponde alle domande e prenota appuntamenti — il tuo sito web lavora così anche di notte." },
+      { title: "Appuntamenti e richieste", text: "Modulo di contatto, prenotazione appuntamenti o WhatsApp — i visitatori diventano direttamente richieste, senza deviazioni." },
+      { title: "Facile da gestire", text: "Puoi modificare i contenuti da solo o ci occupiamo noi della gestione — come preferisci." },
+    ],
+    stepsHeading: "Come funziona",
+    steps: [
+      { n: "01", title: "Colloquio e concetto", text: "Chiariamo cosa deve realizzare il tuo sito web e chi sono i tuoi clienti. Poi ricevi un preventivo a prezzo fisso." },
+      { n: "02", title: "Design e costruzione", text: "Progettiamo e costruiamo il sito — con i tuoi contenuti, il tuo logo, il tuo linguaggio. Vedi fasi intermedie e dai feedback." },
+      { n: "03", title: "Online e assistenza", text: "Il sito va online, ci occupiamo noi di tecnica e hosting. Su richiesta con manutenzione continua." },
+    ],
+    faqHeading: "Domande frequenti",
+    faq: [
+      { question: "Quanto costa un sito web da Axivore?", answer: "Dipende dall'ambito. Ricevi in anticipo un preventivo scritto a prezzo fisso — dopo il prezzo non cambia più. Un classico sito aziendale parte da alcune migliaia di euro, landing page più piccole al di sotto." },
+      { question: "Quanto tempo ci vuole prima che il mio sito sia online?", answer: "Di solito 1–3 settimane, a seconda dell'ambito e di quanto velocemente riceviamo i tuoi contenuti (testi, immagini). Ti diciamo in anticipo una data realistica." },
+      { question: "Posso modificare i contenuti da solo in seguito?", answer: "Sì. Costruiamo il sito in modo che tu possa gestire testi e immagini da solo — oppure ci occupiamo noi della manutenzione per te. Come preferisci." },
+      { question: "Fate anche ottimizzazione per i motori di ricerca (SEO)?", answer: "Costruiamo ogni sito web tecnicamente pulito per Google. Su richiesta ci occupiamo anche di SEO locale, così i clienti della tua zona ti trovano meglio." },
+    ],
+    crossLinkText: "Un sito web con assistente AI si adatta alla tua attività? Dai un'occhiata anche ai nostri {CHATBOTS} o consulta la nostra {RATGEBER}.",
+    chatbotsLabel: "Chatbot AI",
+    ratgeberLabel: "Guida",
+    ctaHeading: "Pronto per un sito web che lavora?",
+    ctaText: "In un colloquio gratuito di 30 minuti guardiamo cosa deve realizzare il tuo sito web — e dopo ricevi un preventivo a prezzo fisso. Nessuna presentazione di vendita.",
+    ctaButton: "Prenota un colloquio gratuito",
+    start: "Home",
+    leistungenLabel: "Servizi",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -188,7 +268,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription }, tr: { title: CONTENT.tr.metaTitle, description: CONTENT.tr.metaDescription }, it: { title: CONTENT.it.metaTitle, description: CONTENT.it.metaDescription } },
     AVAILABLE
   );
 }
@@ -196,7 +276,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function WebseitenPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

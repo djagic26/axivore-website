@@ -7,9 +7,9 @@ import { resolveContentLocale, partialPageMetadata, localePathname, type AppLoca
 
 // Branchen content exists in German, Croatian and (as of this pass) English;
 // other locales fall back to the German page until they get their own pass.
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 
-const UI: Record<"de" | "hr" | "en" | "ro", { faq: string; ctaHeading: string; ctaText: string; ctaButton: string; more: string; start: string; branchenLabel: string }> = {
+const UI: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", { faq: string; ctaHeading: string; ctaText: string; ctaButton: string; more: string; start: string; branchenLabel: string }> = {
   de: {
     faq: "Häufige Fragen",
     ctaHeading: "Welche Aufgabe kostet dich am meisten Zeit?",
@@ -46,6 +46,24 @@ const UI: Record<"de" | "hr" | "en" | "ro", { faq: string; ctaHeading: string; c
     start: "Acasă",
     branchenLabel: "Domenii",
   },
+  tr: {
+    faq: "Sık sorulan sorular",
+    ctaHeading: "Hangi görev senin en çok zamanını alıyor?",
+    ctaText: "Ücretsiz görüşmede bize söyle — o görevin işletmende tam olarak nasıl otomatikleştirilebileceğini gösterelim.",
+    ctaButton: "Ücretsiz görüşme ayarla",
+    more: "Diğer sektörler",
+    start: "Ana Sayfa",
+    branchenLabel: "Sektörler",
+  },
+  it: {
+    faq: "Domande frequenti",
+    ctaHeading: "Quale compito ti costa più tempo?",
+    ctaText: "Dicci nel colloquio gratuito — ti mostriamo esattamente come automatizzare quel compito nella tua attività.",
+    ctaButton: "Prenota un colloquio gratuito",
+    more: "Altri settori",
+    start: "Home",
+    branchenLabel: "Settori",
+  },
 };
 
 // Only the known branches exist — unknown slugs return 404.
@@ -73,6 +91,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       hr: { title: branche.metaTitle, description: branche.metaDescription },
       en: { title: branche.metaTitle, description: branche.metaDescription },
       ro: { title: branche.metaTitle, description: branche.metaDescription },
+      tr: { title: branche.metaTitle, description: branche.metaDescription },
+      it: { title: branche.metaTitle, description: branche.metaDescription },
     },
     AVAILABLE
   );
@@ -84,7 +104,7 @@ export default async function BranchePage({ params }: Props) {
   const branche = getBranche(slug, contentLocale);
   if (!branche) notFound();
 
-  const ui = UI[contentLocale as "de" | "hr" | "en" | "ro"];
+  const ui = UI[contentLocale as "de" | "hr" | "en" | "ro" | "tr" | "it"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, `/branchen/${branche.slug}`)}`;
   const branchenUrl = `https://axivore.io${localePathname(contentLocale, "/branchen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

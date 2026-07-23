@@ -4,7 +4,7 @@ import { ArticleLayout } from "@/components/ratgeber/ArticleLayout";
 import { getRatgeberArticle } from "@/lib/ratgeber";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 const SLUG = "ki-chatbot-oder-anrufbeantworter";
 const PATH = `/ratgeber/${SLUG}`;
 
@@ -15,10 +15,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const hr = getRatgeberArticle(SLUG, "hr")!;
   const en = getRatgeberArticle(SLUG, "en")!;
   const ro = getRatgeberArticle(SLUG, "ro")!;
+  const tr = getRatgeberArticle(SLUG, "tr")!;
+  const it = getRatgeberArticle(SLUG, "it")!;
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description }, en: { title: en.metaTitle, description: en.description }, ro: { title: ro.metaTitle, description: ro.description } },
+    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description }, en: { title: en.metaTitle, description: en.description }, ro: { title: ro.metaTitle, description: ro.description }, tr: { title: tr.metaTitle, description: tr.description }, it: { title: it.metaTitle, description: it.description } },
     AVAILABLE
   );
 }
@@ -57,6 +59,24 @@ const comparisonRo = [
   { label: "Programează întâlniri", ab: "Nu", buero: "Da", ki: "Da, direct în calendarul tău" },
   { label: "Predare structurată", ab: "Asculți tu mesajele", buero: "Bilet / e-mail", ki: "Cerere + contact înregistrate curat" },
   { label: "Contact personal", ab: "Nu", buero: "Da", ki: "Nu — te predă pe tine când devine personal" },
+];
+
+const comparisonTr = [
+  { label: "Maliyet", ab: "Tek seferlik, çok ucuz", buero: "Sürekli, aylık birkaç yüz €'dan", ki: "Tek seferlik 499 €'dan, düşük sürekli maliyet" },
+  { label: "Erişilebilirlik", ab: "7/24 — ama sadece kayıt", buero: "Mesai saatlerinde", ki: "7/24 — gerçek yanıtlarla" },
+  { label: "Soruları yanıtlar", ab: "Hayır", buero: "Evet, standart sorular", ki: "Evet, ona öğrettiğin her şeyi" },
+  { label: "Randevu alır", ab: "Hayır", buero: "Evet", ki: "Evet, doğrudan takvimine" },
+  { label: "Yapılandırılmış teslim", ab: "Mesajları kendin dinlersin", buero: "Not / e-posta", ki: "Talep + iletişim düzgünce kaydedilir" },
+  { label: "Kişisel iletişim", ab: "Hayır", buero: "Evet", ki: "Hayır — kişisel hale gelince sana devreder" },
+];
+
+const comparisonIt = [
+  { label: "Costo", ab: "Una tantum, molto economico", buero: "Continuo, da diverse centinaia di €/mese", ki: "Una tantum da 499 €, bassi costi continui" },
+  { label: "Reperibilità", ab: "24/7 — ma solo registrazione", buero: "Negli orari d'ufficio", ki: "24/7 — con risposte reali" },
+  { label: "Risponde alle domande", ab: "No", buero: "Sì, domande standard", ki: "Sì, tutto ciò che gli insegni" },
+  { label: "Prenota appuntamenti", ab: "No", buero: "Sì", ki: "Sì, direttamente nel tuo calendario" },
+  { label: "Consegna strutturata", ab: "Ascolti tu i messaggi", buero: "Biglietto / e-mail", ki: "Richiesta + contatto registrati in modo pulito" },
+  { label: "Contatto personale", ab: "No", buero: "Sì", ki: "No — ti consegna quando diventa personale" },
 ];
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
@@ -414,6 +434,254 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           la un preț unic. Ce soluție se potrivește firmei tale depinde de volumul tău de apeluri, nu
           de hype-ul tehnologic. Dacă nu ești sigur: în 30 de minute îți spunem sincer dacă merită
           pentru tine — chiar și atunci când răspunsul este &bdquo;nu&ldquo;.
+        </p>
+      </ArticleLayout>
+    );
+  }
+
+  if (contentLocale === "tr") {
+    return (
+      <ArticleLayout article={article} locale={contentLocale}>
+        <p>
+          Merdivendesin, telefon çalıyor. Bir müşteriyle konuşuyorsun — yine çalıyor. Mesai
+          sonrasında geri arıyorsun ama ilgilenen kişi çoktan bir sonraki işletmeyi aramış.
+          Kaçırılan aramalar küçük işletmeler için en pahalı sorunlardan biridir — tam olarak
+          faturada görünmediği için. Soru şu: ne yapmalı? Üç yaygın seçeneği karşılaştırıyoruz —
+          tüm zayıflıklarıyla birlikte, dürüstçe.
+        </p>
+
+        <h2>Gerçek sorun: ulaşamayan bir sonrakini arar</h2>
+        <p>
+          Bugün bir usta, bir masa ya da bir randevu arayan kişinin sabrı azdır. Telefona kimse
+          bakmazsa nadiren beklenir — listedeki bir sonraki numara aranır. İş, senin varlığından
+          haberin olmadan çoktan kaybolmuştur. Her çözüm şuna göre ölçülmelidir: ilgilenen kişiyi
+          tam olarak aradığı ya da yazdığı anda yakalıyor mu?
+        </p>
+
+        <h2>Seçenek 1: Telesekreter</h2>
+        <p>
+          Klasik çözüm — neredeyse hiçbir şeye mal olmaz ve hızlıca kurulur. Sorunu kendi
+          deneyiminden biliyorsun: <strong>birçok arayan telesekreterde mesaj bile bırakmaz</strong>,
+          sadece kapatır. Ve bir mesaj olsa bile, geri arama pinpon oyunu başlar: geri arıyorsun,
+          müşteriye ulaşılamıyor, o geri arıyor, sen merdivendesin. Telesekreter kaydeder — hiçbir
+          şeyi çözmez.
+        </p>
+
+        <h2>Seçenek 2: Ofis personeli ya da dış telefon hizmeti</h2>
+        <p>
+          Telefonda bir insan, arayan için en hoş çözümdür — kuşkusuz. Ama bir bedeli vardır: kendi
+          ofis personelin ancak belirli bir işletme büyüklüğünden itibaren karşılığını verir, dış
+          telefon hizmetleri ise sürekli para tutar ve işini sadece yüzeysel olarak tanır. Teknik
+          sorularda (&bdquo;Eski bina tadilatı da yapıyor musunuz?&ldquo;) yetersiz kalır ve mesai
+          saatleri dışında yine boşa çalar.
+        </p>
+
+        <h2>Seçenek 3: AI asistan</h2>
+        <p>
+          Bir AI asistan — web sitende bir sohbet, WhatsApp üzerinden ya da telefonda — en yeni
+          seçenektir ve sadece kayıt yapmak yerine 7/24 <em>yanıt veren</em> tek seçenektir. Somut
+          olarak şunları yapabilir:
+        </p>
+        <ul>
+          <li>
+            <strong>Standart soruları anında yanıtlar:</strong> çalışma saatleri, hizmetler,
+            hizmet bölgesi, yaklaşık fiyat aralıkları — ona bir kez öğrettiğin her şey.
+          </li>
+          <li>
+            <strong>Doğrudan randevu alır:</strong> ilgilenen kişi uygun bir zaman dilimini seçer,
+            onay otomatik olarak gönderilir — geri arama pinponu olmadan.
+          </li>
+          <li>
+            <strong>Talebi yapılandırılmış şekilde kaydeder:</strong> yarı anlaşılır bir sesli
+            mesaj yerine, isim, iletişim, talep ve aciliyet düzgünce not edilmiş olarak elde
+            edersin.
+          </li>
+          <li>
+            <strong>İşler ciddileştiğinde devreder:</strong> iyi bir asistan bir insanın devralması
+            gerektiğini fark eder — ve müşteriyi döngüye sokmak yerine yönlendirir.
+          </li>
+        </ul>
+
+        <h2>Dürüst karşılaştırma</h2>
+        <div className="mb-6 overflow-x-auto rounded-xl" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
+          <table className="w-full text-[13.5px] leading-[1.5]">
+            <thead>
+              <tr className="text-left" style={{ background: "rgba(255,255,255,0.04)" }}>
+                <th className="p-3.5 font-semibold text-white"> </th>
+                <th className="p-3.5 font-semibold text-white">Telesekreter</th>
+                <th className="p-3.5 font-semibold text-white">Ofis personeli / hizmet</th>
+                <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>AI asistan</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonTr.map((row) => (
+                <tr key={row.label} style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+                  <td className="p-3.5 font-medium text-white/85">{row.label}</td>
+                  <td className="p-3.5 text-white/55">{row.ab}</td>
+                  <td className="p-3.5 text-white/55">{row.buero}</td>
+                  <td className="p-3.5 text-white/75">{row.ki}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Telesekreterin tamamen yeterli olduğu durumlar</h2>
+        <p>
+          Dürüst cevap: her işletmenin AI&rsquo;ya ihtiyacı yoktur. Neredeyse sadece sabit
+          müşterilerin varsa, telefonla yeni talep neredeyse hiç gelmiyorsa ve geri aramaları
+          güvenilir şekilde aynı gün yapabiliyorsan — o zaman telesekreter yeterlidir. Parayı başka
+          bir yere yatır.
+        </p>
+
+        <h2>AI asistanın değdiği durumlar</h2>
+        <ul>
+          <li>Şantiyede, hizmette ya da bir tedavi sırasında olduğun için düzenli olarak aramaları kaçırıyorsun.</li>
+          <li>Yeni talepler senin için önemli — ve bazılarının rakiplerinde sonlandığını biliyorsun.</li>
+          <li>Her gün aynı beş soru zaman alıyor: çalışma saatleri, fiyatlar, müsaitlik.</li>
+          <li>Randevuları ileri geri telefon görüşmeleriyle koordine etmek seni (ve müşterilerini) sinirlendiriyor.</li>
+        </ul>
+        <p>
+          İki ya da daha fazla madde sana uyuyorsa, asistan hızlıca kendini amorti eder: bizde
+          böyle bir sistem <strong>499 €&rsquo;dan başlar, sabit fiyatla</strong> — tek seferlik,
+          önceden yazılı bir teklifle. Detaylar{" "}
+          <Link href={localePathname(contentLocale, "/preise")}>fiyatlar sayfasında</Link>, teknoloji
+          hakkında daha fazlası ise{" "}
+          <Link href={localePathname(contentLocale, "/leistungen/ki-chatbots")}>işletmeler için AI chatbotlar</Link> sayfamızda.
+        </p>
+
+        <h2>Sonuç</h2>
+        <p>
+          Telesekreter kaydeder, insan sürekli maliyet çıkarır, AI asistan yanıtlar — 7/24, tek
+          seferlik bir fiyatla. Hangi çözümün işletmene uyduğu, teknoloji abartısına değil, arama
+          hacmine bağlıdır. Emin değilsen: 30 dakikada sana bunun senin için değip değmediğini
+          dürüstçe söyleriz — cevap &bdquo;hayır&ldquo; olsa bile.
+        </p>
+      </ArticleLayout>
+    );
+  }
+
+  if (contentLocale === "it") {
+    return (
+      <ArticleLayout article={article} locale={contentLocale}>
+        <p>
+          Sei sulla scala, squilla il telefono. Sei al telefono con un cliente — squilla di nuovo.
+          Dopo l&rsquo;orario di lavoro richiami, ma l&rsquo;interessato ha già chiamato
+          l&rsquo;azienda successiva. Le chiamate perse sono uno dei problemi più costosi per le
+          piccole imprese — proprio perché non le vedi su una fattura. La domanda è: cosa fare?
+          Confrontiamo le tre opzioni comuni — onestamente, con tutti i loro punti deboli.
+        </p>
+
+        <h2>Il vero problema: chi non risponde, viene chiamato il successivo</h2>
+        <p>
+          Chi oggi cerca un artigiano, un tavolo o un appuntamento ha poca pazienza. Se nessuno
+          risponde al telefono, raramente si aspetta — si compone il numero successivo sulla
+          lista. L&rsquo;incarico è sparito prima ancora che tu sapessi che esisteva. Ogni
+          soluzione deve essere misurata su questo: intercetta l&rsquo;interessato proprio nel
+          momento in cui chiama o scrive?
+        </p>
+
+        <h2>Opzione 1: La segreteria telefonica</h2>
+        <p>
+          La soluzione classica — costa quasi niente ed è configurata rapidamente. Il problema lo
+          conosci per esperienza diretta: <strong>molti chiamanti non lasciano nemmeno un
+          messaggio</strong> sulla segreteria, ma riattaccano. E anche quando c&rsquo;è un
+          messaggio, inizia il ping-pong dei richiami: richiami, il cliente non è raggiungibile,
+          richiama lui, tu sei sulla scala. La segreteria telefonica registra — non risolve nulla.
+        </p>
+
+        <h2>Opzione 2: Personale d&rsquo;ufficio o servizio telefonico esterno</h2>
+        <p>
+          Una persona al telefono è la soluzione più piacevole per chi chiama — senza dubbio. Ma
+          ha il suo prezzo: personale d&rsquo;ufficio proprio conviene solo da una certa dimensione
+          aziendale, e i servizi telefonici esterni costano continuamente denaro, ma conoscono la
+          tua attività solo superficialmente. Alle domande tecniche (&bdquo;Fate anche
+          ristrutturazioni di edifici storici?&ldquo;) diventa sottile, e fuori dagli orari
+          d&rsquo;ufficio squilla di nuovo a vuoto.
+        </p>
+
+        <h2>Opzione 3: L&rsquo;assistente AI</h2>
+        <p>
+          Un assistente AI — come chat sul tuo sito web, tramite WhatsApp o al telefono —
+          è l&rsquo;opzione più recente, e l&rsquo;unica che <em>risponde</em> 24/7 invece di
+          limitarsi a registrare. Concretamente può:
+        </p>
+        <ul>
+          <li>
+            <strong>Rispondere subito a domande standard:</strong> orari, servizi, area di
+            competenza, fasce di prezzo approssimative — tutto ciò che gli hai insegnato una
+            volta.
+          </li>
+          <li>
+            <strong>Prenotare appuntamenti direttamente:</strong> l&rsquo;interessato sceglie uno
+            slot libero, la conferma parte automaticamente — senza ping-pong di richiami.
+          </li>
+          <li>
+            <strong>Registrare le richieste in modo strutturato:</strong> invece di un messaggio
+            vocale a metà comprensibile, ottieni nome, contatto, richiesta e urgenza annotati in
+            modo pulito.
+          </li>
+          <li>
+            <strong>Consegnare quando diventa serio:</strong> un buon assistente riconosce quando
+            serve una persona — e inoltra, invece di mandare il cliente in un circolo.
+          </li>
+        </ul>
+
+        <h2>Il confronto onesto</h2>
+        <div className="mb-6 overflow-x-auto rounded-xl" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
+          <table className="w-full text-[13.5px] leading-[1.5]">
+            <thead>
+              <tr className="text-left" style={{ background: "rgba(255,255,255,0.04)" }}>
+                <th className="p-3.5 font-semibold text-white"> </th>
+                <th className="p-3.5 font-semibold text-white">Segreteria telefonica</th>
+                <th className="p-3.5 font-semibold text-white">Personale / servizio</th>
+                <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>Assistente AI</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonIt.map((row) => (
+                <tr key={row.label} style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+                  <td className="p-3.5 font-medium text-white/85">{row.label}</td>
+                  <td className="p-3.5 text-white/55">{row.ab}</td>
+                  <td className="p-3.5 text-white/55">{row.buero}</td>
+                  <td className="p-3.5 text-white/75">{row.ki}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Quando la segreteria telefonica basta completamente</h2>
+        <p>
+          Risposta onesta: non ogni azienda ha bisogno dell&rsquo;AI. Se hai quasi solo clienti
+          abituali, arrivano poche nuove richieste per telefono e riesci a richiamare in modo
+          affidabile lo stesso giorno — allora la segreteria telefonica basta. Investi il denaro
+          altrove.
+        </p>
+
+        <h2>Quando conviene l&rsquo;assistente AI</h2>
+        <ul>
+          <li>Perdi regolarmente chiamate perché sei in cantiere, in servizio o in trattamento.</li>
+          <li>Le nuove richieste sono importanti per te — e sai che alcune finiscono dalla concorrenza.</li>
+          <li>Le stesse cinque domande consumano tempo ogni giorno: orari, prezzi, disponibilità.</li>
+          <li>Coordinare gli appuntamenti con telefonate avanti e indietro ti infastidisce (e infastidisce i tuoi clienti).</li>
+        </ul>
+        <p>
+          Se due o più punti si applicano a te, l&rsquo;assistente si ripaga rapidamente: da noi un
+          tale sistema parte <strong>da 499 € a prezzo fisso</strong> — una tantum, con preventivo
+          scritto in anticipo. Dettagli sulla{" "}
+          <Link href={localePathname(contentLocale, "/preise")}>pagina dei prezzi</Link>, maggiori
+          informazioni sulla tecnologia sulla nostra pagina sui{" "}
+          <Link href={localePathname(contentLocale, "/leistungen/ki-chatbots")}>chatbot AI per aziende</Link>.
+        </p>
+
+        <h2>Conclusione</h2>
+        <p>
+          La segreteria telefonica registra, la persona costa continuamente, l&rsquo;assistente AI
+          risponde — 24/7, a un prezzo unico. Quale soluzione si adatta alla tua attività dipende
+          dal tuo volume di chiamate, non dall&rsquo;hype tecnologico. Se non sei sicuro: in 30
+          minuti ti diciamo onestamente se ne vale la pena per te — anche se la risposta è
+          &bdquo;no&ldquo;.
         </p>
       </ArticleLayout>
     );

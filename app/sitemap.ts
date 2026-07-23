@@ -7,8 +7,8 @@ import { localeHref, type AppLocale } from "@/lib/seo";
 // Pages that exist in all 6 languages (see lib/i18n.ts).
 const TRANSLATED_PATHS = ["", "/preise", "/ueber-uns", "/projekte", "/kontakt"];
 
-// Deep SEO content translated one market at a time — currently German, Croatian, English and Romanian.
-const PARTIAL_LOCALES: readonly AppLocale[] = ["de", "hr", "en", "ro"];
+// Deep SEO content translated one market at a time — currently German, Croatian, English, Romanian, Turkish and Italian.
+const PARTIAL_LOCALES: readonly AppLocale[] = ["de", "hr", "en", "ro", "tr", "it"];
 const LEISTUNGEN_PATHS = ["/leistungen", "/leistungen/ki-automatisierung", "/leistungen/ki-chatbots", "/leistungen/web-apps", "/leistungen/webseiten"];
 
 function languageAlternates(path: string, locales: readonly AppLocale[] = routing.locales) {

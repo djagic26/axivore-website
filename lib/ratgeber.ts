@@ -37,7 +37,6 @@ export const ratgeberArticles: RatgeberArticle[] = [
 ];
 
 // Croatian translations — same slugs/order/dates as `ratgeberArticles`.
-// Other locales (en/ro/tr/it) fall back to German until they get their pass.
 export const ratgeberArticlesHr: RatgeberArticle[] = [
   {
     slug: "angebote-automatisieren-handwerk",
@@ -109,10 +108,60 @@ export const ratgeberArticlesRo: RatgeberArticle[] = [
   },
 ];
 
+// Turkish translations — same slugs/order/dates as `ratgeberArticles`.
+export const ratgeberArticlesTr: RatgeberArticle[] = [
+  {
+    slug: "angebote-automatisieren-handwerk",
+    title: "Zanaatkârlıkta Teklif Otomasyonu: Gerçekte Ne Kazandırır?",
+    metaTitle: "Zanaatkârlıkta teklif otomasyonu — gerçekte ne kazandırır? | Axivore",
+    description:
+      "Zanaatkâr işletmeleri teklifleri saatler yerine dakikalar içinde nasıl oluşturur: otomasyon gerçekte ne yapabilir, dürüstçe neye mal olur ve ne zaman değer?",
+    category: "Zanaatkârlar",
+    date: "2026-07-03",
+    readingTime: "6 dk.",
+  },
+  {
+    slug: "ki-chatbot-oder-anrufbeantworter",
+    title: "AI Chatbot mu, Telesekreter mi: Küçük İşletmeler İçin Ne Değer?",
+    metaTitle: "AI Chatbot mu Telesekreter mi? Dürüst Karşılaştırma | Axivore",
+    description:
+      "Kaçırılan aramalar iş kaybettirir. Dürüst karşılaştırma: telesekreter, ofis personeli ve AI asistanı — maliyetler, faydalar ve gerçekte ne zaman ne işe yarar.",
+    category: "Erişilebilirlik",
+    date: "2026-07-03",
+    readingTime: "7 dk.",
+  },
+];
+
+// Italian translations — same slugs/order/dates as `ratgeberArticles`.
+export const ratgeberArticlesIt: RatgeberArticle[] = [
+  {
+    slug: "angebote-automatisieren-handwerk",
+    title: "Automatizzare i Preventivi nell'Artigianato: Cosa Porta Davvero",
+    metaTitle: "Automatizzare i preventivi nell'artigianato — cosa porta davvero | Axivore",
+    description:
+      "Come le aziende artigiane creano preventivi in pochi minuti invece che in ore: cosa può davvero fare l'automazione, quanto costa onestamente e da quando conviene.",
+    category: "Artigiani",
+    date: "2026-07-03",
+    readingTime: "6 min.",
+  },
+  {
+    slug: "ki-chatbot-oder-anrufbeantworter",
+    title: "Chatbot AI o Segreteria Telefonica: Cosa Conviene per le Piccole Imprese?",
+    metaTitle: "Chatbot AI o Segreteria Telefonica? Il Confronto Onesto | Axivore",
+    description:
+      "Le chiamate perse costano incarichi. Il confronto onesto: segreteria telefonica, personale d'ufficio e assistente AI — costi, benefici e quando cosa conviene davvero.",
+    category: "Reperibilità",
+    date: "2026-07-03",
+    readingTime: "7 min.",
+  },
+];
+
 export function getRatgeberArticlesList(locale: string): RatgeberArticle[] {
   if (locale === "hr") return ratgeberArticlesHr;
   if (locale === "en") return ratgeberArticlesEn;
   if (locale === "ro") return ratgeberArticlesRo;
+  if (locale === "tr") return ratgeberArticlesTr;
+  if (locale === "it") return ratgeberArticlesIt;
   return ratgeberArticles;
 }
 
