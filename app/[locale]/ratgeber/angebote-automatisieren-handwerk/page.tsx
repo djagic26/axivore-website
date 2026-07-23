@@ -4,7 +4,7 @@ import { ArticleLayout } from "@/components/ratgeber/ArticleLayout";
 import { getRatgeberArticle } from "@/lib/ratgeber";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 const SLUG = "angebote-automatisieren-handwerk";
 const PATH = `/ratgeber/${SLUG}`;
 
@@ -14,10 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const de = getRatgeberArticle(SLUG, "de")!;
   const hr = getRatgeberArticle(SLUG, "hr")!;
   const en = getRatgeberArticle(SLUG, "en")!;
+  const ro = getRatgeberArticle(SLUG, "ro")!;
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description }, en: { title: en.metaTitle, description: en.description } },
+    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description }, en: { title: en.metaTitle, description: en.description }, ro: { title: ro.metaTitle, description: ro.description } },
     AVAILABLE
   );
 }
@@ -255,6 +256,122 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <p>
           More on what we build specifically for trade businesses can be found on our{" "}
           <Link href={localePathname(contentLocale, "/branchen/handwerk")}>AI for trade businesses</Link> page.
+        </p>
+      </ArticleLayout>
+    );
+  }
+
+  if (contentLocale === "ro") {
+    return (
+      <ArticleLayout article={article} locale={contentLocale}>
+        <p>
+          Este ora 21:00. Șantierul s-a terminat de câteva ore bune, dar tu tot stai la masa din
+          bucătărie și tastezi o ofertă. Cauți poziții, verifici prețuri, aduci totul în formatul
+          corect — iar mâine te așteaptă următoarea. Dacă acest lucru îți sună cunoscut, articolul
+          acesta e pentru tine. Explicăm ce înseamnă concret &bdquo;automatizarea ofertelor&ldquo;,
+          ce aduce cu adevărat — și la fel de sincer: ce nu poate face.
+        </p>
+
+        <h2>Ce înseamnă concret &bdquo;automatizarea ofertelor&ldquo;</h2>
+        <p>
+          Ideea este simplă: introduci doar datele esențiale — ce trebuie făcut, ce suprafețe sau
+          cantități, ce particularități. Restul este preluat de un sistem care cunoaște logica ta de
+          prețuri și pozițiile tale standard. Rezultatul este o ofertă finită, formatată curat, ca
+          PDF — cu logo-ul tău, textele tale, prețurile tale. În loc de 45 până la 60 de minute per
+          ofertă, ai nevoie de câteva minute pentru introducere și o scurtă verificare.
+        </p>
+
+        <h2>Cum funcționează tehnic — fără jargon</h2>
+        <p>Un sistem automatizat de oferte constă din patru elemente:</p>
+        <ul>
+          <li>
+            <strong>Catalogul tău de servicii:</strong> pozițiile tale tipice (de ex.
+            &bdquo;șpăcluire și vopsire perete, pe m²&ldquo;) sunt înregistrate curat o singură dată.
+          </li>
+          <li>
+            <strong>Logica ta de prețuri:</strong> materiale, timp de lucru, suprataxe, deplasare —
+            regulile după care calculezi azi în cap sau în Excel sunt integrate în sistem.
+          </li>
+          <li>
+            <strong>AI pentru text:</strong> din notițele tale, AI-ul formulează descrierile —
+            profesionist, dar în tonul tău. Fără șabloane care sună a scrisoare tipizată.
+          </li>
+          <li>
+            <strong>Șablonul tău:</strong> oferta finită arată ca a ta, pentru că este a ta — logo,
+            structură, condiții de plată, totul ca de obicei.
+          </li>
+        </ul>
+        <p>
+          Controlul rămâne la tine: sistemul creează ciorna, tu verifici și trimiți. Nimic nu pleacă
+          fără aprobarea ta.
+        </p>
+
+        <h2>Ce aduce cu adevărat</h2>
+        <h3>1. Timp — calculul sincer</h3>
+        <p>
+          Dacă scrii cinci oferte pe săptămână a câte 45 până la 60 de minute, asta înseamnă
+          <strong> 4 până la 5 ore în fiecare săptămână</strong> — de obicei seara sau în weekend. Cu
+          automatizare, asta se reduce la introducere plus verificare, deci aproximativ o oră. Sunt
+          trei până la patru ore recuperate pe săptămână, săptămână de săptămână.
+        </p>
+        <h3>2. Viteza câștigă comenzi</h3>
+        <p>
+          Cine face o cerere rareori întreabă o singură firmă. Comanda merge adesea la cel care
+          trimite primul o ofertă curată — nu neapărat cel mai ieftin. Dacă oferta ta ajunge la
+          client în aceeași zi în loc de o săptămână mai târziu, este un avantaj competitiv real.
+        </p>
+        <h3>3. Consecvență</h3>
+        <p>
+          Nu mai există poziții uitate, prețuri deplasate, &bdquo;data trecută am calculat altfel&ldquo;.
+          Fiecare ofertă urmează aceeași logică — asta îți protejează marja.
+        </p>
+
+        <h2>Sincer: ce nu poate face automatizarea</h2>
+        <ul>
+          <li>
+            <strong>Măsurătoarea la fața locului</strong> nu este preluată de niciun sistem. Datele
+            esențiale tot trebuie să le culegi tu — doar tastarea de după dispare.
+          </li>
+          <li>
+            <strong>Cazurile speciale reale</strong> (construcții neobișnuite, protecția
+            monumentelor, materiale speciale) tot au nevoie de judecata ta. Sistemul ajută la 80%
+            din cazurile standard.
+          </li>
+          <li>
+            <strong>Configurarea are nevoie de tine:</strong> pentru ca sistemul să-ți calculeze
+            prețurile, trebuie să-ți dezvălui o dată calculația și să o parcurgi cu noi. Este o
+            după-amiază de muncă — o singură dată, nu în fiecare săptămână.
+          </li>
+        </ul>
+
+        <h2>Cât costă — și de când merită?</h2>
+        <p>
+          La noi, o automatizare pornește <strong>de la 499&nbsp;€ la preț fix</strong> — primești
+          în avans o ofertă scrisă cu preț fix, după aceea nimic nu se mai schimbă. Calculul e
+          simplu: dacă economisești 3 până la 4 ore pe săptămână și calculezi conservator ora ta la
+          50&nbsp;€, sistemul se amortizează în câteva săptămâni. Mai multe despre modelul nostru de
+          prețuri găsești pe <Link href={localePathname(contentLocale, "/preise")}>pagina de prețuri</Link>.
+        </p>
+
+        <h2>Cum începi</h2>
+        <ol>
+          <li>
+            <strong>Analizăm procesul:</strong> cum apar azi ofertele tale? Unde se blochează cel
+            mai mult? Asta clarificăm la o discuție gratuită.
+          </li>
+          <li>
+            <strong>Înregistrăm calculația:</strong> traducem logica ta de prețuri în reguli pe care
+            sistemul le înțelege — împreună, pe înțeles, fără să fie nevoie să înveți ceva tehnic.
+          </li>
+          <li>
+            <strong>Testare și lansare:</strong> compari ofertele automate cu ale tale, ajustăm —
+            apoi funcționează. De obicei în 1 până la 2 săptămâni.
+          </li>
+        </ol>
+        <p>
+          Mai multe despre ce construim special pentru firmele de meșteșugărit găsești pe pagina
+          noastră{" "}
+          <Link href={localePathname(contentLocale, "/branchen/handwerk")}>AI pentru meșteșugari</Link>.
         </p>
       </ArticleLayout>
     );

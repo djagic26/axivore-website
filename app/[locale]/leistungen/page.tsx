@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 const PATH = "/leistungen";
 
 type ServiceCard = { href: string; eyebrow: string; title: string; text: string };
 type Pair = [string, string];
 type Step = [string, string, string];
 
-const CONTENT: Record<"de" | "hr" | "en", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   eyebrow: string; h1a: string; h1b: string; subheadline: string;
   services: ServiceCard[]; more: string;
@@ -137,6 +137,45 @@ const CONTENT: Record<"de" | "hr" | "en", {
     ctaButton: "Book a free call",
     start: "Home",
   },
+  ro: {
+    metaTitle: "Servicii — Site-uri web, software și AI pentru firme mici | Axivore",
+    metaDescription: "Ce construiește Axivore pentru firme mici și mijlocii din Germania: site-uri web moderne, aplicații web și SaaS personalizate, automatizare AI. Totul dintr-un singur loc, live în câteva săptămâni.",
+    ogDescription: "Site-uri web moderne, aplicații web și SaaS personalizate, automatizare AI pentru firme mici din Germania — totul dintr-un singur loc.",
+    eyebrow: "Servicii",
+    h1a: "Site-uri web, software și AI",
+    h1b: "pentru firme mici.",
+    subheadline: "De la site-uri web moderne, prin aplicații web personalizate, până la automatizare AI — construim baza ta digitală. Totul dintr-un singur loc, live în câteva săptămâni, nu luni. Special pentru proprietarii de firme cu 5–30 de angajați din Germania care se implică personal.",
+    services: [
+      { href: "/leistungen/webseiten", eyebrow: "Site-uri web", title: "Site-uri web și pagini de destinație", text: "Site-uri web moderne, rapide, care transformă vizitatorii în clienți — la cerere cu un asistent AI care programează întâlniri și răspunde la întrebări." },
+      { href: "/leistungen/web-apps", eyebrow: "Aplicații web și SaaS", title: "Aplicații web și SaaS", text: "Aplicații web și produse SaaS personalizate — de la idee la lansare. Adaptate exact firmei tale, nu de serie." },
+      { href: "/leistungen/ki-automatisierung", eyebrow: "Automatizare", title: "Automatizare AI", text: "Oferte, facturi, rapoarte, introducerea datelor — sarcinile recurente funcționează automat. Economisești 5–15 ore pe săptămână." },
+      { href: "/leistungen/ki-chatbots", eyebrow: "Chatbot-uri", title: "Chatbot-uri AI", text: "Un asistent digital care răspunde la cererile clienților, programează întâlniri și califică lead-uri non-stop — chiar și noaptea." },
+    ],
+    more: "Află mai multe",
+    autoHeading: "Ce se poate automatiza în firma ta",
+    autoIntro: "Majoritatea firmelor mici pierd ore în fiecare săptămână cu aceleași sarcini recurente. Exact aici intervenim — iată cele mai frecvente exemple din practică:",
+    autoItems: [
+      ["Oferte și estimări", "Din câteva puncte cheie rezultă oferta finală, calculată — formatată și gata de trimis în minute în loc de ore."],
+      ["Facturi și urmărire", "Facturile apar automat după finalizarea comenzii, sumele restante primesc o urmărire politicoasă — fără să trebuiască să ții tu minte."],
+      ["Programări", "Clienții își rezervă singuri un interval liber, confirmarea și memento-ul se trimit automat — fără du-te-vino telefonic."],
+      ["Răspuns la cererile clienților", "Întrebările recurente despre prețuri, program și servicii primesc răspuns non-stop — chiar și după program."],
+      ["Rapoarte și reportare", "Numerele din surse diferite sunt îmbinate automat — raportul finit te așteaptă luni dimineața în inbox."],
+      ["Introducerea și transferul datelor", "Datele circulă automat de la A la B — între formular, tabel și sistemul tău, fără copy-paste."],
+    ],
+    stepsHeading: "Cum funcționează un proiect",
+    steps: [
+      ["01", "Discuție gratuită", "Analizăm procesele tale și găsim sarcina care se amortizează cel mai rapid. Sincer — chiar și atunci când răspunsul e uneori: încă nu."],
+      ["02", "Ofertă cu preț fix", "Primești o ofertă scrisă cu preț fix și domeniu clar. Prețul nu se mai schimbă după aceea."],
+      ["03", "Lansare în câteva săptămâni", "Construim, testăm împreună cu tine și lansăm — de obicei în 1 până la 2 săptămâni, nu în luni."],
+    ],
+    branchenLinkText: "Nu ești sigur dacă firma ta e pregătită pentru asta? Vezi cum lucrăm pentru {BRANCHEN}, sau aruncă o privire în {RATGEBER}.",
+    branchenLabel: "diverse domenii",
+    ratgeberLabel: "ghidul nostru",
+    ctaHeading: "Spune-ne problema ta.",
+    ctaText: "La o discuție gratuită de 30 de minute analizăm împreună care sarcină poate fi automatizată cel mai rapid pentru tine. Fără prezentare de vânzare.",
+    ctaButton: "Programează o discuție gratuită",
+    start: "Acasă",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -145,7 +184,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
     AVAILABLE
   );
 }
@@ -153,7 +192,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function LeistungenPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
   const [beforeBranchen, rest] = c.branchenLinkText.split("{BRANCHEN}");

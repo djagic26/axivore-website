@@ -9,7 +9,7 @@ type ArticleLayoutProps = {
   children: React.ReactNode;
 };
 
-const UI: Record<"de" | "hr" | "en", {
+const UI: Record<"de" | "hr" | "en" | "ro", {
   ratgeberLabel: string; readingTimeSuffix: string; ctaHeading: string; ctaText: string; ctaButton: string; ctaContactLink: string; dateLocale: string;
 }> = {
   de: {
@@ -39,6 +39,15 @@ const UI: Record<"de" | "hr" | "en", {
     ctaContactLink: "or write to us →",
     dateLocale: "en-US",
   },
+  ro: {
+    ratgeberLabel: "Ghid",
+    readingTimeSuffix: "citire",
+    ctaHeading: "Vrei să știi ce înseamnă concret asta pentru afacerea ta?",
+    ctaText: "La o discuție gratuită de 30 de minute analizăm procesele tale și îți spunem sincer dacă și unde merită automatizarea pentru tine — fără jargon, fără presiune de vânzare.",
+    ctaButton: "Programează o discuție gratuită",
+    ctaContactLink: "sau scrie-ne →",
+    dateLocale: "ro-RO",
+  },
 };
 
 function formatDate(iso: string, dateLocale: string): string {
@@ -55,7 +64,7 @@ function formatDate(iso: string, dateLocale: string): string {
  * Article + BreadcrumbList JSON-LD.
  */
 export function ArticleLayout({ article, locale, children }: ArticleLayoutProps) {
-  const ui = UI[locale as "de" | "hr" | "en"] ?? UI.de;
+  const ui = UI[locale as "de" | "hr" | "en" | "ro"] ?? UI.de;
   const pageUrl = `https://axivore.io${localePathname(locale, `/ratgeber/${article.slug}`)}`;
   const ratgeberUrl = `https://axivore.io${localePathname(locale, "/ratgeber")}`;
 

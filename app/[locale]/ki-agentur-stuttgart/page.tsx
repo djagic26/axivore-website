@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 const PATH = "/ki-agentur-stuttgart";
 
 const region = ["Stuttgart", "Esslingen", "Ludwigsburg", "Böblingen", "Sindelfingen", "Waiblingen", "Fellbach", "Leonberg"];
@@ -10,7 +10,7 @@ const region = ["Stuttgart", "Esslingen", "Ludwigsburg", "Böblingen", "Sindelfi
 type Item = { title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   eyebrow: string; h1: string; subheadline: string;
   servicesHeading: string; services: Item[];
@@ -122,6 +122,40 @@ const CONTENT: Record<"de" | "hr" | "en", {
     start: "Home",
     localBusinessDescription: "AI agency from Stuttgart for AI automations, chatbots and custom software for small and medium businesses in Stuttgart and the region.",
   },
+  ro: {
+    metaTitle: "Agenție AI Stuttgart — Automatizare AI pentru IMM-uri | Axivore",
+    metaDescription: "Axivore este agenția ta AI din Stuttgart: automatizări AI, chatbot-uri și software personalizat pentru firme mici și mijlocii din Stuttgart și regiune. Live în 1–2 săptămâni.",
+    ogDescription: "Automatizări AI, chatbot-uri și software pentru firme mici din Stuttgart și împrejurimi. Personal, local, sincer.",
+    eyebrow: "Agenție AI · Stuttgart",
+    h1: "Agenție AI din Stuttgart pentru firme mici.",
+    subheadline: "Axivore construiește automatizări AI, chatbot-uri inteligente și software personalizat pentru firme mici și mijlocii din Stuttgart și regiune. Preluăm sarcinile care costă ore în fiecare săptămână — personal, local, fără să fie nevoie să înțelegi tehnologia.",
+    servicesHeading: "Ce construim pentru firmele din Stuttgart",
+    services: [
+      { title: "Automatizare AI", text: "Oferte, facturi, rapoarte și introducerea datelor funcționează automat — 5–15 ore pe săptămână recuperate, fără angajați noi." },
+      { title: "Chatbot-uri AI", text: "Un asistent digital răspunde la cererile clienților non-stop, programează întâlniri și califică lead-uri — chiar și după program." },
+      { title: "Software personalizat", text: "Instrumente mici care se potrivesc exact firmei tale — în loc de soluții standard scumpe pe care nu le folosești niciodată complet." },
+    ],
+    whyHeading: "De ce o agenție AI din regiune",
+    why: [
+      { title: "Din Stuttgart, pentru Stuttgart", text: "Cunoaștem firmele de aici — meșteșugari, servicii, ospitalitate, cabinete. Nu un call center anonim, ci o persoană de contact din regiune." },
+      { title: "Accesibili personal", text: "Întâlnire în persoană în Stuttgart și împrejurimi sau prin video — cum ți se potrivește. Vorbești mereu direct cu persoana care construiește sistemul tău." },
+      { title: "Live rapid", text: "Prima automatizare funcționează de obicei în 1–2 săptămâni. Nu un proiect de luni de zile, ci un rezultat pe care îl simți imediat." },
+    ],
+    regionHeading: "În Stuttgart și împrejurimi",
+    regionText: "Susținem firme în tot Stuttgart-ul și regiunea — printre altele în:",
+    faqHeading: "Întrebări frecvente",
+    faq: [
+      { question: "Axivore lucrează doar în Stuttgart?", answer: "Sediul nostru este în Stuttgart și susținem firme în Stuttgart și în întreaga regiune — de la Esslingen prin Ludwigsburg până la Böblingen. Întâlnirile în persoană sunt posibile fără probleme în regiune, restul se desfășoară confortabil digital." },
+      { question: "Pentru ce firme merită asta?", answer: "Pentru firme mici și mijlocii cu 5–30 de angajați care pierd timp pe sarcini recurente — meșteșugari, servicii, agenții, ospitalitate, cabinete. Firmele mici beneficiază cel mai mult, pentru că fiecare oră economisită contează direct." },
+      { question: "Cât costă o automatizare AI?", answer: "Depinde de amploare. La prima discuție gratuită analizăm sarcina care îți consumă timp și îți spunem sincer cât costă și dacă merită efortul — fără obligații." },
+      { question: "Trebuie să fiu tehnic?", answer: "Nu. Descrii sarcina în limbaj obișnuit, noi construim restul. Utilizarea ulterioară este la fel de simplă ca trimiterea unui e-mail." },
+    ],
+    ctaHeading: "Hai să vorbim despre firma ta.",
+    ctaText: "Discuție inițială gratuită — în persoană în Stuttgart sau prin video. Îți arătăm care sarcină merită automatizată prima pentru tine.",
+    ctaButton: "Programează o discuție gratuită",
+    start: "Acasă",
+    localBusinessDescription: "Agenție AI din Stuttgart pentru automatizări AI, chatbot-uri și software personalizat pentru firme mici și mijlocii din Stuttgart și regiune.",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -130,7 +164,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
     AVAILABLE
   );
 }
@@ -138,7 +172,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function KiAgenturStuttgartPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;
 

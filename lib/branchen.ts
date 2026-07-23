@@ -430,9 +430,144 @@ export const branchenEn: Branche[] = [
   },
 ];
 
+// Romanian translations — same slugs/order as `branchen`.
+export const branchenRo: Branche[] = [
+  {
+    slug: "handwerk",
+    name: "Meșteșugari",
+    metaTitle: "AI pentru meșteșugari — automatizează oferte și apeluri | Axivore",
+    metaDescription:
+      "Automatizare AI pentru firme de meșteșugărit: oferte în minute în loc de seara târziu, niciun apel pierdut de pe șantier, facturi automate. Axivore construiește sisteme pentru meșteșugari — live în 1–2 săptămâni.",
+    ogDescription:
+      "Automatizează oferte, apeluri și facturi — ca să rămâi pe șantier în loc să stai seara la birou. Pentru firme de meșteșugărit din Germania.",
+    eyebrow: "Domeniu · Meșteșugari",
+    h1: "Automatizare AI pentru firme de meșteșugărit.",
+    intro:
+      "Ca meșteșugar, lucrezi ziua pe șantier și scrii oferte seara. Apelurile se pierd pentru că nimeni nu poate răspunde la telefon. Axivore construiește sisteme care preiau exact aceste sarcini — ca să nu mai stai la birou după program.",
+    serviceType: "Automatizare AI pentru firme de meșteșugărit",
+    useCasesHeading: "Ce se poate automatiza în meșteșugărit",
+    useCases: [
+      { title: "Oferte în câteva minute", text: "Din câteva puncte cheie rezultă oferta finală, calculată — formatată și gata de trimis. Nu mai scrii oferte după program." },
+      { title: "Niciun apel pierdut", text: "Un asistent digital preia apelurile cât ești pe scară — notează cererea, contactul și dorința de apel înapoi, ca să nu mai pierzi nicio comandă." },
+      { title: "Programări și organizare", text: "Programările cu clienții sunt coordonate și confirmate automat — inclusiv memento, ca nimeni să nu uite și să nu mergi degeaba." },
+      { title: "Facturi și urmărire", text: "După finalizarea lucrării, factura apare automat, iar sumele restante sunt urmărite politicos — fără să trebuiască să ții tu minte." },
+    ],
+    faq: [
+      { question: "Nu sunt tehnic — funcționează totuși?", answer: "Da. Descrii sarcina în limbaj obișnuit, noi construim restul. Utilizarea ulterioară este la fel de simplă ca un mesaj WhatsApp." },
+      { question: "Sunt prea mic ca firmă mică pentru asta?", answer: "Dimpotrivă. Firmele mici și cele cu un singur angajat beneficiază cel mai mult, pentru că fiecare oră economisită înseamnă direct mai mult timp pe șantier sau acasă." },
+      { question: "Cât de repede funcționează un astfel de sistem?", answer: "O primă automatizare — de exemplu pentru oferte — este de obicei gata de utilizare în 1–2 săptămâni." },
+    ],
+  },
+  {
+    slug: "gastronomie",
+    name: "Ospitalitate",
+    metaTitle: "AI pentru ospitalitate — automatizează rezervări și cereri | Axivore",
+    metaDescription:
+      "Automatizare AI pentru restaurante, cafenele și unități de ospitalitate: rezervări non-stop, apeluri preluate automat, recenzii gestionate. Axivore construiește sisteme pentru ospitalitate — live în 1–2 săptămâni.",
+    ogDescription:
+      "Automatizează rezervări, apeluri și cereri — în timpul serviciului și după program. Pentru restaurante și cafenele din Germania.",
+    eyebrow: "Domeniu · Ospitalitate",
+    h1: "Automatizare AI pentru ospitalitate.",
+    intro:
+      "În timpul serviciului sună telefonul, dar nimeni nu are o mână liberă. Cererile de rezervare vin noaptea, mult după închidere. Axivore construiește sisteme care răspund la cereri non-stop și acceptă rezervări automat — ca tu să te poți ocupa de oaspeții din fața ta.",
+    serviceType: "Automatizare AI pentru unități de ospitalitate",
+    useCasesHeading: "Ce se poate automatiza în ospitalitate",
+    useCases: [
+      { title: "Rezervări non-stop", text: "Oaspeții rezervă prin chat sau asistent vocal — chiar și la ora 23, când localul e închis. Confirmarea și memento-ul se trimit automat." },
+      { title: "Apeluri în timpul serviciului", text: "Un asistent preia apelurile cât echipa e la mese — răspunde la întrebări standard despre program, meniu și disponibilitate." },
+      { title: "Recenzii și cereri", text: "Recenziile primite și cererile prin e-mail sunt sortate automat și primesc sugestii de răspuns, ca nimic să nu rămână neatins." },
+      { title: "Mai puține no-show-uri", text: "Memento-urile automate înainte de rezervare reduc simțitor absențele — fără ca cineva să sune manual." },
+    ],
+    faq: [
+      { question: "Înlocuiește sistemul meu de rezervări?", answer: "Nu, îl completează. Conectăm automatizarea la instrumentele tale existente sau construim o soluție simplă dacă nu ai încă una." },
+      { question: "Funcționează și pentru o cafenea mică?", answer: "Da. Chiar și o singură automatizare — de exemplu preluarea rezervărilor după program — economisește câteva ore de telefon pe săptămână." },
+      { question: "Cât durează implementarea?", answer: "O primă automatizare este de obicei live în 1–2 săptămâni și testată cu procesele tale reale." },
+    ],
+  },
+  {
+    slug: "praxen",
+    name: "Cabinete Medicale",
+    metaTitle: "AI pentru cabinete medicale și stomatologice — degrevare telefon și programări | Axivore",
+    metaDescription:
+      "Automatizare AI pentru cabinete: degrevează telefonul care sună constant, programează automat, răspunde la cereri standard non-stop. Axivore construiește sisteme pentru cabinete medicale și stomatologice — live în 1–2 săptămâni.",
+    ogDescription:
+      "Degrevează telefonul, programează automat, răspunde la cereri non-stop. Pentru cabinete medicale, stomatologice și de terapie din Germania.",
+    eyebrow: "Domeniu · Cabinete",
+    h1: "Automatizare AI pentru cabinete medicale și stomatologice.",
+    intro:
+      "Telefonul cabinetului nu se oprește, recepția abia reușește să lucreze, iar pacienții tot nu vă pot contacta. Axivore construiește sisteme care preiau sarcina organizatorică de la recepție — programări, cereri recurente și disponibilitate, fără a automatiza decizii medicale.",
+    serviceType: "Automatizare AI pentru cabinete medicale și stomatologice",
+    useCasesHeading: "Ce se poate automatiza în cabinet",
+    useCases: [
+      { title: "Degrevarea telefonului", text: "Un asistent digital răspunde la întrebări recurente despre program, disponibilitate și proceduri — recepția se poate concentra pe pacienții prezenți." },
+      { title: "Programări non-stop", text: "Pacienții fac și modifică programări online — chiar și în afara orelor de consultație. Confirmarea și memento-ul se trimit automat." },
+      { title: "Mai puține absențe", text: "Memento-urile automate pentru programări reduc absențele și mențin agenda plină, fără efort suplimentar pentru echipă." },
+      { title: "Sortarea prealabilă a cererilor", text: "Cererile primite sunt înregistrate structurat și direcționate după prioritate — echipa vede imediat ce e urgent și ce poate aștepta." },
+    ],
+    faq: [
+      { question: "AI-ul ia decizii medicale?", answer: "Nu. Automatizăm exclusiv procesele organizatorice — programări, disponibilitate, cereri recurente. Evaluarea medicală rămâne complet în sarcina echipei cabinetului." },
+      { question: "Cum stă treaba cu protecția datelor?", answer: "Protecția datelor este centrală. Configurăm procesele conform GDPR și clarificăm dinainte exact ce date sunt procesate și cum." },
+      { question: "Se poate conecta la software-ul nostru?", answer: "În majoritatea cazurilor, da. La prima discuție clarificăm ce sisteme folosiți și cum se integrează automatizarea corect." },
+    ],
+  },
+  {
+    slug: "agenturen",
+    name: "Agenții",
+    metaTitle: "AI pentru agenții — automatizează rapoarte, oferte și fluxuri de lucru | Axivore",
+    metaDescription:
+      "Automatizare AI pentru agenții mici: rapoarte la un click, oferte în minute, fluxuri de conținut și lead-uri automatizate. Axivore construiește sisteme pentru agenții — live în 1–2 săptămâni.",
+    ogDescription:
+      "Automatizează rapoarte, oferte și fluxuri de lucru — mai mult timp pentru clienți, mai puțin pentru administrație. Pentru agenții mici din Germania.",
+    eyebrow: "Domeniu · Agenții",
+    h1: "Automatizare AI pentru agenții.",
+    intro:
+      "Rapoartele consumă zile întregi în fiecare lună, ofertele sunt asamblate manual, iar echipa copiază date între instrumente. Axivore construiește sisteme care preiau exact această muncă recurentă — ca echipa ta să lucreze cu clienții, nu cu administrația.",
+    serviceType: "Automatizare AI pentru agenții",
+    useCasesHeading: "Ce se poate automatiza într-o agenție",
+    useCases: [
+      { title: "Rapoarte la un click", text: "Datele din platforme diferite sunt îmbinate automat și livrate ca raport finit, cu branding — lunar sau la cerere." },
+      { title: "Oferte și prezentări", text: "Dintr-un scurt brief rezultă oferta structurată sau documentul de prezentare — consecvent cu stilul agenției, în minute în loc de ore." },
+      { title: "Fluxuri de conținut", text: "Pașii recurenți în producția de conținut — de la cercetare la prima variantă — sunt automatizați, echipa doar rafinează." },
+      { title: "Calificarea lead-urilor", text: "Cererile primite sunt evaluate automat, îmbogățite și primesc mesaje de urmărire, ca niciun lead să nu se răcească." },
+    ],
+    faq: [
+      { question: "Folosim multe instrumente diferite — merge?", answer: "Exact pentru asta este făcut. Conectăm instrumentele tale existente ca datele să curgă automat, în loc să fie copiate manual." },
+      { question: "Înlocuiește angajați?", answer: "Nu — preia munca repetitivă de la echipă, ca aceasta să se concentreze pe creativitate și relații cu clienții. Mai mult output fără angajări noi." },
+      { question: "Cât de repede vedem rezultate?", answer: "O primă automatizare — de exemplu raportarea lunară — este de obicei gata de utilizare în 1–2 săptămâni." },
+    ],
+  },
+  {
+    slug: "dienstleister",
+    name: "Prestatori de Servicii",
+    metaTitle: "AI pentru prestatori de servicii — automatizează cereri, oferte și programări | Axivore",
+    metaDescription:
+      "Automatizare AI pentru prestatori de servicii: răspunde la cereri non-stop, generează oferte automat, programează și urmărește. Axivore construiește sisteme pentru firme de servicii — live în 1–2 săptămâni.",
+    ogDescription:
+      "Automatizează cereri, oferte și programări — niciun lead pierdut, nicio urmărire uitată. Pentru prestatori de servicii din Germania.",
+    eyebrow: "Domeniu · Prestatori de Servicii",
+    h1: "Automatizare AI pentru prestatori de servicii.",
+    intro:
+      "Cererile vin prin cinci canale, scrii oferte printre altele, iar urmărirea se uită în agitația zilnică. Axivore construiește sisteme care răspund imediat la cereri, pregătesc oferte și coordonează programări — ca nicio comandă să nu mai scape.",
+    serviceType: "Automatizare AI pentru firme de servicii",
+    useCasesHeading: "Ce se poate automatiza la prestatorii de servicii",
+    useCases: [
+      { title: "Cereri non-stop", text: "Un asistent digital răspunde imediat la cereri — și seara și în weekend — și adună toate informațiile necesare pentru o ofertă." },
+      { title: "Oferte automate", text: "Din datele adunate rezultă oferta finală — formatată și gata de trimis, fără să trebuiască să stai seara la calculator." },
+      { title: "Programări și rezervări", text: "Clienții își rezervă singuri programarea potrivită, confirmarea și memento-ul se trimit automat — fără du-te-vino telefonic." },
+      { title: "Urmărire fără să uiți", text: "Ofertele și cererile deschise primesc automat o urmărire politicoasă, ca interesul să devină efectiv o comandă." },
+    ],
+    faq: [
+      { question: "Funcționează pentru domeniul meu?", answer: "Procesele sunt similare la majoritatea prestatorilor de servicii — cerere, ofertă, programare, urmărire. La prima discuție analizăm concret firma ta." },
+      { question: "Trebuie să-mi schimb instrumentele?", answer: "Nu. Conectăm automatizarea la instrumentele tale existente sau construim o soluție simplă dacă nu folosești încă niciunul." },
+      { question: "Cât costă?", answer: "Depinde de amploare. La prima discuție gratuită îți spunem sincer cât costă și dacă merită efortul pentru tine." },
+    ],
+  },
+];
+
 export function getBranchenList(locale: string): Branche[] {
   if (locale === "hr") return branchenHr;
   if (locale === "en") return branchenEn;
+  if (locale === "ro") return branchenRo;
   return branchen;
 }
 

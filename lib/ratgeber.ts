@@ -85,9 +85,34 @@ export const ratgeberArticlesEn: RatgeberArticle[] = [
   },
 ];
 
+// Romanian translations — same slugs/order/dates as `ratgeberArticles`.
+export const ratgeberArticlesRo: RatgeberArticle[] = [
+  {
+    slug: "angebote-automatisieren-handwerk",
+    title: "Automatizarea ofertelor în meșteșugărit: Ce aduce cu adevărat",
+    metaTitle: "Automatizarea ofertelor în meșteșugărit — ce aduce cu adevărat | Axivore",
+    description:
+      "Cum creează firmele de meșteșugărit oferte în minute în loc de ore: ce poate face cu adevărat automatizarea, cât costă sincer și de când merită.",
+    category: "Meșteșugari",
+    date: "2026-07-03",
+    readingTime: "6 min.",
+  },
+  {
+    slug: "ki-chatbot-oder-anrufbeantworter",
+    title: "Chatbot AI sau robot telefonic: Ce merită pentru firmele mici?",
+    metaTitle: "Chatbot AI sau robot telefonic? Comparația sinceră | Axivore",
+    description:
+      "Apelurile pierdute costă comenzi. Comparația sinceră: robot telefonic, personal de birou și asistent AI — costuri, beneficii și când chiar merită ce.",
+    category: "Disponibilitate",
+    date: "2026-07-03",
+    readingTime: "7 min.",
+  },
+];
+
 export function getRatgeberArticlesList(locale: string): RatgeberArticle[] {
   if (locale === "hr") return ratgeberArticlesHr;
   if (locale === "en") return ratgeberArticlesEn;
+  if (locale === "ro") return ratgeberArticlesRo;
   return ratgeberArticles;
 }
 

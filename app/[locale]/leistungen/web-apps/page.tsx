@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 const PATH = "/leistungen/web-apps";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   useCasesHeading: string; useCases: Item[];
@@ -137,6 +137,45 @@ const CONTENT: Record<"de" | "hr" | "en", {
     start: "Home",
     leistungenLabel: "Services",
   },
+  ro: {
+    metaTitle: "Dezvoltare de aplicații web și SaaS personalizate | Axivore",
+    metaDescription: "Axivore dezvoltă aplicații web și produse SaaS personalizate pentru firme mici și mijlocii — de la idee la lansare. Adaptate exact firmei tale, la preț fix.",
+    ogDescription: "Aplicații web și produse SaaS personalizate, de la idee la lansare — adaptate exact firmei tale, la preț fix.",
+    breadcrumb: "Aplicații web și SaaS",
+    serviceName: "Dezvoltare de aplicații web și SaaS",
+    eyebrow: "Servicii / Aplicații web și SaaS",
+    h1: "Software care se potrivește firmei tale.",
+    subheadline: "Software-ul standard te obligă să-ți adaptezi procesul la program. Noi facem invers: construim o aplicație web sau un produs SaaS care reflectă exact procesul tău — de la prima idee la lansare, la preț fix.",
+    useCasesHeading: "Ce construim",
+    useCases: [
+      { title: "Instrumente interne", text: "Software care reflectă exact fluxul tău de lucru — în loc de soluții standard scumpe care nu se potrivesc niciodată perfect și pe care nu le folosești niciodată complet." },
+      { title: "Portaluri pentru clienți", text: "O zonă protejată în care clienții tăi văd documente, programări sau statusul — fără întrebări constante către tine." },
+      { title: "Produse SaaS", text: "Ai o idee de produs? Îți construim SaaS-ul de la idee prin MVP până la lansare — inclusiv gestionarea utilizatorilor și facturarea." },
+      { title: "Dashboard-uri și analize", text: "Numere din surse diferite într-un singur loc — clare, actualizate, ca să iei decizii pe baza datelor reale." },
+      { title: "Sisteme de rezervări și comenzi", text: "Sisteme personalizate pentru programări, rezervări sau comenzi — exact așa cum are nevoie firma ta." },
+      { title: "Integrări", text: "Conectăm instrumentele tale existente ca datele să curgă automat — fără copy-paste între programe." },
+    ],
+    stepsHeading: "Cum funcționează",
+    steps: [
+      { n: "01", title: "Idee și domeniu", text: "Clarificăm ce trebuie să facă aplicația și pentru cine. Apoi primești o ofertă cu preț fix și domeniu clar." },
+      { n: "02", title: "Construire și testare", text: "Dezvoltăm în etape, vezi devreme primele versiuni și oferi feedback — astfel nu apar surprize la final." },
+      { n: "03", title: "Lansare și dezvoltare continuă", text: "Aplicația este lansată. La cerere, continuăm să o dezvoltăm pe măsură ce firma ta crește și apar cerințe noi." },
+    ],
+    faqHeading: "Întrebări frecvente",
+    faq: [
+      { question: "Cât costă dezvoltarea unei aplicații web?", answer: "Depinde mult de amploare. Împărțim proiectele mai mari în etape, ca să nu plătești totul deodată. Primești mereu în avans o ofertă scrisă cu preț fix și domeniu clar — fără factură deschisă." },
+      { question: "Cât durează dezvoltarea?", answer: "O primă versiune utilizabilă (MVP) este adesea posibilă în câteva săptămâni. Produsele mai ample cresc în etape. Îți spunem dinainte un termen realist." },
+      { question: "Codul îmi aparține la final?", answer: "Da. Ce construim pentru tine îți aparține — inclusiv codul. Nu ești legat de noi și poți prelua aplicația oricând." },
+      { question: "Puteți construi pe o soluție existentă?", answer: "Adesea, da. Analizăm ce ai deja și extindem sau conectăm — în loc să construim totul de la zero când nu merită." },
+    ],
+    projekteText: "Găsești exemple live ale produselor noastre proprii la {LINK} — sisteme SaaS reale pe care le-am construit noi înșine și le rulăm zilnic.",
+    projekteLinkLabel: "Proiecte",
+    ctaHeading: "Ai o idee în minte?",
+    ctaText: "Povestește-ne despre ea la o discuție gratuită de 30 de minute. Îți spunem sincer dacă și cum poate fi realizată — și cât costă. Fără prezentare de vânzare.",
+    ctaButton: "Programează o discuție gratuită",
+    start: "Acasă",
+    leistungenLabel: "Servicii",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -145,7 +184,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
     AVAILABLE
   );
 }
@@ -153,7 +192,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function WebAppsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

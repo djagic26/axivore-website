@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 const PATH = "/leistungen/ki-automatisierung";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   useCasesHeading: string; useCases: Item[];
@@ -120,6 +120,40 @@ const CONTENT: Record<"de" | "hr" | "en", {
     start: "Home",
     leistungenLabel: "Services",
   },
+  ro: {
+    metaTitle: "Automatizare AI pentru IMM-uri din Germania | Axivore",
+    metaDescription: "Oferte, facturi, rapoarte și introducerea datelor gestionate automat. Axivore construiește automatizări AI pentru firme mici — 5–15 ore economisite pe săptămână. Live în 1–2 săptămâni.",
+    ogDescription: "Sarcini recurente gestionate automat — oferte, facturi, rapoarte. Pentru firme mici din Germania.",
+    breadcrumb: "Automatizare AI",
+    serviceName: "Automatizare AI",
+    eyebrow: "Servicii / Automatizare AI",
+    h1: "Automatizare AI pentru firme mici.",
+    subheadline: "Oferte, facturi, rapoarte, introducerea datelor — sarcinile care costă ore în fiecare săptămână sunt preluate de un sistem. Recuperezi 5–15 ore pe săptămână, fără angajați noi și fără să fie nevoie să înțelegi tehnologia.",
+    useCasesHeading: "Ce se poate automatiza",
+    useCases: [
+      { title: "Oferte și facturi", text: "Dintr-o intrare scurtă rezultă oferta sau factura finală — formatată, corectă, în secunde în loc de 30 de minute." },
+      { title: "Rapoarte și reportare", text: "Datele din surse diferite sunt îmbinate automat și livrate ca raport finit — zilnic, săptămânal sau la cerere." },
+      { title: "Introducerea și transferul datelor", text: "Informațiile circulă automat între e-mail, tabele și instrumentele tale — fără copy-paste, fără greșeli de tastare." },
+      { title: "Sortarea cererilor clienților", text: "Cererile primite sunt evaluate automat, prioritizate și primesc mesaje de urmărire — fără efort manual." },
+    ],
+    stepsHeading: "Cum funcționează",
+    steps: [
+      { n: "01", title: "Discuție gratuită", text: "Analizăm sarcina care îți consumă timp și îți spunem sincer dacă și cum o putem automatiza." },
+      { n: "02", title: "Implementare în 1–2 săptămâni", text: "Construim sistemul, îl testăm cu datele tale reale și ți-l predăm gata de utilizare." },
+      { n: "03", title: "Funcționează și este întreținut", text: "Sistemul funcționează independent. Nu dispărem după lansare — ne poți contacta oricând." },
+    ],
+    faqHeading: "Întrebări frecvente",
+    faq: [
+      { question: "Cât durează o automatizare?", answer: "O automatizare tipică este gata în 1–2 săptămâni — de la prima idee până la sistemul funcțional." },
+      { question: "Trebuie să fiu tehnic pentru a folosi asta?", answer: "Nu. Descrii sarcina în limbaj obișnuit, noi construim restul. Utilizarea ulterioară este la fel de simplă ca trimiterea unui e-mail." },
+      { question: "Sunt prea mic ca firmă mică pentru asta?", answer: "Dimpotrivă. Firmele mici beneficiază cel mai mult, pentru că fiecare oră economisită contează direct. Chiar și o singură automatizare economisește adesea câteva ore pe săptămână." },
+    ],
+    ctaHeading: "Ce sarcină îți consumă cel mai mult timp?",
+    ctaText: "Spune-ne la o discuție gratuită — îți arătăm exact cum poate fi automatizată acea sarcină.",
+    ctaButton: "Programează o discuție gratuită",
+    start: "Acasă",
+    leistungenLabel: "Servicii",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -128,7 +162,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
     AVAILABLE
   );
 }
@@ -136,7 +170,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function KiAutomatisierungPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

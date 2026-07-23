@@ -4,10 +4,10 @@ import { ServiceShell } from "@/components/ServiceShell";
 import { getRatgeberArticlesList } from "@/lib/ratgeber";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 const PATH = "/ratgeber";
 
-const COPY: Record<"de" | "hr" | "en", { metaTitle: string; metaDescription: string; ogDescription: string; eyebrow: string; h1: string; intro: string; dateLocale: string }> = {
+const COPY: Record<"de" | "hr" | "en" | "ro", { metaTitle: string; metaDescription: string; ogDescription: string; eyebrow: string; h1: string; intro: string; dateLocale: string }> = {
   de: {
     metaTitle: "Ratgeber — KI & Automatisierung für kleine Unternehmen | Axivore",
     metaDescription: "Praxisnahe Anleitungen ohne Fachchinesisch: Wie kleine Unternehmen in Deutschland mit KI und Automatisierung Zeit sparen — ehrlich, konkret, ohne Hype.",
@@ -35,6 +35,15 @@ const COPY: Record<"de" | "hr" | "en", { metaTitle: string; metaDescription: str
     intro: "No buzzwords, no glossy promises. Here we write down what actually works in practice, what it costs and when it's worth it — from our daily work with businesses in Stuttgart and across Germany.",
     dateLocale: "en-US",
   },
+  ro: {
+    metaTitle: "Ghid — AI și automatizare pentru firme mici | Axivore",
+    metaDescription: "Ghiduri practice fără jargon: cum economisesc firmele mici din Germania timp cu AI și automatizare — sincer, concret, fără hype.",
+    ogDescription: "Ghiduri practice fără jargon: cum economisesc firmele mici timp cu AI și automatizare.",
+    eyebrow: "Ghid",
+    h1: "AI și automatizare — explicate pentru firme mici.",
+    intro: "Fără cuvinte la modă, fără promisiuni lucioase. Aici scriem ce funcționează cu adevărat în practică, cât costă și când merită — din munca noastră zilnică cu firme din Stuttgart și din toată Germania.",
+    dateLocale: "ro-RO",
+  },
 };
 
 function formatDate(iso: string, dateLocale: string): string {
@@ -47,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription }, en: { title: COPY.en.metaTitle, description: COPY.en.metaDescription } },
+    { de: { title: COPY.de.metaTitle, description: COPY.de.metaDescription }, hr: { title: COPY.hr.metaTitle, description: COPY.hr.metaDescription }, en: { title: COPY.en.metaTitle, description: COPY.en.metaDescription }, ro: { title: COPY.ro.metaTitle, description: COPY.ro.metaDescription } },
     AVAILABLE
   );
 }
@@ -55,7 +64,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function RatgeberPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = COPY[contentLocale as "de" | "hr" | "en"];
+  const c = COPY[contentLocale as "de" | "hr" | "en" | "ro"];
   const articles = getRatgeberArticlesList(contentLocale);
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
 

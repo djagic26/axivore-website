@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 const PATH = "/leistungen/webseiten";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   featuresHeading: string; features: Item[];
@@ -140,6 +140,46 @@ const CONTENT: Record<"de" | "hr" | "en", {
     start: "Home",
     leistungenLabel: "Services",
   },
+  ro: {
+    metaTitle: "Design și dezvoltare de site-uri web — site-uri moderne pentru firme mici | Axivore",
+    metaDescription: "Axivore construiește site-uri web moderne, rapide, care transformă vizitatorii în clienți — cu un asistent AI opțional pentru programări și cereri. Preț fix, live în 1–3 săptămâni.",
+    ogDescription: "Site-uri web moderne, rapide, care transformă vizitatorii în clienți — cu un asistent AI opțional. Preț fix, live în 1–3 săptămâni.",
+    breadcrumb: "Site-uri web",
+    serviceName: "Site-uri web și pagini de destinație",
+    eyebrow: "Servicii / Site-uri web",
+    h1: "Site-uri web care nu doar arată bine.",
+    subheadline: "Un site web modern este mai mult decât o carte de vizită digitală. Construim site-uri care transformă vizitatorii în clienți — rapide, adaptate mobilului, găsite pe Google — și, la cerere, cu un asistent AI care programează întâlniri și răspunde la întrebări, chiar și după program.",
+    featuresHeading: "Ce primești",
+    features: [
+      { title: "Aspect profesional", text: "Un design care inspiră încredere și se potrivește firmei tale — nu de serie, ci personalizat pentru tine." },
+      { title: "Rapid și adaptat mobilului", text: "Site-ul tău se încarcă în secunde și arată la fel de bine pe telefon ca pe calculator — acolo unde majoritatea clienților te găsesc." },
+      { title: "Găsit local", text: "Construit corect pentru Google, ca să te găsească clienții din regiunea ta când caută serviciul tău." },
+      { title: "Asistent AI (opțional)", text: "La cerere, integrăm un asistent care răspunde la întrebări și programează întâlniri — site-ul tău lucrează atunci și noaptea." },
+      { title: "Programări și cereri", text: "Formular de contact, programare online sau WhatsApp — vizitatorii devin direct cereri, fără ocolișuri." },
+      { title: "Ușor de întreținut", text: "Poți modifica singur conținutul sau preluăm noi întreținerea — cum preferi." },
+    ],
+    stepsHeading: "Cum funcționează",
+    steps: [
+      { n: "01", title: "Discuție și concept", text: "Clarificăm ce trebuie să realizeze site-ul tău și cine sunt clienții tăi. Apoi primești o ofertă cu preț fix." },
+      { n: "02", title: "Design și construire", text: "Proiectăm și construim site-ul — cu conținutul, logo-ul, tonul tău. Vezi etape intermediare și oferi feedback." },
+      { n: "03", title: "Lansare și întreținere", text: "Site-ul este lansat, ne ocupăm de tehnologie și hosting. La cerere, cu întreținere continuă." },
+    ],
+    faqHeading: "Întrebări frecvente",
+    faq: [
+      { question: "Cât costă un site web la Axivore?", answer: "Depinde de amploare. Primești în avans o ofertă scrisă cu preț fix — prețul nu se schimbă după aceea. Un site clasic de firmă începe în intervalul mediu-jos de patru cifre, paginile de destinație mai mici sub acest nivel." },
+      { question: "Cât durează până când site-ul meu e live?", answer: "De obicei 1 până la 3 săptămâni, în funcție de amploare și cât de repede primim conținutul tău (texte, imagini). Îți spunem dinainte un termen realist." },
+      { question: "Pot modifica singur conținutul mai târziu?", answer: "Da. Construim site-ul astfel încât să poți întreține singur texte și imagini — sau preluăm noi întreținerea pentru tine. Exact cum preferi." },
+      { question: "Faceți și optimizare pentru motoarele de căutare (SEO)?", answer: "Construim fiecare site tehnic corect pentru Google. La cerere, ne ocupăm și de SEO local, ca clienții din regiunea ta să te găsească mai bine." },
+    ],
+    crossLinkText: "Un site web cu asistent AI se potrivește firmei tale? Vezi și {CHATBOTS} sau aruncă o privire în {RATGEBER}.",
+    chatbotsLabel: "chatbot-urile noastre AI",
+    ratgeberLabel: "ghidul nostru",
+    ctaHeading: "Ești gata pentru un site web care lucrează?",
+    ctaText: "La o discuție gratuită de 30 de minute analizăm ce trebuie să realizeze site-ul tău — și primești apoi o ofertă cu preț fix. Fără prezentare de vânzare.",
+    ctaButton: "Programează o discuție gratuită",
+    start: "Acasă",
+    leistungenLabel: "Servicii",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -148,7 +188,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
     AVAILABLE
   );
 }
@@ -156,7 +196,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function WebseitenPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

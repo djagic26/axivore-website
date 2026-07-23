@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { ServiceShell, CALENDLY_URL } from "@/components/ServiceShell";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 const PATH = "/leistungen/ki-chatbots";
 
 type Item = { title: string; text: string };
 type Step = { n: string; title: string; text: string };
 type Faq = { question: string; answer: string };
 
-const CONTENT: Record<"de" | "hr" | "en", {
+const CONTENT: Record<"de" | "hr" | "en" | "ro", {
   metaTitle: string; metaDescription: string; ogDescription: string;
   breadcrumb: string; serviceName: string; eyebrow: string; h1: string; subheadline: string;
   useCasesHeading: string; useCases: Item[];
@@ -120,6 +120,40 @@ const CONTENT: Record<"de" | "hr" | "en", {
     start: "Home",
     leistungenLabel: "Services",
   },
+  ro: {
+    metaTitle: "Chatbot-uri AI pentru firme din Germania | Axivore",
+    metaDescription: "Chatbot-uri AI inteligente care răspund la cererile clienților, programează întâlniri și califică lead-uri non-stop. Axivore construiește chatbot-uri pentru IMM-uri — 70–90% dintre cereri gestionate automat.",
+    ogDescription: "Un asistent digital care răspunde la cererile clienților și programează întâlniri non-stop — chiar și noaptea.",
+    breadcrumb: "Chatbot-uri AI",
+    serviceName: "Chatbot-uri AI",
+    eyebrow: "Servicii / Chatbot-uri AI",
+    h1: "Chatbot-uri AI care nu dorm niciodată.",
+    subheadline: "Un asistent digital care răspunde la cererile clienților non-stop, programează întâlniri și califică potențiali clienți — și noaptea, și în weekend. Astfel nu mai pierzi nicio cerere doar pentru că nimeni nu era lângă telefon.",
+    useCasesHeading: "Ce preia un chatbot AI pentru tine",
+    useCases: [
+      { title: "Servicii clienți non-stop", text: "Răspunde imediat la întrebări recurente — despre program, prețuri, servicii — chiar și în afara programului tău de lucru." },
+      { title: "Programează întâlniri", text: "Vizitatorii programează direct în chat o întâlnire, fără schimb de e-mailuri și fără telefoane repetate." },
+      { title: "Califică lead-uri", text: "Bot-ul pune întrebările potrivite, recunoaște persoanele cu adevărat interesate și ți le predă cu toate informațiile." },
+      { title: "Pe site-ul tău sau pe WhatsApp", text: "Instalăm bot-ul acolo unde sunt clienții tăi — integrat pe site sau prin messenger." },
+    ],
+    stepsHeading: "Cum funcționează",
+    steps: [
+      { n: "01", title: "Adunăm cunoștințele", text: "Hrănim bot-ul cu conținutul tău — servicii, prețuri, întrebări frecvente — ca să sune ca firma ta." },
+      { n: "02", title: "Implementare în 2–4 săptămâni", text: "Construim, antrenăm și testăm chatbot-ul cu întrebări reale înainte să fie lansat." },
+      { n: "03", title: "Live și în continuă învățare", text: "Bot-ul este lansat și devine tot mai bun cu conversații reale. Continuăm să-l întreținem." },
+    ],
+    faqHeading: "Întrebări frecvente",
+    faq: [
+      { question: "Câte cereri poate prelua un chatbot?", answer: "În practică, chatbot-urile bine construite răspund complet automat la 70–90% dintre cererile recurente. Echipa ta se ocupă doar de cazurile cu adevărat complexe." },
+      { question: "Bot-ul sună ca un robot?", answer: "Nu. Îl antrenăm pe conținutul și tonul tău, astfel încât răspunde natural și util — ca un angajat bine pregătit." },
+      { question: "Ce se întâmplă dacă bot-ul nu știe ceva?", answer: "Recunoaște sincer acest lucru și direcționează cererea către tine sau echipa ta — inclusiv conversația de până atunci." },
+    ],
+    ctaHeading: "Testează cum ar suna chatbot-ul tău.",
+    ctaText: "La o discuție gratuită îți arătăm cu un exemplu concret cum ar răspunde un chatbot la cererile pentru firma ta.",
+    ctaButton: "Programează o discuție gratuită",
+    start: "Acasă",
+    leistungenLabel: "Servicii",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -128,7 +162,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription } },
+    { de: { title: CONTENT.de.metaTitle, description: CONTENT.de.metaDescription }, hr: { title: CONTENT.hr.metaTitle, description: CONTENT.hr.metaDescription }, en: { title: CONTENT.en.metaTitle, description: CONTENT.en.metaDescription }, ro: { title: CONTENT.ro.metaTitle, description: CONTENT.ro.metaDescription } },
     AVAILABLE
   );
 }
@@ -136,7 +170,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function KiChatbotsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const contentLocale = resolveContentLocale(rawLocale, AVAILABLE);
-  const c = CONTENT[contentLocale as "de" | "hr" | "en"];
+  const c = CONTENT[contentLocale as "de" | "hr" | "en" | "ro"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, PATH)}`;
   const leistungenUrl = `https://axivore.io${localePathname(contentLocale, "/leistungen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

@@ -7,9 +7,9 @@ import { resolveContentLocale, partialPageMetadata, localePathname, type AppLoca
 
 // Branchen content exists in German, Croatian and (as of this pass) English;
 // other locales fall back to the German page until they get their own pass.
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 
-const UI: Record<"de" | "hr" | "en", { faq: string; ctaHeading: string; ctaText: string; ctaButton: string; more: string; start: string; branchenLabel: string }> = {
+const UI: Record<"de" | "hr" | "en" | "ro", { faq: string; ctaHeading: string; ctaText: string; ctaButton: string; more: string; start: string; branchenLabel: string }> = {
   de: {
     faq: "Häufige Fragen",
     ctaHeading: "Welche Aufgabe kostet dich am meisten Zeit?",
@@ -37,6 +37,15 @@ const UI: Record<"de" | "hr" | "en", { faq: string; ctaHeading: string; ctaText:
     start: "Home",
     branchenLabel: "Industries",
   },
+  ro: {
+    faq: "Întrebări frecvente",
+    ctaHeading: "Ce sarcină îți consumă cel mai mult timp?",
+    ctaText: "Spune-ne la o discuție gratuită — îți arătăm exact cum poate fi automatizată acea sarcină în firma ta.",
+    ctaButton: "Programează o discuție gratuită",
+    more: "Alte domenii",
+    start: "Acasă",
+    branchenLabel: "Domenii",
+  },
 };
 
 // Only the known branches exist — unknown slugs return 404.
@@ -63,6 +72,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       de: { title: branche.metaTitle, description: branche.metaDescription },
       hr: { title: branche.metaTitle, description: branche.metaDescription },
       en: { title: branche.metaTitle, description: branche.metaDescription },
+      ro: { title: branche.metaTitle, description: branche.metaDescription },
     },
     AVAILABLE
   );
@@ -74,7 +84,7 @@ export default async function BranchePage({ params }: Props) {
   const branche = getBranche(slug, contentLocale);
   if (!branche) notFound();
 
-  const ui = UI[contentLocale as "de" | "hr" | "en"];
+  const ui = UI[contentLocale as "de" | "hr" | "en" | "ro"];
   const pageUrl = `https://axivore.io${localePathname(contentLocale, `/branchen/${branche.slug}`)}`;
   const branchenUrl = `https://axivore.io${localePathname(contentLocale, "/branchen")}`;
   const siteUrl = `https://axivore.io${localePathname(contentLocale, "")}`;

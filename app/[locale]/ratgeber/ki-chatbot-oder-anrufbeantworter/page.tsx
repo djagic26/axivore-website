@@ -4,7 +4,7 @@ import { ArticleLayout } from "@/components/ratgeber/ArticleLayout";
 import { getRatgeberArticle } from "@/lib/ratgeber";
 import { resolveContentLocale, partialPageMetadata, localePathname, type AppLocale } from "@/lib/seo";
 
-const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en"];
+const AVAILABLE: readonly AppLocale[] = ["de", "hr", "en", "ro"];
 const SLUG = "ki-chatbot-oder-anrufbeantworter";
 const PATH = `/ratgeber/${SLUG}`;
 
@@ -14,10 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const de = getRatgeberArticle(SLUG, "de")!;
   const hr = getRatgeberArticle(SLUG, "hr")!;
   const en = getRatgeberArticle(SLUG, "en")!;
+  const ro = getRatgeberArticle(SLUG, "ro")!;
   return partialPageMetadata(
     contentLocale,
     PATH,
-    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description }, en: { title: en.metaTitle, description: en.description } },
+    { de: { title: de.metaTitle, description: de.description }, hr: { title: hr.metaTitle, description: hr.description }, en: { title: en.metaTitle, description: en.description }, ro: { title: ro.metaTitle, description: ro.description } },
     AVAILABLE
   );
 }
@@ -47,6 +48,15 @@ const comparisonEn = [
   { label: "Books appointments", ab: "No", buero: "Yes", ki: "Yes, directly into your calendar" },
   { label: "Structured handoff", ab: "You listen to messages", buero: "Note / email", ki: "Request + contact captured cleanly" },
   { label: "Personal contact", ab: "No", buero: "Yes", ki: "No — hands off to you when it gets personal" },
+];
+
+const comparisonRo = [
+  { label: "Cost", ab: "Foarte ieftin, o singură dată", buero: "Continuu, de la câteva sute €/lună", ki: "O singură dată de la 499 €, costuri continue reduse" },
+  { label: "Disponibilitate", ab: "0-24 — dar doar înregistrare", buero: "În program de birou", ki: "0-24 — cu răspunsuri reale" },
+  { label: "Răspunde la întrebări", ab: "Nu", buero: "Da, întrebări standard", ki: "Da, tot ce îl înveți" },
+  { label: "Programează întâlniri", ab: "Nu", buero: "Da", ki: "Da, direct în calendarul tău" },
+  { label: "Predare structurată", ab: "Asculți tu mesajele", buero: "Bilet / e-mail", ki: "Cerere + contact înregistrate curat" },
+  { label: "Contact personal", ab: "Nu", buero: "Da", ki: "Nu — te predă pe tine când devine personal" },
 ];
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
@@ -285,6 +295,125 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           answers — around the clock, for a one-time price. Which solution fits your business
           depends on your call volume, not the tech hype. If you're unsure: in 30 minutes we'll
           tell you honestly whether it's worth it for you — even if the answer is &ldquo;no.&rdquo;
+        </p>
+      </ArticleLayout>
+    );
+  }
+
+  if (contentLocale === "ro") {
+    return (
+      <ArticleLayout article={article} locale={contentLocale}>
+        <p>
+          Ești pe scară, sună telefonul. Vorbești cu un client — sună din nou. După program, suni
+          înapoi, dar cel interesat a sunat deja firma următoare. Apelurile pierdute sunt una dintre
+          cele mai costisitoare probleme pentru firmele mici — tocmai pentru că nu se văd pe o
+          factură. Întrebarea este: ce faci? Comparăm cele trei opțiuni obișnuite — sincer, cu toate
+          slăbiciunile lor.
+        </p>
+
+        <h2>Problema reală: cine nu răspunde, pierde clientul în favoarea următorului</h2>
+        <p>
+          Cine caută azi un meșteșugar, o masă sau o programare are puțină răbdare. Dacă nimeni nu
+          răspunde la telefon, rareori se așteaptă — se sună următorul număr de pe listă. Comanda a
+          dispărut înainte să știi măcar că a existat. Fiecare soluție trebuie măsurată prin asta:
+          prinde persoana interesată exact în momentul în care sună sau scrie?
+        </p>
+
+        <h2>Opțiunea 1: Robotul telefonic</h2>
+        <p>
+          Soluția clasică — costă aproape nimic și se configurează rapid. Problema o cunoști din
+          proprie experiență: mulți apelanți <strong>nici măcar nu lasă un mesaj</strong> pe robot,
+          ci închid. Și chiar și când există un mesaj, începe ping-pong-ul apelurilor: suni înapoi,
+          clientul nu e disponibil, el sună înapoi, tu ești pe scară. Robotul telefonic
+          înregistrează — nu rezolvă nimic.
+        </p>
+
+        <h2>Opțiunea 2: Personal de birou sau serviciu telefonic extern</h2>
+        <p>
+          Un om la telefon este cea mai plăcută soluție pentru apelant — fără îndoială. Dar are
+          prețul ei: personal propriu de birou merită abia de la o anumită dimensiune a firmei, iar
+          serviciile telefonice externe costă bani continuu, dar cunosc afacerea ta doar superficial.
+          La întrebări de specialitate (&bdquo;Faceți și renovări la clădiri vechi?&ldquo;) devine
+          subțire, iar în afara programului sună din nou în gol.
+        </p>
+
+        <h2>Opțiunea 3: Asistentul AI</h2>
+        <p>
+          Un asistent AI — ca chat pe site-ul tău, prin WhatsApp sau la telefon — este cea mai nouă
+          opțiune, și singura care <em>răspunde</em> non-stop în loc să doar înregistreze. Concret,
+          poate:
+        </p>
+        <ul>
+          <li>
+            <strong>Răspunde imediat la întrebări standard:</strong> program, servicii, zonă
+            deservită, intervale de prețuri — tot ce l-ai învățat o dată.
+          </li>
+          <li>
+            <strong>Programează direct întâlniri:</strong> cel interesat alege un interval liber,
+            confirmarea pleacă automat — fără ping-pong de apeluri.
+          </li>
+          <li>
+            <strong>Înregistrează cererea structurat:</strong> în loc de un mesaj vocal pe jumătate
+            înțeles, primești nume, contact, cerere și urgență notate curat.
+          </li>
+          <li>
+            <strong>Predă când devine serios:</strong> un asistent bun recunoaște când e nevoie de
+            un om — și direcționează mai departe, în loc să trimită clientul în cerc.
+          </li>
+        </ul>
+
+        <h2>Comparația sinceră</h2>
+        <div className="mb-6 overflow-x-auto rounded-xl" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
+          <table className="w-full text-[13.5px] leading-[1.5]">
+            <thead>
+              <tr className="text-left" style={{ background: "rgba(255,255,255,0.04)" }}>
+                <th className="p-3.5 font-semibold text-white"> </th>
+                <th className="p-3.5 font-semibold text-white">Robot telefonic</th>
+                <th className="p-3.5 font-semibold text-white">Birou / serviciu</th>
+                <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>Asistent AI</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRo.map((row) => (
+                <tr key={row.label} style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+                  <td className="p-3.5 font-medium text-white/85">{row.label}</td>
+                  <td className="p-3.5 text-white/55">{row.ab}</td>
+                  <td className="p-3.5 text-white/55">{row.buero}</td>
+                  <td className="p-3.5 text-white/75">{row.ki}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Când robotul telefonic este complet suficient</h2>
+        <p>
+          Răspuns sincer: nu orice firmă are nevoie de AI. Dacă ai aproape numai clienți fideli,
+          aproape deloc cereri noi prin telefon și reușești constant să suni înapoi în aceeași zi —
+          atunci robotul telefonic e suficient. Investește banii altundeva.
+        </p>
+
+        <h2>Când merită asistentul AI</h2>
+        <ul>
+          <li>Pierzi regulat apeluri pentru că ești pe șantier, în serviciu sau la un tratament.</li>
+          <li>Cererile noi contează pentru tine — și știi că unele ajung la concurență.</li>
+          <li>Aceleași cinci întrebări consumă timp în fiecare zi: program, prețuri, disponibilitate.</li>
+          <li>Coordonarea programărilor prin telefoane repetate te enervează (și pe clienții tăi).</li>
+        </ul>
+        <p>
+          Dacă două sau mai multe puncte se aplică, asistentul se amortizează rapid: la noi, un
+          astfel de sistem pornește <strong>de la 499&nbsp;€ la preț fix</strong> — o singură dată,
+          cu ofertă scrisă în avans. Detalii pe <Link href={localePathname(contentLocale, "/preise")}>pagina de prețuri</Link>,
+          mai multe despre tehnologie pe pagina noastră despre{" "}
+          <Link href={localePathname(contentLocale, "/leistungen/ki-chatbots")}>chatbot-uri AI pentru firme</Link>.
+        </p>
+
+        <h2>Concluzie</h2>
+        <p>
+          Robotul telefonic înregistrează, omul costă continuu, asistentul AI răspunde — non-stop,
+          la un preț unic. Ce soluție se potrivește firmei tale depinde de volumul tău de apeluri, nu
+          de hype-ul tehnologic. Dacă nu ești sigur: în 30 de minute îți spunem sincer dacă merită
+          pentru tine — chiar și atunci când răspunsul este &bdquo;nu&ldquo;.
         </p>
       </ArticleLayout>
     );
