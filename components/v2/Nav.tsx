@@ -115,12 +115,9 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
   const mutedColor = isDark ? "rgba(255,255,255,0.45)" : "rgba(10,10,15,0.45)";
   const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
 
-  // Leistungen/Branchen aren't translated yet (German-only SEO content) —
-  // keep those two unprefixed so visitors land on a consistently German
-  // page instead of a Croatian/Romanian/etc. shell around German copy.
   const navLinks = [
-    { key: "services", href: "/leistungen", label: t.nav.services },
-    { key: "branchen", href: "/branchen", label: t.nav.branchen },
+    { key: "services", href: localePath(language, "/leistungen"), label: t.nav.services },
+    { key: "branchen", href: localePath(language, "/branchen"), label: t.nav.branchen },
     { key: "portfolio", href: localePath(language, "/projekte"), label: t.nav.portfolio },
     { key: "pricing", href: localePath(language, "/preise"), label: t.nav.pricing },
     { key: "about", href: localePath(language, "/ueber-uns"), label: t.nav.about },

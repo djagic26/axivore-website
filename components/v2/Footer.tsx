@@ -3,16 +3,26 @@
 import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useTheme } from "@/lib/ThemeContext";
+import { Language } from "@/lib/i18n";
 import { AxivoreLogo } from "./AxivoreLogo";
 
-// German has no URL prefix; only pages that are actually translated get one —
-// Leistungen/Branchen/Ratgeber/KI-Agentur-Stuttgart stay German-only for now,
-// so linking to them keeps the whole page consistently German instead of a
-// translated shell wrapped around German copy.
+// German has no URL prefix; every other language keeps its /xx prefix so
+// footer links stay in the visitor's language instead of dropping them
+// back into German chrome.
 function localePath(locale: string, path: string): string {
   if (locale === "de") return path;
   return path === "/" ? `/${locale}` : `/${locale}${path}`;
 }
+
+// Sub-navigation labels not covered by the shared nav.* translations.
+const FOOTER_EXTRA: Record<Language, { automation: string; chatbots: string; agency: string; ratgeber: string }> = {
+  de: { automation: "KI-Automatisierung", chatbots: "KI-Chatbots", agency: "KI-Agentur Stuttgart", ratgeber: "Ratgeber" },
+  en: { automation: "AI Automation", chatbots: "AI Chatbots", agency: "AI Agency Stuttgart", ratgeber: "Guide" },
+  hr: { automation: "AI automatizacija", chatbots: "AI chatbotovi", agency: "AI agencija Stuttgart", ratgeber: "Vodič" },
+  ro: { automation: "Automatizare AI", chatbots: "Chatbot-uri AI", agency: "Agenție AI Stuttgart", ratgeber: "Ghid" },
+  tr: { automation: "AI Otomasyonu", chatbots: "AI Chatbotlar", agency: "Stuttgart AI Ajansı", ratgeber: "Rehber" },
+  it: { automation: "Automazione AI", chatbots: "Chatbot AI", agency: "Agenzia AI Stoccarda", ratgeber: "Guida" },
+};
 
 export function Footer() {
   const { t, language } = useLanguage();
@@ -25,19 +35,21 @@ export function Footer() {
     e.currentTarget.style.color = enter ? (isDark ? "#ffffff" : "#0a0a0f") : textColor;
   };
 
+  const fx = FOOTER_EXTRA[language] ?? FOOTER_EXTRA.de;
+
   const serviceLinks = [
-    { label: t.nav.services, href: "/leistungen" },
-    { label: "KI-Automatisierung", href: "/leistungen/ki-automatisierung" },
-    { label: "KI-Chatbots", href: "/leistungen/ki-chatbots" },
-    { label: "KI-Agentur Stuttgart", href: "/ki-agentur-stuttgart" },
+    { label: t.nav.services, href: localePath(language, "/leistungen") },
+    { label: fx.automation, href: localePath(language, "/leistungen/ki-automatisierung") },
+    { label: fx.chatbots, href: localePath(language, "/leistungen/ki-chatbots") },
+    { label: fx.agency, href: localePath(language, "/ki-agentur-stuttgart") },
   ];
 
   const companyLinks = [
-    { label: t.nav.branchen, href: "/branchen" },
+    { label: t.nav.branchen, href: localePath(language, "/branchen") },
     { label: t.nav.portfolio, href: localePath(language, "/projekte") },
     { label: t.nav.pricing, href: localePath(language, "/preise") },
     { label: t.nav.about, href: localePath(language, "/ueber-uns") },
-    { label: "Ratgeber", href: "/ratgeber" },
+    { label: fx.ratgeber, href: localePath(language, "/ratgeber") },
     { label: t.nav.contact, href: localePath(language, "/kontakt") },
   ];
 

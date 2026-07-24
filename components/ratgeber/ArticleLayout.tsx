@@ -9,7 +9,7 @@ type ArticleLayoutProps = {
   children: React.ReactNode;
 };
 
-const UI: Record<"de" | "hr" | "en" | "ro", {
+const UI: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
   ratgeberLabel: string; readingTimeSuffix: string; ctaHeading: string; ctaText: string; ctaButton: string; ctaContactLink: string; dateLocale: string;
 }> = {
   de: {
@@ -48,6 +48,24 @@ const UI: Record<"de" | "hr" | "en" | "ro", {
     ctaContactLink: "sau scrie-ne →",
     dateLocale: "ro-RO",
   },
+  tr: {
+    ratgeberLabel: "Rehber",
+    readingTimeSuffix: "okuma",
+    ctaHeading: "Bunun işletmen için somut olarak ne anlama geldiğini bilmek ister misin?",
+    ctaText: "Ücretsiz 30 dakikalık bir görüşmede iş akışlarına bakarız ve otomasyonun senin için nerede ve ne ölçüde değeceğini dürüstçe söyleriz — karmaşık terimler olmadan, satış baskısı olmadan.",
+    ctaButton: "Ücretsiz görüşme ayarla",
+    ctaContactLink: "ya da bize yaz →",
+    dateLocale: "tr-TR",
+  },
+  it: {
+    ratgeberLabel: "Guida",
+    readingTimeSuffix: "di lettura",
+    ctaHeading: "Vuoi sapere cosa significa concretamente questo per la tua attività?",
+    ctaText: "In un colloquio gratuito di 30 minuti guardiamo i tuoi flussi di lavoro e ti diciamo onestamente se e dove l'automazione conviene per te — senza gergo tecnico, senza pressione di vendita.",
+    ctaButton: "Prenota un colloquio gratuito",
+    ctaContactLink: "oppure scrivici →",
+    dateLocale: "it-IT",
+  },
 };
 
 function formatDate(iso: string, dateLocale: string): string {
@@ -64,7 +82,7 @@ function formatDate(iso: string, dateLocale: string): string {
  * Article + BreadcrumbList JSON-LD.
  */
 export function ArticleLayout({ article, locale, children }: ArticleLayoutProps) {
-  const ui = UI[locale as "de" | "hr" | "en" | "ro"] ?? UI.de;
+  const ui = UI[locale as "de" | "hr" | "en" | "ro" | "tr" | "it"] ?? UI.de;
   const pageUrl = `https://axivore.io${localePathname(locale, `/ratgeber/${article.slug}`)}`;
   const ratgeberUrl = `https://axivore.io${localePathname(locale, "/ratgeber")}`;
 
