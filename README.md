@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Axivore
 
-## Getting Started
+Websites, web apps & AI automation for small and medium businesses in Germany.
 
-First, run the development server:
+**Live:** [axivore.io](https://axivore.io) · **Contact:** hello@axivore.io
+
+## Stack
+
+- [Next.js 16](https://nextjs.org) (App Router, Turbopack)
+- TypeScript, Tailwind CSS, Framer Motion
+- [next-intl](https://next-intl.dev) — 6 languages (de, en, hr, ro, tr, it), German unprefixed at root
+- [AI SDK](https://sdk.vercel.ai) + OpenAI — the `Axi` chat widget on the site
+- [Resend](https://resend.com) — lead notification and contact emails
+- Deployed on [Vercel](https://vercel.com)
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/[locale]/        Locale-prefixed routes (leistungen, branchen, ratgeber, ...)
+app/api/              Chat + contact route handlers (rate-limited, Zod-validated)
+components/v2/        Current site components
+lib/i18n.ts           Translations for all 6 locales
+lib/rate-limit.ts      Per-IP rate limiting for public API routes
+i18n/routing.ts        next-intl locale config
+```
 
-## Learn More
+## Deploy
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+vercel --prod
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Auto-deploys to production on every push to `main`.
