@@ -42,7 +42,7 @@ export function KontaktInfo() {
               className="rounded-2xl p-6"
               style={{ background: cardBg, border: cardBorder }}
             >
-              <p className="text-[9px] uppercase tracking-[0.24em] font-semibold mb-3" style={{ color: "#A09AFF" }}>
+              <p className="text-[9px] uppercase tracking-[0.24em] font-semibold mb-3" style={{ color: "#E0A360" }}>
                 {label}
               </p>
               {href ? (

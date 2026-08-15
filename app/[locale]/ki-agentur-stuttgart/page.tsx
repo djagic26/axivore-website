@@ -292,7 +292,7 @@ export default async function KiAgenturStuttgartPage({ params }: { params: Promi
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="max-w-3xl mx-auto px-6 pt-20 pb-10">
-        <p className="text-[11px] tracking-[0.2em] uppercase text-[#A09AFF] mb-5">{c.eyebrow}</p>
+        <p className="text-[11px] tracking-[0.2em] uppercase text-[#E0A360] mb-5">{c.eyebrow}</p>
         <h1 className="font-black tracking-[-0.03em] leading-[1.04] mb-6" style={{ fontSize: "clamp(36px,5.5vw,60px)" }}>
           {c.h1}
         </h1>
@@ -316,7 +316,7 @@ export default async function KiAgenturStuttgartPage({ params }: { params: Promi
         <div className="space-y-5">
           {c.why.map((w) => (
             <div key={w.title} className="flex gap-5">
-              <span className="text-[#7C5CFF] font-black text-[20px] shrink-0">›</span>
+              <span className="text-[#C97C3C] font-black text-[20px] shrink-0">›</span>
               <div>
                 <h3 className="text-[16px] font-semibold mb-1">{w.title}</h3>
                 <p className="text-[14px] leading-relaxed text-white/50">{w.text}</p>
@@ -351,10 +351,10 @@ export default async function KiAgenturStuttgartPage({ params }: { params: Promi
       </section>
 
       <section className="max-w-3xl mx-auto px-6 py-12">
-        <div className="rounded-2xl px-8 py-11 text-center" style={{ background: "linear-gradient(135deg,rgba(124,92,255,0.12),rgba(160,154,255,0.05))", border: "1px solid rgba(124,92,255,0.2)" }}>
+        <div className="rounded-2xl px-8 py-11 text-center" style={{ background: "linear-gradient(135deg,rgba(201,124,60,0.12),rgba(224,163,96,0.05))", border: "1px solid rgba(201,124,60,0.2)" }}>
           <h2 className="text-[24px] font-bold mb-3">{c.ctaHeading}</h2>
           <p className="text-white/55 mb-8 max-w-lg mx-auto">{c.ctaText}</p>
-          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="inline-block font-semibold px-7 py-3.5 rounded-full transition-transform hover:scale-[1.03]" style={{ background: "linear-gradient(135deg,#7C5CFF,#A09AFF)", color: "#0C0C0F" }}>
+          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="inline-block font-semibold px-7 py-3.5 rounded-full transition-transform hover:scale-[1.03]" style={{ background: "linear-gradient(135deg,#C97C3C,#E0A360)", color: "#0C0C0F" }}>
             {c.ctaButton}
           </a>
         </div>

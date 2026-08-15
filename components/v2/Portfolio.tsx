@@ -17,10 +17,10 @@ const PORTFOLIO_LINKS: Record<string, string> = {
 };
 
 const PORT_ACCENTS = [
-  { color: "#7C5CFF", rgb: "124,92,255" },
-  { color: "#FF3DC5", rgb: "255,61,197" },
+  { color: "#C97C3C", rgb: "201,124,60" },
+  { color: "#B5502E", rgb: "181,80,46" },
   { color: "#22d3ee", rgb: "34,211,238" },
-  { color: "#5B8AFF", rgb: "91,138,255" },
+  { color: "#D9A54E", rgb: "217,165,78" },
 ];
 
 const statusColors: Record<string, { bg: string; color: string; border: string }> = {
@@ -33,12 +33,12 @@ const statusColors: Record<string, { bg: string; color: string; border: string }
   "În Dezvoltare":    { bg: "rgba(251,191,36,0.08)", color: "#fbbf24", border: "rgba(251,191,36,0.2)" },
   "Geliştirmede":     { bg: "rgba(251,191,36,0.08)", color: "#fbbf24", border: "rgba(251,191,36,0.2)" },
   "In Sviluppo":      { bg: "rgba(251,191,36,0.08)", color: "#fbbf24", border: "rgba(251,191,36,0.2)" },
-  "Demo verfügbar":   { bg: "rgba(99,102,241,0.08)", color: "#818cf8", border: "rgba(99,102,241,0.2)" },
-  "Demo Available":   { bg: "rgba(99,102,241,0.08)", color: "#818cf8", border: "rgba(99,102,241,0.2)" },
-  "Demo dostupan":    { bg: "rgba(99,102,241,0.08)", color: "#818cf8", border: "rgba(99,102,241,0.2)" },
-  "Demo Disponibil":  { bg: "rgba(99,102,241,0.08)", color: "#818cf8", border: "rgba(99,102,241,0.2)" },
-  "Demo Mevcut":      { bg: "rgba(99,102,241,0.08)", color: "#818cf8", border: "rgba(99,102,241,0.2)" },
-  "Demo Disponibile": { bg: "rgba(99,102,241,0.08)", color: "#818cf8", border: "rgba(99,102,241,0.2)" },
+  "Demo verfügbar":   { bg: "rgba(217,155,78,0.08)", color: "#D99B4E", border: "rgba(217,155,78,0.2)" },
+  "Demo Available":   { bg: "rgba(217,155,78,0.08)", color: "#D99B4E", border: "rgba(217,155,78,0.2)" },
+  "Demo dostupan":    { bg: "rgba(217,155,78,0.08)", color: "#D99B4E", border: "rgba(217,155,78,0.2)" },
+  "Demo Disponibil":  { bg: "rgba(217,155,78,0.08)", color: "#D99B4E", border: "rgba(217,155,78,0.2)" },
+  "Demo Mevcut":      { bg: "rgba(217,155,78,0.08)", color: "#D99B4E", border: "rgba(217,155,78,0.2)" },
+  "Demo Disponibile": { bg: "rgba(217,155,78,0.08)", color: "#D99B4E", border: "rgba(217,155,78,0.2)" },
 };
 
 function PortfolioCard({ product, i, isDark }: {
@@ -47,7 +47,7 @@ function PortfolioCard({ product, i, isDark }: {
 }) {
   const { t } = useLanguage();
   const C = useColors(isDark);
-  const sc = statusColors[product.status] ?? { bg: "rgba(124,92,255,0.08)", color: "#A09AFF", border: "rgba(124,92,255,0.2)" };
+  const sc = statusColors[product.status] ?? { bg: "rgba(201,124,60,0.08)", color: "#E0A360", border: "rgba(201,124,60,0.2)" };
   const acc = PORT_ACCENTS[i % 4];
   const href = PORTFOLIO_LINKS[product.name];
   const viewLive = t.hero.viewLive;
@@ -86,7 +86,7 @@ function PortfolioCard({ product, i, isDark }: {
       className="group rounded-[22px] overflow-hidden flex flex-col relative will-change-transform"
       style={{ rotateX, rotateY, transformPerspective: 1200, transformStyle: "preserve-3d",
         background: isDark
-        ? `linear-gradient(145deg, rgba(${acc.rgb},0.12) 0%, rgba(6,3,14,0.97) 65%)`
+        ? `linear-gradient(145deg, rgba(${acc.rgb},0.12) 0%, rgba(18, 12, 7,0.97) 65%)`
         : "rgba(255,255,255,0.9)",
         border: `1px solid rgba(${acc.rgb},${isDark ? "0.3" : "0.18"})`,
         backdropFilter: isDark ? "none" : "blur(20px)",
@@ -107,7 +107,7 @@ function PortfolioCard({ product, i, isDark }: {
             <p className="text-[12.5px]" style={{ color: C.muted }}>{product.tagline}</p>
           </div>
           <div className="text-right shrink-0">
-            <div className="text-[22px] font-bold" style={{ color: "#7C5CFF" }}>{product.metric.value}</div>
+            <div className="text-[22px] font-bold" style={{ color: "#C97C3C" }}>{product.metric.value}</div>
             <div className="text-[10px] max-w-[80px] leading-tight" style={{ color: C.muted }}>{product.metric.label}</div>
           </div>
         </div>
@@ -139,7 +139,7 @@ function PortfolioCard({ product, i, isDark }: {
           <div className="flex flex-wrap gap-2">
             {product.tags.map((tag, j) => (
               <span key={j} className="text-[11px] px-2.5 py-0.5 rounded-full"
-                style={{ color: C.muted, background: isDark ? "rgba(255,255,255,0.04)" : "rgba(124,92,255,0.07)", border: `1px solid ${C.cardBorder}` }}>
+                style={{ color: C.muted, background: isDark ? "rgba(255,255,255,0.04)" : "rgba(201,124,60,0.07)", border: `1px solid ${C.cardBorder}` }}>
                 {tag}
               </span>
             ))}
@@ -171,21 +171,21 @@ export function Portfolio() {
       <div className="absolute inset-x-0 top-0 h-px"
         style={{ background: isDark
           ? "linear-gradient(90deg,transparent 10%,rgba(255,255,255,0.07) 50%,transparent 90%)"
-          : "linear-gradient(90deg,transparent 5%,rgba(124,92,255,0.15) 50%,transparent 95%)" }} />
+          : "linear-gradient(90deg,transparent 5%,rgba(201,124,60,0.15) 50%,transparent 95%)" }} />
       <div className="max-w-[1320px] mx-auto px-6">
         <div className="relative text-center mb-16">
           <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center pointer-events-none overflow-hidden select-none" style={{ zIndex: 0 }}>
             <span className="font-black uppercase tracking-[-0.04em] whitespace-nowrap"
-              style={{ fontSize: "clamp(80px,14vw,200px)", color: isDark ? "rgba(255,255,255,0.1)" : "rgba(124,92,255,0.1)" }}>
+              style={{ fontSize: "clamp(80px,14vw,200px)", color: isDark ? "rgba(255,255,255,0.1)" : "rgba(201,124,60,0.1)" }}>
               PORTFOLIO
             </span>
           </div>
           <div className="relative" style={{ zIndex: 1 }}>
-            <p className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#7C5CFF" }}>
+            <p className="text-[10.5px] tracking-[0.28em] uppercase mb-5 font-medium" style={{ color: "#C97C3C" }}>
               {t.labels.portfolio}
             </p>
             <h2 className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: C.text }}>
-              {t.portfolio.headline}<span style={{ color: "#7C5CFF" }}>.</span>
+              {t.portfolio.headline}<span style={{ color: "#C97C3C" }}>.</span>
             </h2>
             <p className="text-[15px] mt-5 max-w-md mx-auto leading-[1.7]" style={{ color: C.muted }}>
               {t.portfolio.subheadline}

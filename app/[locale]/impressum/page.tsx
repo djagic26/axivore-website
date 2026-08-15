@@ -34,8 +34,8 @@ export default function Impressum() {
 
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/30">Kontakt</h2>
-            <p>E-Mail: <a href="mailto:hello@axivore.io" className="text-[#A09AFF] hover:underline">hello@axivore.io</a></p>
-            <p>Telefon: <a href="tel:+491729372307" className="text-[#A09AFF] hover:underline">+49 172 9372307</a></p>
+            <p>E-Mail: <a href="mailto:hello@axivore.io" className="text-[#E0A360] hover:underline">hello@axivore.io</a></p>
+            <p>Telefon: <a href="tel:+491729372307" className="text-[#E0A360] hover:underline">+49 172 9372307</a></p>
           </div>
 
           <div>

@@ -13,11 +13,11 @@ export function TrustStrip() {
   if (items.length === 0) return null;
 
   return (
-    <section className="relative" style={{ background: isDark ? "#030208" : "#f3efff" }}>
+    <section className="relative" style={{ background: isDark ? "#120d08" : "#FBF5EA" }}>
       <div className="max-w-[1320px] mx-auto px-6">
         <div
           className="flex flex-wrap items-center justify-center gap-x-9 gap-y-3 py-5 border-y"
-          style={{ borderColor: isDark ? "rgba(255,255,255,0.07)" : "rgba(124,92,255,0.14)" }}
+          style={{ borderColor: isDark ? "rgba(255,255,255,0.07)" : "rgba(201,124,60,0.14)" }}
         >
           {items.map((item, i) => (
             <motion.div
@@ -28,12 +28,12 @@ export function TrustStrip() {
               transition={{ delay: i * 0.08, duration: 0.4 }}
               className="flex items-center gap-2.5"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7C5CFF" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C97C3C" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 6 9 17l-5-5" />
               </svg>
               <span
                 className="text-[12.5px] font-semibold tracking-tight"
-                style={{ color: isDark ? "rgba(255,255,255,0.78)" : "rgba(13,11,26,0.72)" }}
+                style={{ color: isDark ? "rgba(255,255,255,0.78)" : "rgba(16, 13, 9,0.72)" }}
               >
                 {item}
               </span>

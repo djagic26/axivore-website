@@ -9,10 +9,15 @@ const SITE_URL = "https://axivore.io";
  */
 export function StructuredData({ locale }: { locale: Language }) {
   const faqItems = translations[locale].faq.items;
+  const offers = translations[locale].pricing.offers;
 
   const graph = [
     {
-      "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
+      // Plain Organization — Axivore is remote-first with no walk-in
+      // location, so LocalBusiness/ProfessionalService + GeoCoordinates
+      // (which imply a visitable place) were dropped. The address stays
+      // for Impressum/legal purposes only.
+      "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
       name: "Axivore",
       url: SITE_URL,
@@ -21,11 +26,9 @@ export function StructuredData({ locale }: { locale: Language }) {
       description:
         "Axivore entwickelt moderne Websites, maßgeschneiderte Web-Apps und SaaS-Produkte sowie KI-Automatisierungen und Chatbots für kleine und mittlere Unternehmen in Stuttgart und ganz Deutschland.",
       email: "hello@axivore.io",
+      telephone: "+49 172 9372307",
       priceRange: "€€",
-      founder: {
-        "@type": "Person",
-        name: "Dino Jagić",
-      },
+      founder: { "@id": `${SITE_URL}/#dino-jagic` },
       address: {
         "@type": "PostalAddress",
         streetAddress: "Rotweg 172",
@@ -34,25 +37,34 @@ export function StructuredData({ locale }: { locale: Language }) {
         addressRegion: "Baden-Württemberg",
         addressCountry: "DE",
       },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: 48.8313,
-        longitude: 9.1665,
-      },
-      areaServed: [
-        { "@type": "Country", name: "Germany" },
-        { "@type": "City", name: "Stuttgart" },
-        { "@type": "City", name: "Esslingen" },
-        { "@type": "City", name: "Ludwigsburg" },
-        { "@type": "City", name: "Böblingen" },
-        { "@type": "City", name: "Sindelfingen" },
-        { "@type": "City", name: "Waiblingen" },
-      ],
+      areaServed: { "@type": "Country", name: "Germany" },
       knowsLanguage: ["de", "en"],
       sameAs: [
         "https://www.instagram.com/axivore.io/",
         "https://www.linkedin.com/company/118684148/",
       ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Axivore Leistungen",
+        itemListElement: offers.map((offer) => ({
+          "@type": "Offer",
+          priceCurrency: "EUR",
+          price: offer.from.replace(/[^0-9]/g, ""),
+          itemOffered: {
+            "@type": "Service",
+            name: offer.name,
+            description: offer.desc,
+            provider: { "@id": `${SITE_URL}/#organization` },
+          },
+        })),
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#dino-jagic`,
+      name: "Dino Jagić",
+      jobTitle: "Gründer & KI-Architekt",
+      worksFor: { "@id": `${SITE_URL}/#organization` },
     },
     {
       "@type": "WebSite",
@@ -84,7 +96,7 @@ export function StructuredData({ locale }: { locale: Language }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
     />
   );
 }

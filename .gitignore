@@ -42,3 +42,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# internal working files — not for the public repo (screenshots, raw
+# audit findings, scratch notes)
+/axivore.io-audit

@@ -1,0 +1,31 @@
+# Axivore
+
+> Axivore ist eine KI-Agentur aus Stuttgart. Wir entwickeln KI-Automatisierungen, intelligente Chatbots und maßgeschneiderte Software (Websites, Web-Apps, SaaS) für kleine und mittlere Unternehmen in Stuttgart und ganz Deutschland — vom Handwerk über Gastronomie und Praxen bis zu Agenturen und Dienstleistern.
+
+## Leistungen
+
+- [Websites](https://axivore.io/leistungen/webseiten): Moderne, schnelle Websites für KMU.
+- [Web-Apps & SaaS](https://axivore.io/leistungen/web-apps): Individuelle Web-Anwendungen und SaaS-Produkte.
+- [KI-Automatisierung](https://axivore.io/leistungen/ki-automatisierung): Automatisierte Angebote, Rechnungen, Berichte und Kundenanfragen.
+- [KI-Chatbots](https://axivore.io/leistungen/ki-chatbots): Intelligente Chatbots für Kundenservice und Terminbuchung.
+
+## Branchen
+
+- [Handwerk](https://axivore.io/branchen/handwerk)
+- [Gastronomie](https://axivore.io/branchen/gastronomie)
+- [Praxen](https://axivore.io/branchen/praxen)
+- [Agenturen](https://axivore.io/branchen/agenturen)
+- [Dienstleister](https://axivore.io/branchen/dienstleister)
+
+## Ratgeber
+
+- [Angebote automatisieren im Handwerk](https://axivore.io/ratgeber/angebote-automatisieren-handwerk)
+- [KI-Chatbot oder Anrufbeantworter?](https://axivore.io/ratgeber/ki-chatbot-oder-anrufbeantworter)
+
+## Über Axivore
+
+- [Preise](https://axivore.io/preise): Festpreis-Modelle, keine Stundensätze.
+- [Über uns](https://axivore.io/ueber-uns)
+- [Projekte](https://axivore.io/projekte)
+- [Kontakt](https://axivore.io/kontakt)
+- [KI-Agentur Stuttgart](https://axivore.io/ki-agentur-stuttgart): Lokale Leistungen für Stuttgart und die Region.

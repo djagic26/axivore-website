@@ -36,13 +36,13 @@ export default function Datenschutz() {
               <p>Deutschland</p>
               <p className="mt-2">
                 E-Mail:{" "}
-                <a href="mailto:hello@axivore.io" className="text-[#A09AFF] hover:underline">
+                <a href="mailto:hello@axivore.io" className="text-[#E0A360] hover:underline">
                   hello@axivore.io
                 </a>
               </p>
               <p>
                 Telefon:{" "}
-                <a href="tel:+491729372307" className="text-[#A09AFF] hover:underline">
+                <a href="tel:+491729372307" className="text-[#E0A360] hover:underline">
                   +49 172 9372307
                 </a>
               </p>
@@ -180,33 +180,33 @@ export default function Datenschutz() {
             </p>
             <ul className="space-y-2 ml-4">
               <li className="flex gap-2">
-                <span className="text-[#A09AFF] shrink-0">—</span>
+                <span className="text-[#E0A360] shrink-0">—</span>
                 <span><span className="text-white">Auskunft</span> über Ihre bei uns gespeicherten Daten (Art. 15 DSGVO)</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-[#A09AFF] shrink-0">—</span>
+                <span className="text-[#E0A360] shrink-0">—</span>
                 <span><span className="text-white">Berichtigung</span> unrichtiger Daten (Art. 16 DSGVO)</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-[#A09AFF] shrink-0">—</span>
+                <span className="text-[#E0A360] shrink-0">—</span>
                 <span><span className="text-white">Löschung</span> Ihrer Daten (Art. 17 DSGVO)</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-[#A09AFF] shrink-0">—</span>
+                <span className="text-[#E0A360] shrink-0">—</span>
                 <span><span className="text-white">Einschränkung</span> der Verarbeitung (Art. 18 DSGVO)</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-[#A09AFF] shrink-0">—</span>
+                <span className="text-[#E0A360] shrink-0">—</span>
                 <span><span className="text-white">Datenübertragbarkeit</span> (Art. 20 DSGVO)</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-[#A09AFF] shrink-0">—</span>
+                <span className="text-[#E0A360] shrink-0">—</span>
                 <span><span className="text-white">Widerspruch</span> gegen die Verarbeitung (Art. 21 DSGVO)</span>
               </li>
             </ul>
             <p className="mt-4">
               Zur Ausübung Ihrer Rechte wenden Sie sich bitte an:{" "}
-              <a href="mailto:hello@axivore.io" className="text-[#A09AFF] hover:underline">
+              <a href="mailto:hello@axivore.io" className="text-[#E0A360] hover:underline">
                 hello@axivore.io
               </a>
             </p>
@@ -226,7 +226,7 @@ export default function Datenschutz() {
               <p className="mt-2">
                 <a
                   href="https://www.baden-wuerttemberg.datenschutz.de"
-                  className="text-[#A09AFF] hover:underline"
+                  className="text-[#E0A360] hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

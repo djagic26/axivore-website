@@ -27,7 +27,7 @@ export default function OGImage() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(rgba(160,154,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(160,154,255,0.06) 1px, transparent 1px)",
+              "linear-gradient(rgba(224,163,96,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(224,163,96,0.06) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
             display: "flex",
           }}
@@ -61,7 +61,7 @@ export default function OGImage() {
         <div
           style={{
             fontSize: 26,
-            color: "#A09AFF",
+            color: "#E0A360",
             letterSpacing: "4px",
             textTransform: "uppercase",
             display: "flex",

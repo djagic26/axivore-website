@@ -313,7 +313,7 @@ export default async function WebAppsPage({ params }: { params: Promise<{ locale
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="max-w-3xl mx-auto px-6 pt-20 pb-10">
-        <p className="text-[11px] tracking-[0.2em] uppercase text-[#A09AFF] mb-5">{c.eyebrow}</p>
+        <p className="text-[11px] tracking-[0.2em] uppercase text-[#E0A360] mb-5">{c.eyebrow}</p>
         <h1 className="font-black tracking-[-0.03em] leading-[1.04] mb-6" style={{ fontSize: "clamp(36px,5.5vw,60px)" }}>
           {c.h1}
         </h1>
@@ -325,7 +325,7 @@ export default async function WebAppsPage({ params }: { params: Promise<{ locale
         <div className="grid sm:grid-cols-2 gap-x-10 gap-y-6">
           {c.useCases.map((u) => (
             <div key={u.title} className="flex gap-3.5">
-              <span className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: "#A09AFF" }} />
+              <span className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: "#E0A360" }} />
               <div>
                 <h3 className="text-[15.5px] font-semibold mb-1">{u.title}</h3>
                 <p className="text-[13.5px] leading-relaxed text-white/50">{u.text}</p>
@@ -340,7 +340,7 @@ export default async function WebAppsPage({ params }: { params: Promise<{ locale
         <div className="grid sm:grid-cols-3 gap-8">
           {c.steps.map((s) => (
             <div key={s.n}>
-              <div className="text-[13px] font-bold text-[#A09AFF] mb-3">{s.n}</div>
+              <div className="text-[13px] font-bold text-[#E0A360] mb-3">{s.n}</div>
               <h3 className="text-[16px] font-semibold mb-2">{s.title}</h3>
               <p className="text-[13.5px] leading-relaxed text-white/50">{s.text}</p>
             </div>
@@ -360,16 +360,16 @@ export default async function WebAppsPage({ params }: { params: Promise<{ locale
         </div>
         <p className="text-[14px] leading-relaxed text-white/50 mt-10">
           {projekteBefore}
-          <Link href={localePathname(contentLocale, "/projekte")} className="text-[#A09AFF] underline underline-offset-2 hover:text-[#C4B8FF]">{c.projekteLinkLabel}</Link>
+          <Link href={localePathname(contentLocale, "/projekte")} className="text-[#E0A360] underline underline-offset-2 hover:text-[#F0C48A]">{c.projekteLinkLabel}</Link>
           {projekteAfter}
         </p>
       </section>
 
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <div className="rounded-2xl px-8 py-12 text-center" style={{ background: "linear-gradient(135deg,rgba(124,92,255,0.12),rgba(160,154,255,0.05))", border: "1px solid rgba(124,92,255,0.2)" }}>
+        <div className="rounded-2xl px-8 py-12 text-center" style={{ background: "linear-gradient(135deg,rgba(201,124,60,0.12),rgba(224,163,96,0.05))", border: "1px solid rgba(201,124,60,0.2)" }}>
           <h2 className="text-[26px] font-bold mb-3">{c.ctaHeading}</h2>
           <p className="text-white/55 mb-8 max-w-xl mx-auto">{c.ctaText}</p>
-          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="inline-block font-semibold px-7 py-3.5 rounded-full transition-transform hover:scale-[1.03]" style={{ background: "linear-gradient(135deg,#7C5CFF,#A09AFF)", color: "#0C0C0F" }}>
+          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="inline-block font-semibold px-7 py-3.5 rounded-full transition-transform hover:scale-[1.03]" style={{ background: "linear-gradient(135deg,#C97C3C,#E0A360)", color: "#0C0C0F" }}>
             {c.ctaButton}
           </a>
         </div>

@@ -152,7 +152,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <th className="p-3.5 font-semibold text-white"> </th>
                 <th className="p-3.5 font-semibold text-white">Telefonska sekretarica</th>
                 <th className="p-3.5 font-semibold text-white">Ured / služba</th>
-                <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>AI asistent</th>
+                <th className="p-3.5 font-semibold" style={{ color: "#E0A360" }}>AI asistent</th>
               </tr>
             </thead>
             <tbody>
@@ -272,7 +272,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <th className="p-3.5 font-semibold text-white"> </th>
                 <th className="p-3.5 font-semibold text-white">Answering machine</th>
                 <th className="p-3.5 font-semibold text-white">Office staff / service</th>
-                <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>AI assistant</th>
+                <th className="p-3.5 font-semibold" style={{ color: "#E0A360" }}>AI assistant</th>
               </tr>
             </thead>
             <tbody>
@@ -390,7 +390,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <th className="p-3.5 font-semibold text-white"> </th>
                 <th className="p-3.5 font-semibold text-white">Robot telefonic</th>
                 <th className="p-3.5 font-semibold text-white">Birou / serviciu</th>
-                <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>Asistent AI</th>
+                <th className="p-3.5 font-semibold" style={{ color: "#E0A360" }}>Asistent AI</th>
               </tr>
             </thead>
             <tbody>
@@ -510,7 +510,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <th className="p-3.5 font-semibold text-white"> </th>
                 <th className="p-3.5 font-semibold text-white">Telesekreter</th>
                 <th className="p-3.5 font-semibold text-white">Ofis personeli / hizmet</th>
-                <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>AI asistan</th>
+                <th className="p-3.5 font-semibold" style={{ color: "#E0A360" }}>AI asistan</th>
               </tr>
             </thead>
             <tbody>
@@ -635,7 +635,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <th className="p-3.5 font-semibold text-white"> </th>
                 <th className="p-3.5 font-semibold text-white">Segreteria telefonica</th>
                 <th className="p-3.5 font-semibold text-white">Personale / servizio</th>
-                <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>Assistente AI</th>
+                <th className="p-3.5 font-semibold" style={{ color: "#E0A360" }}>Assistente AI</th>
               </tr>
             </thead>
             <tbody>
@@ -757,7 +757,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               <th className="p-3.5 font-semibold text-white"> </th>
               <th className="p-3.5 font-semibold text-white">Anrufbeantworter</th>
               <th className="p-3.5 font-semibold text-white">Bürokraft / Service</th>
-              <th className="p-3.5 font-semibold" style={{ color: "#A09AFF" }}>KI-Assistent</th>
+              <th className="p-3.5 font-semibold" style={{ color: "#E0A360" }}>KI-Assistent</th>
             </tr>
           </thead>
           <tbody>

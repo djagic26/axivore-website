@@ -290,7 +290,7 @@ export default async function LeistungenPage({ params }: { params: Promise<{ loc
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       <section className="max-w-5xl mx-auto px-6 pt-20 pb-12">
-        <p className="text-[11px] tracking-[0.2em] uppercase text-[#A09AFF] mb-5">{c.eyebrow}</p>
+        <p className="text-[11px] tracking-[0.2em] uppercase text-[#E0A360] mb-5">{c.eyebrow}</p>
         <h1 className="font-black tracking-[-0.03em] leading-[1.02] mb-6" style={{ fontSize: "clamp(38px,6vw,68px)" }}>
           {c.h1a}
           <br />
@@ -308,10 +308,10 @@ export default async function LeistungenPage({ params }: { params: Promise<{ loc
               className="group block rounded-2xl p-7 transition-colors"
               style={{ background: "rgba(255,255,255,0.028)", border: "1px solid rgba(255,255,255,0.07)" }}
             >
-              <p className="text-[10.5px] tracking-[0.18em] uppercase text-[#A09AFF] mb-3">{s.eyebrow}</p>
-              <h2 className="text-[22px] font-semibold mb-3 group-hover:text-[#C4B8FF] transition-colors">{s.title}</h2>
+              <p className="text-[10.5px] tracking-[0.18em] uppercase text-[#E0A360] mb-3">{s.eyebrow}</p>
+              <h2 className="text-[22px] font-semibold mb-3 group-hover:text-[#F0C48A] transition-colors">{s.title}</h2>
               <p className="text-[14px] leading-relaxed text-white/50">{s.text}</p>
-              <span className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-medium text-[#A09AFF]">
+              <span className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-medium text-[#E0A360]">
                 {c.more}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
@@ -328,7 +328,7 @@ export default async function LeistungenPage({ params }: { params: Promise<{ loc
         <div className="grid sm:grid-cols-2 gap-x-10 gap-y-6">
           {c.autoItems.map(([title, text]) => (
             <div key={title} className="flex gap-3.5">
-              <span className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: "#A09AFF" }} />
+              <span className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: "#E0A360" }} />
               <div>
                 <h3 className="text-[15.5px] font-semibold mb-1">{title}</h3>
                 <p className="text-[13.5px] leading-relaxed text-white/50">{text}</p>
@@ -343,7 +343,7 @@ export default async function LeistungenPage({ params }: { params: Promise<{ loc
         <div className="grid sm:grid-cols-3 gap-8">
           {c.steps.map(([num, title, text]) => (
             <div key={num}>
-              <div className="text-[13px] font-bold text-[#A09AFF] mb-3">{num}</div>
+              <div className="text-[13px] font-bold text-[#E0A360] mb-3">{num}</div>
               <h3 className="text-[16px] font-semibold mb-2">{title}</h3>
               <p className="text-[13.5px] leading-relaxed text-white/50">{text}</p>
             </div>
@@ -351,18 +351,18 @@ export default async function LeistungenPage({ params }: { params: Promise<{ loc
         </div>
         <p className="text-[14px] leading-relaxed text-white/50 max-w-2xl mt-10">
           {beforeBranchen}
-          <Link href={localePathname(contentLocale, "/branchen")} className="text-[#A09AFF] underline underline-offset-2 hover:text-[#C4B8FF]">{c.branchenLabel}</Link>
+          <Link href={localePathname(contentLocale, "/branchen")} className="text-[#E0A360] underline underline-offset-2 hover:text-[#F0C48A]">{c.branchenLabel}</Link>
           {betweenLinks}
-          <Link href={localePathname(contentLocale, "/ratgeber")} className="text-[#A09AFF] underline underline-offset-2 hover:text-[#C4B8FF]">{c.ratgeberLabel}</Link>
+          <Link href={localePathname(contentLocale, "/ratgeber")} className="text-[#E0A360] underline underline-offset-2 hover:text-[#F0C48A]">{c.ratgeberLabel}</Link>
           {afterRatgeber}
         </p>
       </section>
 
       <section className="max-w-5xl mx-auto px-6 py-16">
-        <div className="rounded-2xl px-8 py-12 text-center" style={{ background: "linear-gradient(135deg,rgba(124,92,255,0.12),rgba(160,154,255,0.05))", border: "1px solid rgba(124,92,255,0.2)" }}>
+        <div className="rounded-2xl px-8 py-12 text-center" style={{ background: "linear-gradient(135deg,rgba(201,124,60,0.12),rgba(224,163,96,0.05))", border: "1px solid rgba(201,124,60,0.2)" }}>
           <h2 className="text-[26px] font-bold mb-3">{c.ctaHeading}</h2>
           <p className="text-white/55 mb-8 max-w-xl mx-auto">{c.ctaText}</p>
-          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="inline-block font-semibold px-7 py-3.5 rounded-full transition-transform hover:scale-[1.03]" style={{ background: "linear-gradient(135deg,#7C5CFF,#A09AFF)", color: "#0C0C0F" }}>
+          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="inline-block font-semibold px-7 py-3.5 rounded-full transition-transform hover:scale-[1.03]" style={{ background: "linear-gradient(135deg,#C97C3C,#E0A360)", color: "#0C0C0F" }}>
             {c.ctaButton}
           </a>
         </div>

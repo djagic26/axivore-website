@@ -8,9 +8,9 @@ import { useColors } from "./colors";
 const CALENDLY = "https://calendly.com/hello-axivore/kostenloses-gesprach";
 
 const OFFER_ACCENTS = [
-  { color: "#5B8AFF", rgb: "91,138,255", grad: "linear-gradient(135deg, #5B8AFF, #93baff)" },
-  { color: "#7C5CFF", rgb: "124,92,255", grad: "linear-gradient(135deg, #8B5CF6, #A09AFF)" },
-  { color: "#FF3DC5", rgb: "255,61,197", grad: "linear-gradient(135deg, #FF3DC5, #ff8de8)" },
+  { color: "#D9A54E", rgb: "217,165,78", grad: "linear-gradient(135deg, #D9A54E, #f0c98a)" },
+  { color: "#C97C3C", rgb: "201,124,60", grad: "linear-gradient(135deg, #C97C3C, #E0A360)" },
+  { color: "#B5502E", rgb: "181,80,46", grad: "linear-gradient(135deg, #B5502E, #e0a074)" },
 ];
 
 export function Pricing() {
@@ -24,26 +24,26 @@ export function Pricing() {
       <div className="absolute inset-x-0 top-0 h-px"
         style={{ background: isDark
           ? "linear-gradient(90deg,transparent 10%,rgba(255,255,255,0.07) 50%,transparent 90%)"
-          : "linear-gradient(90deg,transparent 5%,rgba(124,92,255,0.15) 50%,transparent 95%)" }} />
+          : "linear-gradient(90deg,transparent 5%,rgba(201,124,60,0.15) 50%,transparent 95%)" }} />
 
       <div className="max-w-[1320px] mx-auto px-6">
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 overflow-hidden">
           <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none select-none overflow-hidden" style={{ zIndex: 0 }}>
             <span className="font-black uppercase tracking-[-0.04em] whitespace-nowrap"
               style={{ fontSize: "clamp(70px,12vw,180px)",
-                color: isDark ? "rgba(255,255,255,0.1)" : "rgba(124,92,255,0.1)" }}>
+                color: isDark ? "rgba(255,255,255,0.1)" : "rgba(201,124,60,0.1)" }}>
               PRICING
             </span>
           </div>
           <div className="relative" style={{ zIndex: 1 }}>
             <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#7C5CFF" }}>
+              className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#C97C3C" }}>
               {t.labels.pricing}
             </motion.p>
             <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(34px,4.5vw,58px)", color: C.text }}>
-              {t.pricing.headline}<span style={{ color: "#7C5CFF" }}>.</span>
+              {t.pricing.headline}<span style={{ color: "#C97C3C" }}>.</span>
             </motion.h2>
           </div>
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
@@ -70,7 +70,7 @@ export function Pricing() {
                 className="rounded-[22px] relative overflow-hidden transition-all duration-300"
                 style={{
                   background: isDark
-                    ? `linear-gradient(145deg, rgba(${acc.rgb},0.2) 0%, rgba(6,3,14,0.97) 65%)`
+                    ? `linear-gradient(145deg, rgba(${acc.rgb},0.2) 0%, rgba(18, 12, 7,0.97) 65%)`
                     : "rgba(255,255,255,0.94)",
                   border: `1px solid rgba(${acc.rgb},${isDark ? "0.42" : "0.2"})`,
                   backdropFilter: isDark ? "none" : "blur(20px)",
@@ -105,10 +105,10 @@ export function Pricing() {
               className="rounded-[18px] p-6 flex gap-4 relative overflow-hidden"
               style={{
                 background: isDark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.7)",
-                border: `1px solid ${isDark ? "rgba(124,92,255,0.2)" : "rgba(124,92,255,0.15)"}`,
+                border: `1px solid ${isDark ? "rgba(201,124,60,0.2)" : "rgba(201,124,60,0.15)"}`,
               }}>
               <div className="font-black text-[26px] leading-none flex-shrink-0 mt-0.5"
-                style={{ color: "rgba(124,92,255,0.55)" }}>
+                style={{ color: "rgba(201,124,60,0.55)" }}>
                 {i + 1}
               </div>
               <div>
@@ -126,8 +126,8 @@ export function Pricing() {
           className="rounded-[24px] relative overflow-hidden"
           style={{
             background: isDark
-              ? "linear-gradient(135deg, rgba(34,197,94,0.16) 0%, rgba(6,3,14,0.97) 55%, rgba(124,92,255,0.14) 100%)"
-              : "linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(248,255,250,0.95) 55%, rgba(124,92,255,0.07) 100%)",
+              ? "linear-gradient(135deg, rgba(34,197,94,0.16) 0%, rgba(18, 12, 7,0.97) 55%, rgba(201,124,60,0.14) 100%)"
+              : "linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(248,255,250,0.95) 55%, rgba(201,124,60,0.07) 100%)",
             border: `1px solid rgba(34,197,94,${isDark ? "0.38" : "0.28"})`,
             boxShadow: isDark ? "0 10px 60px rgba(34,197,94,0.18)" : "0 10px 56px rgba(34,197,94,0.14)",
           }}>
@@ -158,11 +158,11 @@ export function Pricing() {
               </p>
             </div>
             <motion.a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-              whileHover={{ scale: 1.04, boxShadow: "0 10px 50px rgba(160,60,255,0.6)" }}
+              whileHover={{ scale: 1.04, boxShadow: "0 10px 50px rgba(188, 102, 40,0.6)" }}
               whileTap={{ scale: 0.97 }}
               className="flex-shrink-0 flex items-center justify-center gap-2 px-7 py-4 rounded-full text-white text-[14px] font-semibold cursor-pointer"
-              style={{ background: "linear-gradient(135deg, #8B5CF6 0%, #7C5CFF 40%, #5b8aff 100%)",
-                boxShadow: "0 6px 36px rgba(124,92,255,0.5)", transition: "box-shadow 0.25s" }}>
+              style={{ background: "linear-gradient(135deg, #C97C3C 0%, #C97C3C 40%, #d9a54e 100%)",
+                boxShadow: "0 6px 36px rgba(201,124,60,0.5)", transition: "box-shadow 0.25s" }}>
               {t.pricing.cta}
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                 <path d="M2 11L11 2M11 2H4M11 2V9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>

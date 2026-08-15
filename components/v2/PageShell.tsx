@@ -57,15 +57,15 @@ export function PageShell({ titleKey, subtitle, hero = "visible", children }: Pa
           className="absolute inset-0 pointer-events-none"
           style={{
             background: isDark
-              ? "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(124,92,255,0.12), transparent)"
-              : "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(124,92,255,0.07), transparent)",
+              ? "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,124,60,0.12), transparent)"
+              : "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,124,60,0.07), transparent)",
           }}
         />
         <div className="relative max-w-[1320px] mx-auto">
           <motion.p
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
             className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium"
-            style={{ color: "#7C5CFF" }}
+            style={{ color: "#C97C3C" }}
           >
             Axivore
           </motion.p>

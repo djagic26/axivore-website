@@ -83,7 +83,7 @@ function LangDropdown({ language, setLanguage, isDark }: {
                   <span className="font-medium">{langMeta[lang].name}</span>
                 </span>
                 {language === lang && (
-                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="#A09AFF" strokeWidth={2.5}>
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="#E0A360" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 )}
@@ -143,7 +143,7 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
           <AxivoreLogo />
           <div className="flex flex-col leading-tight">
             <span className="font-medium text-[17px] tracking-[-0.04em]" style={{ color: textColor }}>Axivore</span>
-            <span className="text-[7px] uppercase tracking-[0.22em]" style={{ color: "#A09AFF" }}>
+            <span className="text-[7px] uppercase tracking-[0.22em]" style={{ color: "#E0A360" }}>
               Precision · Disruption · Direction
             </span>
           </div>
@@ -171,8 +171,8 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
           {!hideLanguageSwitcher && <LangDropdown language={language} setLanguage={setLanguage} isDark={isDark} />}
 
           <button onClick={toggle}
-            className="p-2 rounded-lg transition-all duration-200"
-            style={{ color: mutedColor }}
+            className="rounded-lg transition-all duration-200 flex items-center justify-center"
+            style={{ color: mutedColor, width: 44, height: 44 }}
             aria-label="Toggle theme"
           >
             {isDark ? (
@@ -190,7 +190,7 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
             target="_blank" rel="noopener noreferrer"
             whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
             className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-[13px] font-semibold shadow-lg relative overflow-hidden"
-            style={{ background: "linear-gradient(135deg, #7C5CFF, #5b8aff)", boxShadow: "0 4px 20px rgba(124,92,255,0.3)" }}
+            style={{ background: "linear-gradient(135deg, #C97C3C, #d9a54e)", boxShadow: "0 4px 20px rgba(201,124,60,0.3)" }}
           >
             <motion.div
               className="absolute inset-0 pointer-events-none"
@@ -201,9 +201,9 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
             {t.nav.cta}
           </motion.a>
 
-          <button className="md:hidden p-2" onClick={() => setMobileOpen(!mobileOpen)}
+          <button className="md:hidden flex items-center justify-center" onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Menü schließen" : "Menü öffnen"}
-            style={{ color: mutedColor }}>
+            style={{ color: mutedColor, width: 44, height: 44 }}>
             <div className="w-5 flex flex-col gap-1.5">
               <span className={`block h-0.5 bg-current transition-all ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
               <span className={`block h-0.5 bg-current transition-all ${mobileOpen ? "opacity-0" : ""}`} />
@@ -222,7 +222,7 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
             {navLinks.map(({ href, label }) => (
               <Link key={href} href={href} onClick={() => setMobileOpen(false)}
                 className="text-base font-medium transition-colors"
-                style={{ color: isActive(href) ? "#A09AFF" : textColor }}>
+                style={{ color: isActive(href) ? "#E0A360" : textColor }}>
                 {label}
               </Link>
             ))}
@@ -235,8 +235,8 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all"
                     style={{
                       color: language === lang ? "#fff" : mutedColor,
-                      background: language === lang ? "rgba(124,92,255,0.25)" : isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
-                      border: language === lang ? "1px solid rgba(124,92,255,0.4)" : isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
+                      background: language === lang ? "rgba(201,124,60,0.25)" : isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+                      border: language === lang ? "1px solid rgba(201,124,60,0.4)" : isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
                     }}
                   >
                     <span>{langMeta[lang].flag}</span>
@@ -249,7 +249,7 @@ export function Nav({ hideLanguageSwitcher = false }: { hideLanguageSwitcher?: b
               target="_blank" rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="inline-flex justify-center items-center text-white text-sm font-semibold px-5 py-3 rounded-full mt-1"
-              style={{ background: "linear-gradient(135deg, #7C5CFF, #5b8aff)" }}>
+              style={{ background: "linear-gradient(135deg, #C97C3C, #d9a54e)" }}>
               {t.nav.cta}
             </a>
           </motion.div>

@@ -6,9 +6,9 @@ import { useTheme } from "@/lib/ThemeContext";
 import { useColors } from "./colors";
 
 const SVC_ACCENTS = [
-  { color: "#7C5CFF", rgb: "124,92,255" },
-  { color: "#5B8AFF", rgb: "91,138,255" },
-  { color: "#FF3DC5", rgb: "255,61,197" },
+  { color: "#C97C3C", rgb: "201,124,60" },
+  { color: "#D9A54E", rgb: "217,165,78" },
+  { color: "#B5502E", rgb: "181,80,46" },
   { color: "#22d3ee", rgb: "34,211,238" },
 ];
 
@@ -30,26 +30,26 @@ export function Services() {
       <div className="absolute inset-x-0 top-0 h-px"
         style={{ background: isDark
           ? "linear-gradient(90deg,transparent 10%,rgba(255,255,255,0.07) 50%,transparent 90%)"
-          : "linear-gradient(90deg,transparent 5%,rgba(124,92,255,0.15) 50%,transparent 95%)" }} />
+          : "linear-gradient(90deg,transparent 5%,rgba(201,124,60,0.15) 50%,transparent 95%)" }} />
 
       <div className="max-w-[1320px] mx-auto px-6">
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 overflow-hidden">
           <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none select-none overflow-hidden" style={{ zIndex: 0 }}>
             <span className="font-black uppercase tracking-[-0.04em] whitespace-nowrap"
               style={{ fontSize: "clamp(70px,12vw,180px)",
-                color: isDark ? "rgba(255,255,255,0.1)" : "rgba(124,92,255,0.1)" }}>
+                color: isDark ? "rgba(255,255,255,0.1)" : "rgba(201,124,60,0.1)" }}>
               SERVICES
             </span>
           </div>
           <div className="relative" style={{ zIndex: 1 }}>
             <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#7C5CFF" }}>
+              className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#C97C3C" }}>
               {t.labels.services}
             </motion.p>
             <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="font-black tracking-[-0.04em] leading-[1.0]" style={{ fontSize: "clamp(36px,4.5vw,60px)", color: C.text }}>
-              {t.services.headline}<span style={{ color: "#7C5CFF" }}>.</span>
+              {t.services.headline}<span style={{ color: "#C97C3C" }}>.</span>
             </motion.h2>
           </div>
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
@@ -77,7 +77,7 @@ export function Services() {
                 className="group rounded-[22px] flex flex-col relative overflow-hidden transition-all duration-300 cursor-pointer"
                 style={{
                   background: isDark
-                    ? `linear-gradient(145deg, rgba(${acc.rgb},0.26) 0%, rgba(8,4,22,0.94) 60%)`
+                    ? `linear-gradient(145deg, rgba(${acc.rgb},0.26) 0%, rgba(18, 13, 7,0.94) 60%)`
                     : "rgba(255,255,255,0.92)",
                   border: `1px solid rgba(${acc.rgb},${isDark ? "0.46" : "0.2"})`,
                   backdropFilter: isDark ? "none" : "blur(20px)",

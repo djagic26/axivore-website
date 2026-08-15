@@ -7,11 +7,11 @@ import { useTheme } from "@/lib/ThemeContext";
 import { useColors } from "./colors";
 
 const PROC_ACCENTS = [
-  { color: "#A09AFF", rgb: "160,154,255" },
-  { color: "#FF3DC5", rgb: "255,61,197" },
-  { color: "#5B8AFF", rgb: "91,138,255" },
+  { color: "#E0A360", rgb: "224,163,96" },
+  { color: "#B5502E", rgb: "181,80,46" },
+  { color: "#D9A54E", rgb: "217,165,78" },
   { color: "#22d3ee", rgb: "34,211,238" },
-  { color: "#A09AFF", rgb: "160,154,255" },
+  { color: "#E0A360", rgb: "224,163,96" },
 ];
 
 export function Process() {
@@ -48,22 +48,22 @@ export function Process() {
           <div className="flex items-end justify-between relative overflow-hidden">
             <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none select-none" style={{ zIndex: 0 }}>
               <span className="font-black uppercase tracking-[-0.04em] whitespace-nowrap"
-                style={{ fontSize: "clamp(70px,12vw,180px)", color: isDark ? "rgba(255,255,255,0.1)" : "rgba(124,92,255,0.1)" }}>
+                style={{ fontSize: "clamp(70px,12vw,180px)", color: isDark ? "rgba(255,255,255,0.1)" : "rgba(201,124,60,0.1)" }}>
                 PROZESS
               </span>
             </div>
             <div className="relative" style={{ zIndex: 1 }}>
-              <p className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#A09AFF" }}>
+              <p className="text-[10.5px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#E0A360" }}>
                 {t.labels.process}
               </p>
               <h2 className="font-black tracking-[-0.04em] leading-[1.0]"
                 style={{ fontSize: "clamp(36px,4.5vw,60px)", color: C.text }}>
-                {t.process.headline}<span style={{ color: "#7C5CFF" }}>.</span>
+                {t.process.headline}<span style={{ color: "#C97C3C" }}>.</span>
               </h2>
             </div>
             <div className="text-right hidden md:block relative" style={{ zIndex: 1 }}>
               <p className="text-[12px] mb-1" style={{ color: C.muted }}>{t.process.subheadline}</p>
-              <span className="text-[11px] font-mono tracking-widest" style={{ color: "#7C5CFF" }}>
+              <span className="text-[11px] font-mono tracking-widest" style={{ color: "#C97C3C" }}>
                 01 → 0{t.process.steps.length}
               </span>
             </div>
@@ -77,7 +77,7 @@ export function Process() {
               return (
                 <div key={i} className="rounded-[22px] flex flex-col justify-between relative overflow-hidden"
                   style={{
-                    background: isDark ? `linear-gradient(145deg, rgba(${pa.rgb},0.16) 0%, rgba(6,3,14,0.97) 65%)` : `linear-gradient(145deg, rgba(${pa.rgb},0.05) 0%, rgba(255,255,255,0.94) 100%)`,
+                    background: isDark ? `linear-gradient(145deg, rgba(${pa.rgb},0.16) 0%, rgba(18, 12, 7,0.97) 65%)` : `linear-gradient(145deg, rgba(${pa.rgb},0.05) 0%, rgba(255,255,255,0.94) 100%)`,
                     border: `1px solid rgba(${pa.rgb},${isDark ? "0.32" : "0.2"})`,
                     boxShadow: isDark ? `0 6px 40px rgba(${pa.rgb},0.18)` : `0 4px 28px rgba(${pa.rgb},0.12)`,
                     minHeight: "220px",
@@ -104,7 +104,7 @@ export function Process() {
                 <div key={i} className="flex-shrink-0 w-[310px] rounded-[22px] flex flex-col justify-between relative overflow-hidden"
                   style={{
                     background: isDark
-                      ? `linear-gradient(145deg, rgba(${pa.rgb},0.16) 0%, rgba(6,3,14,0.97) 65%)`
+                      ? `linear-gradient(145deg, rgba(${pa.rgb},0.16) 0%, rgba(18, 12, 7,0.97) 65%)`
                       : `linear-gradient(145deg, rgba(${pa.rgb},0.05) 0%, rgba(255,255,255,0.94) 100%)`,
                     border: `1px solid rgba(${pa.rgb},${isDark ? "0.32" : "0.2"})`,
                     backdropFilter: isDark ? "none" : "blur(20px)",

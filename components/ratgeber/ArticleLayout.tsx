@@ -98,7 +98,7 @@ export function ArticleLayout({ article, locale, children }: ArticleLayoutProps)
         dateModified: article.date,
         inLanguage: ui.dateLocale,
         mainEntityOfPage: pageUrl,
-        author: { "@id": "https://axivore.io/#organization" },
+        author: { "@id": "https://axivore.io/#dino-jagic" },
         publisher: { "@id": "https://axivore.io/#organization" },
       },
       {
@@ -116,40 +116,40 @@ export function ArticleLayout({ article, locale, children }: ArticleLayoutProps)
     <ServiceShell>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
-      <article className="max-w-3xl mx-auto px-6 pt-16 pb-8">
-        <nav aria-label="Breadcrumb" className="mb-8 text-[13px] text-white/40">
-          <Link href={localePathname(locale, "/ratgeber")} className="hover:text-white/70 transition-colors">
+      <article className="ratgeber-article max-w-3xl mx-auto px-6 pt-16 pb-8">
+        <nav aria-label="Breadcrumb" className="ra-muted-40 mb-8 text-[13px]">
+          <Link href={localePathname(locale, "/ratgeber")} className="ra-muted-70-hover transition-colors">
             {ui.ratgeberLabel}
           </Link>
           <span className="mx-2">/</span>
-          <span className="text-white/60">{article.category}</span>
+          <span className="ra-muted-60">{article.category}</span>
         </nav>
 
         <header className="mb-12">
-          <h1 className="text-[32px] md:text-[42px] leading-[1.15] font-semibold tracking-tight mb-5">
+          <h1 className="ra-strong text-[32px] md:text-[42px] leading-[1.15] font-semibold tracking-tight mb-5">
             {article.title}
           </h1>
-          <p className="text-[16px] leading-[1.7] text-white/60 mb-5">{article.description}</p>
-          <p className="text-[13px] text-white/40">
+          <p className="ra-muted-60 text-[16px] leading-[1.7] mb-5">{article.description}</p>
+          <p className="ra-muted-40 text-[13px]">
             <time dateTime={article.date}>{formatDate(article.date, ui.dateLocale)}</time>
             <span className="mx-2">·</span>
             {article.readingTime} {ui.readingTimeSuffix}
             <span className="mx-2">·</span>
-            Axivore, Stuttgart
+            Dino Jagić, Axivore
           </p>
         </header>
 
         <div
-          className="text-[15.5px]
-            [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:text-[24px] [&>h2]:md:text-[26px] [&>h2]:font-semibold [&>h2]:tracking-tight [&>h2]:text-white
-            [&>h3]:mt-8 [&>h3]:mb-3 [&>h3]:text-[18px] [&>h3]:font-semibold [&>h3]:text-white
-            [&>p]:mb-5 [&>p]:leading-[1.85] [&>p]:text-white/70
-            [&>ul]:mb-6 [&>ul]:pl-5 [&>ul]:list-disc [&>ul]:space-y-2.5 [&>ul]:leading-[1.7] [&>ul]:text-white/70
-            [&>ol]:mb-6 [&>ol]:pl-5 [&>ol]:list-decimal [&>ol]:space-y-2.5 [&>ol]:leading-[1.7] [&>ol]:text-white/70
-            [&_strong]:text-white [&_strong]:font-semibold
-            [&_a]:text-[#A09AFF] [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-[#c4c0ff]"
+          className="ra-prose text-[15.5px]
+            [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:text-[24px] [&>h2]:md:text-[26px] [&>h2]:font-semibold [&>h2]:tracking-tight
+            [&>h3]:mt-8 [&>h3]:mb-3 [&>h3]:text-[18px] [&>h3]:font-semibold
+            [&>p]:mb-5 [&>p]:leading-[1.85]
+            [&>ul]:mb-6 [&>ul]:pl-5 [&>ul]:list-disc [&>ul]:space-y-2.5 [&>ul]:leading-[1.7]
+            [&>ol]:mb-6 [&>ol]:pl-5 [&>ol]:list-decimal [&>ol]:space-y-2.5 [&>ol]:leading-[1.7]
+            [&_strong]:font-semibold
+            [&_a]:text-[#E0A360] [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-[#f0c48a]"
         >
           {children}
         </div>
@@ -157,23 +157,23 @@ export function ArticleLayout({ article, locale, children }: ArticleLayoutProps)
         <aside
           className="mt-14 rounded-2xl p-7 md:p-8"
           style={{
-            background: "linear-gradient(135deg, rgba(124,92,255,0.14), rgba(91,138,255,0.07))",
-            border: "1px solid rgba(124,92,255,0.28)",
+            background: "linear-gradient(135deg, rgba(201,124,60,0.14), rgba(217,165,78,0.07))",
+            border: "1px solid rgba(201,124,60,0.28)",
           }}
         >
-          <p className="text-[18px] font-semibold mb-2">{ui.ctaHeading}</p>
-          <p className="text-[14px] leading-[1.7] text-white/60 mb-5">{ui.ctaText}</p>
+          <p className="ra-strong text-[18px] font-semibold mb-2">{ui.ctaHeading}</p>
+          <p className="ra-muted-60 text-[14px] leading-[1.7] mb-5">{ui.ctaText}</p>
           <div className="flex flex-wrap items-center gap-4">
             <a
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 rounded-full text-[14px] font-semibold transition-transform hover:scale-[1.03]"
-              style={{ background: "linear-gradient(135deg,#7C5CFF,#A09AFF)", color: "#0C0C0F" }}
+              style={{ background: "linear-gradient(135deg,#C97C3C,#E0A360)", color: "#0C0C0F" }}
             >
               {ui.ctaButton}
             </a>
-            <Link href={localePathname(locale, "/kontakt")} className="text-[14px] text-white/60 hover:text-white transition-colors">
+            <Link href={localePathname(locale, "/kontakt")} className="ra-muted-60 ra-strong-hover text-[14px] transition-colors">
               {ui.ctaContactLink}
             </Link>
           </div>

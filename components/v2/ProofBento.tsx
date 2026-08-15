@@ -7,8 +7,8 @@ import { useTheme } from "@/lib/ThemeContext";
 import { useColors } from "./colors";
 
 const CARD_ACCENTS = [
-  { color: "#5B8AFF", rgb: "91,138,255", grad: "linear-gradient(135deg, #5B8AFF, #93baff)" },
-  { color: "#FF3DC5", rgb: "255,61,197", grad: "linear-gradient(135deg, #FF3DC5, #ff8de8)" },
+  { color: "#D9A54E", rgb: "217,165,78", grad: "linear-gradient(135deg, #D9A54E, #f0c98a)" },
+  { color: "#B5502E", rgb: "181,80,46", grad: "linear-gradient(135deg, #B5502E, #e0a074)" },
   { color: "#22d3ee", rgb: "34,211,238", grad: "linear-gradient(135deg, #22d3ee, #67e8f9)" },
 ];
 
@@ -19,14 +19,14 @@ export function ProofBento() {
   const C = useColors(isDark);
 
   const sectionBg = isDark
-    ? "linear-gradient(180deg, #050410 0%, #040110 100%)"
-    : "linear-gradient(180deg, #f2eeff 0%, #ece6ff 100%)";
+    ? "linear-gradient(180deg, #120d08 0%, #140d05 100%)"
+    : "linear-gradient(180deg, #FAF0E0 0%, #F7EBD8 100%)";
 
   return (
     <section className="relative py-12 md:py-16 lg:py-20 overflow-hidden" style={{ background: sectionBg }}>
       {isDark && (
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 90% 60% at 50% 50%, rgba(80,40,180,0.07) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(ellipse 90% 60% at 50% 50%, rgba(94, 65, 39,0.07) 0%, transparent 70%)" }} />
       )}
       <div className="max-w-[1320px] mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -38,41 +38,41 @@ export function ProofBento() {
             className="md:col-span-2 rounded-[24px] p-10 flex flex-col justify-between relative overflow-hidden"
             style={{
               background: isDark
-                ? "linear-gradient(145deg, rgba(124,92,255,0.16) 0%, rgba(6,3,14,0.97) 70%)"
-                : "linear-gradient(145deg, rgba(124,92,255,0.06) 0%, rgba(245,240,255,0.92) 100%)",
-              border: `1px solid rgba(124,92,255,${isDark ? "0.3" : "0.24"})`,
+                ? "linear-gradient(145deg, rgba(201,124,60,0.16) 0%, rgba(18, 12, 7,0.97) 70%)"
+                : "linear-gradient(145deg, rgba(201,124,60,0.06) 0%, rgba(237, 201, 171,0.92) 100%)",
+              border: `1px solid rgba(201,124,60,${isDark ? "0.3" : "0.24"})`,
               backdropFilter: isDark ? "none" : "blur(20px)",
-              boxShadow: isDark ? "0 6px 44px rgba(124,92,255,0.18)" : "0 8px 56px rgba(124,92,255,0.16)",
+              boxShadow: isDark ? "0 6px 44px rgba(201,124,60,0.18)" : "0 8px 56px rgba(201,124,60,0.16)",
               minHeight: "220px",
             }}>
             <div className="absolute top-0 left-0 right-0 h-[3px]"
-              style={{ background: "linear-gradient(90deg, transparent, rgba(124,92,255,0.8), transparent)" }} />
+              style={{ background: "linear-gradient(90deg, transparent, rgba(201,124,60,0.8), transparent)" }} />
             <div className="absolute -top-8 -left-4 font-black select-none pointer-events-none leading-none"
               style={{ fontSize: 240, lineHeight: 1,
                 background: isDark
-                  ? "linear-gradient(135deg, rgba(124,92,255,0.12) 0%, transparent 55%)"
-                  : "linear-gradient(135deg, rgba(124,92,255,0.16) 0%, transparent 55%)",
+                  ? "linear-gradient(135deg, rgba(201,124,60,0.12) 0%, transparent 55%)"
+                  : "linear-gradient(135deg, rgba(201,124,60,0.16) 0%, transparent 55%)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               {'"'}
             </div>
             <div className="absolute top-0 right-0 w-80 h-80 pointer-events-none"
-              style={{ background: `radial-gradient(ellipse, rgba(124,92,255,${isDark ? "0.18" : "0.3"}) 0%, transparent 65%)`, filter: "blur(36px)", transform: "translate(35%,-35%)" }} />
+              style={{ background: `radial-gradient(ellipse, rgba(201,124,60,${isDark ? "0.18" : "0.3"}) 0%, transparent 65%)`, filter: "blur(36px)", transform: "translate(35%,-35%)" }} />
             <div className="relative">
               <p className="text-[17px] md:text-[20px] font-medium leading-[1.7] mb-8 max-w-xl"
                 style={{ color: isDark ? "rgba(255,255,255,0.9)" : "#0a0a0f" }}>
                 {t.proofBento.quoteStart}
-                <span style={{ color: "#7C5CFF", fontWeight: 700 }}>{t.proofBento.quoteHighlight}</span>
+                <span style={{ color: "#C97C3C", fontWeight: 700 }}>{t.proofBento.quoteHighlight}</span>
                 {t.proofBento.quoteEnd}
               </p>
               <div className="flex items-center gap-3.5">
                 <div className="w-10 h-10 rounded-full overflow-hidden shrink-0"
-                  style={{ border: "2px solid rgba(124,92,255,0.45)", boxShadow: "0 2px 14px rgba(124,92,255,0.35)" }}>
+                  style={{ border: "2px solid rgba(201,124,60,0.45)", boxShadow: "0 2px 14px rgba(201,124,60,0.35)" }}>
                   <Image src="/founder.jpg" alt="Dino Jagić" width={40} height={40}
                     className="w-full h-full object-cover" style={{ objectPosition: "50% 8%" }} />
                 </div>
                 <div>
                   <div className="text-[13px] font-semibold" style={{ color: C.text }}>Dino Jagić</div>
-                  <div className="text-[11px]" style={{ color: "#7C5CFF" }}>{t.proofBento.founderRole}</div>
+                  <div className="text-[11px]" style={{ color: "#C97C3C" }}>{t.proofBento.founderRole}</div>
                 </div>
               </div>
             </div>
@@ -88,8 +88,8 @@ export function ProofBento() {
                 className="rounded-[24px] p-9 flex flex-col justify-between relative overflow-hidden"
                 style={{
                   background: isDark
-                    ? `linear-gradient(145deg, rgba(${acc.rgb},0.18) 0%, rgba(6,3,14,0.97) 70%)`
-                    : `linear-gradient(145deg, rgba(${acc.rgb},0.06) 0%, rgba(248,248,255,0.92) 100%)`,
+                    ? `linear-gradient(145deg, rgba(${acc.rgb},0.18) 0%, rgba(18, 12, 7,0.97) 70%)`
+                    : `linear-gradient(145deg, rgba(${acc.rgb},0.06) 0%, rgba(239, 210, 178,0.92) 100%)`,
                   border: `1px solid rgba(${acc.rgb},${isDark ? "0.32" : "0.24"})`,
                   backdropFilter: isDark ? "none" : "blur(20px)",
                   boxShadow: isDark ? `0 6px 44px rgba(${acc.rgb},0.2)` : `0 8px 56px rgba(${acc.rgb},0.16)`,
@@ -118,7 +118,7 @@ export function ProofBento() {
             className="rounded-[24px] p-8 flex flex-col justify-between relative overflow-hidden"
             style={{
               background: isDark
-                ? "linear-gradient(145deg, rgba(34,197,94,0.14) 0%, rgba(6,3,14,0.97) 70%)"
+                ? "linear-gradient(145deg, rgba(34,197,94,0.14) 0%, rgba(18, 12, 7,0.97) 70%)"
                 : "linear-gradient(145deg, rgba(34,197,94,0.05) 0%, rgba(240,255,245,0.92) 100%)",
               border: `1px solid rgba(34,197,94,${isDark ? "0.3" : "0.22"})`,
               backdropFilter: isDark ? "none" : "blur(20px)",

@@ -110,7 +110,7 @@ export default async function RatgeberPage({ params }: { params: Promise<{ local
       />
       <div className="max-w-5xl mx-auto px-6 pt-16 pb-8">
         <header className="mb-14 max-w-2xl">
-          <p className="text-[11px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#7C5CFF" }}>
+          <p className="text-[11px] tracking-[0.28em] uppercase mb-4 font-medium" style={{ color: "#C97C3C" }}>
             {c.eyebrow}
           </p>
           <h1 className="text-[34px] md:text-[46px] leading-[1.12] font-semibold tracking-tight mb-5">
@@ -130,10 +130,10 @@ export default async function RatgeberPage({ params }: { params: Promise<{ local
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
-              <p className="text-[10px] tracking-[0.22em] uppercase font-semibold mb-4" style={{ color: "#A09AFF" }}>
+              <p className="text-[10px] tracking-[0.22em] uppercase font-semibold mb-4" style={{ color: "#E0A360" }}>
                 {a.category}
               </p>
-              <h2 className="text-[20px] leading-[1.3] font-semibold tracking-tight mb-3 group-hover:text-[#c4c0ff] transition-colors">
+              <h2 className="text-[20px] leading-[1.3] font-semibold tracking-tight mb-3 group-hover:text-[#f0c48a] transition-colors">
                 {a.title}
               </h2>
               <p className="text-[13.5px] leading-[1.65] text-white/55 mb-5">{a.description}</p>
