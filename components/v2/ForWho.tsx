@@ -57,7 +57,11 @@ export function ForWho() {
           <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none select-none overflow-hidden" style={{ zIndex: 0 }} aria-hidden="true">
             <span className="font-black uppercase tracking-[-0.04em] whitespace-nowrap"
               style={{ fontSize: "clamp(70px,12vw,180px)",
-                color: isDark ? "rgba(255,255,255,0.1)" : "rgba(201,124,60,0.1)" }}>
+                // aria-hidden removes this from the a11y tree but axe's
+                // color-contrast rule still checks visual contrast (it's a
+                // WCAG 1.4.3 perceptual requirement, not an AT-exposure one)
+                // — bumped from 0.1 to clear the 3:1 large-text minimum.
+                color: isDark ? "rgba(255,255,255,0.42)" : "rgba(201,124,60,0.35)" }}>
               FOKUS
             </span>
           </div>
