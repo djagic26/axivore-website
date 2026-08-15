@@ -8,6 +8,10 @@ export const routing = defineRouting({
   locales: ["de", "en", "hr", "ro", "tr", "it"],
   defaultLocale: "de",
   localePrefix: "as-needed",
+  // Root "/" must always serve German — the target market. Browser
+  // Accept-Language detection would otherwise redirect German business
+  // owners with a non-de browser locale away from the German homepage.
+  localeDetection: false,
 });
 
 export type AppLocale = (typeof routing.locales)[number];

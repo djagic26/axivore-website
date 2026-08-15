@@ -2,6 +2,33 @@ import { openai } from "@ai-sdk/openai";
 import { streamText, tool } from "ai";
 import { Resend } from "resend";
 import { z } from "zod";
+import type { NextRequest } from "next/server";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+
+const CHAT_RATE_LIMIT = 20;
+const CHAT_RATE_WINDOW_MS = 60_000;
+
+const requestSchema = z.object({
+  messages: z
+    .array(
+      z.object({
+        role: z.enum(["user", "assistant"]),
+        content: z.string().max(4000),
+      })
+    )
+    .min(1)
+    .max(40),
+  language: z.enum(["de", "en", "hr", "ro", "tr", "it"]).optional(),
+});
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 const LANG_NAMES: Record<string, string> = {
   de: "German",
@@ -64,19 +91,46 @@ function buildTranscriptHtml(messages: { role: string; content: string }[]) {
     .map((m) => {
       const isUser = m.role === "user";
       const label = isUser ? "👤 Besucher" : "🤖 Axivore AI";
-      const bg = isUser ? "#1a1a2e" : "#13131A";
-      const border = isUser ? "#7B72E8" : "#4A4866";
+      const bg = isUser ? "#0f0d0a" : "#13131A";
+      const border = isUser ? "#B36A2E" : "#4A4866";
       return `<div style="margin-bottom:12px;padding:12px 16px;background:${bg};border-left:3px solid ${border};border-radius:6px;">
         <div style="font-size:11px;color:#ffffff50;margin-bottom:4px;">${label}</div>
-        <div style="color:#ffffff;font-size:14px;line-height:1.5;">${m.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+        <div style="color:#ffffff;font-size:14px;line-height:1.5;">${escapeHtml(m.content)}</div>
       </div>`;
     })
     .join("");
   return rows;
 }
 
-export async function POST(req: Request) {
-  const { messages, language = "de" } = await req.json();
+export async function POST(req: NextRequest) {
+  const ip = getClientIp(req);
+  const { allowed, retryAfterSeconds } = checkRateLimit(
+    `chat:${ip}`,
+    CHAT_RATE_LIMIT,
+    CHAT_RATE_WINDOW_MS
+  );
+  if (!allowed) {
+    return new Response(JSON.stringify({ error: "Too many requests" }), {
+      status: 429,
+      headers: {
+        "Content-Type": "application/json",
+        "Retry-After": String(retryAfterSeconds),
+      },
+    });
+  }
+
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return new Response(JSON.stringify({ error: "Invalid JSON" }), { status: 400 });
+  }
+
+  const parsed = requestSchema.safeParse(body);
+  if (!parsed.success) {
+    return new Response(JSON.stringify({ error: "Invalid request" }), { status: 400 });
+  }
+  const { messages, language = "de" } = parsed.data;
 
   const result = streamText({
     model: openai("gpt-4o-mini"),
@@ -87,10 +141,11 @@ export async function POST(req: Request) {
         description:
           "Call this tool as soon as you have the visitor's name AND email address. Use it to save the lead and notify the team.",
         parameters: z.object({
-          name: z.string().describe("Visitor's full name"),
-          email: z.string().describe("Visitor's email address"),
+          name: z.string().max(200).describe("Visitor's full name"),
+          email: z.string().email().max(320).describe("Visitor's email address"),
           interest: z
             .string()
+            .max(2000)
             .describe("What they are interested in or their main question"),
         }),
         execute: async ({ name, email, interest }) => {
@@ -102,30 +157,33 @@ export async function POST(req: Request) {
             }
             const resend = new Resend(apiKey);
             const transcript = buildTranscriptHtml(messages);
+            const safeName = escapeHtml(name);
+            const safeEmail = escapeHtml(email);
+            const safeInterest = escapeHtml(interest);
             await resend.emails.send({
               from: "Axivore Chatbot <hello@axivore.io>",
               to: "hello@axivore.io",
-              subject: `🎯 Neuer Lead: ${name}`,
+              subject: `🎯 Neuer Lead: ${safeName}`,
               html: `
                 <div style="font-family: sans-serif; max-width: 620px; margin: 0 auto; background: #0C0C0F; color: #ffffff; padding: 32px; border-radius: 12px;">
-                  <h2 style="color: #A09AFF; margin: 0 0 24px;">Neuer Lead über Axivore Chatbot</h2>
+                  <h2 style="color: #E0A360; margin: 0 0 24px;">Neuer Lead über Axivore Chatbot</h2>
                   <table style="width: 100%; border-collapse: collapse; margin-bottom: 28px;">
                     <tr>
                       <td style="padding: 10px 0; color: #ffffff80; width: 120px;">Name</td>
-                      <td style="padding: 10px 0; color: #ffffff; font-weight: 600;">${name}</td>
+                      <td style="padding: 10px 0; color: #ffffff; font-weight: 600;">${safeName}</td>
                     </tr>
                     <tr>
                       <td style="padding: 10px 0; color: #ffffff80;">E-Mail</td>
-                      <td style="padding: 10px 0;"><a href="mailto:${email}" style="color: #A09AFF;">${email}</a></td>
+                      <td style="padding: 10px 0;"><a href="mailto:${safeEmail}" style="color: #E0A360;">${safeEmail}</a></td>
                     </tr>
                     <tr>
                       <td style="padding: 10px 0; color: #ffffff80;">Interesse</td>
-                      <td style="padding: 10px 0; color: #ffffff;">${interest}</td>
+                      <td style="padding: 10px 0; color: #ffffff;">${safeInterest}</td>
                     </tr>
                   </table>
-                  <h3 style="color: #A09AFF; margin: 0 0 16px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Gesprächsverlauf</h3>
+                  <h3 style="color: #E0A360; margin: 0 0 16px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Gesprächsverlauf</h3>
                   ${transcript}
-                  <a href="mailto:${email}" style="display: inline-block; margin-top: 24px; padding: 12px 24px; background: #A09AFF; color: #0C0C0F; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                  <a href="mailto:${safeEmail}" style="display: inline-block; margin-top: 24px; padding: 12px 24px; background: #E0A360; color: #0C0C0F; border-radius: 8px; text-decoration: none; font-weight: 600;">
                     Jetzt antworten
                   </a>
                 </div>

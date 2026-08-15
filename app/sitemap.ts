@@ -13,7 +13,10 @@ const LEISTUNGEN_PATHS = ["/leistungen", "/leistungen/ki-automatisierung", "/lei
 
 function languageAlternates(path: string, locales: readonly AppLocale[] = routing.locales) {
   return {
-    languages: Object.fromEntries(locales.map((l) => [l, localeHref(l, path)])),
+    languages: {
+      ...Object.fromEntries(locales.map((l) => [l, localeHref(l, path)])),
+      "x-default": localeHref(routing.defaultLocale, path),
+    },
   };
 }
 

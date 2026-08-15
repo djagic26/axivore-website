@@ -16,13 +16,14 @@ export function FinalCTA() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [company, setCompany] = useState(""); // honeypot — must stay empty
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const focusStyle = (key: string) => ({
-    borderColor: focusedField === key ? "rgba(124,92,255,0.5)" : isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+    borderColor: focusedField === key ? "rgba(201,124,60,0.5)" : isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
     background: focusedField === key
-      ? isDark ? "rgba(124,92,255,0.06)" : "rgba(124,92,255,0.04)"
+      ? isDark ? "rgba(201,124,60,0.06)" : "rgba(201,124,60,0.04)"
       : isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
   });
 
@@ -33,7 +34,7 @@ export function FinalCTA() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, company }),
       });
       if (!res.ok) throw new Error();
       setStatus("success");
@@ -47,18 +48,18 @@ export function FinalCTA() {
     <section className="relative py-16 md:py-24 lg:py-[160px] overflow-hidden" style={{ borderTop: `1px solid ${borderColor}` }}>
       <div className="absolute inset-0"
         style={{ background: isDark
-          ? "radial-gradient(ellipse 100% 100% at 50% 100%, rgba(80,40,200,0.22) 0%, rgba(40,15,90,0.12) 40%, #030208 70%)"
-          : "linear-gradient(to bottom, #ffffff, #f5f2ff)" }} />
+          ? "radial-gradient(ellipse 100% 100% at 50% 100%, rgba(110, 75, 43,0.22) 0%, rgba(19, 12, 7,0.12) 40%, #120d08 70%)"
+          : "linear-gradient(to bottom, #ffffff, #FBF2E4)" }} />
       {isDark && (
         <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
           style={{ top: "20%", width: 900, height: 600,
-            background: "radial-gradient(ellipse, rgba(100,55,240,0.2) 0%, transparent 65%)",
+            background: "radial-gradient(ellipse, rgba(162, 101, 46,0.2) 0%, transparent 65%)",
             filter: "blur(60px)" }} />
       )}
       {isDark && (
         <div className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: "linear-gradient(rgba(160,154,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(160,154,255,0.03) 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(rgba(224,163,96,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(224,163,96,0.03) 1px, transparent 1px)",
             backgroundSize: "80px 80px",
           }} />
       )}
@@ -67,30 +68,30 @@ export function FinalCTA() {
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-10"
-            style={{ background: "rgba(124,92,255,0.1)", border: "1px solid rgba(124,92,255,0.22)" }}>
+            style={{ background: "rgba(201,124,60,0.1)", border: "1px solid rgba(201,124,60,0.22)" }}>
             <motion.div
               className="w-1.5 h-1.5 rounded-full"
-              style={{ background: "#A09AFF" }}
+              style={{ background: "#E0A360" }}
               animate={{ opacity: [1, 0.3, 1], scale: [1, 1.4, 1] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
-            <span className="text-[10.5px] tracking-[0.18em] uppercase font-medium" style={{ color: "#A09AFF" }}>
+            <span className="text-[10.5px] tracking-[0.18em] uppercase font-medium" style={{ color: "#E0A360" }}>
               {t.labels.cta}
             </span>
           </div>
           <h2 className="font-bold tracking-[-0.04em] leading-[0.92] mb-8"
             style={{ fontSize: "clamp(48px,7vw,100px)", color: textColor }}>
-            {t.cta.headline.replace(/[?!.]$/, "")}<span style={{ color: "#7C5CFF" }}>.</span>
+            {t.cta.headline.replace(/[?!.]$/, "")}<span style={{ color: "#C97C3C" }}>.</span>
           </h2>
           <p className="text-[16px] mb-12 max-w-[400px] mx-auto leading-[1.7]" style={{ color: mutedColor }}>
             {t.cta.subheadline}
           </p>
           <motion.a href="https://calendly.com/hello-axivore/kostenloses-gesprach"
             target="_blank" rel="noopener noreferrer"
-            whileHover={{ scale: 1.04, boxShadow: "0 12px 48px rgba(124,92,255,0.6)" }}
+            whileHover={{ scale: 1.04, boxShadow: "0 12px 48px rgba(201,124,60,0.6)" }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-white text-[14px] font-semibold cursor-pointer relative overflow-hidden"
-            style={{ background: "linear-gradient(135deg, #7C5CFF 0%, #6B8FFF 100%)", boxShadow: "0 6px 32px rgba(124,92,255,0.45)", transition: "box-shadow 0.2s" }}>
+            style={{ background: "linear-gradient(135deg, #C97C3C 0%, #E0A360 100%)", boxShadow: "0 6px 32px rgba(201,124,60,0.45)", transition: "box-shadow 0.2s" }}>
             <motion.div
               className="absolute inset-0 pointer-events-none"
               animate={{ x: ["-120%", "220%"] }}
@@ -118,6 +119,12 @@ export function FinalCTA() {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
             className="max-w-[480px] mx-auto flex flex-col gap-3 text-left">
+            {/* Honeypot — hidden from real visitors, bots that auto-fill every field trip it */}
+            <input type="text" name="company" value={company} onChange={e => setCompany(e.target.value)}
+              tabIndex={-1} autoComplete="off" aria-hidden="true"
+              className="absolute opacity-0 pointer-events-none -z-10 h-0 w-0"
+              style={{ left: "-9999px" }}
+            />
             <div className="grid grid-cols-2 gap-3">
               {[
                 { value: name, set: setName, ph: t.cta.formName, type: "text" },
@@ -149,10 +156,10 @@ export function FinalCTA() {
               whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
               className="w-full py-3.5 rounded-xl text-[13px] font-semibold transition-all duration-200 disabled:opacity-50"
               style={{
-                background: "linear-gradient(135deg, #7C5CFF, #5b8aff)",
+                background: "linear-gradient(135deg, #C97C3C, #d9a54e)",
                 border: "none",
                 color: "#ffffff",
-                boxShadow: "0 4px 28px rgba(124,92,255,0.45)",
+                boxShadow: "0 4px 28px rgba(201,124,60,0.45)",
               }}>
               {status === "loading" ? "..." : t.cta.formSubmit}
             </motion.button>

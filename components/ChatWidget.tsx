@@ -55,6 +55,24 @@ const ONLINE_TEXT: Record<string, string> = {
   it: "Online · Risponde subito",
 };
 
+const CHAT_OPEN_LABEL: Record<string, string> = {
+  de: "Chat öffnen",
+  en: "Open chat",
+  hr: "Otvori chat",
+  ro: "Deschide chatul",
+  tr: "Sohbeti aç",
+  it: "Apri la chat",
+};
+
+const CHAT_CLOSE_LABEL: Record<string, string> = {
+  de: "Chat schließen",
+  en: "Close chat",
+  hr: "Zatvori chat",
+  ro: "Închide chatul",
+  tr: "Sohbeti kapat",
+  it: "Chiudi la chat",
+};
+
 export default function ChatWidget() {
   const { language } = useLanguage();
   const [open, setOpen] = useState(false);
@@ -80,19 +98,16 @@ export default function ChatWidget() {
 
   const userHasMessaged = messages.some((m) => m.role === "user");
 
-  // Auto-open once per session: bubble at 2s, open at 4s
+  // Teaser bubble once per session at 2s. The panel itself only opens on a
+  // click — auto-expanding a 380px panel over the hero on load blocked key
+  // content (stat cards) and felt aggressive for a premium-positioned brand.
   useEffect(() => {
     if (sessionStorage.getItem("axi-chat-seen")) return;
-    const bubbleTimer = setTimeout(() => setShowBubble(true), 2000);
-    const openTimer = setTimeout(() => {
-      setOpen(true);
-      setShowBubble(false);
+    const bubbleTimer = setTimeout(() => {
+      setShowBubble(true);
       sessionStorage.setItem("axi-chat-seen", "1");
-    }, 4000);
-    return () => {
-      clearTimeout(bubbleTimer);
-      clearTimeout(openTimer);
-    };
+    }, 2000);
+    return () => clearTimeout(bubbleTimer);
   }, []);
 
   // Hide bubble when chat opens manually
@@ -130,7 +145,7 @@ export default function ChatWidget() {
     !userHasMessaged && showProactive ? [...messages, proactiveMsg] : messages;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-6 right-6 z-50">
       <AnimatePresence>
         {open && (
           <motion.div
@@ -138,7 +153,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="w-[340px] sm:w-[380px] flex flex-col rounded-2xl overflow-hidden shadow-2xl"
+            className="absolute bottom-[4.25rem] right-0 w-[340px] sm:w-[380px] flex flex-col rounded-2xl overflow-hidden shadow-2xl"
             style={{ border: "1px solid rgba(74,72,102,0.6)", background: "#0C0C0F", height: "480px" }}
           >
             {/* Header */}
@@ -149,7 +164,7 @@ export default function ChatWidget() {
                 </div>
                 <div>
                   <p className="text-white text-sm font-medium leading-none">Axi</p>
-                  <p className="text-[10px] mt-0.5" style={{ color: "#A09AFF" }}>{ONLINE_TEXT[language] ?? ONLINE_TEXT.de}</p>
+                  <p className="text-[10px] mt-0.5" style={{ color: "#E0A360" }}>{ONLINE_TEXT[language] ?? ONLINE_TEXT.de}</p>
                 </div>
               </div>
               <button
@@ -170,7 +185,7 @@ export default function ChatWidget() {
                     className="max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed"
                     style={
                       m.role === "user"
-                        ? { background: "#A09AFF", color: "#0C0C0F", borderBottomRightRadius: "4px" }
+                        ? { background: "#E0A360", color: "#0C0C0F", borderBottomRightRadius: "4px" }
                         : { background: "#13131A", color: "rgba(255,255,255,0.85)", border: "1px solid rgba(74,72,102,0.4)", borderBottomLeftRadius: "4px" }
                     }
                   >
@@ -186,7 +201,7 @@ export default function ChatWidget() {
                         <motion.div
                           key={i}
                           className="w-1.5 h-1.5 rounded-full"
-                          style={{ background: "#A09AFF" }}
+                          style={{ background: "#E0A360" }}
                           animate={{ opacity: [0.3, 1, 0.3] }}
                           transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
                         />
@@ -215,7 +230,7 @@ export default function ChatWidget() {
                 type="submit"
                 disabled={isLoading || !input.trim()}
                 className="w-8 h-8 rounded-full flex items-center justify-center transition-all disabled:opacity-30"
-                style={{ background: "#A09AFF" }}
+                style={{ background: "#E0A360" }}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0C0C0F" strokeWidth="2.5">
                   <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" />
@@ -235,7 +250,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.9 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="max-w-[220px] text-left px-4 py-2.5 rounded-2xl text-sm cursor-pointer"
+            className="absolute bottom-[4.25rem] right-0 max-w-[220px] text-left px-4 py-2.5 rounded-2xl text-sm cursor-pointer"
             style={{
               background: "#13131A",
               color: "rgba(255,255,255,0.85)",
@@ -254,11 +269,12 @@ export default function ChatWidget() {
         onClick={() => setOpen((v) => !v)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
+        aria-label={(open ? CHAT_CLOSE_LABEL : CHAT_OPEN_LABEL)[language] ?? (open ? CHAT_CLOSE_LABEL.de : CHAT_OPEN_LABEL.de)}
         className="relative w-14 h-14 rounded-full flex items-center justify-center shadow-xl"
-        style={{ background: open ? "#13131A" : "#A09AFF", border: "1px solid rgba(160,154,255,0.3)" }}
+        style={{ background: open ? "#13131A" : "#E0A360", border: "1px solid rgba(224,163,96,0.3)" }}
       >
         {hasUnread && !open && (
-          <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#A09AFF] border-2 border-[#050507]" />
+          <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#E0A360] border-2 border-[#050507]" />
         )}
         <AnimatePresence mode="wait">
           {open ? (

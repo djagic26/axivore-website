@@ -675,7 +675,7 @@ export const translations = {
     hero: {
       badge: "Digital studio iz Stuttgarta",
       headline: "Tvoj ured radi.",
-      headline2: "I noću",
+      headline2: "Čak i noću",
       subheadline: "Web stranice, web-aplikacije i AI automatizacija za male tvrtke — gradimo digitalne alate s kojima tvoj posao postiže više. Live u tjednima, ne mjesecima.",
       ctaPrimary: "Zakaži besplatan razgovor",
       ctaSecondary: "Pogledaj rezultate",
