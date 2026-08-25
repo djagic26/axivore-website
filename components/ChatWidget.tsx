@@ -55,6 +55,20 @@ const ONLINE_TEXT: Record<string, string> = {
   it: "Online · Risponde subito",
 };
 
+// EU AI Act Art. 50(1) transparency obligation (in force since 02.08.2026):
+// a person interacting with an AI system must be told so, clearly and
+// before/at the point of interaction — not just buried in the privacy
+// policy. This label sits in the always-visible chat header; the welcome
+// message (below) restates it in the conversation itself.
+const AI_LABEL: Record<string, string> = {
+  de: "KI-Assistent",
+  en: "AI Assistant",
+  hr: "AI asistent",
+  ro: "Asistent AI",
+  tr: "AI Asistanı",
+  it: "Assistente AI",
+};
+
 const CHAT_OPEN_LABEL: Record<string, string> = {
   de: "Chat öffnen",
   en: "Open chat",
@@ -163,8 +177,16 @@ export default function ChatWidget() {
                   <AxivoreIcon />
                 </div>
                 <div>
-                  <p className="text-white text-sm font-medium leading-none">Axi</p>
-                  <p className="text-[10px] mt-0.5" style={{ color: "#E0A360" }}>{ONLINE_TEXT[language] ?? ONLINE_TEXT.de}</p>
+                  <p className="text-white text-sm font-medium leading-none flex items-center gap-1.5">
+                    Axi
+                    <span
+                      className="text-[9px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded-full"
+                      style={{ color: "#E0A360", background: "rgba(224,163,96,0.14)", border: "1px solid rgba(224,163,96,0.3)" }}
+                    >
+                      {AI_LABEL[language] ?? AI_LABEL.de}
+                    </span>
+                  </p>
+                  <p className="text-[10px] mt-1" style={{ color: "#E0A360" }}>{ONLINE_TEXT[language] ?? ONLINE_TEXT.de}</p>
                 </div>
               </div>
               <button

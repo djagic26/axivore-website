@@ -124,9 +124,15 @@ export default function Datenschutz() {
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/30">5. KI-Assistent (Axi)</h2>
             <p>
-              Unsere Website bietet einen KI-gestützten Chat-Assistenten an. Wenn Sie diesen nutzen, werden
-              die von Ihnen eingegebenen Nachrichten an unseren Server übermittelt und dort verarbeitet,
-              um eine Antwort zu generieren.
+              Unsere Website bietet einen KI-gestützten Chat-Assistenten namens &bdquo;Axi&ldquo; an. Axi ist
+              ein KI-System und kein Mensch. Dies wird gemäß Art. 50 Abs. 1 der EU-Verordnung über
+              Künstliche Intelligenz (Verordnung (EU) 2024/1689, &bdquo;KI-Verordnung&ldquo;/AI Act) sowohl
+              im Chat-Header (Kennzeichnung &bdquo;KI-Assistent&ldquo;) als auch in der ersten Nachricht des
+              Chats klar offengelegt, bevor Sie mit Axi interagieren.
+            </p>
+            <p className="mt-3">
+              Wenn Sie den Chat nutzen, werden die von Ihnen eingegebenen Nachrichten an unseren Server
+              übermittelt und dort verarbeitet, um eine Antwort zu generieren.
             </p>
             <p className="mt-3">
               <span className="text-white">Was wird verarbeitet:</span> Ausschließlich die Inhalte, die
