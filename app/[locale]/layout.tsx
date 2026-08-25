@@ -9,6 +9,7 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { ConsentProvider } from "@/lib/ConsentContext";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { MetaPixel } from "@/components/analytics/MetaPixel";
+import { CalendlyClickTracking } from "@/components/analytics/CalendlyClickTracking";
 import { StructuredData } from "@/components/StructuredData";
 import { Analytics } from "@vercel/analytics/next";
 import { routing, type AppLocale } from "@/i18n/routing";
@@ -104,6 +105,21 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning className={`${geistSans.variable} ${fraunces.variable} h-full antialiased`}>
       <head>
+        {/* Google Consent Mode v2 — must run before any gtag/GA/Ads script.
+            Defaults to denied; lib/ConsentContext.tsx sends 'update' once a
+            visitor accepts, so Google Ads conversion tracking + remarketing
+            work correctly for EEA traffic once ads campaigns start. */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('consent', 'default', {
+            ad_storage: 'denied',
+            analytics_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            wait_for_update: 500
+          });
+        ` }} />
         <meta property="fb:app_id" content="1371180501519020" />
         <StructuredData locale={locale} />
         {/* Prevent flash of wrong theme on load (language is now set server-side via the URL, no script needed for that). */}
@@ -118,6 +134,7 @@ export default async function LocaleLayout({
               <CookieBanner />
               <GoogleAnalytics />
               <MetaPixel />
+              <CalendlyClickTracking />
             </ConsentProvider>
           </LanguageProvider>
         </ThemeProvider>

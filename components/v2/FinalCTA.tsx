@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useTheme } from "@/lib/ThemeContext";
+import { trackLead } from "@/lib/trackConversion";
 
 export function FinalCTA() {
   const { t } = useLanguage();
@@ -38,6 +39,7 @@ export function FinalCTA() {
       });
       if (!res.ok) throw new Error();
       setStatus("success");
+      trackLead();
       setName(""); setEmail(""); setMessage("");
     } catch {
       setStatus("error");

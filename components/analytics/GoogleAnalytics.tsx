@@ -5,12 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useConsent } from "@/lib/ConsentContext";
 
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
-
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export function GoogleAnalytics() {
@@ -33,11 +27,11 @@ export function GoogleAnalytics() {
 
   return (
     <>
+      {/* window.gtag is defined globally in app/[locale]/layout.tsx (Consent Mode default
+          runs there before this ever mounts) — this just points it at our GA4 property. */}
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
       <Script id="ga4-init" strategy="afterInteractive">
         {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', '${GA_ID}', { anonymize_ip: true });
         `}

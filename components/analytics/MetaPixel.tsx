@@ -5,12 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useConsent } from "@/lib/ConsentContext";
 
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void;
-  }
-}
-
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
 export function MetaPixel() {
