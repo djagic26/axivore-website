@@ -6,6 +6,9 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 import { ThemeProvider } from "@/lib/ThemeContext";
 import ChatWidgetWrapper from "@/components/ChatWidgetWrapper";
 import { CookieBanner } from "@/components/CookieBanner";
+import { ConsentProvider } from "@/lib/ConsentContext";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { MetaPixel } from "@/components/analytics/MetaPixel";
 import { StructuredData } from "@/components/StructuredData";
 import { Analytics } from "@vercel/analytics/next";
 import { routing, type AppLocale } from "@/i18n/routing";
@@ -109,9 +112,13 @@ export default async function LocaleLayout({
       <body className="min-h-full">
         <ThemeProvider>
           <LanguageProvider locale={locale}>
-            {children}
-            <ChatWidgetWrapper />
-            <CookieBanner />
+            <ConsentProvider>
+              {children}
+              <ChatWidgetWrapper />
+              <CookieBanner />
+              <GoogleAnalytics />
+              <MetaPixel />
+            </ConsentProvider>
           </LanguageProvider>
         </ThemeProvider>
         <Analytics />

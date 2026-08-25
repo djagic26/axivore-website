@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useTheme } from "@/lib/ThemeContext";
+import { useConsent } from "@/lib/ConsentContext";
 import { Language } from "@/lib/i18n";
 import { AxivoreLogo } from "./AxivoreLogo";
 
@@ -27,13 +28,14 @@ const FOOTER_EXTRA: Record<Language, { automation: string; chatbots: string; age
 export function Footer() {
   const { t, language } = useLanguage();
   const { theme } = useTheme();
+  const { reset: reopenCookieSettings } = useConsent();
   const isDark = theme === "dark";
   const bg = isDark ? "#050505" : "#ffffff";
   // 0.3/0.35 failed WCAG AA contrast (2.52:1 vs required 4.5:1, flagged by
   // Lighthouse a11y audit on the small footer text/links) — bumped to clear it.
   const textColor = isDark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.6)";
   const borderColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const hover = (e: React.MouseEvent<HTMLAnchorElement>, enter: boolean) => {
+  const hover = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, enter: boolean) => {
     e.currentTarget.style.color = enter ? (isDark ? "#ffffff" : "#0a0a0f") : textColor;
   };
 
@@ -190,6 +192,15 @@ export function Footer() {
               onMouseEnter={e => hover(e, true)} onMouseLeave={e => hover(e, false)}>
               {t.footer.privacy}
             </a>
+            <button
+              type="button"
+              onClick={reopenCookieSettings}
+              className="text-[11.5px] transition-colors duration-150"
+              style={{ color: textColor, background: "none", border: "none", padding: 0, cursor: "pointer", font: "inherit" }}
+              onMouseEnter={e => hover(e, true)}
+              onMouseLeave={e => hover(e, false)}>
+              {t.cookieBanner.settingsLink}
+            </button>
           </div>
         </div>
       </div>

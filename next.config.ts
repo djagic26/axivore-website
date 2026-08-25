@@ -13,10 +13,12 @@ const nextConfig: NextConfig = {
           {
             key: "Content-Security-Policy",
             // 'unsafe-inline' is required for the JSON-LD blocks and the
-            // pre-hydration theme script rendered inline across pages;
-            // everything else stays same-origin only.
+            // pre-hydration theme script rendered inline across pages.
+            // googletagmanager.com/connect.facebook.net are GA4 + Meta
+            // Pixel, both consent-gated (see lib/ConsentContext.tsx) —
+            // they only load after the visitor accepts the cookie banner.
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';",
+              "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.facebook.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';",
           },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ],

@@ -88,9 +88,10 @@ export default function Datenschutz() {
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/30">4. Cookies und lokaler Speicher</h2>
             <p>
-              Unsere Website verwendet ausschließlich technisch notwendige Cookies und den lokalen Speicher
-              (localStorage) des Browsers. Eine Einwilligung ist hierfür gemäß § 25 Abs. 2 TTDSG nicht
-              erforderlich.
+              Unsere Website verwendet technisch notwendige Cookies und den lokalen Speicher (localStorage)
+              des Browsers. Eine Einwilligung ist hierfür gemäß § 25 Abs. 2 TTDSG nicht erforderlich.
+              Zusätzlich setzen wir — ausschließlich nach Ihrer Einwilligung über den Cookie-Banner —
+              Analyse- und Marketing-Cookies ein (siehe Ziffer 7).
             </p>
             <div className="mt-4 space-y-3">
               <div className="bg-white/5 rounded-lg p-4 space-y-1">
@@ -106,6 +107,11 @@ export default function Datenschutz() {
               <div className="bg-white/5 rounded-lg p-4 space-y-1">
                 <p className="text-white font-medium">axivore-lang <span className="text-white/30 font-normal">(localStorage)</span></p>
                 <p className="text-white/50">Speichert die Sprachpräferenz lokal im Browser.</p>
+                <p className="text-white/30 text-xs">Keine Übermittlung an Server</p>
+              </div>
+              <div className="bg-white/5 rounded-lg p-4 space-y-1">
+                <p className="text-white font-medium">axivore-cookie-consent <span className="text-white/30 font-normal">(localStorage)</span></p>
+                <p className="text-white/50">Speichert Ihre Cookie-Entscheidung (akzeptiert/abgelehnt).</p>
                 <p className="text-white/30 text-xs">Keine Übermittlung an Server</p>
               </div>
             </div>
@@ -158,10 +164,40 @@ export default function Datenschutz() {
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-widest mb-3 text-white/30">7. Analyse- und Tracking-Tools</h2>
             <p>
-              Wir setzen auf dieser Website keine Analyse-, Tracking- oder Werbe-Tools ein. Es werden
-              keine Nutzungsprofile erstellt, keine Daten an Werbenetzwerke übermittelt und keine
-              Third-Party-Tracking-Cookies gesetzt.
+              Wenn Sie im Cookie-Banner auf &bdquo;Akzeptieren&ldquo; klicken, setzen wir die folgenden Tools ein.
+              Ohne Ihre Einwilligung werden diese Tools nicht geladen und keine entsprechenden Cookies gesetzt.
+              Sie können Ihre Entscheidung jederzeit über den Link &bdquo;Cookie-Einstellungen&ldquo; im Footer ändern.
             </p>
+            <div className="mt-4 space-y-3">
+              <div className="bg-white/5 rounded-lg p-4 space-y-1">
+                <p className="text-white font-medium">Google Analytics 4</p>
+                <p className="text-white/50">
+                  Reichweitenmessung (Google Ireland Limited). Erfasst u.a. besuchte Seiten, Verweildauer
+                  und Herkunft der Besucher in anonymisierter Form (IP-Anonymisierung aktiviert).
+                </p>
+                <p className="text-white/30 text-xs">
+                  Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Übermittlung in die USA auf
+                  Basis von Standardvertragsklauseln. Opt-out:{" "}
+                  <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="underline">
+                    Google Analytics Opt-out Browser Add-on
+                  </a>.
+                </p>
+              </div>
+              <div className="bg-white/5 rounded-lg p-4 space-y-1">
+                <p className="text-white font-medium">Meta Pixel</p>
+                <p className="text-white/50">
+                  Reichweitenmessung und Retargeting (Meta Platforms Ireland Limited). Ermöglicht die
+                  Auswertung des Erfolgs unserer Instagram-/Facebook-Werbeanzeigen.
+                </p>
+                <p className="text-white/30 text-xs">
+                  Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Übermittlung in die USA auf
+                  Basis von Standardvertragsklauseln. Opt-out:{" "}
+                  <a href="https://www.facebook.com/help/568137493302217" target="_blank" rel="noopener noreferrer" className="underline">
+                    Meta-Einstellungen für Werbeanzeigen
+                  </a>.
+                </p>
+              </div>
+            </div>
           </div>
 
           <div>

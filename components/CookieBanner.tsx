@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useTheme } from "@/lib/ThemeContext";
+import { useConsent } from "@/lib/ConsentContext";
 
-const STORAGE_KEY = "axivore-cookie-consent";
 const ACCENT = "#C97C3C";
 
 // Fixed positioning means this can never cause CLS on other content —
@@ -17,25 +17,22 @@ function localePath(locale: string, path: string): string {
 export function CookieBanner() {
   const { t, language } = useLanguage();
   const { theme } = useTheme();
+  const { consent, accept, decline } = useConsent();
   const isDark = theme === "dark";
-  const [visible, setVisible] = useState(false);
+  const [delayElapsed, setDelayElapsed] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem(STORAGE_KEY)) return;
-    const id = setTimeout(() => setVisible(true), 1200);
+    const id = setTimeout(() => setDelayElapsed(true), 1200);
     return () => clearTimeout(id);
   }, []);
 
-  function accept() {
-    localStorage.setItem(STORAGE_KEY, "true");
-    setVisible(false);
-  }
-
-  if (!visible) return null;
+  if (!delayElapsed || consent !== null) return null;
 
   const bg = isDark ? "rgba(18,13,8,0.97)" : "rgba(255,255,255,0.97)";
   const border = isDark ? "rgba(255,255,255,0.08)" : "rgba(201,124,60,0.18)";
   const text = isDark ? "rgba(255,255,255,0.78)" : "rgba(16,13,9,0.75)";
+  const declineText = isDark ? "rgba(255,255,255,0.85)" : "rgba(16,13,9,0.8)";
+  const declineBorder = isDark ? "rgba(255,255,255,0.18)" : "rgba(16,13,9,0.18)";
 
   return (
     <div
@@ -47,7 +44,7 @@ export function CookieBanner() {
         right: "1rem",
         bottom: "1rem",
         zIndex: 60,
-        maxWidth: "38rem",
+        maxWidth: "40rem",
         margin: "0 auto",
         display: "flex",
         flexWrap: "wrap",
@@ -78,23 +75,40 @@ export function CookieBanner() {
           {t.cookieBanner.linkText}
         </Link>
       </p>
-      <button
-        type="button"
-        onClick={accept}
-        style={{
-          flexShrink: 0,
-          padding: "0.6rem 1.35rem",
-          borderRadius: "999px",
-          border: "none",
-          background: ACCENT,
-          color: "#fff",
-          fontSize: "0.85rem",
-          fontWeight: 600,
-          cursor: "pointer",
-        }}
-      >
-        {t.cookieBanner.accept}
-      </button>
+      <div style={{ display: "flex", gap: "0.6rem", flexShrink: 0 }}>
+        <button
+          type="button"
+          onClick={decline}
+          style={{
+            padding: "0.6rem 1.1rem",
+            borderRadius: "999px",
+            border: `1px solid ${declineBorder}`,
+            background: "transparent",
+            color: declineText,
+            fontSize: "0.85rem",
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
+        >
+          {t.cookieBanner.decline}
+        </button>
+        <button
+          type="button"
+          onClick={accept}
+          style={{
+            padding: "0.6rem 1.35rem",
+            borderRadius: "999px",
+            border: "none",
+            background: ACCENT,
+            color: "#fff",
+            fontSize: "0.85rem",
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
+        >
+          {t.cookieBanner.accept}
+        </button>
+      </div>
     </div>
   );
 }
