@@ -323,6 +323,12 @@ export const translations = {
       privacy: "Datenschutz",
       copyright: "Alle Rechte vorbehalten.",
     },
+    cookieBanner: {
+      ariaLabel: "Cookie-Hinweis",
+      text: "Wir verwenden ausschließlich technisch notwendige Cookies — kein Tracking, keine Werbung.",
+      accept: "Verstanden",
+      linkText: "Datenschutz",
+    },
   },
 
   en: {
@@ -647,6 +653,12 @@ export const translations = {
       privacy: "Privacy Policy",
       copyright: "All rights reserved.",
     },
+    cookieBanner: {
+      ariaLabel: "Cookie notice",
+      text: "We only use technically necessary cookies — no tracking, no ads.",
+      accept: "Got it",
+      linkText: "Privacy Policy",
+    },
   },
 
   hr: {
@@ -886,6 +898,12 @@ export const translations = {
       legal: "Pravne informacije",
       privacy: "Privatnost",
       copyright: "Sva prava pridržana.",
+    },
+    cookieBanner: {
+      ariaLabel: "Obavijest o kolačićima",
+      text: "Koristimo isključivo tehnički nužne kolačiće — bez trackinga, bez oglašavanja.",
+      accept: "Razumijem",
+      linkText: "Privatnost",
     },
   },
 
@@ -1127,6 +1145,12 @@ export const translations = {
       privacy: "Confidențialitate",
       copyright: "Toate drepturile rezervate.",
     },
+    cookieBanner: {
+      ariaLabel: "Notificare cookie-uri",
+      text: "Folosim doar cookie-uri strict necesare din punct de vedere tehnic — fără tracking, fără reclame.",
+      accept: "Am înțeles",
+      linkText: "Confidențialitate",
+    },
   },
 
   tr: {
@@ -1367,6 +1391,12 @@ export const translations = {
       privacy: "Gizlilik Politikası",
       copyright: "Tüm hakları saklıdır.",
     },
+    cookieBanner: {
+      ariaLabel: "Çerez bildirimi",
+      text: "Yalnızca teknik olarak gerekli çerezleri kullanıyoruz — takip yok, reklam yok.",
+      accept: "Anladım",
+      linkText: "Gizlilik Politikası",
+    },
   },
 
   it: {
@@ -1606,6 +1636,12 @@ export const translations = {
       legal: "Note legali",
       privacy: "Privacy",
       copyright: "Tutti i diritti riservati.",
+    },
+    cookieBanner: {
+      ariaLabel: "Informativa sui cookie",
+      text: "Utilizziamo esclusivamente cookie tecnicamente necessari — nessun tracciamento, nessuna pubblicità.",
+      accept: "Capito",
+      linkText: "Privacy",
     },
   },
 };

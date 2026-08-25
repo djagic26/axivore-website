@@ -5,6 +5,7 @@ import "../globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import { ThemeProvider } from "@/lib/ThemeContext";
 import ChatWidgetWrapper from "@/components/ChatWidgetWrapper";
+import { CookieBanner } from "@/components/CookieBanner";
 import { StructuredData } from "@/components/StructuredData";
 import { Analytics } from "@vercel/analytics/next";
 import { routing, type AppLocale } from "@/i18n/routing";
@@ -110,6 +111,7 @@ export default async function LocaleLayout({
           <LanguageProvider locale={locale}>
             {children}
             <ChatWidgetWrapper />
+            <CookieBanner />
           </LanguageProvider>
         </ThemeProvider>
         <Analytics />
