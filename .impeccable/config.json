@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-08-26T07:31:37.467Z",
         "reason": "Dino confirmed 26.08.2026: violet/indigo/blue/cyan/pink/emerald gradients are intentional per-portfolio-item accent badges (Insight Pulse, LeadPilot, etc.), not Axivore's own brand palette (which is copper/amber since the 11.08 rebrand) - kept for visual differentiation between portfolio cards"
+      },
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "app/globals.css"
+        ],
+        "createdAt": "2026-08-26T07:55:19.803Z",
+        "reason": "Dino confirmed 26.08.2026 (same decision as lib/i18n.ts): violet/indigo/blue/cyan/emerald/orange gradient classes are the light-mode color overrides for the intentional per-portfolio-item accent badges (Insight Pulse, LeadPilot, etc.), not Axivore's own brand palette (copper/amber since the 08-11 rebrand)"
       }
     ]
   }
