@@ -22,7 +22,7 @@ export function FAQ() {
         <div className="flex flex-col md:flex-row gap-16">
           <div className="md:w-[380px] shrink-0 relative overflow-hidden">
             <div className="absolute bottom-0 left-0 pointer-events-none select-none" style={{ zIndex: 0 }}>
-              <span className="font-black uppercase tracking-[-0.04em] whitespace-nowrap"
+              <span aria-hidden="true" className="font-black uppercase tracking-[-0.04em] whitespace-nowrap"
                 style={{ fontSize: "clamp(80px,13vw,170px)", color: isDark ? "rgba(255,255,255,0.1)" : "rgba(201,124,60,0.1)" }}>
                 FAQ
               </span>

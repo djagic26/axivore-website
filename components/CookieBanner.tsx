@@ -80,6 +80,9 @@ export function CookieBanner() {
           type="button"
           onClick={decline}
           style={{
+            minHeight: "44px",
+            display: "inline-flex",
+            alignItems: "center",
             padding: "0.6rem 1.1rem",
             borderRadius: "999px",
             border: `1px solid ${declineBorder}`,
@@ -96,10 +99,16 @@ export function CookieBanner() {
           type="button"
           onClick={accept}
           style={{
+            minHeight: "44px",
+            display: "inline-flex",
+            alignItems: "center",
             padding: "0.6rem 1.35rem",
             borderRadius: "999px",
             border: "none",
-            background: ACCENT,
+            // Darker than ACCENT specifically for white text at this small size —
+            // ACCENT (#C97C3C) + white only hits ~3.3:1 contrast, fails WCAG AA
+            // 4.5:1 for normal-size text. #B5502E (existing brand tier-accent) + white = ~5:1.
+            background: "#B5502E",
             color: "#fff",
             fontSize: "0.85rem",
             fontWeight: 600,

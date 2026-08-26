@@ -27,7 +27,6 @@ export function StructuredData({ locale }: { locale: Language }) {
         "Axivore entwickelt moderne Websites, maßgeschneiderte Web-Apps und SaaS-Produkte sowie KI-Automatisierungen und Chatbots für kleine und mittlere Unternehmen in Stuttgart und ganz Deutschland.",
       email: "hello@axivore.io",
       telephone: "+49 172 9372307",
-      priceRange: "€€",
       founder: { "@id": `${SITE_URL}/#dino-jagic` },
       address: {
         "@type": "PostalAddress",

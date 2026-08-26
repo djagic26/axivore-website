@@ -47,7 +47,7 @@ export function Process() {
         <div className="max-w-[1320px] mx-auto px-6 w-full mb-12">
           <div className="flex items-end justify-between relative overflow-hidden">
             <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none select-none" style={{ zIndex: 0 }}>
-              <span className="font-black uppercase tracking-[-0.04em] whitespace-nowrap"
+              <span aria-hidden="true" className="font-black uppercase tracking-[-0.04em] whitespace-nowrap"
                 style={{ fontSize: "clamp(70px,12vw,180px)", color: isDark ? "rgba(255,255,255,0.1)" : "rgba(201,124,60,0.1)" }}>
                 PROZESS
               </span>
