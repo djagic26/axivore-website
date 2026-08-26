@@ -16,6 +16,7 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
   services: ServiceCard[]; more: string;
   autoHeading: string; autoIntro: string; autoItems: Pair[];
   stepsHeading: string; steps: Step[];
+  faqHeading: string; faq: { question: string; answer: string }[];
   branchenLinkText: string; branchenLabel: string; ratgeberLabel: string;
   ctaHeading: string; ctaText: string; ctaButton: string;
   start: string;
@@ -50,6 +51,12 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
       ["01", "Kostenloses Gespräch", "Wir schauen uns deine Abläufe an und finden die Aufgabe, die sich am schnellsten lohnt. Ehrlich — auch wenn die Antwort manchmal lautet: noch nicht."],
       ["02", "Festpreis-Angebot", "Du bekommst ein schriftliches Angebot mit fixem Preis und klarem Umfang. Danach ändert sich der Preis nicht mehr."],
       ["03", "Live in Wochen", "Wir bauen, testen gemeinsam mit dir und gehen live — meist in 1 bis 2 Wochen, nicht in Monaten."],
+    ],
+    faqHeading: "Häufige Fragen",
+    faq: [
+      { question: "Welche Leistung passt zu meinem Betrieb?", answer: "Das hängt davon ab, wo es bei dir am meisten drückt — eine veraltete Website, ein fehlendes internes Tool oder zeitraubende Routineaufgaben. Im kostenlosen Gespräch finden wir gemeinsam den richtigen Einstieg." },
+      { question: "Muss ich mich für eine Leistung entscheiden?", answer: "Nein. Die meisten Kunden starten mit einer Sache und erweitern später — etwa eine Website mit KI-Assistent oder eine Automatisierung, die an eine bestehende Web-App andockt." },
+      { question: "Was, wenn ich noch nicht genau weiß, was ich brauche?", answer: "Völlig normal. Beschreib uns einfach dein Problem — wir sagen dir ehrlich, was technisch sinnvoll ist und was nicht." },
     ],
     branchenLinkText: "Du bist dir nicht sicher, ob dein Betrieb dafür bereit ist? Schau dir an, wie wir für {BRANCHEN} arbeiten, oder wirf einen Blick in unseren {RATGEBER}.",
     branchenLabel: "verschiedene Branchen",
@@ -90,6 +97,12 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
       ["02", "Ponuda s fiksnom cijenom", "Dobivaš pisanu ponudu s fiksnom cijenom i jasnim opsegom. Poslije se cijena više ne mijenja."],
       ["03", "Live za tjedne", "Gradimo, zajedno s tobom testiramo i idemo live — obično za 1 do 2 tjedna, ne u mjesecima."],
     ],
+    faqHeading: "Česta pitanja",
+    faq: [
+      { question: "Koja usluga pristaje mom poslu?", answer: "Ovisi gdje te najviše žulja — zastarjela web stranica, alat koji nedostaje ili zadaci koji troše vrijeme. Na besplatnom razgovoru zajedno pronalazimo pravi početak." },
+      { question: "Moram li se odlučiti za jednu uslugu?", answer: "Ne. Većina klijenata kreće s jednom stvari i kasnije proširuje — primjerice web stranicu s AI asistentom ili automatizaciju koja se spaja na postojeću web-aplikaciju." },
+      { question: "Što ako još ne znam točno što trebam?", answer: "Sasvim normalno. Samo nam opiši svoj problem — iskreno ćemo ti reći što ima tehničkog smisla, a što ne." },
+    ],
     branchenLinkText: "Nisi siguran je li tvoj posao spreman za ovo? Pogledaj kako radimo za {BRANCHEN}, ili baci pogled u naš {RATGEBER}.",
     branchenLabel: "razne branše",
     ratgeberLabel: "vodič",
@@ -128,6 +141,12 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
       ["01", "Free call", "We look at your workflows and find the task that pays off fastest. Honestly — even when the answer is sometimes: not yet."],
       ["02", "Fixed-price quote", "You get a written quote with a fixed price and a clear scope. The price doesn't change after that."],
       ["03", "Live within weeks", "We build, test together with you and go live — usually within 1 to 2 weeks, not months."],
+    ],
+    faqHeading: "Frequently asked questions",
+    faq: [
+      { question: "Which service fits my business?", answer: "It depends on where it hurts most — an outdated website, a missing internal tool, or time-consuming routine tasks. In the free call we find the right starting point together." },
+      { question: "Do I have to commit to one service?", answer: "No. Most clients start with one thing and expand later — for example a website with an AI assistant, or an automation that connects to an existing web app." },
+      { question: "What if I don't know exactly what I need yet?", answer: "Completely normal. Just describe your problem — we'll tell you honestly what makes technical sense and what doesn't." },
     ],
     branchenLinkText: "Not sure if your business is ready for this? See how we work for {BRANCHEN}, or take a look at our {RATGEBER}.",
     branchenLabel: "different industries",
@@ -168,6 +187,12 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
       ["02", "Ofertă cu preț fix", "Primești o ofertă scrisă cu preț fix și domeniu clar. Prețul nu se mai schimbă după aceea."],
       ["03", "Lansare în câteva săptămâni", "Construim, testăm împreună cu tine și lansăm — de obicei în 1 până la 2 săptămâni, nu în luni."],
     ],
+    faqHeading: "Întrebări frecvente",
+    faq: [
+      { question: "Ce serviciu se potrivește firmei mele?", answer: "Depinde unde te doare cel mai mult — un site web depășit, un instrument intern lipsă sau sarcini de rutină consumatoare de timp. La discuția gratuită găsim împreună punctul de plecare potrivit." },
+      { question: "Trebuie să mă decid pentru un singur serviciu?", answer: "Nu. Majoritatea clienților încep cu un singur lucru și extind mai târziu — de exemplu un site web cu asistent AI sau o automatizare care se conectează la o aplicație web existentă." },
+      { question: "Ce fac dacă încă nu știu exact de ce am nevoie?", answer: "Complet normal. Descrie-ne problema ta — îți spunem sincer ce are sens tehnic și ce nu." },
+    ],
     branchenLinkText: "Nu ești sigur dacă firma ta e pregătită pentru asta? Vezi cum lucrăm pentru {BRANCHEN}, sau aruncă o privire în {RATGEBER}.",
     branchenLabel: "diverse domenii",
     ratgeberLabel: "ghidul nostru",
@@ -206,6 +231,12 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
       ["01", "Ücretsiz görüşme", "Süreçlerine bakar ve en hızlı karşılığını verecek görevi buluruz. Dürüstçe — bazen cevap 'henüz değil' olsa bile."],
       ["02", "Sabit fiyat teklifi", "Sabit fiyatlı ve net kapsamlı yazılı bir teklif alırsın. Sonrasında fiyat değişmez."],
       ["03", "Haftalar içinde canlı", "Kurarız, seninle birlikte test ederiz ve canlıya alırız — genellikle aylar değil, 1-2 hafta içinde."],
+    ],
+    faqHeading: "Sık sorulan sorular",
+    faq: [
+      { question: "Hangi hizmet işletmeme uyar?", answer: "En çok nerede sıkıntı yaşadığına bağlı — güncel olmayan bir web sitesi, eksik bir dahili araç ya da zaman alan rutin görevler. Ücretsiz görüşmede birlikte doğru başlangıç noktasını buluruz." },
+      { question: "Tek bir hizmete karar vermek zorunda mıyım?", answer: "Hayır. Çoğu müşteri tek bir şeyle başlar ve sonra genişletir — örneğin AI asistanlı bir web sitesi ya da mevcut bir web uygulamasına bağlanan bir otomasyon." },
+      { question: "Tam olarak neye ihtiyacım olduğunu henüz bilmiyorsam ne olur?", answer: "Tamamen normal. Bize sorununu anlat — teknik olarak neyin mantıklı olduğunu dürüstçe söyleriz." },
     ],
     branchenLinkText: "İşletmenin buna hazır olup olmadığından emin değil misin? {BRANCHEN} için nasıl çalıştığımıza bak ya da {RATGEBER} sayfamıza göz at.",
     branchenLabel: "farklı sektörler",
@@ -246,6 +277,12 @@ const CONTENT: Record<"de" | "hr" | "en" | "ro" | "tr" | "it", {
       ["02", "Preventivo a prezzo fisso", "Ricevi un preventivo scritto con prezzo fisso e ambito chiaro. Dopo, il prezzo non cambia più."],
       ["03", "Attivo in settimane", "Costruiamo, testiamo insieme a te e andiamo online — di solito in 1–2 settimane, non mesi."],
     ],
+    faqHeading: "Domande frequenti",
+    faq: [
+      { question: "Quale servizio si adatta alla mia attività?", answer: "Dipende da dove senti più il problema — un sito web datato, uno strumento interno mancante o compiti di routine che consumano tempo. Nel colloquio gratuito troviamo insieme il punto di partenza giusto." },
+      { question: "Devo decidermi per un solo servizio?", answer: "No. La maggior parte dei clienti inizia con una cosa e si espande dopo — ad esempio un sito web con assistente AI o un'automazione che si collega a una web-app esistente." },
+      { question: "Cosa succede se non so ancora esattamente di cosa ho bisogno?", answer: "Del tutto normale. Descrivici il tuo problema — ti diciamo onestamente cosa ha senso tecnicamente e cosa no." },
+    ],
     branchenLinkText: "Non sei sicuro se la tua attività è pronta per questo? Guarda come lavoriamo per {BRANCHEN}, o dai un'occhiata alla nostra {RATGEBER}.",
     branchenLabel: "diversi settori",
     ratgeberLabel: "guida",
@@ -276,18 +313,30 @@ export default async function LeistungenPage({ params }: { params: Promise<{ loc
   const [beforeBranchen, rest] = c.branchenLinkText.split("{BRANCHEN}");
   const [betweenLinks, afterRatgeber] = rest.split("{RATGEBER}");
 
-  const breadcrumb = {
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: c.start, item: siteUrl },
-      { "@type": "ListItem", position: 2, name: c.eyebrow, item: pageUrl },
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: c.start, item: siteUrl },
+          { "@type": "ListItem", position: 2, name: c.eyebrow, item: pageUrl },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: c.faq.map((i) => ({
+          "@type": "Question",
+          name: i.question,
+          acceptedAnswer: { "@type": "Answer", text: i.answer },
+        })),
+      },
     ],
   };
 
   return (
     <ServiceShell>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="max-w-5xl mx-auto px-6 pt-20 pb-12">
         <p className="text-[11px] tracking-[0.2em] uppercase text-[#E0A360] mb-5">{c.eyebrow}</p>
@@ -356,6 +405,18 @@ export default async function LeistungenPage({ params }: { params: Promise<{ loc
           <Link href={localePathname(contentLocale, "/ratgeber")} className="text-[#E0A360] underline underline-offset-2 hover:text-[#F0C48A]">{c.ratgeberLabel}</Link>
           {afterRatgeber}
         </p>
+      </section>
+
+      <section className="max-w-3xl mx-auto px-6 py-10">
+        <h2 className="text-[24px] md:text-[28px] font-bold tracking-tight mb-8">{c.faqHeading}</h2>
+        <div className="space-y-6">
+          {c.faq.map((f) => (
+            <div key={f.question}>
+              <h3 className="text-[15.5px] font-semibold mb-2">{f.question}</h3>
+              <p className="text-[14px] leading-relaxed text-white/55">{f.answer}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="max-w-5xl mx-auto px-6 py-16">
