@@ -26,16 +26,17 @@ export function GoogleAnalytics() {
   if (!GA_ID || consent !== "accepted") return null;
 
   return (
-    <>
-      {/* window.gtag is defined globally in app/[locale]/layout.tsx (Consent Mode default
-          runs there before this ever mounts) — this just points it at our GA4 property. */}
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-      <Script id="ga4-init" strategy="afterInteractive">
-        {`
-          gtag('js', new Date());
-          gtag('config', '${GA_ID}', { anonymize_ip: true });
-        `}
-      </Script>
-    </>
+    // window.gtag is defined globally in app/[locale]/layout.tsx (Consent Mode default
+    // runs there before this ever mounts) — this just points it at our GA4 property.
+    // Init runs via onLoad (real JS in this component's own bundle) instead of a
+    // separate inline <script>, so CSP script-src can drop 'unsafe-inline'.
+    <Script
+      src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+      strategy="afterInteractive"
+      onLoad={() => {
+        window.gtag?.("js", new Date());
+        window.gtag?.("config", GA_ID, { anonymize_ip: true });
+      }}
+    />
   );
 }

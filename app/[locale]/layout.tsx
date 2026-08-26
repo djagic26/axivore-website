@@ -108,22 +108,14 @@ export default async function LocaleLayout({
         {/* Google Consent Mode v2 — must run before any gtag/GA/Ads script.
             Defaults to denied; lib/ConsentContext.tsx sends 'update' once a
             visitor accepts, so Google Ads conversion tracking + remarketing
-            work correctly for EEA traffic once ads campaigns start. */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('consent', 'default', {
-            ad_storage: 'denied',
-            analytics_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-            wait_for_update: 500
-          });
-        ` }} />
+            work correctly for EEA traffic once ads campaigns start.
+            External file (not inline) so CSP script-src can drop
+            'unsafe-inline' — see next.config.ts. */}
+        <script src="/consent-default.js" />
         <meta property="fb:app_id" content="1371180501519020" />
         <StructuredData locale={locale} />
-        {/* Prevent flash of wrong theme on load (language is now set server-side via the URL, no script needed for that). */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('axivore-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();` }} />
+        {/* Prevent flash of wrong theme on load (language is now set server-side via the URL, no script needed for that). External file for the same CSP reason as above. */}
+        <script src="/theme-init.js" />
       </head>
       <body className="min-h-full">
         <ThemeProvider>
