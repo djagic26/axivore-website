@@ -241,7 +241,7 @@ export const translations = {
       items: [
         {
           question: "Was macht ihr eigentlich genau?",
-          answer: "Einfach gesagt: Wir sparen dir Zeit und Geld durch Technik. Wir bauen Apps, Webseiten und richten Systeme ein die Aufgaben automatisch erledigen — damit du dich auf das Wesentliche konzentrieren kannst.",
+          answer: "Einfach gesagt: Wir sparen dir Zeit und Geld durch Technik. Wir bauen drei Dinge: Websites, maßgeschneiderte Web-Apps und KI-Automatisierungen, die wiederkehrende Aufgaben übernehmen — Anfragen beantworten, Termine bestätigen, Angebote erstellen. Kein Baukasten von der Stange, sondern genau das System, das deine Zeitfresser übernimmt.",
         },
         {
           question: "Was ist KI — und brauche ich das wirklich?",
@@ -265,7 +265,7 @@ export const translations = {
         },
         {
           question: "Was passiert nach dem Projektabschluss?",
-          answer: "Wir übergeben alles mit verständlicher Erklärung und optional fortlaufender Betreuung. Wir verschwinden nicht nach dem Start — du kannst uns immer erreichen.",
+          answer: "Wir übergeben alles mit verständlicher Erklärung — keine Blackbox. Optional pflegen und erweitern wir das System weiter, wenn du das willst. Wir verschwinden nicht nach dem Start: du kannst uns jederzeit erreichen, auch Monate später.",
         },
       ],
     },
@@ -573,7 +573,7 @@ export const translations = {
       items: [
         {
           question: "What exactly do you do?",
-          answer: "Simply put: we save you time and money through technology. We build apps, websites and set up systems that handle tasks automatically — so you can focus on what matters.",
+          answer: "Simply put: we save you time and money through technology. We build three things: websites, custom web apps, and AI automations that handle recurring tasks — answering inquiries, confirming appointments, creating quotes. No off-the-shelf toolkit, just the exact system that takes over your time-sinks.",
         },
         {
           question: "What is AI — and do I actually need it?",
@@ -597,7 +597,7 @@ export const translations = {
         },
         {
           question: "What happens after the project is done?",
-          answer: "We hand everything over with clear explanations and optional ongoing support. We don't disappear after launch — you can always reach us.",
+          answer: "We hand everything over with clear explanations — no black box. If you want, we can keep maintaining and extending the system afterward. We don't disappear after launch: you can always reach us, even months later.",
         },
       ],
     },
@@ -840,13 +840,13 @@ export const translations = {
       headline: "Često postavljana pitanja",
       subtitle: "Sve važno — jasno i direktno.",
       items: [
-        { question: "Što točno radite?", answer: "Jednostavno rečeno: štedimo ti vrijeme i novac putem tehnologije. Gradimo aplikacije, web stranice i postavljamo sustave koji automatski obavljaju zadatke — da se možeš fokusirati na ono što je važno." },
+        { question: "Što točno radite?", answer: "Jednostavno rečeno: štedimo ti vrijeme i novac putem tehnologije. Radimo tri stvari: web stranice, prilagođene web-aplikacije i AI automatizacije koje preuzimaju ponavljajuće zadatke — odgovaranje na upite, potvrđivanje termina, izradu ponuda. Ne gotovo rješenje iz kutije, nego točno onaj sustav koji preuzima tvoje najveće žderače vremena." },
         { question: "Što je AI — i trebam li to zaista?", answer: "AI (umjetna inteligencija) je softver koji samostalno obavlja zadatke — odgovara na pitanja, analizira podatke, piše e-mailove. Trebaš li ga? Ako imaš ponavljajuće zadatke koji troše vrijeme — da. U razgovoru ćemo ti objasniti točno što ima smisla za tebe." },
         { question: "Koliko traje tipičan projekt?", answer: "Automatizacija je gotova za 1–2 tjedna. AI chatbot za 2–4 tjedna. Cijela aplikacija za 4–10 tjedana — ovisno o veličini." },
         { question: "Što košta prvi razgovor?", answer: "Ništa. Razgovor je potpuno besplatan i neobvezujući. 30 minuta — pogledamo tvoju situaciju i pošteno ti kažemo možemo li i kako pomoći." },
         { question: "Ne razumijem tehnologiju — je li to problem?", answer: "Nimalo. Objašnjavamo sve normalnim jezikom. Ne trebaš znati ništa o programiranju — tvoj jedini zadatak je davati povratne informacije. Ostatak radimo mi." },
         { question: "Jesam li premali za AI?", answer: "Ne. Posebno kao malo poduzeće ili samostalac enormno profitiraš — jer nemaš vremena za rasipanje. Čak i jednostavne automatizacije mogu ti uštedjeti nekoliko sati tjedno." },
-        { question: "Što se događa nakon završetka projekta?", answer: "Predajemo sve s jasnim objašnjenjima i opcionalnom kontinuiranom podrškom. Ne nestajemo nakon lansiranja — uvijek nas možeš kontaktirati." },
+        { question: "Što se događa nakon završetka projekta?", answer: "Predajemo sve s jasnim objašnjenjima — bez crne kutije. Ako želiš, možemo nastaviti održavati i nadograđivati sustav. Ne nestajemo nakon lansiranja: uvijek nas možeš kontaktirati, i mjesecima kasnije." },
       ],
     },
     cta: {
@@ -1088,13 +1088,13 @@ export const translations = {
       headline: "Întrebări Frecvente",
       subtitle: "Tot ce contează — clar și direct.",
       items: [
-        { question: "Ce faceți exact?", answer: "Simplu spus: îți economisim timp și bani prin tehnologie. Construim aplicații, site-uri web și configurăm sisteme care execută automat sarcinile — ca să te poți concentra pe ce contează." },
+        { question: "Ce faceți exact?", answer: "Simplu spus: îți economisim timp și bani prin tehnologie. Facem trei lucruri: site-uri web, aplicații web personalizate și automatizări AI care preiau sarcinile repetitive — răspund la solicitări, confirmă programări, creează oferte. Nu o soluție standard, ci exact sistemul care îți preia consumatorii de timp." },
         { question: "Ce este AI — și am nevoie cu adevărat de asta?", answer: "AI (Inteligență Artificială) este software care realizează singur sarcini — răspunde la întrebări, analizează date, scrie emailuri. Ai nevoie de el? Dacă ai sarcini repetitive care consumă timp — da. Îți vom explica exact ce are sens pentru tine într-un apel." },
         { question: "Cât durează un proiect tipic?", answer: "O automatizare este gata în 1–2 săptămâni. Un chatbot AI în 2–4 săptămâni. O aplicație completă în 4–10 săptămâni — în funcție de mărime." },
         { question: "Cât costă prima consultație?", answer: "Nimic. Este complet gratuită și fără angajament. 30 de minute — ne uităm la situația ta și îți spunem sincer dacă și cum te putem ajuta." },
         { question: "Nu înțeleg tehnologia — este o problemă?", answer: "Deloc. Explicăm totul în limbaj obișnuit. Nu trebuie să știi nimic despre programare — singura ta sarcină este să dai feedback. Noi ne ocupăm de rest." },
         { question: "Sunt prea mic pentru AI?", answer: "Nu. Mai ales ca afacere mică sau solopreneur, beneficiezi enorm — pentru că nu ai timp de pierdut. Chiar și automatizările simple îți pot economisi câteva ore pe săptămână." },
-        { question: "Ce se întâmplă după terminarea proiectului?", answer: "Predăm totul cu explicații clare și suport continuu opțional. Nu dispărem după lansare — ne poți contacta oricând." },
+        { question: "Ce se întâmplă după terminarea proiectului?", answer: "Predăm totul cu explicații clare — fără cutie neagră. Dacă vrei, putem continua să întreținem și să extindem sistemul. Nu dispărem după lansare: ne poți contacta oricând, chiar și după luni." },
       ],
     },
     cta: {
@@ -1336,13 +1336,13 @@ export const translations = {
       headline: "Sıkça Sorulan Sorular",
       subtitle: "Her şey önemli — açık ve net.",
       items: [
-        { question: "Tam olarak ne yapıyorsunuz?", answer: "Kısaca: teknoloji aracılığıyla zaman ve para tasarrufu sağlıyoruz. Uygulamalar, web siteleri inşa ediyor ve görevleri otomatik olarak yerine getiren sistemler kuruyoruz — önemli olana odaklanabilmen için." },
+        { question: "Tam olarak ne yapıyorsunuz?", answer: "Kısaca: teknoloji aracılığıyla zaman ve para tasarrufu sağlıyoruz. Üç şey yapıyoruz: web siteleri, özel web uygulamaları ve tekrarlayan görevleri üstlenen AI otomasyonları — talepleri yanıtlama, randevu onaylama, teklif oluşturma. Hazır bir paket değil, tam olarak senin zaman kaybettiren işlerini üstlenen sistem." },
         { question: "AI nedir — ve gerçekten buna ihtiyacım var mı?", answer: "AI (Yapay Zeka) görevleri kendi başına yerine getiren yazılımdır — soruları yanıtlar, verileri analiz eder, email yazar. Buna ihtiyacın var mı? Zaman alan tekrarlayan görevlerin varsa — evet. Bir görüşmede senin için tam olarak neyin mantıklı olduğunu açıklayacağız." },
         { question: "Tipik bir proje ne kadar sürer?", answer: "Bir otomasyon 1–2 haftada tamamlanır. Bir AI chatbot 2–4 haftada. Tam bir uygulama 4–10 haftada — boyutuna göre." },
         { question: "İlk danışmanlık ne kadar tutar?", answer: "Hiçbir şey. Tamamen ücretsiz ve bağlayıcı değil. 30 dakika — durumuna bakıyoruz ve dürüstçe yardımcı olup olamayacağımızı söylüyoruz." },
         { question: "Teknolojiyi anlamıyorum — bu sorun mu?", answer: "Hiç değil. Her şeyi sade bir dille anlatıyoruz. Programlama hakkında hiçbir şey bilmen gerekmiyor — tek görevin geri bildirim vermek. Gerisini biz hallederiz." },
         { question: "AI için çok küçük müyüm?", answer: "Hayır. Özellikle küçük bir işletme veya solo çalışan olarak muazzam fayda sağlarsın — çünkü harcayacak zamanın yok. Basit otomasyonlar bile sana haftada birkaç saat kazandırabilir." },
-        { question: "Proje bittikten sonra ne olur?", answer: "Her şeyi açık açıklamalarla teslim ediyoruz ve isteğe bağlı süregelen destek sağlıyoruz. Lansmanın ardından ortadan kaybolmuyoruz — bize her zaman ulaşabilirsin." },
+        { question: "Proje bittikten sonra ne olur?", answer: "Her şeyi açık açıklamalarla teslim ediyoruz — kara kutu yok. İstersen sistemi bakım ve geliştirmeye devam ederiz. Lansmanın ardından ortadan kaybolmuyoruz: bize her zaman, aylar sonra bile ulaşabilirsin." },
       ],
     },
     cta: {
@@ -1584,13 +1584,13 @@ export const translations = {
       headline: "Domande Frequenti",
       subtitle: "Tutto l'essenziale — chiaro e diretto.",
       items: [
-        { question: "Cosa fate esattamente?", answer: "In parole semplici: ti facciamo risparmiare tempo e denaro attraverso la tecnologia. Costruiamo app, siti web e configuriamo sistemi che svolgono automaticamente le attività — così puoi concentrarti su ciò che conta." },
+        { question: "Cosa fate esattamente?", answer: "In parole semplici: ti facciamo risparmiare tempo e denaro attraverso la tecnologia. Facciamo tre cose: siti web, app web su misura e automazioni AI che si occupano di attività ricorrenti — rispondere alle richieste, confermare appuntamenti, creare preventivi. Non una soluzione standard, ma esattamente il sistema che elimina i tuoi divoratori di tempo." },
         { question: "Cos'è l'AI — e ne ho davvero bisogno?", answer: "L'AI (Intelligenza Artificiale) è software che svolge compiti da sola — risponde alle domande, analizza i dati, scrive email. Ne hai bisogno? Se hai attività ricorrenti che ti consumano tempo — sì. In una chiamata ti spiegheremo esattamente cosa ha senso per te." },
         { question: "Quanto dura un progetto tipico?", answer: "Un'automazione è pronta in 1–2 settimane. Un chatbot AI in 2–4 settimane. Un'app completa in 4–10 settimane — a seconda delle dimensioni." },
         { question: "Quanto costa la prima consulenza?", answer: "Niente. È completamente gratuita e senza impegno. 30 minuti — guardiamo la tua situazione e ti diciamo onestamente se e come possiamo aiutarti." },
         { question: "Non capisco la tecnologia — è un problema?", answer: "Per niente. Spieghiamo tutto in linguaggio normale. Non hai bisogno di sapere nulla di programmazione — il tuo unico compito è dare feedback. Del resto ci occupiamo noi." },
         { question: "Sono troppo piccolo per l'AI?", answer: "No. Soprattutto come piccola impresa o solopreneur, benefici enormemente — perché non hai tempo da sprecare. Anche semplici automazioni possono farti risparmiare diverse ore ogni settimana." },
-        { question: "Cosa succede dopo la fine del progetto?", answer: "Consegniamo tutto con spiegazioni chiare e supporto continuativo opzionale. Non sparaimo dopo il lancio — puoi sempre contattarci." },
+        { question: "Cosa succede dopo la fine del progetto?", answer: "Consegniamo tutto con spiegazioni chiare — nessuna scatola nera. Se vuoi, possiamo continuare a mantenere e ampliare il sistema. Non spariamo dopo il lancio: puoi contattarci sempre, anche mesi dopo." },
       ],
     },
     cta: {

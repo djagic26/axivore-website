@@ -64,6 +64,7 @@ export function StructuredData({ locale }: { locale: Language }) {
       name: "Dino Jagić",
       jobTitle: "Gründer & KI-Architekt",
       worksFor: { "@id": `${SITE_URL}/#organization` },
+      sameAs: ["https://www.linkedin.com/in/dino-jagic/"],
     },
     {
       "@type": "WebSite",
