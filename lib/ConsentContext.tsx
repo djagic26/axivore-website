@@ -45,6 +45,15 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
   function reset() {
     clearStoredConsent();
     setConsent(null);
+    // Revert Google to the denied default too — otherwise a prior
+    // "accepted" consent stays granted on Google's side until the visitor
+    // explicitly declines again, even though the banner is showing fresh.
+    window.gtag?.("consent", "update", {
+      ad_storage: "denied",
+      analytics_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
   }
 
   return (
