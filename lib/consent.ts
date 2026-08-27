@@ -1,6 +1,7 @@
 export type ConsentStatus = "accepted" | "declined";
 
-const STORAGE_KEY = "axivore-cookie-consent";
+export const CONSENT_STORAGE_KEY = "axivore-cookie-consent";
+const STORAGE_KEY = CONSENT_STORAGE_KEY;
 
 export function getStoredConsent(): ConsentStatus | null {
   const raw = localStorage.getItem(STORAGE_KEY);

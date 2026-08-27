@@ -1,7 +1,13 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { ConsentStatus, getStoredConsent, setStoredConsent, clearStoredConsent } from "./consent";
+import {
+  ConsentStatus,
+  getStoredConsent,
+  setStoredConsent,
+  clearStoredConsent,
+  CONSENT_STORAGE_KEY,
+} from "./consent";
 
 interface ConsentContextType {
   // null = visitor hasn't decided yet (banner should show)
@@ -18,6 +24,27 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setConsent(getStoredConsent());
+
+    // Cross-tab sync: the native "storage" event fires in every OTHER tab
+    // when localStorage changes here (never the tab that made the change —
+    // that one already updated synchronously in accept/decline/reset).
+    // Without this, a tab left open before a decline/reset happens in
+    // another tab keeps its stale "accepted" Context value, so MetaPixel/
+    // GoogleAnalytics (both gated on this Context, not a live localStorage
+    // read) keep sending page-view events in that stale tab.
+    function handleStorage(e: StorageEvent) {
+      if (e.key !== CONSENT_STORAGE_KEY) return;
+      const next = getStoredConsent();
+      setConsent(next);
+      window.gtag?.("consent", "update", {
+        ad_storage: next === "accepted" ? "granted" : "denied",
+        analytics_storage: next === "accepted" ? "granted" : "denied",
+        ad_user_data: next === "accepted" ? "granted" : "denied",
+        ad_personalization: next === "accepted" ? "granted" : "denied",
+      });
+    }
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
   function accept() {
